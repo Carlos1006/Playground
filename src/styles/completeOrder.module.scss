@@ -1,0 +1,125 @@
+@mixin car {
+    .cargoBox {
+        position: absolute;
+        top:0;
+        left: 1vh;
+        width: 5.5vw;
+        height: 3.3vw;
+        background:black;
+        border-radius:3px;
+        z-index:5;
+    }
+    .cabin {
+        width: 2.75vw;
+        height: 2.5vw;
+        top: 0.8vw;
+        left: calc(5.5vw + 1vh);
+        position: absolute;
+        z-index:5;
+        background-color:violet;
+    }
+    .chassis {
+        position: absolute;
+        top:3vw;
+        left: calc(1vh - 3px);
+        border-radius: 2px;
+        width: calc(5.5vw + 2.75vw + 6px);
+        height: 0.3vw;
+        background-color:yellow;
+        z-index:6;
+    }
+    .rightWheels {
+        height:1vw;
+        width: 5.5vw;
+        position: absolute;
+        bottom:0;
+        left: 2vw;
+        background-color:red;
+        z-index:10;
+    }
+    .leftWheels {
+        height:1vw;
+        width: 5.5vw;
+        position: absolute;
+        bottom:0;
+        left: 1vw;
+        background-color:purple;
+        z-index:1;
+    }
+}
+
+.completeOrder {
+    width: 17vw;
+    height: 4vw;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    .road {
+        width: 100%;
+        
+        background-color:rgba(89,96,126,255);
+    }
+    .background {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background-color:rgba(38,41,59,255);
+    }
+    .carContainer {
+        margin-top: 0.5vh;
+        width: 100%;
+        background-color:blue;
+        display:inline-block; 
+        height:0;
+        vertical-align:middle;
+        position: relative;
+        overflow:hidden;
+        .car {
+            width: 100%;
+            position: relative;
+            height:calc(4.5vw - 1.5vh);
+            @include car;
+        }
+    }
+    &.small {
+        .carContainer {
+            margin-left: 0.5vh;
+            width:calc(100% - 1vh);
+        }
+        .road {
+            height:0;
+            margin-left: 0.5vh;
+            width:calc(100% - 1vh);
+        }
+        .background {
+            transition: all 0.3s ease-in-out;
+            width: calc(100% - 1vh);
+            height: calc(100% - 1vh);
+            margin-left: 0.5vh;
+        }
+    }
+    &.disappear {
+        .carContainer {
+            margin-top:-2vw;
+            transition:0.4s all ease;
+            margin-left: 0.25vh;
+            width:calc(100% - 0.5vh);
+            height:calc(4.5vw - 1.5vh);
+        }
+        .road {
+            transition:0.4s all ease;
+            height:1.5vh;
+            margin-left: 0.25vh;
+            width:calc(100% - 0.5vh);
+        }
+        .background {
+            border-radius:2px;
+            transition:0.4s all ease;
+            height:0;
+            margin-left: 0.25vh;
+            width:calc(100% - 0.5vh);
+        }
+    }
+}
+
+
