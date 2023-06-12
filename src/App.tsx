@@ -1,12 +1,17 @@
-import CompleteOrder from './components/completeOrder';
-import css from './styles/page.module.scss';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Page_00 from './pages/page_00';
+
+const router = createBrowserRouter([
+  {
+    path: "/page_complete_order",
+    element: <Page_00/>,
+  },
+]);
 
 const App = () => {
 
   return <>
-    <div className={css.page}>
-      <CompleteOrder/>
-    </div>
+    <RouterProvider router={router} />
   </>
 }
 
