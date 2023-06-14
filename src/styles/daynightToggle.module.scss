@@ -1,6 +1,30 @@
+$toggle_width: 20vw;
+$toggle_height: 7vw;
+$circle_difference: 1.5vw;
+$circle_side: calc(#{$toggle_height} - #{$circle_difference});
+$circle_margin: calc(#{$circle_difference} / 2);
+
 .toggle {
     width: 20vw;
     height: 7vw;
     border-radius:100px;
-    background:red;
+    background:white;
+    box-shadow:inset 0 2px 5px 3px rgba(0,0,0,0.3);
+    cursor: pointer;
+    user-select: none;
+    .circle {
+        width: $circle_side;
+        height: $circle_side;
+        border-radius:50%;
+        background:rgb(0,0,0);
+        margin:$circle_margin;
+        position:relative;
+        .center {
+            width: $circle_side;
+            height: $circle_side;
+            border-radius:50%;
+            box-shadow:inset 1px 2px 5px 5px rgba(255,255,255,0.3);
+            z-index:20;
+        }
+    }
 }
