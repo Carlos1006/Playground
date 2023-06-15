@@ -1,30 +1,131 @@
 $toggle_width: 20vw;
 $toggle_height: 7vw;
-$circle_difference: 1.5vw;
-$circle_side: calc(#{$toggle_height} - #{$circle_difference});
-$circle_margin: calc(#{$circle_difference} / 2);
+$difference: 1.5vw;
+$circle_side: calc(7vw - $difference);
+$margin: calc($difference / 2);
 
 .toggle {
-    width: 20vw;
-    height: 7vw;
+    width: $toggle_width;
+    height: $toggle_height;
     border-radius:100px;
-    background:white;
-    box-shadow:inset 0 2px 5px 3px rgba(0,0,0,0.3);
     cursor: pointer;
+    position:relative;
     user-select: none;
+    overflow: hidden;
+    .background {
+        width: $toggle_width;
+        height: $toggle_height;
+        border-radius:100px;
+        box-shadow:inset 0 2px 5px 3px rgba(0,0,0,0.3);
+        z-index:4;
+        position:absolute;
+        left:0;
+        top:0;
+        background:rgb(72, 136, 209);
+    }
     .circle {
         width: $circle_side;
         height: $circle_side;
+        margin: $margin;
         border-radius:50%;
-        background:rgb(0,0,0);
-        margin:$circle_margin;
-        position:relative;
+        position:absolute;
+        transition:all 0.5s ease-in-out;
+        background-color:rgb(236, 197, 74);
+        left:0;
+        z-index:15;
         .center {
             width: $circle_side;
             height: $circle_side;
             border-radius:50%;
             box-shadow:inset 1px 2px 5px 5px rgba(255,255,255,0.3);
             z-index:20;
+        }
+    }
+    .smallAura {
+        background:white;
+        opacity: 0.15;
+        z-index: 10;
+        transform:scale(2);
+        transition-delay:60ms;
+    }
+    .middleAura {
+        background:white;
+        opacity: 0.15;
+        z-index: 9;
+        transform:scale(3.5);
+        transition-delay:70ms;
+    }
+    .bigAura {
+        background:white;
+        opacity: 0.15;
+        z-index: 8;
+        transform:scale(5);
+        transition-delay:80ms;
+    }
+    .clouds {
+        width: $toggle_width;
+        height: $toggle_height;
+        border-radius:100px;
+        z-index:14;
+        position:absolute;
+        &.backgrounClouds {
+            z-index: 5;
+            top: -1.4vw;
+            opacity: 0.5;
+            left: -1vw;
+        }
+        >div {
+            border-radius:100px;
+            background:white;
+            position:absolute;
+            &:nth-child(1) {
+                bottom: -89%;
+                left: -1%;
+                height:$toggle_height * 1.1;
+                width:$toggle_height * 1.1;
+            }
+            &:nth-child(2) {
+                bottom: -78%;
+                left: 12%;
+                height:$toggle_height;
+                width:$toggle_height;
+            }
+            &:nth-child(3) {
+                bottom: -56%;
+                left: 31%;
+                height:$toggle_height * 0.8;
+                width:$toggle_height * 0.8;
+            }
+            &:nth-child(4) {
+                bottom: -36%;
+                left: 50%;
+                height:$toggle_height * 0.55;
+                width:$toggle_height * 0.55;
+            }
+            &:nth-child(5) {
+                bottom: -43%;
+                left: 59%;
+                height:$toggle_height * 0.7;
+                width:$toggle_height * 0.7;
+            }
+            &:nth-child(6) {
+                bottom: -14%;
+                left: 71%;
+                height:$toggle_height * 0.6;
+                width:$toggle_height * 0.6;
+            }
+            &:nth-child(7) {
+                bottom: 2%;
+                left: 79%;
+                height:$toggle_height * 0.8;
+                width:$toggle_height * 0.8;
+            }
+        }
+    }
+
+    &.night {
+        .circle {
+            left:calc(100% - #{$circle_side} - #{$margin} * 2) !important;
         }
     }
 }

@@ -1,15 +1,20 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Page_00 from './pages/page_00';
+import Page_02 from './pages/page_02';
 import Page_01 from './pages/page_01';
+import Page_00 from './pages/page_00';
 
 const router = createBrowserRouter([
   {
-    path: "/page_complete_order",
+    path: "/",
     element: <Page_00/>,
   },
   {
     path: "/day_night_toggle",
     element: <Page_01/>,
+  },
+  {
+    path: "/page_complete_order",
+    element: <Page_02/>,
   },
 ]);
 
