@@ -19,6 +19,25 @@ const Cloud:FC<ICloud> = ({extra}:ICloud) => {
     </>
 }
 
+const Stars:FC<ICloud> = ({extra}:ICloud) => {
+    return <>
+        <div className={`${css.stars} ${extra}`}>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+            <div/>
+        </div>    
+    </>
+}
+
 const DayNightToggle = () => {
 
     const [isDay, setIsDay] = useState(true);
@@ -33,15 +52,20 @@ const DayNightToggle = () => {
             ${isDay ? css.day : css.night}
         `} onClick={toggleDayNight}>
             <div className={css.circle}>
-                <div className={css.center}/>
+                <div className={css.moon}>
+                    <div className={css.crater}/>
+                    <div className={css.crater}/>
+                    <div className={css.crater}/>
+                </div>
+                <div className={css.sun}/>
             </div>
             <div className={`${css.smallAura} ${css.circle}`}/>
             <div className={`${css.middleAura} ${css.circle}`}/>
             <div className={`${css.bigAura} ${css.circle}`}/>
-            <div className={css.background}>
-            </div>
-            <Cloud/>
-            <Cloud extra={css.backgrounClouds}/>
+            <div className={css.background}/>
+            <Stars extra={css.nightStar}/>
+            <Cloud extra={css.foregroundClouds}/>
+            <Cloud extra={css.backgroundClouds}/>
         </div>
     </>
 }
