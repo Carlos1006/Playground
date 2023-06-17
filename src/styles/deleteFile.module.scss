@@ -1,0 +1,36 @@
+$icon_side: 2.3vw;
+$sides_margin: 2vw;
+$inner_margin: 0.5vw;
+
+.deleteFile {
+    width: 17vw;
+    height: 4vw;
+    background-color: rgba(27,30,45);
+    border-radius: 10px;
+    position:relative;
+    .icon {
+        position:absolute;
+        width:$icon_side;
+        height:$icon_side;
+        top:calc(50% - #{$icon_side/2});
+        background:red;
+        left: $sides_margin;
+    }
+    .text {
+        position:absolute;
+        width:calc(100% - #{$icon_side + $sides_margin*2 + $inner_margin} );
+        height:$icon_side;
+        top:calc(50% - #{$icon_side/2});
+        display:flex;
+        align-items:center;
+        left: calc(#{$icon_side} + #{$sides_margin} + #{$inner_margin});
+        span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4em;
+            margin-left: 10%;
+            opacity:1;
+            letter-spacing: 0.1em;
+            color:rgb(249,254,255);
+        }
+    }
+}

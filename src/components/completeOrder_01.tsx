@@ -1,11 +1,11 @@
 import { useState } from "react";
-import css from "../styles/completeOrder.module.scss";
-import { AnimationTools } from "../types/completeOrder";
+import css from "../styles/completeOrder_01.module.scss";
+import { AnimationTools } from "../types/completeOrder_01";
 import { sleep } from "../utils";
 
 const emulateResponse = async () => {
     await sleep(4000);
-    return true;
+    return false;
 }
 
 function useAnimation(): AnimationTools {
@@ -18,10 +18,8 @@ function useAnimation(): AnimationTools {
     const [truckFirstStage, setTruckFirstStage] = useState(false);
     const [loadBar, setLoadBar] = useState(false);
 
-    const [fillBar, setFillBar] = useState(false);
-    const [truckLastStage, setTruckLastStage] = useState(false);
-    const [fillCheckmark, setFillCheckmark] = useState(false);
-
+    const [fillBarError, setFillBarError] = useState(false);
+    
     const animationStart = async () => {
         setSmall(true);
         await sleep(500);
@@ -39,20 +37,10 @@ function useAnimation(): AnimationTools {
         setLoadBar(true);
     }
 
-    const animationEnd = async() => {
+    const animationError = async() => {
         setLoadBar(false);
-        setFillBar(true);
-        setTruckFirstStage(false);
-        setTruckLastStage(true);
-        await sleep(800);
-        setOverflow(false);
-        setDisappear(false);
-        await sleep(400);
-        setRemoveBorderRadius(false);
-        setSmall(false);
-        await sleep(100);
-        setFillCheckmark(true);
-    }
+        setFillBarError(true);
+    };
 
     return {
         small,
@@ -64,10 +52,8 @@ function useAnimation(): AnimationTools {
         truckFirstStage,
         loadBar,
         animationStart,
-        fillBar,
-        truckLastStage,
-        fillCheckmark,
-        animationEnd
+        fillBarError,
+        animationError
     }
 }
 
@@ -83,10 +69,8 @@ const CompleteOrder = () => {
         truckFirstStage,
         loadBar,
         animationStart,
-        fillBar,
-        truckLastStage,
-        fillCheckmark,
-        animationEnd
+        fillBarError,
+        animationError
     } = useAnimation();
 
     const [completed, setCompleted] = useState(false); 
@@ -95,9 +79,9 @@ const CompleteOrder = () => {
     const onClick = async ()=> {
         animationStart();
         const response = await emulateResponse();
-        setText(response? "Order Placed" : "Error");
+        setText(response? "Order Placed" : "Error Occured");
         setCompleted(response);
-        animationEnd();
+        animationError();
     }
 
     return <>
@@ -114,9 +98,7 @@ const CompleteOrder = () => {
             ${truckFirstStage? css.truckFirstStage : ""}
             ${loadBar? css.loadBar : ""}
 
-            ${fillBar? css.fillBar : ""}
-            ${truckLastStage? css.truckLastStage : ""}
-            ${fillCheckmark? css.fillCheckmark : ""}
+            ${fillBarError? css.fillBarError : ""}
         `}>
             <div className={css.carContainer}>
                 <div className={css.car}>

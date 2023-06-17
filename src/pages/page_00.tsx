@@ -11,6 +11,9 @@ const Page_00 = () => {
       <div className={css.link}>
         <a href='/page_complete_order'>Pagina 02</a>
       </div>
+      <div className={css.link}>
+        <a href='/delete_file'>Pagina 03</a>
+      </div>
     </div>
   </>
 }

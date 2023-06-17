@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Page_02 from './pages/page_02';
 import Page_01 from './pages/page_01';
 import Page_00 from './pages/page_00';
+import Page_03 from './pages/page_03';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/page_complete_order",
     element: <Page_02/>,
   },
+  {
+    path: "/delete_file",
+    element: <Page_03/>,
+  }
 ]);
 
 const App = () => {
