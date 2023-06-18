@@ -45,6 +45,36 @@ $cabin_color: rgb(142, 147, 179);
     }
 }
 
+@mixin error {
+    .error {
+        width:1.3vw;
+        height:1.3vw;
+        margin-left:0.5vw;
+        margin-top:0.1vw;
+        position:relative;
+        >div {
+            width:1.3vw;
+            height:0.2vw;
+            left:0;
+            position:absolute;
+            top:calc(50% - 0.1vw);
+            >div {
+                background: rgb(196, 61, 27);
+                transition:all 0.2s linear;
+                width: 0;
+                height: 100%;
+                border-radius:3px;
+            }
+            &:first-child {
+                transform:rotate(45deg);
+            }
+            &:last-child {
+                transform:rotate(-45deg);
+            }
+        }
+    }
+}
+
 @mixin car {
     .cargoBox {
         position: absolute;
@@ -101,6 +131,7 @@ $cabin_color: rgb(142, 147, 179);
         position: absolute;
         z-index:5;
         display:flex;
+        @include smoke;
         //clip-path: polygon(0 0, 100% 37%, 100% 100%, 0% 100%);
         .cabinBox {
             width:2.2vw;
@@ -174,6 +205,8 @@ $cabin_color: rgb(142, 147, 179);
             position: relative;
             &:last-child {
                 margin-left:auto;
+                left:0;
+                position: relative;
             }
             &::after {
                 content: "";
@@ -205,6 +238,56 @@ $cabin_color: rgb(142, 147, 179);
             &:last-child {
                 margin-left:auto;
             }
+        }
+    }
+}
+
+@keyframes smokeLeft {
+    0%   { transform: scale(1) translate(0, 0) }
+    10%  { opacity: 0.7; transform: scale(2) translate(0, -5px) }
+    100% { opacity: 0; transform: scale(3) translate(-10px, -10px) }
+}
+@keyframes smokeRight {
+    0%   { transform: scale(1) translate(0, 0) }
+    10%  { opacity: 0.7; transform: scale(2) translate(5, -5px) }
+    100% { opacity: 0; transform: scale(3) translate(10px, -10px) }
+}
+$side:2vw;
+$position:calc(50% - (#{$side} / 2));
+$duration:3s;
+
+@mixin smoke {
+    .smokeTrail {
+        width: $side;
+        height: $side;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        position: absolute;
+        opacity:0;
+        pointer-events:none;
+        transition:opacity 0.3s ease-out;
+        right: -0.4vw;
+        z-index: 0;
+        >div.smoke {
+            position:absolute;
+            left: 50%;
+            top: 45%;
+            width:1vh;
+            height: 1vh;
+            border-radius: 100px;
+            background-color:#222222;
+            &[data-index='0'] {animation: smokeLeft $duration 0s infinite;}
+            &[data-index='1'] {animation: smokeLeft $duration 1s infinite;}
+            &[data-index='2'] {animation: smokeLeft $duration 2s infinite;}
+            &[data-index='3'] {animation: smokeLeft $duration 3s infinite;}
+            &[data-index='4'] {animation: smokeLeft $duration 4s infinite;}
+            &[data-index='5'] {animation: smokeRight $duration 0.5s infinite;}
+            &[data-index='6'] {animation: smokeRight $duration 1.5s infinite;}
+            &[data-index='7'] {animation: smokeRight $duration 2.5s infinite;}
+            &[data-index='8'] {animation: smokeRight $duration 3.5s infinite;}
+            &[data-index='9'] {animation: smokeRight $duration 4.5s infinite;}
+            animation-timing-function:cubic-bezier(.53,.35,.35,.58) !important;
         }
     }
 }
@@ -247,7 +330,7 @@ $cabin_color: rgb(142, 147, 179);
                 font-weight: bold;
                 color: rgb(41, 196, 41);
             }
-            @include checkMark;
+            @include error;
         }
     }
     .carContainer {
@@ -391,6 +474,46 @@ $cabin_color: rgb(142, 147, 179);
             width: 100% !important;
         }
     }
+
+    $wheel_animation:top 0.2s cubic-bezier(.15,-2,.83,1.17);
+    &.wheelError {
+        .cargoBox {
+            top: 0.3vw !important;
+            transition:$wheel_animation;
+        }
+        .cabin {
+            top: 1.1vw !important;
+            transition:$wheel_animation;
+        }
+        .chassis {
+            top: 3.3vw !important;
+            transition:$wheel_animation;
+        }
+        .rightWheels {
+            .wheel:first-child {
+                transform:translateY(2px) scaleY(0.8) !important;
+            }
+            .wheel:last-child {
+                transition:all 2s linear !important;
+                left:4vw !important;
+            }
+        } 
+    }
+    &.motorError {
+        .smokeTrail {
+            opacity:1 !important;
+        }
+    }
+    &.fillErrormark {
+        .error {
+            >div {
+                >div {
+                    width:100% !important;
+                }
+            }
+        }
+    }
+
 }
 
 

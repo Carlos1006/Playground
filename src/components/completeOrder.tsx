@@ -1,12 +1,7 @@
 import { useState } from "react";
 import css from "../styles/completeOrder.module.scss";
 import { AnimationTools } from "../types/completeOrder";
-import { sleep } from "../utils";
-
-const emulateResponse = async () => {
-    await sleep(4000);
-    return true;
-}
+import { emulateResponse, sleep } from "../utils";
 
 function useAnimation(): AnimationTools {
     const [small, setSmall] = useState(false);

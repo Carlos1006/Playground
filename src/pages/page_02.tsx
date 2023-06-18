@@ -9,6 +9,8 @@ const Page_02 = () => {
       <CompleteOrder/>
       <div className={css.pageDivider}/>
       <div className={css.pageDivider}/>
+      <div className={css.pageDivider}/>
+      <div className={css.pageDivider}/>
       <CompleteOrderVariant/>
     </div>
   </>

@@ -9,5 +9,8 @@ export interface AnimationTools {
     loadBar: boolean;
     animationStart: () => Promise<void>;
     fillBarError: boolean;
+    wheelError: boolean;
+    motorError: boolean;
+    fillErrormark: boolean;
     animationError: () => Promise<void>;
 }

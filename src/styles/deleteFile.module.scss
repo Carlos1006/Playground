@@ -1,6 +1,69 @@
 $icon_side: 2.3vw;
 $sides_margin: 2vw;
-$inner_margin: 0.5vw;
+$inner_margin: 0.3vw;
+$icon_big_side: 3vw;
+
+$trashbin_width:43.48%;
+$trashbin_height:56.52%;
+
+$line_height: 60%;
+$line_width: 15%;
+$line_margin: 15%;
+
+$lid_width: 69.57%;
+$lid_top: calc(50% - #{$trashbin_height/2} - 1px);
+
+$lid_height: 4%; // reference, in small icon it is 2px
+$border_width: 2px;
+$border_one_width: 1px;
+
+$handler_width: 26.09%;
+$handler_height: 8.70%;
+
+$border_big_width: 4px;
+$border_big_one_width: 2px;
+
+@mixin trashbin {
+    .trashbinBody {
+        width:$trashbin_width;
+        height:$trashbin_height;
+        position:absolute;
+        left: calc(50% - #{$trashbin_width/2} - #{$border_one_width});
+        top: calc(50% - #{$trashbin_height/2} - #{$border_one_width});
+        border-radius:0 0 5px 5px;
+        border:$border_width solid rgb(251,253,255);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        .trashbinLine {
+            width:$line_width;
+            height:$line_height;
+            border-radius:5px;
+            background-color:rgb(182,183,219);
+            &:first-child {
+                margin-right:$line_margin;
+            }
+        }
+    }
+    .trashbinLid {
+        width:$lid_width;
+        height:$border_width;
+        position:absolute;
+        border-radius:100px;
+        left: calc(50% - #{$lid_width/2} + #{$border_one_width});
+        top: $lid_top;
+        background-color:rgb(251,253,255);
+    }
+    .trashbinHandler {
+        width:$handler_width;
+        height:$handler_height;
+        left: calc(50% - #{$handler_width/2} - #{$border_one_width});
+        border:$border_width solid rgb(251,253,255);
+        top: calc(#{$lid_top} - #{$handler_height} - #{$border_width});
+        position:absolute;
+        border-radius:3px 3px 0 0 ;
+    }
+}
 
 .deleteFile {
     width: 17vw;
@@ -8,13 +71,18 @@ $inner_margin: 0.5vw;
     background-color: rgba(27,30,45);
     border-radius: 10px;
     position:relative;
+    overflow:hidden;
+    user-select: none;
+    cursor: pointer;
     .icon {
         position:absolute;
         width:$icon_side;
         height:$icon_side;
         top:calc(50% - #{$icon_side/2});
-        background:red;
         left: $sides_margin;
+        transition: all 0.4s ease-in-out;
+        @include trashbin;
+        border:1px solid rgba(251, 253, 255, 0.082);
     }
     .text {
         position:absolute;
@@ -23,6 +91,8 @@ $inner_margin: 0.5vw;
         top:calc(50% - #{$icon_side/2});
         display:flex;
         align-items:center;
+        opacity: 1;
+        transition: all 0.3s ease-in-out 0.1s, opacity 0.2s linear;
         left: calc(#{$icon_side} + #{$sides_margin} + #{$inner_margin});
         span {
             font-family: 'Poppins', sans-serif;
@@ -31,6 +101,19 @@ $inner_margin: 0.5vw;
             opacity:1;
             letter-spacing: 0.1em;
             color:rgb(249,254,255);
+        }
+    }
+
+    &.center {
+        .icon {
+            height:$icon_big_side;
+            width:$icon_big_side;
+            top: calc(50% - #{$icon_big_side/2});
+            left:calc(50% - #{$icon_big_side/2});
+        }
+        .text {
+            left: 100%;
+            opacity: 0;
         }
     }
 }

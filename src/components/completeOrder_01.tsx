@@ -1,12 +1,7 @@
 import { useState } from "react";
 import css from "../styles/completeOrder_01.module.scss";
 import { AnimationTools } from "../types/completeOrder_01";
-import { sleep } from "../utils";
-
-const emulateResponse = async () => {
-    await sleep(4000);
-    return false;
-}
+import { emulateResponse, sleep } from "../utils";
 
 function useAnimation(): AnimationTools {
     const [small, setSmall] = useState(false);
@@ -19,6 +14,9 @@ function useAnimation(): AnimationTools {
     const [loadBar, setLoadBar] = useState(false);
 
     const [fillBarError, setFillBarError] = useState(false);
+    const [wheelError, setWheelError] = useState(false);
+    const [motorError, setMotorError] = useState(false);
+    const [fillErrormark, setFillErrormark] = useState(false);
     
     const animationStart = async () => {
         setSmall(true);
@@ -40,6 +38,17 @@ function useAnimation(): AnimationTools {
     const animationError = async() => {
         setLoadBar(false);
         setFillBarError(true);
+        setWheelError(true);
+        await sleep(200);
+        setMotorError(true);
+        await sleep(1300);
+        setOverflow(false);
+        setDisappear(false);
+        await sleep(400);
+        setRemoveBorderRadius(false);
+        setSmall(false);
+        await sleep(100);
+        setFillErrormark(true);
     };
 
     return {
@@ -53,6 +62,9 @@ function useAnimation(): AnimationTools {
         loadBar,
         animationStart,
         fillBarError,
+        wheelError,
+        motorError,
+        fillErrormark,
         animationError
     }
 }
@@ -70,6 +82,9 @@ const CompleteOrder = () => {
         loadBar,
         animationStart,
         fillBarError,
+        wheelError,
+        motorError,
+        fillErrormark,
         animationError
     } = useAnimation();
 
@@ -79,7 +94,7 @@ const CompleteOrder = () => {
     const onClick = async ()=> {
         animationStart();
         const response = await emulateResponse();
-        setText(response? "Order Placed" : "Error Occured");
+        setText(response? "Error Occured" : "Order Placed");
         setCompleted(response);
         animationError();
     }
@@ -99,6 +114,9 @@ const CompleteOrder = () => {
             ${loadBar? css.loadBar : ""}
 
             ${fillBarError? css.fillBarError : ""}
+            ${wheelError? css.wheelError : ""}
+            ${motorError? css.motorError : ""}
+            ${fillErrormark? css.fillErrormark : ""}
         `}>
             <div className={css.carContainer}>
                 <div className={css.car}>
@@ -118,6 +136,11 @@ const CompleteOrder = () => {
                         <div className={css.wheel}></div>
                     </div>
                     <div className={css.cabin}>
+                        <div className={css.smokeTrail}>
+                            {new Array(6).fill(0).map((_, index) => {
+                                return <div className={css.smoke} data-index={index} key={index}/>
+                            })}
+                        </div>
                         <div className={css.cabinBox}>
                             <div className={css.cargoShadow}/>
                             <div className={css.window}>
@@ -138,7 +161,7 @@ const CompleteOrder = () => {
                 <span>
                     {text} 
                     {completed && <>
-                        <div className={css.checkMark}>
+                        <div className={css.error}>
                             <div>
                                 <div/>
                             </div>
