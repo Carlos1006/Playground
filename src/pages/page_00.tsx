@@ -1,4 +1,3 @@
-import CompleteOrder from '../components/completeOrder';
 import css from '../styles/page.module.scss';
 
 const Page_00 = () => {
@@ -13,6 +12,9 @@ const Page_00 = () => {
       </div>
       <div className={css.link}>
         <a href='/delete_file'>Pagina 03</a>
+      </div>
+      <div className={css.link}>
+        <a href='/glow_button'>Pagina 04</a>
       </div>
     </div>
   </>

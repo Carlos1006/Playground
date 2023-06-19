@@ -1,0 +1,101 @@
+$button_width: 10.5vw;
+$button_height: 3.5vw;
+$glow_side: 3vw;
+
+.glowButton {
+    width:$button_width;
+    height:$button_height;
+    background:black;
+    border-radius: 20px;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    .gradient {
+        position:absolute;
+        left:0;
+        top:0;
+        width:$button_width;
+        height:$button_height;
+        border-radius: 20px;
+        background: linear-gradient(90deg, rgb(108, 80, 160) 0%, rgb(93, 52, 155) 100%);
+        &.glow {
+            filter: blur(2px);
+            opacity:0.5;
+        }
+    }
+    .frontFace {
+        position:absolute;
+        left:0;
+        top:0;
+        width:$button_width;
+        height:$button_height;
+        z-index:1;
+        border-radius: 20px;
+        background:rgba(9,2,29);
+        animation: buttonRotate 10s infinite;
+    }
+    .followingGlow {
+        width:$button_width;
+        height:$button_height;
+        z-index:10;
+        left:0;
+        top:0;
+        position:absolute;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 20px;
+        .glow {
+            width:$glow_side;
+            height:$glow_side;
+            border-radius:100px;
+            position:absolute;
+            filter: blur(20px);
+            opacity:0;
+            transition:opacity 0.3s ease-in-out;
+            &.hovering {
+                opacity:0.4;
+            }
+        }
+    }
+    .textContainer {
+        width:$button_width;
+        height:$button_height;
+        z-index:11;
+        pointer-events: none;
+        position:absolute;
+        left:0;
+        top:0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3em;
+            opacity:1;
+            letter-spacing: 0.1em;
+            color:rgb(249,254,255);
+        }
+    }
+    
+}
+
+@keyframes buttonRotate {
+    0% {
+        transform:rotate(0deg);
+    }
+    25% {
+        transform:rotate(0.5deg);
+    }
+    50% {
+        transform:rotate(0deg);
+    }
+    75% {
+        transform:rotate(-0.5deg);
+    }
+}
+
+:export {
+    button_width: $button_width;
+    button_height: $button_height;
+    glow_side: calc($glow_side / 2);
+}

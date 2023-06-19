@@ -1,8 +1,9 @@
 $icon_side: 2.3vw;
 $sides_margin: 2vw;
 $inner_margin: 0.3vw;
-$icon_big_side: 3vw;
+$icon_big_side: 3.5vw;
 
+// small icon
 $trashbin_width:43.48%;
 $trashbin_height:56.52%;
 
@@ -13,15 +14,19 @@ $line_margin: 15%;
 $lid_width: 69.57%;
 $lid_top: calc(50% - #{$trashbin_height/2} - 1px);
 
-$lid_height: 4%; // reference, in small icon it is 2px
 $border_width: 2px;
 $border_one_width: 1px;
 
 $handler_width: 26.09%;
 $handler_height: 8.70%;
 
-$border_big_width: 4px;
-$border_big_one_width: 2px;
+// big icon
+$border_big_width: 3px;
+$border_big_one_width: 1.5px;
+
+$lid_big_width: 0%;
+$handler_big_width: 43.48%;
+
 
 @mixin trashbin {
     .trashbinBody {
@@ -35,13 +40,25 @@ $border_big_one_width: 2px;
         display:flex;
         align-items:center;
         justify-content:center;
+        overflow:hidden;
+        z-index: 10;
+        .screen {
+            width:100%;
+            height:100%;
+            background-color:rgba(27,30,45);
+            position:absolute;
+            z-index: 0;
+            border-radius:0 0 5px 5px;
+        }
         .trashbinLine {
             width:$line_width;
             height:$line_height;
+            opacity: 1;
             border-radius:5px;
             background-color:rgb(182,183,219);
-            &:first-child {
-                margin-right:$line_margin;
+            z-index: 1;
+            &:last-child {
+                margin-left:$line_margin;
             }
         }
     }
@@ -50,6 +67,7 @@ $border_big_one_width: 2px;
         height:$border_width;
         position:absolute;
         border-radius:100px;
+        z-index: 6;
         left: calc(50% - #{$lid_width/2} + #{$border_one_width});
         top: $lid_top;
         background-color:rgb(251,253,255);
@@ -62,6 +80,78 @@ $border_big_one_width: 2px;
         top: calc(#{$lid_top} - #{$handler_height} - #{$border_width});
         position:absolute;
         border-radius:3px 3px 0 0 ;
+        z-index: 5;
+        
+    }
+}
+
+@mixin trashbin_big {
+    .trashbinBody {
+        transition: all 0.4s ease-in-out;
+        border:$border_big_width solid rgb(251,253,255);
+        border-radius:0 0 8px 8px;
+        left: calc(50% - #{$trashbin_width/2} - #{$border_big_one_width});
+        top: calc(50% - #{$trashbin_height/2} - #{$border_big_one_width});
+        .trashbinLine {
+            opacity: 0;
+            transition: all 0.3s linear;
+        }
+    }
+    .trashbinLid {
+        width:$lid_big_width;
+        transition: all 0.3s ease-in-out;
+        height:$border_big_width;
+        left: calc(50% - #{$lid_big_width/2} + #{$border_big_one_width});
+    }
+    .trashbinHandler {
+        border-radius:10px 10px 0 0 ;
+        width:$handler_big_width;
+        transition: all 0.4s ease-in-out;
+        left: calc(50% - #{$handler_big_width/2} - #{$border_big_one_width});
+        border:$border_big_width solid rgb(251,253,255);
+        top: calc(#{$lid_top} - #{$handler_height} - #{$border_big_width});
+    }
+}
+
+@mixin checkMark {
+    .checkMark {
+        width:1.3em;
+        height:1.3em;
+        margin-left: 0.2vw;
+        margin-top: 0.1vw;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transform:rotate(-45deg);
+        overflow: hidden;
+        >div {
+            overflow: hidden;
+            >div {
+                background: rgb(252,253,251);
+            }
+            &:first-child {
+                width:0.2em;
+                height:0.6em;
+                border-radius:10px 10px 0 10px;
+                >div {
+                    transition:all 0.2s linear;
+                    width: 100%;
+                    height: 0;
+                }
+            }
+            &:last-child {
+                width:0.9em;
+                height:0.2em;
+                margin-left:-1px;
+                margin-top:0.4em;
+                border-radius:0 10px 10px 0;
+                >div {
+                    transition:all 0.2s linear 0.2s;
+                    width: 0;
+                    height: 100%;
+                }
+            }
+        }
     }
 }
 
@@ -71,7 +161,6 @@ $border_big_one_width: 2px;
     background-color: rgba(27,30,45);
     border-radius: 10px;
     position:relative;
-    overflow:hidden;
     user-select: none;
     cursor: pointer;
     .icon {
@@ -82,7 +171,7 @@ $border_big_one_width: 2px;
         left: $sides_margin;
         transition: all 0.4s ease-in-out;
         @include trashbin;
-        border:1px solid rgba(251, 253, 255, 0.082);
+        //border:1px solid rgba(251, 253, 255, 0.082);
     }
     .text {
         position:absolute;
@@ -96,12 +185,65 @@ $border_big_one_width: 2px;
         left: calc(#{$icon_side} + #{$sides_margin} + #{$inner_margin});
         span {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.4em;
+            font-size: 1.5em;
             margin-left: 10%;
             opacity:1;
-            letter-spacing: 0.1em;
             color:rgb(249,254,255);
         }
+    }
+    .document {
+        left:0%;
+        bottom:1.2vw;
+        position: absolute;
+        width:100%;
+        border-radius:5px;
+        height:1.8vw;
+        background-color:rgb(86,120,249);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction: column;
+        opacity:0;
+        pointer-events:none;
+        .documentLine {
+            width:65%;
+            height:3px;
+            margin-bottom:3px;
+            border-radius:100px;
+            background-color:rgba(252,252,254);
+            &:nth-child(even) {
+                width:50%;
+                margin-right:15%;
+            }
+        }
+    }
+    .shreddedDocument {
+        width:80%;
+        height:1.8vw;
+        left:10%;
+        top:-1.8vw;
+        position: absolute;
+        z-index:100;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        .paperStrip {
+            width:3.5px;
+            height:1.8vw;
+            background-color:rgb(86,120,249);
+        }
+    }
+    .okButton {
+        width: 1vw;
+        height: 1vw;
+        position: absolute;
+        bottom: -1.1vw;
+        opacity: 0;
+        background-color:rgb(86,120,249);
+        border-radius:100px;
+        left: calc(50% - #{1vw/2} + 4px);
+        transition:all 0.2s linear;
+        @include checkMark;
     }
 
     &.center {
@@ -110,10 +252,68 @@ $border_big_one_width: 2px;
             width:$icon_big_side;
             top: calc(50% - #{$icon_big_side/2});
             left:calc(50% - #{$icon_big_side/2});
+            @include trashbin_big;
         }
         .text {
             left: 100%;
             opacity: 0;
+        }
+    }
+    &.showDocument {
+        .document {
+            transition:opacity 0.3s ease-in-out;
+            opacity:1;
+        }
+    }
+    &.throwDocument {
+        .document {
+            transition:bottom 0.5s linear;
+            bottom: -1.8vw;
+        }
+        .shreddedDocument {
+            transition:top 1s linear 0.2s;
+            top:3.6vw;
+        }
+        .okButton {
+            bottom: -2vw;
+            opacity: 1;
+            width: 1.5vw;
+            height: 1.5vw;
+            left: calc(50% - #{1.5vw/2} + 4px);
+            transition:all 0.2s cubic-bezier(.77,.28,.75,.49) 0.9s;
+        }
+    }
+    &.fillCheckmark {
+        .checkMark {
+            >div {
+                &:first-child>div {
+                    height:100% !important;
+                }
+                &:last-child>div {
+                    width:100% !important;
+                }
+            }
+        }
+    }
+    &.hideOk {
+        .checkMark {
+            >div {
+                transition:all 0.2s linear;
+                &:first-child>div {
+                    height:0% !important;
+                }
+                &:last-child>div {
+                    width:0% !important;
+                }
+            }
+        }
+        .okButton {
+            width: 1vw;
+            height: 1vw;
+            bottom: -1.1vw;
+            opacity: 0;
+            left: calc(50% - #{1vw/2} + 4px);
+            transition:all 0.2s linear;
         }
     }
 }

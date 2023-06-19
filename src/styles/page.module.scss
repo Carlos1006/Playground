@@ -7,11 +7,30 @@
     //padding-left:10vw;
     justify-content:center;
     background-color:rgb(220,220,230);
+    &.dark {
+        background-color:rgba(1,0,18);
+    }
 }
 .link {
+    display: inline-block;
+    width:20%;
     font-family: 'Poppins';
     font-size:2em;
     text-decoration:none;
+    text-align:center;
+    letter-spacing:1px;
+    a {
+        text-decoration: none;
+        color: rgb(40,40,40);
+    }
+    &:not(:last-child) {
+        margin-bottom:1vw;
+        padding-bottom: 1vw;
+        border-bottom:1px solid rgba(40, 40, 40, 0.432);
+    }
+    &:hover a {
+        color:rgb(80,80,80);
+    }
 }
 .pageDivider {
     width:100%;

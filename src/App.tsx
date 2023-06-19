@@ -3,6 +3,7 @@ import Page_02 from './pages/page_02';
 import Page_01 from './pages/page_01';
 import Page_00 from './pages/page_00';
 import Page_03 from './pages/page_03';
+import Page_04 from './pages/page_04';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/delete_file",
     element: <Page_03/>,
+  },
+  {
+    path: "/glow_button",
+    element: <Page_04/>,
   }
 ]);
 
