@@ -1,21 +1,18 @@
 import css from '../styles/page.module.scss';
+import Routes from '../routes/routes';
+import { pad } from '../utils';
 
 const Page_00 = () => {
 
   return <>
     <div className={css.page} style={{flexDirection:'column'}}>
-      <div className={css.link}>
-        <a href='/day_night_toggle'>Pagina 01</a>
-      </div>
-      <div className={css.link}>
-        <a href='/page_complete_order'>Pagina 02</a>
-      </div>
-      <div className={css.link}>
-        <a href='/delete_file'>Pagina 03</a>
-      </div>
-      <div className={css.link}>
-        <a href='/glow_button'>Pagina 04</a>
-      </div>
+      {Routes.map((route, index)=> {
+        return <>
+          <div className={css.link}>
+            <a href={route.path}>Pagina {pad(index,2)}</a>
+          </div>
+        </>
+      })}
     </div>
   </>
 }
