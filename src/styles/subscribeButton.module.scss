@@ -4,6 +4,7 @@ $height: 5vw;
 $difference: 8px;
 
 $max_width: 20vw;
+$icon: 2.5vw;
 
 .susbcribeButton {
     width:$width;
@@ -12,6 +13,7 @@ $max_width: 20vw;
     border-radius:30px;
     position: relative;
     transition:all 0.5s cubic-bezier(.46,-0.8,.52,.63);
+    
     .solid {
         width: calc($width - $difference);
         height: calc($height - $difference);
@@ -33,6 +35,44 @@ $max_width: 20vw;
             font-weight:500;
             transition:all 0.2s linear;
             pointer-events:none;
+            &.text2 {
+                opacity:0;
+                display:none;
+            }
+        }
+        .iconContainer {
+            width:0;
+            overflow: hidden;
+            height:$icon;
+            opacity:0;
+            transition:opacity 200ms linear 250ms;
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            .arrow {
+                width:2vw;
+                height:4px;
+                background:white;
+                border-radius:3px;
+                position: relative;
+                .arrowAngle {
+                    width:50%;
+                    height:100%;
+                    right: 0;
+                    background:white;
+                    position: absolute;
+                    border-radius:inherit;
+                    transform:rotate(0);
+                    transition:all 0.2s cubic-bezier(.58,.1,.68,2);
+                    &.arrowAngleUp {
+                        transform-origin:calc(100%) calc(50% + 4px);
+                    }
+                    &.arrowAngleDown {
+                        transform-origin:calc(100%) calc(50% - 4px);
+                    }
+                }
+            }
         }
     }
     .input {
@@ -57,10 +97,17 @@ $max_width: 20vw;
             font-size: 1.5rem;
         }
     }
-    &.hideText {
+    &.invisibleText {
         .solid {
             span {
                 opacity: 0;
+            }
+        }
+    }
+    &.hideText {
+        .solid {
+            span {
+                display: none;
             }
         }
     }
@@ -72,10 +119,80 @@ $max_width: 20vw;
 
         }
     }
+    &.showIcon {
+        .solid {
+            .iconContainer {
+                width:$icon;
+                opacity: 1;
+            }
+        }
+    }
     &.showInput {
         .input {
             opacity: 1;
             pointer-events: all;
         }
+    }
+    &.showArrowAngles {
+        .solid {
+            .arrowAngle {
+                &.arrowAngleUp {
+                    transform:rotate(45deg);
+                }
+                &.arrowAngleDown {
+                    transform:rotate(-45deg);
+                }
+            }
+        }
+    }
+    &.showText2 {
+        .solid {
+            span.text2 {
+                display: block;
+            }
+        }
+    }
+    &.visibleText2 {
+        .solid {
+            span.text2 {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.clickAnimation {
+    position:absolute;
+    width: 0;
+    height: 0;
+    z-index:1000;
+    pointer-events: none;
+    border-radius:100px;
+    opacity:0;
+    border:10px solid white;
+    transition:opacity 0.2s linear;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    &.showEffect {
+        opacity:1;
+    }
+    &.propagate {
+        animation: grow 0.2s linear forwards;
+    }
+}
+
+@keyframes grow {
+    0% {
+        opacity:1;
+        width: 0;
+        height: 0;
+    }
+    50% {
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+        width: 100px;
+        height: 100px;
     }
 }
