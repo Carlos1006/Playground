@@ -4,6 +4,8 @@ import Page_02 from "../pages/page_02";
 import Page_03 from "../pages/page_03";
 import Page_04 from "../pages/page_04";
 import Page_05 from "../pages/page_05";
+import Page_06 from "../pages/page_06";
+import Page_07 from "../pages/page_07";
 
 const Routes = [
     {
@@ -29,6 +31,14 @@ const Routes = [
     {
       path: "/subscribe",
       element: <Page_05/>,
+    },
+    {
+      path: "/search_bar",
+      element: <Page_06/>,
+    },
+    {
+      path: "/node_tree",
+      element: <Page_07/>,
     }
   ];
 
