@@ -1,0 +1,258 @@
+.nodeTree {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5vw;
+}
+
+$nodeRawWidth: 200;
+$nodeRawHeight: 90;
+$nodeWidth: #{$nodeRawWidth}px;
+$nodeHeight: #{$nodeRawHeight}px;
+
+$line_width: 1px;
+$lineColor: rgba(110,130,150);
+
+.nodeContainer {
+    min-width: $nodeWidth;
+    min-height: $nodeHeight;
+    padding: 1vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    //background: rgb(240,240,240, 0.5);
+    //border:1px solid rgba(0,0,0,0.2);
+    .nodeConnector {
+        width: 50%;
+        height: $line_width;
+        background: $lineColor;
+        position: absolute;
+        top: 0;
+        transition: none;
+    }
+    .nodeConnectorVertical {
+        width: $line_width;
+        height: calc(50% - 5px);
+        background: $lineColor;
+        position: absolute;
+        left:0;
+        top:0;
+        transition: none;
+    }
+    .nodeFirstVerticalConnector {
+        width: calc(50% + $line_width);
+        height: $line_width;
+        background: $lineColor;
+        position: absolute;
+        left: 0;
+        top:0;
+    }
+}
+.node {
+    width: $nodeWidth;
+    height: $nodeHeight;
+    background: rgb(55,57,64);
+    background: linear-gradient(52deg, rgba(55,57,64,1) 0%, rgba(80,82,90,1) 100%); 
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    line-height:14px;
+    user-select: none;
+    position: relative;
+    z-index:10;
+    margin-bottom: 1vw;
+    cursor: pointer;
+    .topContainer,
+    .bottomContainer {
+        width: calc(100% - 4px);
+        height: calc(calc($nodeHeight / 2) - 4px);
+        &.topContainer {
+            position: relative;
+            border-radius:10px;
+        }
+        &.bottomContainer {
+            display: flex;
+            align-items: center;
+            border-radius:13px;
+            margin-bottom:2px;
+            background: rgb(18,19,22);
+            background: linear-gradient(270deg, rgba(18,19,22,1) 0%, rgba(29,30,33,1) 100%);
+            span {
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: rgb(230,230,230);
+                text-transform: capitalize;
+                margin-left: 0.6vw;
+            }
+        }
+    }
+    .textContainer {
+        height: 100%;
+        display:flex;
+        margin-left:0.5vw;
+        justify-content: center;
+        flex-direction: column;
+        span {
+            &:first-child {
+                font-size: 1.1rem;
+                font-weight: 500;
+                color: rgb(230,230,230);
+                text-transform: uppercase;
+                margin-top: 2px;
+            }
+            &:last-child {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: rgb(150,150,150);
+                text-transform: uppercase;
+            }
+        }
+    }
+    .new {
+        height: 1.6vw;
+        width: 1.6vw;
+        position: absolute;
+        top: 0.35vw;
+        right: 0.5vw;
+        border-radius: 100px;
+        background: rgb(20,20,20);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgb(230,230,230);
+        }
+    }
+    .menu {
+        height: 1.6vw;
+        width: 1.6vw;
+        border-radius: 100px;
+        background: rgb(50,50,50);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-left:auto;
+        margin-right: 0.5vw;
+        svg {
+            width: 90%;
+            fill: rgb(230,230,230)
+        }
+    }
+    .notification {
+        width: 1.4vw;
+        height: 1.4vw;
+        border-radius: 100px;
+        background: rgb(190,190,190);
+        position: absolute;
+        top: -0.7vw;
+        right: 1.8vw;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgb(40,40,40);
+        }
+    }
+    .body {
+        width: calc(100% - 0.8vw);
+        height: calc(100% - 0.7vw);
+        top: 0.4vw;
+        left: 0.4vw;
+        border-radius: 8px;
+        background: rgb(250,250,250);
+        box-shadow: inset 0 0 8px 0 rgba(0,0,0,0.05);
+        position:absolute;
+        display:flex;
+        justify-content: flex-start;
+        align-items: center;
+        overflow: hidden;
+        .flag {
+            width: 1vw;
+            height: 1.2vw;
+            border-radius:6px;
+            background:rgb(119, 0, 255);
+            position: absolute;
+            top: calc(50% - 0.6vw);
+            left: -0.5vw;
+        }
+        .grid {
+            width: 1vw;
+            height: 1.2vw;
+            //clip-path: polygon(70% 0, 100% 50%, 70% 100%, 0 100%, 0 0);
+            position: absolute;
+            background: url('./../assets/point_grid.svg') repeat;
+            opacity: 0.5;
+            background-size: 120% auto;
+            top: calc(50% - 0.6vw);
+            right: 0.5vw;
+        }
+        span {
+            margin-left: 1.5vw;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgb(44, 44, 44);
+            text-transform: uppercase;
+        }
+    }
+    .topNodeLine {
+        width: $line_width;
+        height: 1vw;
+        background: $lineColor;
+        position: absolute;
+        top: -1vw;
+        left: 50%;
+    }
+    .bottomNodeLine {
+        width: $line_width;
+        height: calc(1vw + $line_width);
+        background: $lineColor;
+        position: absolute;
+        bottom: calc(-1vw - $line_width);
+        left: 50%;
+    }
+    >* {
+        pointer-events:none;
+    }
+    * {
+        pointer-events:none;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    &.vertical {
+        .topNodeLine {
+            height: $line_width;
+            width: 1vw;
+            background: $lineColor;
+            position: absolute;
+            left: -1vw;
+            top: 50%;
+        }
+    }
+}
+
+.row {
+    min-width: $nodeWidth;
+    min-height: $nodeHeight;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    z-index: 1;
+    transition: all 0.5s ease-in-out;
+    &.vertical {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+:export {
+    nodeWidth: $nodeRawWidth;
+    nodeHeight: $nodeRawHeight;
+}
