@@ -4,9 +4,9 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    //padding-left:10vw;
     justify-content:center;
     background-color:rgb(220,220,230);
+    cursor: grab;
     &.dark {
         background-color:rgba(1,0,18);
     }
@@ -17,6 +17,9 @@
     flex-wrap: wrap;
     min-width:100vw;
     min-height:100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    position: relative;
     overflow: auto;
 }
 .link {

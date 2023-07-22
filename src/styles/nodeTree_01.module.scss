@@ -2,7 +2,9 @@
     display:flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 5vw;
+    margin:5vw;
+    position: relative;
+    transition: transform 0.2s ease, top 0.2s ease, left  0.2s ease;
 }
 
 $nodeRawWidth: 200;
@@ -10,8 +12,17 @@ $nodeRawHeight: 90;
 $nodeWidth: #{$nodeRawWidth}px;
 $nodeHeight: #{$nodeRawHeight}px;
 
-$line_width: 1px;
-$lineColor: rgba(110,130,150);
+$line_width: 2px;
+$lineColor: rgba(120,120,120);
+
+@mixin lines {
+    opacity:0;
+    transition:opacity 0.5s ease 0s;
+    &.showLine{
+            opacity:1;
+            transition:opacity 0.5s ease 0.5s;
+    }
+}
 
 .nodeContainer {
     min-width: $nodeWidth;
@@ -22,8 +33,6 @@ $lineColor: rgba(110,130,150);
     align-items: center;
     transition: all 0.5s ease-in-out;
     position: relative;
-    //background: rgb(240,240,240, 0.5);
-    //border:1px solid rgba(0,0,0,0.2);
     .nodeConnector {
         width: 50%;
         height: $line_width;
@@ -31,6 +40,7 @@ $lineColor: rgba(110,130,150);
         position: absolute;
         top: 0;
         transition: none;
+        @include lines;
     }
     .nodeConnectorVertical {
         width: $line_width;
@@ -40,6 +50,7 @@ $lineColor: rgba(110,130,150);
         left:0;
         top:0;
         transition: none;
+        @include lines;
     }
     .nodeFirstVerticalConnector {
         width: calc(50% + $line_width);
@@ -48,6 +59,7 @@ $lineColor: rgba(110,130,150);
         position: absolute;
         left: 0;
         top:0;
+        @include lines;
     }
 }
 .node {
@@ -210,6 +222,7 @@ $lineColor: rgba(110,130,150);
         position: absolute;
         top: -1vw;
         left: 50%;
+        @include lines;
     }
     .bottomNodeLine {
         width: $line_width;
@@ -218,6 +231,7 @@ $lineColor: rgba(110,130,150);
         position: absolute;
         bottom: calc(-1vw - $line_width);
         left: 50%;
+        @include lines;
     }
     >* {
         pointer-events:none;
@@ -233,7 +247,7 @@ $lineColor: rgba(110,130,150);
             background: $lineColor;
             position: absolute;
             left: -1vw;
-            top: 50%;
+            top: calc(50% + 4px);
         }
     }
 }
