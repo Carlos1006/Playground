@@ -17,10 +17,17 @@ $lineColor: rgba(120,120,120);
 
 @mixin lines {
     opacity:0;
+<<<<<<< HEAD
     transition:opacity 0.1s linear 0s;
     &.showLine{
             opacity:1;
             transition:opacity 0.5s linear 0.5s;
+=======
+    transition:opacity 0.5s ease 0s;
+    &.showLine{
+            opacity:1;
+            transition:opacity 0.5s ease 0.5s;
+>>>>>>> e939ca371e3369b1e824d8898415ab91d1143ced
     }
 }
 
