@@ -7,6 +7,7 @@ import {
   useState,
   useRef,
   useMemo,
+  RefObject,
 } from "react";
 import css from "./../styles/nodeTree_01.module.scss";
 import { RiMenu4Fill } from "react-icons/ri";
@@ -45,6 +46,11 @@ interface NodeTreeContextProps {
   setTriggerOffset: (value: number) => void;
 }
 
+interface NodeTreeProps {
+  style: CSSProperties;
+  link: RefObject<HTMLDivElement>;
+}
+
 // ? CONTEXT
 const NodeTreeContext = createContext<NodeTreeContextProps>({
   triggerOffset: 0,
@@ -62,7 +68,7 @@ const ForceVerticalMode: string[] = ["node2"];
 
 // ? COMPONENTS
 
-const NodeTree: FC = () => {
+const NodeTree: FC<NodeTreeProps> = ({ style, link }: NodeTreeProps) => {
   const [triggerOffset, setTriggerOffset] = useState<number>(0);
   const nodeTree: NodeComponentProps[] = [
     {
@@ -108,7 +114,7 @@ const NodeTree: FC = () => {
   return (
     <>
       <NodeTreeContext.Provider value={contextValue}>
-        <div className={css.nodeTree}>
+        <div className={css.nodeTree} style={style} ref={link}>
           <Node
             name="root"
             level={0}
@@ -137,6 +143,7 @@ const Node: FC<NodeComponentProps> = ({
 }: NodeComponentProps) => {
   const { triggerOffset, setTriggerOffset } = useContext(NodeTreeContext);
   const [open, setOpen] = useState<boolean>(defaultOpen);
+  const [showLines, setShowLines] = useState<boolean>(false);
   const onClick = () => {
     setOpen((prev) => !prev);
     setTriggerOffset(Math.random());
@@ -157,9 +164,14 @@ const Node: FC<NodeComponentProps> = ({
   };
 
   useEffect(() => {
-    if (propagatedOpen !== null && !propagatedOpen) {
-      setOpen(false);
-      setTriggerOffset(Math.random());
+    if (propagatedOpen !== null) {
+      if (!propagatedOpen) {
+        setOpen(false);
+        setShowLines(false);
+        setTriggerOffset(Math.random());
+      } else {
+        setShowLines(true);
+      }
     }
   }, [propagatedOpen]);
 
@@ -193,20 +205,28 @@ const Node: FC<NodeComponentProps> = ({
                   ? { width: "100%" }
                   : {}),
               }}
-              className={css.nodeConnector}
+              className={`${css.nodeConnector} ${
+                showLines ? css.showLine : ""
+              }`}
             ></div>
           </>
         )}
         {level !== 0 && alignment === "vertical" && (
           <>
             {index === 0 && (
-              <div className={css.nodeFirstVerticalConnector}></div>
+              <div
+                className={`${css.nodeFirstVerticalConnector} ${
+                  showLines ? css.showLine : ""
+                }`}
+              ></div>
             )}
             <div
               style={{
                 ...(index < siblings - 1 ? { height: "100%" } : {}),
               }}
-              className={css.nodeConnectorVertical}
+              className={`${css.nodeConnectorVertical} ${
+                showLines ? css.showLine : ""
+              }`}
             ></div>
           </>
         )}
@@ -219,7 +239,11 @@ const Node: FC<NodeComponentProps> = ({
             boxShadow: `0 0 8px 0 rgba(0,0,0,0.2), -0.3vw 0 0 0 ${color}`,
           }}
         >
-          {level !== 0 && <div className={css.topNodeLine} />}
+          {level !== 0 && (
+            <div
+              className={`${css.topNodeLine}  ${showLines ? css.showLine : ""}`}
+            />
+          )}
           <div className={css.topContainer}>
             <div className={css.textContainer}>
               <span>{name}</span>
@@ -235,15 +259,11 @@ const Node: FC<NodeComponentProps> = ({
               <RiMenu4Fill />
             </div>
           </div>
-          {/* <div className={css.notification}>
-            <span>10</span>
-          </div> */}
-          {/* <div className={css.body}> */}
-          {/* <div className={css.flag} style={{ backgroundColor: color }} /> */}
-          {/* <span>{name} {level}</span> */}
-          {/* <div className={css.grid} /> */}
-          {/* </div> */}
-          {nodes.length > 0 && open && <div className={css.bottomNodeLine} />}
+          {nodes.length > 0 && (
+            <div
+              className={`${css.bottomNodeLine} ${open ? css.showLine : ""}`}
+            />
+          )}
         </div>
         {/* ------------------------------------------------------------ */}
         {nodes.length > 0 && (
