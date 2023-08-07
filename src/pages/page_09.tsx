@@ -1,11 +1,11 @@
-import css from "../styles/rouletteGraph.module.scss";
+import RouletteGraph from "../components/rouletteGraph";
+import css from "../styles/page.module.scss";
 
 const Page_09 = () => {
-
   return (
     <>
-      <div className={`${css.page}`} >
-       
+      <div className={`${css.page}`}>
+        <RouletteGraph />
       </div>
     </>
   );

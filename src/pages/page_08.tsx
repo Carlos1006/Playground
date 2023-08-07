@@ -36,6 +36,7 @@ const Page_03 = () => {
   };
 
   const handleZoom = (e) => {
+    return;
     e.preventDefault();
     const scaleStep = 0.1;
     if (e.deltaY < 0) {

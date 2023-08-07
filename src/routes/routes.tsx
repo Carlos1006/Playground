@@ -7,6 +7,7 @@ import Page_05 from "../pages/page_05";
 import Page_06 from "../pages/page_06";
 import Page_07 from "../pages/page_07";
 import Page_08 from "../pages/page_08";
+import Page_09 from "../pages/page_09";
 
 const Routes = [
   {
@@ -44,6 +45,10 @@ const Routes = [
   {
     path: "/node_tree_variant",
     element: <Page_08 />,
+  },
+  {
+    path: "/graph",
+    element: <Page_09 />,
   },
 ];
 
