@@ -1,23 +1,18 @@
 import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import css from "../styles/rouletteGraph.module.scss";
 
-const COLORS = ["#13263a", "#74b8fe", "#89fa3a", "#ffb806", "#fe4c76"];
+const COLORS = ["#13263a", "#74b8fe", "#89fa3a", "#ffb806", "#fe4c76", "#FFF501"];
 
 interface IObject {
   color: string;
   d: string;
-}
-
-interface IValue {
   value: number;
+  percent: number;
   angleRange: [number, number];
-  color: string;
 }
 
 const RouletteGraph = () => {
-  const [values] = useState([140, 12, 46, 89, 10]);
-  const [graph, setGraph] = useState<IValue[]>([]);
-
+  const [values] = useState([140, 12, 46, 89, 10, 60]);
   const [objects, setObjects] = useState<IObject[]>([]);
   const view = 360;
   const half = view / 2;
@@ -30,8 +25,11 @@ const RouletteGraph = () => {
   const [active, setActive] = useState(false);
   const [startAngle, setStartAngle] = useState(0);
   const [finalAngle, setFinalAngle] = useState(0);
+  const [lock, setLock] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [cancelClick, setCancelClick] = useState(false);
 
-  const [current, setCurrent] = useState<IValue>({});
+  const [current, setCurrent] = useState<IObject>({});
 
   const start = useCallback(
     (e) => {
@@ -71,7 +69,8 @@ const RouletteGraph = () => {
   const rotate = useCallback(
     (e) => {
       e.preventDefault();
-      if (!active) return;
+      if (!active || lock) return;
+      setCancelClick(true);
       const x = e.clientX - center.x;
       const y = e.clientY - center.y;
       const d = R2D * Math.atan2(y, x);
@@ -79,12 +78,15 @@ const RouletteGraph = () => {
       setRotation(newRotation);
       setFinalAngle(convertirAngulo(angle + newRotation));
     },
-    [active, angle, center, R2D, startAngle]
+    [active, center, lock, startAngle, angle, R2D, cancelClick]
   );
 
   const stop = useCallback(() => {
     setAngle(angle + rotation);
     setActive(false);
+    setTimeout(() => {
+      setCancelClick(false);
+    },100);
   }, [angle, rotation]);
 
   useEffect(() => {
@@ -98,7 +100,6 @@ const RouletteGraph = () => {
 
   useEffect(() => {
     const objects_: IObject[] = [];
-    const graph_: IValue[] = [];
     const pieData: number[] = [];
     const total: number = values.reduce((acc, cur) => {
       pieData.push(cur);
@@ -121,52 +122,68 @@ const RouletteGraph = () => {
       objects_.push({
         color: COLORS[index],
         d: d,
-      });
-      graph_.push({
         value: values[index],
+        percent: (values[index] / total) * 100,
         angleRange: [start, end],
-        color: COLORS[index],
       });
     });
     setObjects(objects_);
-    setGraph(graph_);
   }, []);
 
   useEffect(() => {
-    console.log(graph);
-    console.log(finalAngle);
     const refAngle = invertirAngulo(finalAngle);
-    graph.forEach((value) => {
+    objects.forEach((value) => {
       if (value.angleRange[0] <= refAngle && value.angleRange[1] >= refAngle) {
         setCurrent(value);
       }
     });
-  }, [finalAngle, graph]);
+
+  }, [finalAngle, objects]);
+
+  const onSectorClick = async(object: IObject) => {
+    if (cancelClick) return;
+    if(lock) return;
+    setLock(true); 
+    setAnimate(true);
+    const averageAngle = (object.angleRange[0] + object.angleRange[1]) / 2;
+    const refAngle = invertirAngulo(averageAngle);
+    setFinalAngle(convertirAngulo(refAngle));
+    setAngle(refAngle);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setAnimate(false);
+    setLock(false);
+  }
+
+  const triangleSide = 25;
+  const triangleHalf = triangleSide / 2;
 
   return (
     <>
       <div className={css.container}>
         <div className={css.center}>
-          <span
-            style={{
-              color: current.color,
-            }}
-          >
+          <span>
             {current.value}
           </span>
+          <label>Sample Title</label>
         </div>
         <div
           onMouseDown={start}
-          className={css.graph}
+          className={`
+            ${css.graph}
+            ${animate ? css.animate : ""}
+          `}
           ref={rotateRef}
           style={{
-            transform: "rotate(" + finalAngle + "deg)",
+            transform: `rotate(${finalAngle}deg)`,
           }}
         >
           <svg viewBox={`0 0 ${view} ${view}`}>
             <mask id="hole">
-              <rect width="100%" height="100%" fill="white" />
-              <circle r={half - 50} cx={half} cy={half} fill="black" />
+              <g className={`${animate ? css.animate : ""}`} transform={`rotate(${-finalAngle} ${half} ${half})`}>
+                <rect width="100%" height="100%" fill="white" />
+                <polygon points={`${view - (50 + 2)},${half - triangleHalf} ${view - (50 + 2)},${half + triangleHalf} ${view - 50 + triangleHalf},${half}`} fill="black" />
+                <circle r={half - 50} cx={half} cy={half} fill="black" />
+              </g>
             </mask>
             {objects.map((object: IObject, index: number) => {
               return (
@@ -175,9 +192,11 @@ const RouletteGraph = () => {
                   key={index}
                   d={object.d}
                   style={{ fill: object.color }}
+                  onClick={() => { onSectorClick(object) }}
                 ></path>
               );
             })}
+            
           </svg>
         </div>
       </div>
