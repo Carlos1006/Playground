@@ -1,7 +1,5 @@
-import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useId, useRef, useState, MouseEvent } from "react";
 import css from "../styles/rouletteGraph.module.scss";
-
-const COLORS = ["#13263a", "#74b8fe", "#89fa3a", "#ffb806", "#fe4c76", "#FFF501"];
 
 interface IObject {
   color: string;
@@ -11,14 +9,26 @@ interface IObject {
   angleRange: [number, number];
 }
 
-const RouletteGraph = () => {
+interface IRoulette {
+  relative?: boolean;
+  title?: string;
+}
+
+type VoidFunction = (e: globalThis.MouseEvent) => void;
+
+const COLORS = ["#13263a", "#74b8fe", "#89fa3a", "#ffb806", "#fe4c76", "#FFF501"];
+const view = 360;
+const half = view / 2;
+const R2D = 180 / Math.PI;
+const triangleSide = 25;
+const triangleHalf = triangleSide / 2;
+
+const RouletteGraph: FC<IRoulette> = ({
+  relative = false,
+  title = "Roulette Graph",
+}: IRoulette) => {
   const [values] = useState([140, 12, 46, 89, 10, 60]);
   const [objects, setObjects] = useState<IObject[]>([]);
-  const view = 360;
-  const half = view / 2;
-
-  const rotateRef = useRef<HTMLDivElement>(null);
-  const R2D = 180 / Math.PI;
   const [center, setCenter] = useState({ x: 0, y: 0 });
   const [angle, setAngle] = useState(0);
   const [rotation, setRotation] = useState(0);
@@ -28,11 +38,17 @@ const RouletteGraph = () => {
   const [lock, setLock] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [cancelClick, setCancelClick] = useState(false);
+  const [current, setCurrent] = useState<IObject | null>(null);
 
-  const [current, setCurrent] = useState<IObject>({});
+  const rotateRef = useRef<HTMLDivElement>(null);
+  const rotateEventRef = useRef<VoidFunction | null>(null);
+  const stopEventRef = useRef<VoidFunction | null>(null);
+  const isMountedRef = useRef<boolean>(false);
+  const id = useId();
+  const maskId = `mask-${id}`;
 
   const start = useCallback(
-    (e) => {
+    (e:MouseEvent<HTMLDivElement>) => {
       if (rotateRef.current === null) return;
       e.preventDefault();
       const bb = rotateRef.current.getBoundingClientRect();
@@ -51,7 +67,7 @@ const RouletteGraph = () => {
       setStartAngle(newStartAngle);
       setActive(true);
     },
-    [R2D]
+    []
   );
 
   function convertirAngulo(angulo: number): number {
@@ -67,7 +83,7 @@ const RouletteGraph = () => {
   }
 
   const rotate = useCallback(
-    (e) => {
+    (e:globalThis.MouseEvent) => {
       e.preventDefault();
       if (!active || lock) return;
       setCancelClick(true);
@@ -78,7 +94,7 @@ const RouletteGraph = () => {
       setRotation(newRotation);
       setFinalAngle(convertirAngulo(angle + newRotation));
     },
-    [active, center, lock, startAngle, angle, R2D, cancelClick]
+    [active, center, lock, startAngle, angle]
   );
 
   const stop = useCallback(() => {
@@ -89,14 +105,21 @@ const RouletteGraph = () => {
     },100);
   }, [angle, rotation]);
 
-  useEffect(() => {
-    document.addEventListener("mousemove", rotate);
-    document.addEventListener("mouseup", stop);
-    return () => {
-      document.removeEventListener("mousemove", rotate);
-      document.removeEventListener("mouseup", stop);
-    };
-  }, [rotate, stop]);
+  const onSectorClick = useCallback(
+    async(object: IObject) => {
+      if (cancelClick) return;
+      if(lock) return;
+      setLock(true); 
+      setAnimate(true);
+      const averageAngle = (object.angleRange[0] + object.angleRange[1]) / 2;
+      const refAngle = invertirAngulo(averageAngle);
+      setFinalAngle(convertirAngulo(refAngle));
+      setAngle(refAngle);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setAnimate(false);
+      setLock(false);
+    }, [cancelClick, lock]);
+
 
   useEffect(() => {
     const objects_: IObject[] = [];
@@ -128,7 +151,7 @@ const RouletteGraph = () => {
       });
     });
     setObjects(objects_);
-  }, []);
+  }, [values]);
 
   useEffect(() => {
     const refAngle = invertirAngulo(finalAngle);
@@ -140,31 +163,53 @@ const RouletteGraph = () => {
 
   }, [finalAngle, objects]);
 
-  const onSectorClick = async(object: IObject) => {
-    if (cancelClick) return;
-    if(lock) return;
-    setLock(true); 
-    setAnimate(true);
-    const averageAngle = (object.angleRange[0] + object.angleRange[1]) / 2;
-    const refAngle = invertirAngulo(averageAngle);
-    setFinalAngle(convertirAngulo(refAngle));
-    setAngle(refAngle);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setAnimate(false);
-    setLock(false);
-  }
 
-  const triangleSide = 25;
-  const triangleHalf = triangleSide / 2;
+  useEffect(() => {
+    rotateEventRef.current = rotate;
+    stopEventRef.current = stop;
+  }, [rotate, stop]);
+
+
+  useEffect(() => {
+    isMountedRef.current = true;
+     // Función para manejar el evento "mousemove"
+    const handleMouseMove = (e: globalThis.MouseEvent) => {
+      if (isMountedRef.current && rotateEventRef.current) {
+        rotateEventRef.current(e);
+      }
+    };
+
+    // Función para manejar el evento "mouseup"
+    const handleMouseUp = (e: globalThis.MouseEvent) => {
+      if (isMountedRef.current && stopEventRef.current) {
+        stopEventRef.current(e);
+      }
+    };
+
+    // Agregar los event listeners al documento
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    // Función de limpieza para eliminar los event listeners al desmontar el componente
+    return () => {
+      isMountedRef.current = false; // Marcar que el componente se desmonta
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   return (
     <>
       <div className={css.container}>
         <div className={css.center}>
           <span>
-            {current.value}
+            {relative ? 
+              `${current?.percent.toFixed(2)}%`
+              :
+              `${current?.value}`  
+          }
           </span>
-          <label>Sample Title</label>
+          <label>{title}</label>
         </div>
         <div
           onMouseDown={start}
@@ -178,7 +223,7 @@ const RouletteGraph = () => {
           }}
         >
           <svg viewBox={`0 0 ${view} ${view}`}>
-            <mask id="hole">
+            <mask id={maskId}>
               <g className={`${animate ? css.animate : ""}`} transform={`rotate(${-finalAngle} ${half} ${half})`}>
                 <rect width="100%" height="100%" fill="white" />
                 <polygon points={`${view - (50 + 2)},${half - triangleHalf} ${view - (50 + 2)},${half + triangleHalf} ${view - 50 + triangleHalf},${half}`} fill="black" />
@@ -188,7 +233,7 @@ const RouletteGraph = () => {
             {objects.map((object: IObject, index: number) => {
               return (
                 <path
-                  mask="url(#hole)"
+                  mask={`url(#${maskId})`}
                   key={index}
                   d={object.d}
                   style={{ fill: object.color }}
