@@ -1,9 +1,9 @@
-import { FC, useCallback, useEffect, useId, useRef, useState, MouseEvent } from "react";
+import { FC, useCallback, useEffect, useId, useRef, useState, MouseEvent, useMemo } from "react";
 import css from "../styles/rouletteGraph.module.scss";
 
 interface IObject {
   color: string;
-  d: string;
+  draw: string;
   value: number;
   percent: number;
   angleRange: [number, number];
@@ -22,6 +22,18 @@ const half = view / 2;
 const R2D = 180 / Math.PI;
 const triangleSide = 25;
 const triangleHalf = triangleSide / 2;
+
+function invertAngle(angle: number): number {
+  return (360 - angle) % 360;
+}
+
+function normalizeAngle(angle: number): number {
+  let normalizeAngle = angle % 360;
+  if (normalizeAngle < 0) {
+    normalizeAngle += 360;
+  }
+  return normalizeAngle;
+}
 
 const RouletteGraph: FC<IRoulette> = ({
   relative = false,
@@ -51,14 +63,13 @@ const RouletteGraph: FC<IRoulette> = ({
     (e:MouseEvent<HTMLDivElement>) => {
       if (rotateRef.current === null) return;
       e.preventDefault();
-      const bb = rotateRef.current.getBoundingClientRect();
-      const t = bb.top;
-      const l = bb.left;
-      const h = bb.height;
-      const w = bb.width;
+      const clientRect = rotateRef.current.getBoundingClientRect();
+      const {
+        top, left, height, width,
+      } = clientRect;
       const newCenter = {
-        x: l + w / 2,
-        y: t + h / 2,
+        x: left + width / 2,
+        y: top + height / 2,
       };
       const x = e.clientX - newCenter.x;
       const y = e.clientY - newCenter.y;
@@ -70,18 +81,6 @@ const RouletteGraph: FC<IRoulette> = ({
     []
   );
 
-  function convertirAngulo(angulo: number): number {
-    let anguloNormalizado = angulo % 360;
-    if (anguloNormalizado < 0) {
-      anguloNormalizado += 360;
-    }
-    return anguloNormalizado;
-  }
-
-  function invertirAngulo(angulo: number): number {
-    return (360 - angulo) % 360;
-  }
-
   const rotate = useCallback(
     (e:globalThis.MouseEvent) => {
       e.preventDefault();
@@ -89,10 +88,10 @@ const RouletteGraph: FC<IRoulette> = ({
       setCancelClick(true);
       const x = e.clientX - center.x;
       const y = e.clientY - center.y;
-      const d = R2D * Math.atan2(y, x);
-      const newRotation = d - startAngle;
+      const deg = R2D * Math.atan2(y, x);
+      const newRotation = deg - startAngle;
       setRotation(newRotation);
-      setFinalAngle(convertirAngulo(angle + newRotation));
+      setFinalAngle(normalizeAngle(angle + newRotation));
     },
     [active, center, lock, startAngle, angle]
   );
@@ -112,8 +111,8 @@ const RouletteGraph: FC<IRoulette> = ({
       setLock(true); 
       setAnimate(true);
       const averageAngle = (object.angleRange[0] + object.angleRange[1]) / 2;
-      const refAngle = invertirAngulo(averageAngle);
-      setFinalAngle(convertirAngulo(refAngle));
+      const refAngle = invertAngle(averageAngle);
+      setFinalAngle(normalizeAngle(refAngle));
       setAngle(refAngle);
       await new Promise((resolve) => setTimeout(resolve, 500));
       setAnimate(false);
@@ -122,7 +121,7 @@ const RouletteGraph: FC<IRoulette> = ({
 
 
   useEffect(() => {
-    const objects_: IObject[] = [];
+    const draws: IObject[] = [];
     const pieData: number[] = [];
     const total: number = values.reduce((acc, cur) => {
       pieData.push(cur);
@@ -141,20 +140,20 @@ const RouletteGraph: FC<IRoulette> = ({
       const y1 = half + 180 * Math.sin((Math.PI * start) / 180);
       const x2 = half + 180 * Math.cos((Math.PI * end) / 180);
       const y2 = half + 180 * Math.sin((Math.PI * end) / 180);
-      const d = `M${half},${half} L${x1},${y1} A180,180 0 ${overHalf},1 ${x2},${y2} z`;
-      objects_.push({
+      const draw = `M${half},${half} L${x1},${y1} A180,180 0 ${overHalf},1 ${x2},${y2} z`;
+      draws.push({
         color: COLORS[index],
-        d: d,
+        draw: draw,
         value: values[index],
         percent: (values[index] / total) * 100,
         angleRange: [start, end],
       });
     });
-    setObjects(objects_);
+    setObjects(draws);
   }, [values]);
 
   useEffect(() => {
-    const refAngle = invertirAngulo(finalAngle);
+    const refAngle = invertAngle(finalAngle);
     objects.forEach((value) => {
       if (value.angleRange[0] <= refAngle && value.angleRange[1] >= refAngle) {
         setCurrent(value);
@@ -163,12 +162,10 @@ const RouletteGraph: FC<IRoulette> = ({
 
   }, [finalAngle, objects]);
 
-
   useEffect(() => {
     rotateEventRef.current = rotate;
     stopEventRef.current = stop;
   }, [rotate, stop]);
-
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -198,17 +195,19 @@ const RouletteGraph: FC<IRoulette> = ({
     };
   }, []);
 
+  const value: string = useMemo(() => {
+    if (relative) {
+      return `${current?.percent.toFixed(2)}%`;
+    } else {
+      return `${current?.value}`;
+    }
+  },[current, relative]);
+
   return (
     <>
       <div className={css.container}>
         <div className={css.center}>
-          <span>
-            {relative ? 
-              `${current?.percent.toFixed(2)}%`
-              :
-              `${current?.value}`  
-          }
-          </span>
+          <span>{value}</span>
           <label>{title}</label>
         </div>
         <div
@@ -235,13 +234,12 @@ const RouletteGraph: FC<IRoulette> = ({
                 <path
                   mask={`url(#${maskId})`}
                   key={index}
-                  d={object.d}
-                  style={{ fill: object.color }}
+                  d={object.draw}
+                  fill={object.color}
                   onClick={() => { onSectorClick(object) }}
-                ></path>
+                />
               );
             })}
-            
           </svg>
         </div>
       </div>
