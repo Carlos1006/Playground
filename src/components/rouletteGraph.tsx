@@ -1,25 +1,33 @@
 import { FC, useCallback, useEffect, useId, useRef, useState, MouseEvent, useMemo } from "react";
 import css from "../styles/rouletteGraph.module.scss";
 
+interface IValues {
+  title: string;
+  value: number;
+  color: string;
+}
+
 interface IObject {
   color: string;
   draw: string;
   value: number;
   percent: number;
+  title: string;
   angleRange: [number, number];
 }
 
 interface IRoulette {
   relative?: boolean;
   title?: string;
+  values?: IValues[];
 }
 
 type VoidFunction = (e: globalThis.MouseEvent) => void;
 
-const COLORS = ["#13263a", "#74b8fe", "#89fa3a", "#ffb806", "#fe4c76", "#FFF501"];
+const {sin: Sine, cos: Cosine, atan2: ArcTan2 , PI} = Math;
 const view = 360;
 const half = view / 2;
-const R2D = 180 / Math.PI;
+const R2D = 180 / PI;
 const triangleSide = 25;
 const triangleHalf = triangleSide / 2;
 
@@ -38,8 +46,8 @@ function normalizeAngle(angle: number): number {
 const RouletteGraph: FC<IRoulette> = ({
   relative = false,
   title = "Roulette Graph",
+  values = [],
 }: IRoulette) => {
-  const [values] = useState([140, 12, 46, 89, 10, 60]);
   const [objects, setObjects] = useState<IObject[]>([]);
   const [center, setCenter] = useState({ x: 0, y: 0 });
   const [angle, setAngle] = useState(0);
@@ -73,7 +81,7 @@ const RouletteGraph: FC<IRoulette> = ({
       };
       const x = e.clientX - newCenter.x;
       const y = e.clientY - newCenter.y;
-      const newStartAngle = R2D * Math.atan2(y, x);
+      const newStartAngle = R2D * ArcTan2(y, x);
       setCenter(newCenter);
       setStartAngle(newStartAngle);
       setActive(true);
@@ -88,7 +96,7 @@ const RouletteGraph: FC<IRoulette> = ({
       setCancelClick(true);
       const x = e.clientX - center.x;
       const y = e.clientY - center.y;
-      const deg = R2D * Math.atan2(y, x);
+      const deg = R2D * ArcTan2(y, x);
       const newRotation = deg - startAngle;
       setRotation(newRotation);
       setFinalAngle(normalizeAngle(angle + newRotation));
@@ -124,8 +132,8 @@ const RouletteGraph: FC<IRoulette> = ({
     const draws: IObject[] = [];
     const pieData: number[] = [];
     const total: number = values.reduce((acc, cur) => {
-      pieData.push(cur);
-      return acc + cur;
+      pieData.push(cur.value);
+      return acc + cur.value;
     }, 0);
     const sectorAngle: number[] = pieData.map((value) => (value / total) * 360);
     let start = 0;
@@ -136,17 +144,18 @@ const RouletteGraph: FC<IRoulette> = ({
       // Check if the angle is over 180deg for large angle flag
       const percent = end - start;
       const overHalf = percent > 180 ? 1 : 0;
-      const x1 = half + 180 * Math.cos((Math.PI * start) / 180);
-      const y1 = half + 180 * Math.sin((Math.PI * start) / 180);
-      const x2 = half + 180 * Math.cos((Math.PI * end) / 180);
-      const y2 = half + 180 * Math.sin((Math.PI * end) / 180);
+      const x1 = half + 180 * Cosine((PI * start) / 180);
+      const y1 = half + 180 * Sine((PI * start) / 180);
+      const x2 = half + 180 * Cosine((PI * end) / 180);
+      const y2 = half + 180 * Sine((PI * end) / 180);
       const draw = `M${half},${half} L${x1},${y1} A180,180 0 ${overHalf},1 ${x2},${y2} z`;
       draws.push({
-        color: COLORS[index],
+        color: values[index].color,
         draw: draw,
-        value: values[index],
-        percent: (values[index] / total) * 100,
+        value: values[index].value,
+        percent: (values[index].value / total) * 100,
         angleRange: [start, end],
+        title: values[index].title,
       });
     });
     setObjects(draws);
@@ -208,7 +217,7 @@ const RouletteGraph: FC<IRoulette> = ({
       <div className={css.container}>
         <div className={css.center}>
           <span>{value}</span>
-          <label>{title}</label>
+          <label>{current?.title ?? title}</label>
         </div>
         <div
           onMouseDown={start}
