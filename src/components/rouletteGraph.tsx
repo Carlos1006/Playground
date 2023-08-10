@@ -238,6 +238,7 @@ const RouletteGraph: FC<IRoulette> = ({
                 <circle r={half - 50} cx={half} cy={half} fill="black" />
               </g>
             </mask>
+            <circle mask={`url(#${maskId})`} r={half-1} cx={half} cy={half} fill="rgb(120,120,120)" />
             {objects.map((object: IObject, index: number) => {
               return (
                 <path
