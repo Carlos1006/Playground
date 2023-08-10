@@ -12,7 +12,8 @@ const Page_09 = () => {
     {title: "Crimson Skies", value: 46, color: COLD_COLORS[2]},
     {title: "Dancing Raindrops", value: 89, color: COLD_COLORS[3]},
     {title: "Ethereal Echoes", value: 10, color: COLD_COLORS[4]},
-    {title: "Fading Horizons", value: 60, color: COLD_COLORS[5]}
+    {title: "Fading Horizons", value: 60, color: COLD_COLORS[5]},
+    {title: "Nocturnal Serenity", value: 0, color: 'black'}
   ]
 
   const values2 = [

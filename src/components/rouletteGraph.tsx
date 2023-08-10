@@ -127,13 +127,13 @@ const RouletteGraph: FC<IRoulette> = ({
       setLock(false);
     }, [cancelClick, lock]);
 
-
   useEffect(() => {
     const draws: IObject[] = [];
     const pieData: number[] = [];
     const total: number = values.reduce((acc, cur) => {
-      pieData.push(cur.value);
-      return acc + cur.value;
+      const currentValue = cur.value > 1.5 ? cur.value : 1.5;
+      pieData.push(currentValue);
+      return acc + currentValue;
     }, 0);
     const sectorAngle: number[] = pieData.map((value) => (value / total) * 360);
     let start = 0;
