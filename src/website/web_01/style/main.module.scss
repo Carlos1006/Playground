@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100;300;400;500;600;700&display=swap');
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .row {
+      width:100%;
+      display:flex;
+      justify-content: space-between;
+      &#firstRow {
+        height: 12vh; 
+        align-items: center;
+        justify-content: center;
+      }
+      &#secondRow {
+        height: 21vh; 
+      }
+      &#thirdRow {
+        height: 50vh; 
+      }
+    }
+    .column {
+      height:100%;
+      &.firstColumn {
+        width:62vw;
+      }
+      &.secondColumn {
+        width:24vw;
+      }
+    }
+
+  #icon {
+    width: 4vh;
+    height: 4vh;
+    margin-right:0.7vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+    svg {
+      width: 50%;
+      height: 50%;
+    }
+  }
+  .firstRowButton {
+    margin: 0;
+    margin-top: 1vw;
+    height: 4vh;
+    border-radius:50pt;
+    border:2px solid #ececec;
+    background: transparent;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    .dotIcon {
+      display:flex;
+      justify-content: center;
+      overflow:hidden;
+      svg {
+        width: 1.5vw;
+        height: 1.5vw;
+      }
+    }
+    .lineIcon {
+      margin-left: 0.5vw;
+      margin-right: 0.5vw;
+      svg {
+        width: 2vw;
+        height: 1vw;
+      }
+    }
+    span {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    &#buttonPlace {
+      width: 12.6vw;
+      margin-right:0.7vw;
+      
+    }
+    &#buttonAction {
+      width: 8.5vw;
+    }
+  }
+
+  #mainTitle {
+    font-family: 'Archivo', sans-serif;
+    font-size: 10.45rem;
+    font-weight: 500;
+    color: #000000;
+    margin: 0;
+    display: inline-block;
+  }
+
+  #secondRow {
+    #secondRowSecondColumn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      #mainParagraph {
+        font-family: 'Archivo', sans-serif;
+        font-size: 0.99rem;
+        line-height: 1.2rem;
+        font-weight: 400;
+        color: #000000;
+        margin: 0;
+        margin-top:1.5vw;
+        display:inline-block;
+        width:75%;
+      }
+      #secondRowSecondColumnActions {
+        display: flex;
+        margin-top:1.5vw;
+        #actionButton { // TODO MAKE A MIXIN
+          height:3.5vh;
+          width: 12vw;
+          border:0;
+          padding:0;
+          margin:0;
+          cursor: pointer;
+          user-select: none;
+          background-color:black;
+          border-radius:50pt;
+          span {
+              color:white;
+              font-family: 'Archivo', sans-serif;
+              font-weight: 400;
+              font-size: 1rem;
+          }
+        }
+        #playButton {
+          height:3.5vh;
+          width: 3.5vh;
+          border:0;
+          padding:0;
+          margin:0;
+          cursor: pointer;
+          border:1px solid black;
+          background-color: transparent;
+          border-radius:50pt;
+          margin-left:1vh;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          svg {
+            width: 45%;
+            height: 45%;
+          }
+        }
+      }
+    }
+  }
+
+  #thirdRow {
+    .firstColumn {
+      display:flex;
+      justify-content: space-between;
+      .subColumn {
+        height: 100%;
+        width:10%;
+        &:nth-child(1) {
+          width: 13vw;
+        }
+        &:nth-child(2) {
+          width: 44vw;
+        }
+      }
+    }
+  }
+
+  #firstSubColumn {
+    h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: 2.7rem;
+      font-weight: 500;
+      color: #000000;
+      margin: 0;
+    }
+    P {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1vw;
+      color: #000000;
+      margin: 0;
+      margin-top:1vw;
+    }
+    #users {
+      margin-top:6.5vh;
+      margin-bottom: 6.8vh;
+      display:flex;
+      width:100%;
+      .user {
+        width: 1.6vw;
+        height: 1.6vw;
+        border-radius:50pt;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius:50pt;
+        }
+        &:not(:first-of-type) {
+          margin-left:-0.8vw;
+        }
+      }
+      #divisor {
+        height: 1.6vw;
+        width: 0.1vw;
+        background-color: black;
+        margin-left: 0.8vw;
+        margin-right: 0.8vw;
+      }
+      #usersRecord {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 1.6vw;
+        span {
+          font-family: 'Archivo', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 400;
+          line-height: 0.9vw;
+          color: #000000;
+          margin: 0;
+        }
+      }
+    }
+
+    #titleIncludes {
+      display:flex;
+      flex-direction: column;
+      margin-bottom: 1.8vh;
+      span {
+        font-family: 'Archivo', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        line-height: 1.15vw;
+        color: #000000;
+        margin: 0;
+      }
+    }
+    #includes {
+      width:100%;
+      div {
+        height:2.7vh;
+        background:transparent;
+        border:2px solid black;
+        border-radius:50pt;
+        padding-left:1vw;
+        padding-right:1vw;
+        margin-bottom:0.5vh;
+        margin-right:0.5vh;
+        display:inline-flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          font-family: 'Archivo', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 500;
+          line-height: 1.15vw;
+          color: #000000;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+
+  #secondSubColumn {
+    position: relative;
+    #mainBackground {
+      position: absolute;
+      width: 100%;
+      height: calc(100% - 2vh);
+      z-index: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+}

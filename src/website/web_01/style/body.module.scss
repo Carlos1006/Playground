@@ -1,0 +1,15 @@
+@use 'root';
+
+.body {
+    width: 100vw;
+    height: root.$BODY_HEIGHT;
+    background-color: root.$COLOR_1;
+    .bodyMargin {
+        width: calc(100vw - root.$MARGIN_FULL);
+        height: 100%;
+        margin:0 root.$MARGIN;
+    }
+    * {
+        user-select: none;
+    }
+}
