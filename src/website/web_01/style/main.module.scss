@@ -172,6 +172,17 @@
         }
       }
     }
+    .secondColumn {
+      #sidePicture {
+        width:100%;
+        height: 25.6vh;
+        img {
+          width:100%;
+          height:100%;
+          object-fit: cover;
+        }
+      }
+    }
   }
 
   #firstSubColumn {
@@ -284,6 +295,120 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+    }
+    #pictureTopActions {
+      z-index:1;
+      position:absolute;
+      left: 1.9vw;
+      top: 1.5vw;
+      height: 4.9vh;
+      display:flex;
+      .roundButton {
+        height: 4.9vh;
+        width: 4.9vh;
+        border-radius:50pt;
+        border:0;
+        padding:0;
+        background-color:white;
+        margin-right:0.3vw;
+        cursor: pointer;
+        svg {
+          margin-top:2px;
+          width: 55%;
+          height: 55%;
+        }
+      }
+      #evaluationButton {
+        width:14.4vw;
+        background-color: rgb(255,255,255,0.3);
+        backdrop-filter: blur(8px);
+        display:flex;
+        align-items: center;
+        flex-wrap: wrap;
+        #miniBakcgroundPicture {
+          width: calc(4.9vh - 10px);
+          height: calc(4.9vh - 10px);
+          margin-left:5px;
+          border-radius:50pt;
+          overflow: hidden;
+          >div {
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            border-radius:50pt;
+            overflow: hidden;
+            border:4px solid white;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+        svg {
+          width: 1vw;
+          height: 1vw;
+          margin-left: 0.5vw;
+          fill: white;
+        }
+        span {
+          margin-right:1.3vw;
+          font-family: 'Archivo', sans-serif;
+          font-size: 1rem;
+          font-weight: 400;
+          color: white;
+          margin: 0;
+          margin-left: 0.5vw;
+        }
+      }
+    }
+    #pictureBottomActionsContainer {
+      display:flex;
+      width:100%;
+      bottom: -2.85vh;
+      position: absolute;
+      left:0;
+      z-index:2;
+      height:5.7vh;
+      justify-content:center;
+      #pictureBottomActions {
+        height:100%;
+        width: 80%;
+        border-radius:10px;
+        box-shadow:inset 0 0 0 1px white;
+        background: linear-gradient(180deg, rgba(217,217,217,1) 0%, rgba(246,246,246,1) 100%);
+        display:flex;
+        align-items: center;
+        button {
+          height: calc(100% - 8px);
+          background:transparent;
+          border-radius:6px;
+          border:0;
+          flex:1;
+          cursor: pointer;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          margin-right:4px;
+          &:first-child {
+            margin-left:4px;
+          }
+          svg {
+            width: 1vw;
+            height: 1vw;
+            margin-right:0.3vw;
+          }
+          &.selected {
+            background-color: white !important;
+          }
+          span {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #000000;
+            margin: 0;
+          }
+        }
       }
     }
   }

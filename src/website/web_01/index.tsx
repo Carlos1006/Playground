@@ -6,6 +6,11 @@ import { BsDot } from "react-icons/bs";
 import { TfiLayoutGrid2Alt } from "react-icons/tfi";
 import { AiOutlineMinus } from "react-icons/ai";
 import { BsFillPlayFill } from "react-icons/bs";
+import { FiArrowUpRight } from "react-icons/fi";
+import { BsPlusLg } from "react-icons/bs";
+import { AiOutlineStar } from "react-icons/ai";
+import { FiSearch } from 'react-icons/fi';
+import { BiMenu } from 'react-icons/bi';
 
 import mii_00 from "./assets/profiles/mii_0.png";
 import mii_01 from "./assets/profiles/mii_1.png";
@@ -13,6 +18,8 @@ import mii_02 from "./assets/profiles/mii_2.png";
 import mii_03 from "./assets/profiles/mii_3.png";
 
 import panoramic_01 from "./assets/panoramic/panoramic_01.png";
+import panoramic_00 from "./assets/panoramic/panoramic_00.png";
+import panoramic_04 from "./assets/panoramic/panoramic_04.png";
 
 const Web_01: FC = () => {
     
@@ -102,11 +109,36 @@ const Web_01: FC = () => {
                         </div>
                         <div id={css.secondSubColumn} className={`${css.subColumn}`}>
                             <div id={css.mainBackground}>
-                                <img src={panoramic_01} alt="" />
+                                <img src={panoramic_04} alt="" />
+                                <div id={css.pictureTopActions}>
+                                <button className={css.roundButton}><FiArrowUpRight /></button>
+                                <button className={css.roundButton}><BsPlusLg /></button>
+                                <button className={css.roundButton} id={css.evaluationButton}>
+                                    <div id={css.miniBakcgroundPicture}>
+                                        <div>
+                                            <img src={panoramic_00} />
+                                        </div>
+                                    </div>
+                                    <span>Tour evaluation</span>
+                                    <AiOutlineStar />
+                                    <span>(4.5)</span>
+                                </button>
+                            </div>
+                            <div id={css.pictureBottomActionsContainer}>
+                                <div id={css.pictureBottomActions}>
+                                    <button className={css.selected}><BiMenu /><span>Menu</span></button>
+                                    <button><span>Sort By</span></button>
+                                    <button><span>Filter</span></button>
+                                    <button><FiSearch /><span>Search</span></button>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
                     <div className={`${css.secondColumn} ${css.column}`}>
+                        <div id={css.sidePicture}>
+                            <img src={panoramic_00} alt="" />
+                        </div>
                     </div>
                 </div>
             </Body>
