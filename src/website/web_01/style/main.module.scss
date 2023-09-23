@@ -173,6 +173,8 @@
       }
     }
     .secondColumn {
+      display:flex;
+      flex-direction: column;
       #sidePicture {
         width:100%;
         height: 25.6vh;
@@ -180,6 +182,74 @@
           width:100%;
           height:100%;
           object-fit: cover;
+        }
+      }
+      #rightBottomText {
+        display:flex;
+        margin-top:2vw;
+        justify-content: space-between;
+        align-items:center;
+        span {
+          font-family: 'Archivo', sans-serif;
+          font-size: 4rem;
+          font-weight: 500;
+          color: #000000;
+          margin: 0;
+        }
+        p {
+          font-family: 'Archivo', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #000000;
+          margin: 0;
+          margin-left:1vw;
+          width: 45%;
+          line-height:0.9vw;
+        }
+      }
+      #navigator {
+        margin-top:auto;
+        margin-bottom:1vw;
+        display:flex;
+        width:100%;
+        align-items: center;
+        #navIndicator {
+          margin-right:auto;
+          display:flex;
+          align-items: center;
+          span {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.97rem;
+            font-weight: 500;
+            color: #000000;
+            margin: 0;
+            margin-right:0.5vw;
+          }
+          #navLine {
+            height: 0.1vh;
+            width: 5vw;
+            background-color: black;
+            margin-left:1vw;
+            margin-right:1vw;
+          }
+        }
+        .navButton {
+          height:3.6vh;
+          width: 3.6vh;
+          border:0;
+          padding:0;
+          margin:0;
+          border-radius:50pt;
+          cursor: pointer;
+          border:1px solid black;
+          background-color: transparent;
+          &:last-child {
+            margin-left:1vh;
+          }
+          svg {
+            width: 45%;
+            height: 45%;
+          }
         }
       }
     }

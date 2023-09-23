@@ -3,14 +3,11 @@ import css from "./style/main.module.scss";
 import Header from "./components/header";
 import Body from "./components/body";
 import { BsDot } from "react-icons/bs";
-import { TfiLayoutGrid2Alt } from "react-icons/tfi";
-import { AiOutlineMinus } from "react-icons/ai";
-import { BsFillPlayFill } from "react-icons/bs";
-import { FiArrowUpRight } from "react-icons/fi";
-import { BsPlusLg } from "react-icons/bs";
-import { AiOutlineStar } from "react-icons/ai";
-import { FiSearch } from 'react-icons/fi';
+import { AiOutlineMinus, AiOutlineStar } from "react-icons/ai";
+import { BsPlusLg, BsFillPlayFill } from "react-icons/bs";
 import { BiMenu } from 'react-icons/bi';
+import { TfiArrowLeft, TfiArrowRight, TfiLayoutGrid2Alt} from 'react-icons/tfi';
+import { FiSearch, FiArrowUpRight } from 'react-icons/fi';
 
 import mii_00 from "./assets/profiles/mii_0.png";
 import mii_01 from "./assets/profiles/mii_1.png";
@@ -116,7 +113,7 @@ const Web_01: FC = () => {
                                 <button className={css.roundButton} id={css.evaluationButton}>
                                     <div id={css.miniBakcgroundPicture}>
                                         <div>
-                                            <img src={panoramic_00} />
+                                            <img src={panoramic_01} />
                                         </div>
                                     </div>
                                     <span>Tour evaluation</span>
@@ -138,6 +135,23 @@ const Web_01: FC = () => {
                     <div className={`${css.secondColumn} ${css.column}`}>
                         <div id={css.sidePicture}>
                             <img src={panoramic_00} alt="" />
+                        </div>
+                        <div id={css.rightBottomText}>
+                            <span>Tour</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                        </div>
+                        <div id={css.navigator}>
+                            <div id={css.navIndicator}>
+                                <span>Iceland</span>
+                                <div id={css.navLine}/>
+                                <span>1/3</span>
+                            </div>
+                            <button className={css.navButton}>
+                                <TfiArrowLeft />
+                            </button>
+                            <button className={css.navButton}>
+                                <TfiArrowRight />
+                            </button>
                         </div>
                     </div>
                 </div>
