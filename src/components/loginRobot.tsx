@@ -17,7 +17,7 @@ type Limit = { min: number; max: number };
 
 const Teeth = 5;
 const xLimits: Limit = { min: -25, max: 3 };
-const yLimits: Limit = { min: -10, max: 3 };
+const yLimits: Limit = { min: -10, max: 8 };
 const baseClip = 90;
 
 const contextDefault = {
@@ -37,8 +37,7 @@ const useDebounce = (value: number, delay: number) => {
 
 const Robot: React.FC = () => {
   const robotRef = useRef<HTMLDivElement>(null);
-  const { mousePosition, lockPosition } = useContext(LoginContext);
-  const [lockedPosition, setLockedPosition] = useState<Coord>({ x: 0, y: 0 });
+  const { mousePosition } = useContext(LoginContext);
 
   const mouseX = mousePosition.x;
   const mouseY = mousePosition.y;
@@ -53,7 +52,7 @@ const Robot: React.FC = () => {
   }, [mouseX]);
 
   const moveY = useMemo(() => {
-    const move = mouseY / 5;
+    const move = mouseY / 10;
     return move > yLimits.max
       ? yLimits.max
       : move < yLimits.min
@@ -64,23 +63,14 @@ const Robot: React.FC = () => {
   const debouncedX = useDebounce(moveX, 100);
   const debouncedY = useDebounce(moveY, 100);
 
-  useEffect(() => {
-    if (!lockPosition) return;
-    setLockedPosition({ x: debouncedX, y: debouncedY });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lockPosition]);
-
   const clipPath = useMemo(() => {
-    const positionX = lockPosition ? lockedPosition.x : debouncedX;
-    const value = baseClip + positionX / 3;
+    const value = baseClip + debouncedX / 3;
     return `polygon(${value}% 0, 100% 0, 100% 100%, ${value}% 100%)`;
-  }, [debouncedX, lockPosition, lockedPosition]);
+  }, [debouncedX]);
 
   const transform = useMemo(() => {
-    const x = lockPosition ? lockedPosition.x : debouncedX;
-    const y = lockPosition ? lockedPosition.y : debouncedY;
-    return `translate(${x}px, ${y}px)`;
-  }, [debouncedX, debouncedY, lockPosition, lockedPosition]);
+    return `translate(${debouncedX}px, ${debouncedY}px)`;
+  }, [debouncedX, debouncedY]);
 
   return (
     <div id={css.robot} ref={robotRef}>
@@ -119,7 +109,10 @@ const LoginRobot: React.FC = () => {
   const [eye, setEye] = useState<boolean>(false);
   const [mousePosition, setMousePosition] = useState<Coord>({ x: 0, y: 0 });
   const [robotPosition, setRobotPosition] = useState<Coord>({ x: 0, y: 0 });
+  const [lockedPosition, setLockedPosition] = useState<Coord>({ x: 0, y: 0 });
   const [lockPosition, setLockPosition] = useState<boolean>(false);
+  const userRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleMove = useCallback(
     (e: MouseEvent) => {
@@ -148,12 +141,29 @@ const LoginRobot: React.FC = () => {
   }, []);
 
   const value = {
-    mousePosition,
+    mousePosition: lockPosition ? lockedPosition : mousePosition,
     lockPosition,
   };
 
-  const onFocus = useCallback(() => setLockPosition(true), []);
-  const onBlur = useCallback(() => setLockPosition(false), []);
+  const onUserFocus = useCallback(() => {
+    const { x, y } = userRef.current?.getBoundingClientRect() as DOMRect;
+    const newX = x - robotPosition.x;
+    const newY = y - robotPosition.y - 90; // compensacion para que haya cambio de posicion en el rostro
+    setLockedPosition({ x: newX, y: newY });
+    setLockPosition(true);
+  }, [robotPosition.x, robotPosition.y]);
+
+  const onPasswordFocus = useCallback(() => {
+    const { x, y } = passwordRef.current?.getBoundingClientRect() as DOMRect;
+    const newX = x - robotPosition.x;
+    const newY = y - robotPosition.y + 200; // compensacion para que haya cambio de posicion en el rostro
+    setLockedPosition({ x: newX, y: newY });
+    setLockPosition(true);
+  }, [robotPosition.x, robotPosition.y]);
+
+  const onBlur = useCallback(() => {
+    setLockPosition(false);
+  }, []);
 
   return (
     <LoginContext.Provider value={value}>
@@ -161,14 +171,19 @@ const LoginRobot: React.FC = () => {
         <div id={css.robotContainer}>
           <Robot />
         </div>
-        <div className={css.input}>
-          <input placeholder="User..." onFocus={onFocus} onBlur={onBlur} />
+        <div className={css.input} ref={userRef}>
+          <input placeholder="User..." onFocus={onUserFocus} onBlur={onBlur} />
           <div className={css.icon}>
             <FaUserAlt />
           </div>
         </div>
-        <div className={css.input}>
-          <input placeholder="Password..." type={eye ? "text" : "password"} />
+        <div className={css.input} ref={passwordRef}>
+          <input
+            placeholder="Password..."
+            type={eye ? "text" : "password"}
+            onFocus={onPasswordFocus}
+            onBlur={onBlur}
+          />
           <div className={`${css.icon} ${css.eye}`}>
             {eye ? (
               <AiFillEyeInvisible onClick={() => setEye(!eye)} />
