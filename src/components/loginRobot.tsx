@@ -20,6 +20,7 @@ const ArmLines = 10;
 const xLimits: Limit = { min: -25, max: 3 };
 const yLimits: Limit = { min: -10, max: 8 };
 const baseClip = 90;
+const FaceTransition = Number(css.faceTransition);
 
 const contextDefault = {
   mousePosition: { x: 0, y: 0 } as Coord,
@@ -64,8 +65,8 @@ const Robot: React.FC = () => {
       : move;
   }, [mouseY]);
 
-  const debouncedX = useDebounce(moveX, 100);
-  const debouncedY = useDebounce(moveY, 100);
+  const debouncedX = useDebounce(moveX, FaceTransition);
+  const debouncedY = useDebounce(moveY, FaceTransition);
 
   const clipPath = useMemo(() => {
     const value = baseClip + debouncedX / 3;
