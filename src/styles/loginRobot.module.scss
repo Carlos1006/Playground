@@ -239,11 +239,12 @@ $size: 9vw;
                         }
                         .gripper {
                             left:0;
+                            transform-origin:5% 50%;
                             &.gripperTop {
-                                rotate: -10deg;
+                                rotate: -5deg;
                             }
                             &.gripperBottom {
-                                rotate: 10deg;
+                                rotate: 5deg;
                             }
                         }
                         &.show {
@@ -265,11 +266,12 @@ $size: 9vw;
                         }
                         .gripper {
                             right:0;
+                            transform-origin:95% 50%;
                             &.gripperTop {
-                                rotate: 10deg;
+                                rotate: 5deg;
                             }
                             &.gripperBottom {
-                                rotate: -10deg;
+                                rotate: -5deg;
                             }
                         }
                         &.show {
