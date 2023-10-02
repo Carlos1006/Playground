@@ -16,6 +16,7 @@ type Coord = { x: number; y: number };
 type Limit = { min: number; max: number };
 
 const Teeth = 5;
+const ArmLines = 10;
 const xLimits: Limit = { min: -25, max: 3 };
 const yLimits: Limit = { min: -10, max: 8 };
 const baseClip = 90;
@@ -23,6 +24,8 @@ const baseClip = 90;
 const contextDefault = {
   mousePosition: { x: 0, y: 0 } as Coord,
   lockPosition: false as boolean,
+  focusPassword: false as boolean,
+  hoverPassword: false as boolean,
 };
 const LoginContext = createContext(contextDefault);
 
@@ -37,7 +40,8 @@ const useDebounce = (value: number, delay: number) => {
 
 const Robot: React.FC = () => {
   const robotRef = useRef<HTMLDivElement>(null);
-  const { mousePosition } = useContext(LoginContext);
+  const { mousePosition, focusPassword, hoverPassword } =
+    useContext(LoginContext);
 
   const mouseX = mousePosition.x;
   const mouseY = mousePosition.y;
@@ -87,9 +91,41 @@ const Robot: React.FC = () => {
           <div className={css.eyesContainer}>
             <div className={`${css.eye} ${css.left}`}>
               <div className={css.eyeBright} />
+              <div
+                className={`${css.hand} ${
+                  focusPassword || hoverPassword ? css.show : ""
+                } ${css.leftHand}`}
+              >
+                <div className={`${css.gripperTop} ${css.gripper}`} />
+                <div className={css.gripperPivot} />
+                <div className={`${css.gripperBottom} ${css.gripper}`} />
+                <div className={css.arm}>
+                  {Array(ArmLines)
+                    .fill(0)
+                    .map((_, i) => (
+                      <div key={i} className={css.armLine} />
+                    ))}
+                </div>
+              </div>
             </div>
-            <div className={`${css.eye} ${css.right}`}>
+            <div className={`${css.eye}  ${css.right}`}>
               <div className={css.eyeBright} />
+              <div
+                className={`${css.hand} ${
+                  focusPassword || hoverPassword ? css.show : ""
+                } ${css.rightHand}`}
+              >
+                <div className={`${css.gripperTop} ${css.gripper}`} />
+                <div className={css.gripperPivot} />
+                <div className={`${css.gripperBottom} ${css.gripper}`} />
+                <div className={css.arm}>
+                  {Array(ArmLines)
+                    .fill(0)
+                    .map((_, i) => (
+                      <div key={i} className={css.armLine} />
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
           <div className={css.mouth}>
@@ -113,6 +149,8 @@ const LoginRobot: React.FC = () => {
   const [lockPosition, setLockPosition] = useState<boolean>(false);
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [focusPassword, setFocusPassword] = useState<boolean>(false);
+  const [hoverPassword, setHoverPassword] = useState<boolean>(false);
 
   const handleMove = useCallback(
     (e: MouseEvent) => {
@@ -140,11 +178,6 @@ const LoginRobot: React.FC = () => {
     setRobotPosition({ x: xRobot + width / 2, y: yRobot + height / 2 });
   }, []);
 
-  const value = {
-    mousePosition: lockPosition ? lockedPosition : mousePosition,
-    lockPosition,
-  };
-
   const onUserFocus = useCallback(() => {
     const { x, y } = userRef.current?.getBoundingClientRect() as DOMRect;
     const newX = x - robotPosition.x;
@@ -158,12 +191,33 @@ const LoginRobot: React.FC = () => {
     const newX = x - robotPosition.x;
     const newY = y - robotPosition.y + 200; // compensacion para que haya cambio de posicion en el rostro
     setLockedPosition({ x: newX, y: newY });
+    setFocusPassword(true);
     setLockPosition(true);
   }, [robotPosition.x, robotPosition.y]);
 
-  const onBlur = useCallback(() => {
+  const onUserBlur = useCallback(() => {
     setLockPosition(false);
   }, []);
+
+  const onPasswordBlur = useCallback(() => {
+    setLockPosition(false);
+    setFocusPassword(false);
+  }, []);
+
+  const onPasswordMouseEnter = useCallback(() => {
+    setHoverPassword(true);
+  }, []);
+
+  const onPasswordMouseLeave = useCallback(() => {
+    setHoverPassword(false);
+  }, []);
+
+  const value = {
+    mousePosition: lockPosition ? lockedPosition : mousePosition,
+    lockPosition,
+    focusPassword,
+    hoverPassword,
+  };
 
   return (
     <LoginContext.Provider value={value}>
@@ -172,17 +226,26 @@ const LoginRobot: React.FC = () => {
           <Robot />
         </div>
         <div className={css.input} ref={userRef}>
-          <input placeholder="User..." onFocus={onUserFocus} onBlur={onBlur} />
+          <input
+            placeholder="User..."
+            onFocus={onUserFocus}
+            onBlur={onUserBlur}
+          />
           <div className={css.icon}>
             <FaUserAlt />
           </div>
         </div>
-        <div className={css.input} ref={passwordRef}>
+        <div
+          className={css.input}
+          ref={passwordRef}
+          onMouseEnter={onPasswordMouseEnter}
+          onMouseLeave={onPasswordMouseLeave}
+        >
           <input
             placeholder="Password..."
             type={eye ? "text" : "password"}
             onFocus={onPasswordFocus}
-            onBlur={onBlur}
+            onBlur={onPasswordBlur}
           />
           <div className={`${css.icon} ${css.eye}`}>
             {eye ? (
