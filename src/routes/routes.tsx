@@ -8,6 +8,7 @@ import Page_06 from "../pages/page_06";
 import Page_07 from "../pages/page_07";
 import Page_08 from "../pages/page_08";
 import Page_09 from "../pages/page_09";
+import Page_10 from "../pages/page_10";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -52,6 +53,10 @@ const Routes = [
   {
     path: "/graph",
     element: <Page_09 />,
+  },
+  {
+    path: "/loginRobot",
+    element: <Page_10 />,
   },
   {
     path: "/web_01",

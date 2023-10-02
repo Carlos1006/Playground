@@ -68,7 +68,7 @@ const Page_03 = () => {
   return (
     <>
       <div
-        className={`${css.page} ${css.flex}`}
+        className={`${css.page} ${css.inBlock}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

@@ -10,8 +10,25 @@
     &.dark {
         background-color:rgba(1,0,18);
     }
+    &.gray {
+        background-color:rgb(20,25,30);
+    }
 }
+
+.inBlock {
+    display: inline-block !important;
+    width:auto;
+    height:auto;
+    min-width:100vw;
+    min-height:100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    position: relative;
+    overflow: auto;
+}
+
 .flex {
+    display: flex !important;
     width:auto;
     height:auto;
     flex-wrap: wrap;
