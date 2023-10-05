@@ -39,6 +39,31 @@ const useDebounce = (value: number, delay: number) => {
   return debouncedValue;
 };
 
+const RobotMouth: React.FC = () => {
+  const [active, setActive] = useState<number>(0);
+  const interval = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    interval.current = setInterval(() => {
+      setActive((prev) => (prev === Teeth - 1 ? 0 : prev + 1));
+    }, 250);
+    return () => clearInterval(interval?.current ?? 0);
+  }, []);
+
+  return (
+    <div className={css.mouth}>
+      {Array(Teeth)
+        .fill(0)
+        .map((_, i) => (
+          <div
+            key={i}
+            className={`${css.tooth} ${active === i ? css.active : ""}`}
+          />
+        ))}
+    </div>
+  );
+};
+
 const Robot: React.FC = () => {
   const robotRef = useRef<HTMLDivElement>(null);
   const { mousePosition, focusPassword, hoverPassword } =
@@ -129,13 +154,7 @@ const Robot: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className={css.mouth}>
-            {Array(Teeth)
-              .fill(0)
-              .map((_, i) => (
-                <div key={i} className={css.tooth} />
-              ))}
-          </div>
+          <RobotMouth />
         </div>
       </div>
     </div>
