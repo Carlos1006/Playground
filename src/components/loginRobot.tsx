@@ -13,6 +13,8 @@ import css from "../styles/loginRobot.module.scss";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { SiWire } from "react-icons/si";
+import { BiCross } from "react-icons/bi";
+import { FaCheck } from "react-icons/fa";
 
 interface IRobotGripper {
   className: string;
@@ -23,12 +25,19 @@ interface IRobotGripper {
 interface IRobotEye {
   children: ReactNode; // Gripper slot
   className: string;
-  semiCloseTop?: boolean;
+  semiCloseTop: boolean;
   semiCloseBottom?: boolean;
+  redEyes: boolean;
+  brightest: boolean;
 }
 
 interface IRobotLigbtBulb {
   brightLevel: 0 | 1 | 2 | 3 | 4 | 5;
+}
+
+interface IRobotMouth {
+  redMouth: boolean;
+  blueMouth: boolean;
 }
 
 type Coord = { x: number; y: number };
@@ -50,6 +59,8 @@ const contextDefault = {
   hoverRecover: false as boolean,
   hoverSubmit: false as boolean,
   anim: true as boolean,
+  success: 0 as 0 | 1 | 2,
+  hide: false as boolean,
 };
 const LoginContext = createContext(contextDefault);
 
@@ -62,30 +73,44 @@ const useDebounce = (value: number, delay: number) => {
   return debouncedValue;
 };
 
-const RobotMouth: React.FC = memo(() => {
-  const [active, setActive] = useState<number>(0);
-  const interval = useRef<ReturnType<typeof setInterval> | null>(null);
+const EmulateResponse = async (): Promise<1 | 2> => {
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  const success = Math.random() > 0.5;
+  return success ? 1 : 2;
+};
 
-  useEffect(() => {
-    interval.current = setInterval(() => {
-      setActive((prev) => (prev === Teeth - 1 ? 0 : prev + 1));
-    }, 250);
-    return () => clearInterval(interval?.current ?? 0);
-  }, []);
+const RobotMouth: React.FC<IRobotMouth> = memo(
+  ({ redMouth, blueMouth }: IRobotMouth) => {
+    const [active, setActive] = useState<number>(0);
+    const interval = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  return (
-    <div className={css.mouth}>
-      {Array(Teeth)
-        .fill(0)
-        .map((_, i) => (
-          <div
-            key={i}
-            className={`${css.tooth} ${active === i ? css.active : ""}`}
-          />
-        ))}
-    </div>
-  );
-});
+    useEffect(() => {
+      interval.current = setInterval(() => {
+        setActive((prev) => (prev === Teeth - 1 ? 0 : prev + 1));
+      }, 250);
+      return () => clearInterval(interval?.current ?? 0);
+    }, []);
+
+    return (
+      <div
+        className={`
+        ${css.mouth} 
+        ${redMouth ? css.redMouth : ""} 
+        ${blueMouth ? css.blueMouth : ""}
+      `}
+      >
+        {Array(Teeth)
+          .fill(0)
+          .map((_, i) => (
+            <div
+              key={i}
+              className={`${css.tooth} ${active === i ? css.active : ""}`}
+            />
+          ))}
+      </div>
+    );
+  }
+);
 
 const RobotGripper: React.FC<IRobotGripper> = memo(
   ({ className, show, open = false }: IRobotGripper) => {
@@ -120,6 +145,8 @@ const RobotEye: React.FC<IRobotEye> = memo(
     className,
     semiCloseTop,
     semiCloseBottom,
+    redEyes,
+    brightest,
   }: IRobotEye) => {
     return (
       <>
@@ -128,6 +155,8 @@ const RobotEye: React.FC<IRobotEye> = memo(
             ${css.eye} 
             ${semiCloseTop ? css.darker : ""} 
             ${semiCloseBottom ? css.brighter : ""} 
+            ${redEyes ? css.redEyes : ""}
+            ${brightest ? css.brightest : ""}
             ${className}
           `}
         >
@@ -143,7 +172,7 @@ const RobotEye: React.FC<IRobotEye> = memo(
               className={`
               ${css.eyelid} 
               ${css.bottom}
-              ${semiCloseBottom ? css.semiCloseBottom : ""}
+              ${semiCloseBottom || brightest ? css.semiCloseBottom : ""}
             `}
             />
           </div>
@@ -186,8 +215,13 @@ const Robot: React.FC = () => {
     hoverRecover,
     hoverSubmit,
     anim,
+    success,
+    hide,
   } = useContext(LoginContext);
-  const [temporalLevel, setTemporalLevel] = useState<0 | 1 | 2>(0);
+  const [temporalLevel, setTemporalLevel] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
+  const [closeEyes, setCloseEyes] = useState<boolean>(false);
+  const [mouthRed, setMouthRed] = useState<boolean>(false);
+  const [mouthBlue, setMouthBlue] = useState<boolean>(false);
 
   const mouseX = mousePosition.x;
   const mouseY = mousePosition.y;
@@ -226,10 +260,30 @@ const Robot: React.FC = () => {
     return focusPassword || hoverPassword;
   }, [focusPassword, hoverPassword]);
 
-  const temporalLight = async (level: 0 | 1 | 2) => {
+  const temporalLight = async (level: 0 | 1 | 2 | 3 | 4 | 5) => {
     setTemporalLevel(level);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setTemporalLevel(0);
+  };
+
+  const errorAnim = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    setTemporalLevel(3);
+    setCloseEyes(true);
+    setMouthRed(true);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    setTemporalLevel(0);
+    setCloseEyes(false);
+    setMouthRed(false);
+  };
+
+  const successAnim = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    setTemporalLevel(4);
+    setMouthBlue(true);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    setTemporalLevel(0);
+    setMouthBlue(false);
   };
 
   useEffect(() => {
@@ -244,11 +298,45 @@ const Robot: React.FC = () => {
     }
   }, [hoverRecover]);
 
+  useEffect(() => {
+    if (!anim) {
+      if (success == 1) {
+        errorAnim();
+      } else if (success == 2) {
+        successAnim();
+      }
+    }
+  }, [anim, success]);
+
+  const brightLevel = useMemo(() => {
+    if (anim) {
+      return temporalLevel;
+    }
+    if (success !== 0 && !anim) {
+      return temporalLevel;
+    }
+    return 0;
+  }, [temporalLevel, success, anim]);
+
   return (
     <div id={css.robot} ref={robotRef}>
-      <div className={css.body}>
+      <div className={`${css.body} ${hide ? css.hide : ""}`}>
+        <div
+          className={`${css.angryIcon} ${
+            !anim && success === 1 ? css.show : css.hide
+          }`}
+        >
+          <BiCross />
+        </div>
+        <div
+          className={`${css.checkIcon} ${
+            !anim && success === 2 ? css.show : css.hide
+          }`}
+        >
+          <FaCheck />
+        </div>
         <div className={css.color} style={{ clipPath }} />
-        <RobotLightBulb brightLevel={anim ? temporalLevel : 0} />
+        <RobotLightBulb brightLevel={brightLevel} />
         <div className={css.face} style={{ transform }}>
           <div
             className={`
@@ -258,8 +346,10 @@ const Robot: React.FC = () => {
           >
             <RobotEye
               className={css.left}
-              semiCloseBottom={hoverSubmit && anim}
-              semiCloseTop={hoverRecover && anim}
+              brightest={success === 2 && !anim}
+              semiCloseBottom={(hoverSubmit && anim) || closeEyes}
+              semiCloseTop={(hoverRecover && anim) || closeEyes}
+              redEyes={closeEyes}
             >
               <RobotGripper
                 className={css.leftHand}
@@ -270,13 +360,15 @@ const Robot: React.FC = () => {
 
             <RobotEye
               className={css.right}
-              semiCloseBottom={hoverSubmit && anim}
-              semiCloseTop={hoverRecover && anim}
+              brightest={success === 2 && !anim}
+              semiCloseBottom={(hoverSubmit && anim) || closeEyes}
+              semiCloseTop={(hoverRecover && anim) || closeEyes}
+              redEyes={closeEyes}
             >
               <RobotGripper className={css.rightHand} show={blind && anim} />
             </RobotEye>
           </div>
-          <RobotMouth />
+          <RobotMouth redMouth={mouthRed} blueMouth={mouthBlue} />
         </div>
       </div>
     </div>
@@ -296,6 +388,8 @@ const LoginRobot: React.FC = () => {
   const [hoverRecover, setHoverRecover] = useState<boolean>(false);
   const [hoverSubmit, setHoverSubmit] = useState<boolean>(false);
   const [anim, setAnim] = useState<boolean>(true);
+  const [success, setSuccess] = useState<0 | 1 | 2>(0);
+  const [hideRobot, setHideRobot] = useState<boolean>(false);
 
   const handleMove = useCallback(
     (e: MouseEvent) => {
@@ -335,43 +429,56 @@ const LoginRobot: React.FC = () => {
     setLockPosition(true);
   }, [robotPosition.x, robotPosition.y]);
 
-  const onUserBlur = useCallback(() => {
+  const onUserBlur = () => {
     setLockPosition(false);
-  }, []);
+  };
 
-  const onPasswordBlur = useCallback(() => {
+  const onPasswordBlur = () => {
     setLockPosition(false);
     setFocusPassword(false);
-  }, []);
+  };
 
-  const onPasswordMouseEnter = useCallback(() => {
+  const onPasswordMouseEnter = () => {
     setHoverPassword(true);
-  }, []);
+  };
 
-  const onPasswordMouseLeave = useCallback(() => {
+  const onPasswordMouseLeave = () => {
     setHoverPassword(false);
-  }, []);
+  };
 
-  const onRecoverMouseEnter = useCallback(() => {
+  const onRecoverMouseEnter = () => {
     setHoverRecover(true);
-  }, []);
+  };
 
-  const onRecoverMouseLeave = useCallback(() => {
+  const onRecoverMouseLeave = () => {
     setHoverRecover(false);
-  }, []);
+  };
 
-  const onSubmitMouseEnter = useCallback(() => {
+  const onSubmitMouseEnter = () => {
     setHoverSubmit(true);
-  }, []);
+  };
 
-  const onSubmitMouseLeave = useCallback(() => {
+  const onSubmitMouseLeave = () => {
     setHoverSubmit(false);
-  }, []);
+  };
 
-  const onSubmit = (): void => {
+  const onSubmit = async (): Promise<void> => {
     setLockedPosition(robotPosition);
     setLockPosition(true);
     setAnim(false);
+    const success = await EmulateResponse();
+    setSuccess(success);
+    await new Promise((resolve) => setTimeout(resolve, 1350));
+    setAnim(true);
+    setLockPosition(false);
+    if (success == 2) {
+      alert("Welcome!");
+      setHideRobot(true);
+      await new Promise((resolve) => setTimeout(resolve, 300));
+    } else if (success == 1) {
+      alert("Wrong password");
+    }
+    setSuccess(0);
   };
 
   const value = {
@@ -383,6 +490,8 @@ const LoginRobot: React.FC = () => {
     hoverRecover,
     hoverSubmit,
     anim,
+    success,
+    hide: hideRobot,
   };
 
   return (
