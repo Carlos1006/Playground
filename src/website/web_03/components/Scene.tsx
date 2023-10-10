@@ -17,10 +17,12 @@ interface ExtendedCube extends THREE.Group<THREE.Object3DEventMap> {
 
 const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
   const sceneRef = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
+  const render = useRef<number>(0);
 
   useEffect(() => {
-    if (sceneRef.current && !loaded) {
+    render.current = render.current + 1;
+    if (sceneRef.current && render.current === 1) {
+      console.log("loaded");
       const scene = new THREE.Scene();
       const clock = new THREE.Clock();
       const mainObject = new THREE.Group();
@@ -236,9 +238,8 @@ const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
         rotationObject.rotation.x = y / 50000;
         console.log(x, y);
       });
-      setLoaded(true);
     }
-  }, [sceneRef, loaded]);
+  }, [sceneRef, render]);
 
   return (
     <div id={id} ref={sceneRef}>

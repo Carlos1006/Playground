@@ -13,6 +13,10 @@
     &.gray {
         background-color:rgb(20,25,30);
     }
+    &.darker {
+        background-color:rgb(10,15,20);
+        cursor: default !important;
+    }
 }
 
 .inBlock {
@@ -52,6 +56,7 @@
     margin-left:auto;
     margin-right:auto;
     padding: 0.5vw;
+    filter: invert(1);
     a {
         text-decoration: none;
         color: rgb(40,40,40);
