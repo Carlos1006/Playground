@@ -10,6 +10,7 @@ import Page_08 from "../pages/page_08";
 import Page_09 from "../pages/page_09";
 import Page_10 from "../pages/page_10";
 import Page_11 from "../pages/page_11";
+import Page_12 from "../pages/page_12";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -61,8 +62,12 @@ const Routes = [
     element: <Page_10 />,
   },
   {
-    path: "/grid",
+    path: "/terrain",
     element: <Page_11 />,
+  },
+  {
+    path: "/grid",
+    element: <Page_12 />,
   },
   {
     path: "/web_01",

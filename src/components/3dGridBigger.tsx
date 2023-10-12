@@ -194,7 +194,7 @@ const Grid: React.FC = () => {
       mainContainer.current.add(spotLight.current);
       mainContainer.current.add(ambientLight.current);
       mainContainer.current.add(barsContainer.current);
-      mainContainer.current.rotation.x = DegToRad(30); // 25 20
+      mainContainer.current.rotation.x = DegToRad(40); // 30
       add(mainContainer.current);
       renderRef.current.appendChild(renderer.current.domElement);
       animate();

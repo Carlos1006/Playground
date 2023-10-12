@@ -213,27 +213,27 @@ const Grid: React.FC = () => {
     [add, animate]
   );
 
-  const changeMaterial = useCallback(() => {
-    const bar =
-      barGrid.current[Math.floor(Random(0, barGrid.current.length))][
-        Math.floor(Random(0, barGrid.current[0].length))
-      ];
-    const barMaterial = new THREE.MeshPhongMaterial({
-      color: `rgb(${Math.floor(Random(0, 255))},${Math.floor(
-        Random(0, 255)
-      )},${Math.floor(Random(0, 255))})`,
-      emissive: 0x000000,
-      specular: 0x111111,
-      shininess: 30,
-      refractionRatio: 0.5,
-      reflectivity: 0.5,
-    });
-    bar.material = barMaterial;
-  }, []);
+  // const changeMaterial = useCallback(() => {
+  //   const bar =
+  //     barGrid.current[Math.floor(Random(0, barGrid.current.length))][
+  //       Math.floor(Random(0, barGrid.current[0].length))
+  //     ];
+  //   const barMaterial = new THREE.MeshPhongMaterial({
+  //     color: `rgb(${Math.floor(Random(0, 255))},${Math.floor(
+  //       Random(0, 255)
+  //     )},${Math.floor(Random(0, 255))})`,
+  //     emissive: 0x000000,
+  //     specular: 0x111111,
+  //     shininess: 30,
+  //     refractionRatio: 0.5,
+  //     reflectivity: 0.5,
+  //   });
+  //   bar.material = barMaterial;
+  // }, []);
 
-  const changeSpeed = useCallback(() => {
-    speed.current = Random(0.1, 0.5);
-  }, []);
+  // const changeSpeed = useCallback(() => {
+  //   speed.current = Random(0.1, 0.5);
+  // }, []);
 
   // Drag events
 
@@ -388,7 +388,7 @@ const Grid: React.FC = () => {
       for (let i = 0; i < innerCanvas1.current.clientWidth; i++) {
         colors[i] = [];
         for (let j = 0; j < innerCanvas1.current?.clientHeight; j++) {
-          const [r, g, b, a] = innerCanvas1Context.current.getImageData(
+          const [r, g, b] = innerCanvas1Context.current.getImageData(
             i,
             j,
             1,
