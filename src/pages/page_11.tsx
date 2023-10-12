@@ -1,4 +1,4 @@
-import Grid from "../components/3dGrid";
+import Grid from "../components/3dGridBigger";
 import css from "../styles/page.module.scss";
 
 const Page_11 = () => {

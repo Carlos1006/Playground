@@ -189,9 +189,9 @@ const Grid: React.FC = () => {
 
       barsContainer.current.add(base.current);
       let x = 0;
-      for (let i = -2.5; i < 2.5; i += 0.1, x++) {
+      for (let i = -4.67; i < 4.67; i += 0.1, x++) {
         let y = 0;
-        for (let j = -2.5; j < 2.5; j += 0.1, y++) {
+        for (let j = -4.67; j < 4.67; j += 0.1, y++) {
           const bar = createBar(i, 0, j, Random(0.5, 1.5));
           barsContainer.current.add(bar);
           if (Array.isArray(barGrid.current[x]) === false) {
@@ -213,28 +213,6 @@ const Grid: React.FC = () => {
     [add, animate]
   );
 
-  const changeMaterial = useCallback(() => {
-    const bar =
-      barGrid.current[Math.floor(Random(0, barGrid.current.length))][
-        Math.floor(Random(0, barGrid.current[0].length))
-      ];
-    const barMaterial = new THREE.MeshPhongMaterial({
-      color: `rgb(${Math.floor(Random(0, 255))},${Math.floor(
-        Random(0, 255)
-      )},${Math.floor(Random(0, 255))})`,
-      emissive: 0x000000,
-      specular: 0x111111,
-      shininess: 30,
-      refractionRatio: 0.5,
-      reflectivity: 0.5,
-    });
-    bar.material = barMaterial;
-  }, []);
-
-  const changeSpeed = useCallback(() => {
-    speed.current = Random(0.1, 0.5);
-  }, []);
-
   // Drag events
 
   useLayoutEffect(() => {
@@ -245,49 +223,74 @@ const Grid: React.FC = () => {
     }
   }, [renderRef, render, construct]);
 
-  useLayoutEffect(() => {
-    canvasRender1.current = canvasRender1.current + 1;
-    if (
-      canvasRef1.current &&
-      imgContainerRef1.current &&
-      canvasRender1.current === 1
-    ) {
+  const drawColorMap = async () => {
+    if (canvasRef1.current && imgContainerRef1.current) {
       const { clientWidth: width } = imgContainerRef1.current;
+      canvasContext1.current = canvasRef1.current.getContext("2d");
       imgContainerRef1.current.style.height = `${width}px`;
       canvasRef1.current.width = width;
       canvasRef1.current.height = width;
-      const ctx = canvasRef1.current.getContext("2d");
-      if (ctx) {
-        canvasContext1.current = ctx;
-        const image = new Image();
-        image.src = cmap;
+      const image = new Image();
+      image.src = cmap;
+      await new Promise((resolve) => {
         image.onload = () => {
-          ctx.drawImage(image, 0, 0, width, width);
+          resolve(true);
         };
+      });
+      if (canvasContext1.current) {
+        canvasContext1.current?.drawImage(image, 0, 0, width, width);
+        const dataOrigin = canvasContext1.current.getImageData(
+          0,
+          0,
+          width,
+          width
+        );
+        const dataDestiny = canvasContext1.current.createImageData(
+          width,
+          width
+        );
+
+        // invert colors
+        for (let i = 0; i < dataOrigin.data.length; i += 4) {
+          dataDestiny.data[i] = 255 - dataOrigin.data[i];
+          dataDestiny.data[i + 1] = 255 - dataOrigin.data[i + 1];
+          dataDestiny.data[i + 2] = 255 - dataOrigin.data[i + 2];
+          dataDestiny.data[i + 3] = 255;
+        }
+        canvasContext1.current.putImageData(dataDestiny, 0, 0);
       }
+    }
+  };
+
+  const drawHeightMap = async () => {
+    if (canvasRef2.current && imgContainerRef2.current) {
+      const { clientWidth: width } = imgContainerRef2.current;
+      canvasContext2.current = canvasRef2.current.getContext("2d");
+      imgContainerRef2.current.style.height = `${width}px`;
+      canvasRef2.current.width = width;
+      canvasRef2.current.height = width;
+      const image = new Image();
+      image.src = hmap;
+      await new Promise((resolve) => {
+        image.onload = () => {
+          resolve(true);
+        };
+      });
+      canvasContext2.current?.drawImage(image, 0, 0, width, width);
+    }
+  };
+
+  useLayoutEffect(() => {
+    canvasRender1.current = canvasRender1.current + 1;
+    if (canvasRender1.current === 1) {
+      drawColorMap();
     }
   }, [canvasRef1, imgContainerRef1, canvasRender1]);
 
   useLayoutEffect(() => {
     canvasRender2.current = canvasRender2.current + 1;
-    if (
-      canvasRef2.current &&
-      imgContainerRef2.current &&
-      canvasRender2.current === 1
-    ) {
-      const { clientWidth: width } = imgContainerRef2.current;
-      imgContainerRef2.current.style.height = `${width}px`;
-      canvasRef2.current.width = width;
-      canvasRef2.current.height = width;
-      const ctx = canvasRef2.current.getContext("2d");
-      if (ctx) {
-        canvasContext2.current = ctx;
-        const image = new Image();
-        image.src = hmap;
-        image.onload = () => {
-          ctx.drawImage(image, 0, 0, width, width);
-        };
-      }
+    if (canvasRender2.current === 1) {
+      drawHeightMap();
     }
   }, [canvasRef1, imgContainerRef1, canvasRender1]);
 
@@ -318,43 +321,6 @@ const Grid: React.FC = () => {
       });
     });
   }, []);
-
-  useLayoutEffect(() => {
-    if (innerCanvas1.current && draggerRef.current) {
-      innerCanvas1.current.width = draggerRef.current.clientWidth;
-      innerCanvas1.current.height = draggerRef.current.clientHeight;
-      const ctx = innerCanvas1.current.getContext("2d");
-      if (ctx) {
-        innerCanvas1Context.current = ctx;
-      }
-    }
-  }, [innerCanvas1, draggerRef]);
-
-  useLayoutEffect(() => {
-    if (innerCanvas2.current && draggerRef2.current) {
-      const ctx = innerCanvas2.current.getContext("2d");
-      innerCanvas2.current.width = draggerRef2.current.clientWidth;
-      innerCanvas2.current.height = draggerRef2.current.clientHeight;
-      if (ctx) {
-        innerCanvas2Context.current = ctx;
-      }
-    }
-  }, [innerCanvas2]);
-
-  const onMouseDown = useCallback(
-    (
-      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      ref: RefObject<HTMLDivElement>
-    ) => {
-      if (ref.current) {
-        const { clientX, clientY } = e;
-        const { offsetLeft, offsetTop } = ref.current;
-        offset.current = { x: clientX - offsetLeft, y: clientY - offsetTop };
-      }
-      mouseDown.current = true;
-    },
-    []
-  );
 
   const draw = useCallback(() => {
     // draw the section from the canvas into the inner canvas
@@ -421,91 +387,13 @@ const Grid: React.FC = () => {
     }
   }, [changeBarColors, changeBarHeight]);
 
-  const onMouseUp = useCallback(() => {
-    mouseDown.current = false;
-    draw();
-  }, [draw]);
-
-  const drag = useCallback(
-    (
-      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      dragRef: RefObject<HTMLDivElement>,
-      imgContainerRef: RefObject<HTMLDivElement>
-    ) => {
-      if (
-        mouseDown.current &&
-        draggerRef.current &&
-        draggerRef2.current &&
-        dragRef.current &&
-        imgContainerRef.current
-      ) {
-        const { clientX, clientY } = e;
-        const { x: offsetX, y: offsetY } = offset.current;
-        let newX = clientX - offsetX;
-        let newY = clientY - offsetY;
-
-        if (newY < 0) {
-          newY = 0;
-        }
-        if (
-          newY >
-          imgContainerRef.current.clientHeight - dragRef.current.clientHeight
-        ) {
-          newY =
-            imgContainerRef.current.clientHeight - dragRef.current.clientHeight;
-        }
-        if (newX < 0) {
-          newX = 0;
-        }
-        if (
-          newX >
-          imgContainerRef.current.clientWidth - dragRef.current.clientWidth
-        ) {
-          newX =
-            imgContainerRef.current.clientWidth - dragRef.current.clientWidth;
-        }
-        draggerPosition.current = { x: newX, y: newY };
-
-        draggerRef.current.style.left = `${newX}px`;
-        draggerRef.current.style.top = `${newY}px`;
-        draggerRef2.current.style.left = `${newX}px`;
-        draggerRef2.current.style.top = `${newY}px`;
-      }
-    },
-    [mouseDown, offset]
-  );
-
   return (
     <div id={css.grid}>
       <div className={css.column}>
-        <div
-          className={css.imageContainer}
-          ref={imgContainerRef1}
-          onMouseMove={(e) => drag(e, draggerRef, imgContainerRef1)}
-        >
-          <div
-            ref={draggerRef}
-            className={css.dragger}
-            onMouseDown={(e) => onMouseDown(e, draggerRef)}
-            onMouseUp={onMouseUp}
-          >
-            <canvas ref={innerCanvas1} />
-          </div>
+        <div className={css.imageContainer} ref={imgContainerRef1}>
           <canvas ref={canvasRef1} />
         </div>
-        <div
-          className={css.imageContainer}
-          ref={imgContainerRef2}
-          onMouseMove={(e) => drag(e, draggerRef2, imgContainerRef2)}
-        >
-          <div
-            ref={draggerRef2}
-            className={css.dragger}
-            onMouseDown={(e) => onMouseDown(e, draggerRef2)}
-            onMouseUp={onMouseUp}
-          >
-            <canvas ref={innerCanvas2} />
-          </div>
+        <div className={css.imageContainer} ref={imgContainerRef2}>
           <canvas ref={canvasRef2} />
         </div>
       </div>
