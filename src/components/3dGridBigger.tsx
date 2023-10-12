@@ -50,7 +50,7 @@ const createBase = () => {
 
 const createCamera = (width: number, height: number) => {
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-  camera.position.z = 5;
+  camera.position.z = 6;
   return camera;
 };
 
@@ -146,19 +146,8 @@ const Grid: React.FC = () => {
   const canvasContext1 = useRef<CanvasRenderingContext2D | null>(null);
   const canvasContext2 = useRef<CanvasRenderingContext2D | null>(null);
 
-  // drag
-  const draggerRef = useRef<HTMLDivElement>(null);
-  const draggerRef2 = useRef<HTMLDivElement>(null);
-  const mouseDown = useRef<boolean>(false);
-  const draggerPosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const offset = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const innerCanvas1 = useRef<HTMLCanvasElement>(null);
-  const innerCanvas2 = useRef<HTMLCanvasElement>(null);
-  const innerCanvas1Context = useRef<CanvasRenderingContext2D | null>(null);
-  const innerCanvas2Context = useRef<CanvasRenderingContext2D | null>(null);
-
-  const colors1 = useRef<string[][]>([]);
-  const colors2 = useRef<number[][]>([]);
+  const mapColors = useRef<string[][]>([]);
+  const mapHeights = useRef<number[][]>([]);
 
   const add = useCallback((object: THREE.Object3D) => {
     if (scene.current) {
@@ -169,7 +158,6 @@ const Grid: React.FC = () => {
   const animate = useCallback(() => {
     const delta = clock.current.getDelta();
     requestAnimationFrame(animate);
-    // cube.rotation.y += 0.8 * delta;
     barsContainer.current.rotation.y += speed.current * delta;
     renderer.current.render(scene.current, camera.current);
   }, []);
@@ -200,6 +188,7 @@ const Grid: React.FC = () => {
           barGrid.current[x][y] = bar;
         }
       }
+      console.log(barGrid.current);
 
       // mainContainer.add(referenceCube.current);
       mainContainer.current.add(spotLight.current);
@@ -225,11 +214,12 @@ const Grid: React.FC = () => {
 
   const drawColorMap = async () => {
     if (canvasRef1.current && imgContainerRef1.current) {
-      const { clientWidth: width } = imgContainerRef1.current;
+      const { clientWidth: width, clientWidth: height } =
+        imgContainerRef1.current;
       canvasContext1.current = canvasRef1.current.getContext("2d");
-      imgContainerRef1.current.style.height = `${width}px`;
+      imgContainerRef1.current.style.height = `${height}px`;
       canvasRef1.current.width = width;
-      canvasRef1.current.height = width;
+      canvasRef1.current.height = height;
       const image = new Image();
       image.src = cmap;
       await new Promise((resolve) => {
@@ -238,37 +228,98 @@ const Grid: React.FC = () => {
         };
       });
       if (canvasContext1.current) {
-        canvasContext1.current?.drawImage(image, 0, 0, width, width);
+        canvasContext1.current?.drawImage(image, 0, 0, width, height);
         const dataOrigin = canvasContext1.current.getImageData(
           0,
           0,
           width,
-          width
+          height
         );
         const dataDestiny = canvasContext1.current.createImageData(
           width,
-          width
+          height
         );
-
-        // invert colors
-        for (let i = 0; i < dataOrigin.data.length; i += 4) {
-          dataDestiny.data[i] = 255 - dataOrigin.data[i];
-          dataDestiny.data[i + 1] = 255 - dataOrigin.data[i + 1];
-          dataDestiny.data[i + 2] = 255 - dataOrigin.data[i + 2];
-          dataDestiny.data[i + 3] = 255;
+        const colors: string[][] = [];
+        let xx = 0;
+        let yy = 0;
+        for (let x = 0; x < width; x += 4) {
+          yy = 0;
+          for (let y = 0; y < height; y += 4) {
+            // getPixels in a 4x4 square
+            const pixels: Uint8ClampedArray[][] = [];
+            for (let i = 0; i < 4; i++) {
+              pixels[i] = [];
+              for (let j = 0; j < 4; j++) {
+                // if pixel is out of bounds, set it to black
+                if (x + i >= width || y + j >= height) {
+                  pixels[i][j] = new Uint8ClampedArray([0, 0, 0, 0]);
+                  continue;
+                }
+                const iPixel = (x + i + (y + j) * width) * 4;
+                const pixel = dataOrigin.data.slice(iPixel, iPixel + 4);
+                pixels[i][j] = pixel;
+              }
+            }
+            // get average color
+            let r = 0;
+            let g = 0;
+            let b = 0;
+            let counter = 0;
+            pixels.forEach((row) => {
+              row.forEach((pixel) => {
+                if (pixel[3] === 0) {
+                  return;
+                }
+                r += pixel[0];
+                g += pixel[1];
+                b += pixel[2];
+                counter++;
+              });
+            });
+            r /= counter;
+            g /= counter;
+            b /= counter;
+            r = Math.round(r);
+            g = Math.round(g);
+            b = Math.round(b);
+            const color = `rgb(${r},${g},${b})`;
+            // set pixels in destiny
+            for (let i = 0; i < 4; i++) {
+              for (let j = 0; j < 4; j++) {
+                if (x + i >= width || y + j >= height) {
+                  continue;
+                }
+                const iPixel = (x + i + (y + j) * width) * 4;
+                dataDestiny.data[iPixel] = r;
+                dataDestiny.data[iPixel + 1] = g;
+                dataDestiny.data[iPixel + 2] = b;
+                dataDestiny.data[iPixel + 3] = 255;
+              }
+            }
+            if (!Array.isArray(colors[xx])) {
+              colors[xx] = [];
+            }
+            colors[xx][yy] = color;
+            yy++;
+          }
+          xx++;
         }
+        mapColors.current = colors;
         canvasContext1.current.putImageData(dataDestiny, 0, 0);
+        console.log(mapColors.current);
+        changeBarColors();
       }
     }
   };
 
   const drawHeightMap = async () => {
     if (canvasRef2.current && imgContainerRef2.current) {
-      const { clientWidth: width } = imgContainerRef2.current;
+      const { clientWidth: width, clientWidth: height } =
+        imgContainerRef2.current;
       canvasContext2.current = canvasRef2.current.getContext("2d");
-      imgContainerRef2.current.style.height = `${width}px`;
+      imgContainerRef2.current.style.height = `${height}px`;
       canvasRef2.current.width = width;
-      canvasRef2.current.height = width;
+      canvasRef2.current.height = height;
       const image = new Image();
       image.src = hmap;
       await new Promise((resolve) => {
@@ -276,7 +327,84 @@ const Grid: React.FC = () => {
           resolve(true);
         };
       });
-      canvasContext2.current?.drawImage(image, 0, 0, width, width);
+      if (canvasContext2.current) {
+        canvasContext2.current?.drawImage(image, 0, 0, width, height);
+        const dataOrigin = canvasContext2.current.getImageData(
+          0,
+          0,
+          width,
+          height
+        );
+        const dataDestiny = canvasContext2.current.createImageData(
+          width,
+          height
+        );
+        const colors: number[][] = [];
+        let xx = 0;
+        let yy = 0;
+        for (let x = 0; x < width; x += 4) {
+          yy = 0;
+          for (let y = 0; y < height; y += 4) {
+            // getPixels in a 4x4 square
+            const pixels: Uint8ClampedArray[][] = [];
+            for (let i = 0; i < 4; i++) {
+              pixels[i] = [];
+              for (let j = 0; j < 4; j++) {
+                // if pixel is out of bounds, set it to black
+                if (x + i >= width || y + j >= height) {
+                  pixels[i][j] = new Uint8ClampedArray([0, 0, 0, 0]);
+                  continue;
+                }
+                const iPixel = (x + i + (y + j) * width) * 4;
+                const pixel = dataOrigin.data.slice(iPixel, iPixel + 4);
+                pixels[i][j] = pixel;
+              }
+            }
+            // get average color
+            let r = 0;
+            let g = 0;
+            let b = 0;
+            let counter = 0;
+            pixels.forEach((row) => {
+              row.forEach((pixel) => {
+                if (pixel[3] === 0) {
+                  return;
+                }
+                r += pixel[0];
+                g += pixel[1];
+                b += pixel[2];
+                counter++;
+              });
+            });
+            r /= counter;
+            g /= counter;
+            b /= counter;
+            const newHeight = (r + g + b) / 3;
+            // set pixels in destiny
+            for (let i = 0; i < 4; i++) {
+              for (let j = 0; j < 4; j++) {
+                if (x + i >= width || y + j >= height) {
+                  continue;
+                }
+                const iPixel = (x + i + (y + j) * width) * 4;
+                dataDestiny.data[iPixel] = r;
+                dataDestiny.data[iPixel + 1] = g;
+                dataDestiny.data[iPixel + 2] = b;
+                dataDestiny.data[iPixel + 3] = 255;
+              }
+            }
+            if (!Array.isArray(colors[xx])) {
+              colors[xx] = [];
+            }
+            colors[xx][yy] = newHeight;
+            yy++;
+          }
+          xx++;
+        }
+        mapHeights.current = colors;
+        canvasContext2.current.putImageData(dataDestiny, 0, 0);
+        changeBarHeight();
+      }
     }
   };
 
@@ -295,10 +423,9 @@ const Grid: React.FC = () => {
   }, [canvasRef1, imgContainerRef1, canvasRender1]);
 
   const changeBarColors = useCallback(() => {
-    console.log("change bar colors", colors1.current);
     barGrid.current.forEach((row, x) => {
       row.forEach((bar, y) => {
-        const color1 = colors1.current[x][y];
+        const color1 = mapColors.current[x][y];
         const barMaterial = new THREE.MeshPhongMaterial({
           color: color1,
           emissive: 0x000000,
@@ -313,79 +440,13 @@ const Grid: React.FC = () => {
   }, []);
 
   const changeBarHeight = useCallback(() => {
-    console.log("change bar height", colors2.current);
     barGrid.current.forEach((row, x) => {
       row.forEach((bar, y) => {
-        const height = colors2.current[x][y];
+        const height = mapHeights.current[x][y];
         bar.geometry = new THREE.BoxGeometry(0.1, height / 70, 0.1);
       });
     });
   }, []);
-
-  const draw = useCallback(() => {
-    // draw the section from the canvas into the inner canvas
-    innerCanvas1Context.current?.drawImage(
-      canvasRef1.current as HTMLCanvasElement,
-      draggerPosition.current.x,
-      draggerPosition.current.y,
-      draggerRef.current?.clientWidth as number,
-      draggerRef.current?.clientHeight as number,
-      0,
-      0,
-      innerCanvas1.current?.clientWidth as number,
-      innerCanvas1.current?.clientHeight as number
-    );
-
-    innerCanvas2Context.current?.drawImage(
-      canvasRef2.current as HTMLCanvasElement,
-      draggerPosition.current.x,
-      draggerPosition.current.y,
-      draggerRef.current?.clientWidth as number,
-      draggerRef.current?.clientHeight as number,
-      0,
-      0,
-      innerCanvas2.current?.clientWidth as number,
-      innerCanvas2.current?.clientHeight as number
-    );
-
-    // extract colors from inner canvas and store in a 2d array
-    if (innerCanvas1.current && innerCanvas1Context.current) {
-      const colors: string[][] = [];
-      for (let i = 0; i < innerCanvas1.current.clientWidth; i++) {
-        colors[i] = [];
-        for (let j = 0; j < innerCanvas1.current?.clientHeight; j++) {
-          const [r, g, b, a] = innerCanvas1Context.current.getImageData(
-            i,
-            j,
-            1,
-            1
-          ).data;
-          if (!Array.isArray(colors[i])) {
-            colors[i] = [];
-          }
-          colors[i][j] = `rgb(${r},${g},${b})`;
-        }
-      }
-      colors1.current = colors;
-      changeBarColors();
-    }
-
-    if (innerCanvas2.current && innerCanvas2Context.current) {
-      const colors: number[][] = [];
-      for (let i = 0; i < innerCanvas2.current.clientWidth; i++) {
-        colors[i] = [];
-        for (let j = 0; j < innerCanvas2.current?.clientHeight; j++) {
-          const [r] = innerCanvas2Context.current.getImageData(i, j, 1, 1).data;
-          if (!Array.isArray(colors[i])) {
-            colors[i] = [];
-          }
-          colors[i][j] = r;
-        }
-      }
-      colors2.current = colors;
-      changeBarHeight();
-    }
-  }, [changeBarColors, changeBarHeight]);
 
   return (
     <div id={css.grid}>
