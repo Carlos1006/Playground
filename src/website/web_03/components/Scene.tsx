@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import * as THREE from "three";
 import envImg from "../assets/images/env.png";
 import { DegToRad, Random } from "../utils";

@@ -44,7 +44,7 @@ const Routes = [
     element: <Page_05 />,
   },
   {
-    path: "/search_bar",
+    path: "/none",
     element: <Page_06 />,
   },
   {
