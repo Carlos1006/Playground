@@ -304,8 +304,6 @@ const Forest: FC = () => {
     }
   }, [construct, mainRef]);
 
-  console.log(imgBackground);
-
   return (
     <div
       id={css.forest}
