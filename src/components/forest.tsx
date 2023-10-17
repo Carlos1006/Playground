@@ -233,12 +233,10 @@ const Forest: FC = () => {
   const animate = useCallback(() => {
     // const delta = clock.current.getDelta();
     requestAnimationFrame(animate);
-
     // const time = Date.now() * 0.001;
     const time = clock.current.getElapsedTime() * 0.75;
     keyLight.current.intensity = (Math.cos(time) + 1) * 10 + 2;
     keyLight.current.position.x = Math.cos(time * 0.7) * 1.5; // sin
-
     renderer.current.render(scene.current, camera.current);
   }, []);
 
