@@ -1,5 +1,5 @@
 import { FC, useCallback, useLayoutEffect, useRef } from "react";
-import css from "../styles/forest.module.scss";
+import css from "./styles/main.module.scss";
 import * as THREE from "three";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { HorizontalBlurShader } from "three/examples/jsm/shaders/HorizontalBlurShader.js";
@@ -7,7 +7,7 @@ import { VerticalBlurShader } from "three/examples/jsm/shaders/VerticalBlurShade
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
-import imgBackground from "../assets/images/Fondo.png";
+import imgBackground from "./assets/images/Fondo.png";
 
 const createScene = () => {
   const scene = new THREE.Scene();
@@ -215,6 +215,7 @@ const Forest: FC = () => {
   const backLight = useRef<THREE.PointLight>(new THREE.PointLight());
   const back2Light = useRef<THREE.PointLight>(new THREE.PointLight());
   const rotationObject = useRef<THREE.Group>(new THREE.Group());
+  const mainContainer = useRef<HTMLDivElement>(null);
 
   const renderCount = useRef(0);
 
@@ -289,29 +290,37 @@ const Forest: FC = () => {
   );
 
   useLayoutEffect(() => {
-    if (!mainRef.current) return;
+    if (!mainRef.current || !mainContainer.current) return;
     renderCount.current += 1;
     if (renderCount.current === 1) {
       const { clientWidth: width, clientHeight: height } = mainRef.current;
       construct(width, height);
       const windowHalf = new THREE.Vector2(width / 2, height / 2);
-      mainRef.current.addEventListener("mousemove", (event) => {
+      mainContainer?.current?.addEventListener("mousemove", (event) => {
         const x = event.clientX - windowHalf.x;
         const y = event.clientY - windowHalf.y;
         rotationObject.current.rotation.y = x / 50000;
         rotationObject.current.rotation.x = y / 50000;
       });
     }
-  }, [construct, mainRef]);
+  }, [construct, mainRef, mainContainer]);
 
   return (
-    <div
-      id={css.forest}
-      ref={mainRef}
-      style={{
-        backgroundImage: `url(${imgBackground})`,
-      }}
-    ></div>
+    <div ref={mainContainer} id={css.container}>
+      <div className={css.page}>
+        <div className={css.title}>
+          <span>REDUCTO</span>
+          <span>REDUCTO</span>
+        </div>
+      </div>
+      <div
+        id={css.forest}
+        ref={mainRef}
+        style={{
+          backgroundImage: `url(${imgBackground})`,
+        }}
+      ></div>
+    </div>
   );
 };
 
