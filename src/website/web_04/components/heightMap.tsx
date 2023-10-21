@@ -129,6 +129,7 @@ const HeightMap: FC = () => {
     imgContainerRef1,
     imgContainerRef2,
     clock,
+    setImgData,
   } = useMainContext();
 
   const ambientLight = useRef<THREE.HemisphereLight>(
@@ -143,7 +144,7 @@ const HeightMap: FC = () => {
   const base = useRef<THREE.Mesh>(new THREE.Mesh());
   const renderRef = useRef<HTMLDivElement>(null);
   const barGrid = useRef<THREE.Mesh[][]>([]);
-  const speed = useRef<number>(0.2);
+  const speed = useRef<number>(0.1);
   const render = useRef<number>(0);
 
   const canvasRender1 = useRef<number>(0);
@@ -337,8 +338,8 @@ const HeightMap: FC = () => {
             xx++;
           }
           mapColors.current = colors;
+          setImgData(dataDestiny);
           canvasContext1.current.putImageData(dataDestiny, 0, 0);
-          console.log(mapColors.current);
           changeBarColors();
         }
       }
@@ -347,7 +348,13 @@ const HeightMap: FC = () => {
     if (canvasRender1.current === 1) {
       drawColorMap();
     }
-  }, [canvasRef1, imgContainerRef1, canvasRender1, changeBarColors]);
+  }, [
+    canvasRef1,
+    imgContainerRef1,
+    canvasRender1,
+    changeBarColors,
+    setImgData,
+  ]);
 
   useLayoutEffect(() => {
     const drawHeightMap = async () => {

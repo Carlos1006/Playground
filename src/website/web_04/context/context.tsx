@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 import { IMainContext, MainContext } from "./createContext";
 
@@ -10,6 +10,7 @@ const MainContextProvider = ({ children }: { children: React.ReactNode }) => {
   const imgContainerRef2 = useRef<HTMLDivElement>(null);
   const canvasRef2 = useRef<HTMLCanvasElement>(null);
   const clock = useRef<THREE.Clock>(new THREE.Clock());
+  const [imgData, setImgData] = useState<ImageData | null>(null);
 
   const value: IMainContext = {
     euler,
@@ -19,6 +20,8 @@ const MainContextProvider = ({ children }: { children: React.ReactNode }) => {
     imgContainerRef2,
     canvasRef2,
     clock,
+    imgData,
+    setImgData,
   };
 
   return <MainContext.Provider value={value}>{children}</MainContext.Provider>;

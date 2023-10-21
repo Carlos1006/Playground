@@ -8,6 +8,8 @@ export interface IMainContext {
   imgContainerRef2: React.MutableRefObject<HTMLDivElement | null> | null;
   canvasRef2: React.MutableRefObject<HTMLCanvasElement | null> | null;
   clock: React.MutableRefObject<THREE.Clock> | null;
+  imgData: ImageData | null;
+  setImgData: React.Dispatch<React.SetStateAction<ImageData | null>>;
 }
 
 export const MainContext = createContext<IMainContext>({
@@ -18,5 +20,8 @@ export const MainContext = createContext<IMainContext>({
   imgContainerRef2: null,
   canvasRef2: null,
   clock: null,
+  imgData: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setImgData: () => {},
 });
 
