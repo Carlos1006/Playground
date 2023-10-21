@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import css from "./styles/main.module.scss";
 
-import { BsArrowRight, BsArrowUpRight } from "react-icons/bs";
+import { BsDot, BsArrowRight, BsArrowUpRight } from "react-icons/bs";
 import Forest from "./components/forest";
 import { TiSocialFacebook, TiSocialLinkedin } from "react-icons/ti";
 import { AiFillInstagram } from "react-icons/ai";
@@ -43,7 +43,17 @@ const Main: FC = () => {
           </div>
         </div>
         <div className={css.body}>
-          <div className={css.leftBar}></div>
+          <div className={css.leftBar}>
+            <div className={`${css.navigatorDot} ${css.selected}`}>
+              <BsDot />
+            </div>
+            <div className={css.navigatorDot}>
+              <BsDot />
+            </div>
+            <div className={css.navigatorDot}>
+              <BsDot />
+            </div>
+          </div>
           <div className={css.central}>
             <div className={css.mainContainer}>
               <div className={css.main}>

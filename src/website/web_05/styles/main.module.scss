@@ -57,12 +57,12 @@
                 letter-spacing:0.2em;
                 margin-right:3vw;
                 &:first-of-type {
-                    margin-left:calc(3vw + (8vw - 5vh));
+                    margin-left:calc(3vw + (11vw - 7vh));
                 }
             }
         }
         .button {
-            margin-right:5vw;
+            margin-right:7vw;
             border-radius:50pt;
             border:1px solid rgba(255, 255, 255, 0.781);
             transition: background-color 0.3s ease-in-out;
@@ -113,6 +113,30 @@
     .leftBar {
         width:5vw;
         height:92vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        .navigatorDot {
+            width:0.8vw;
+            height:0.8vw;
+            margin-bottom:1vw;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            border-radius:100px;
+            cursor: pointer !important;
+            &.selected {
+                border:1px solid rgba(255, 255, 255, 0.205);
+            }
+            svg {
+                width:100%;
+                height:100%;
+                scale:2;
+                fill:rgb(255,255,255, 0.6);
+                transition: fill 0.3s ease-in-out;
+            }
+        }
     }
     .rightBar {
         width:5vw;
