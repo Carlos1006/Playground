@@ -7,19 +7,17 @@ import React, {
 } from "react";
 import css from "../styles/main.module.scss";
 import cmap from "../../../assets/maps/map1/cmap.png";
-import { DegToRad } from "../../../website/web_03/utils";
 import HeightMap from "./../components/heightMap";
 import { useMainContext } from "../hooks/useMainContext";
 
 const Main: React.FC = () => {
   const {
-    euler,
-    camera,
     canvasRef1,
     canvasRef2,
     imgContainerRef1,
     imgContainerRef2,
     imgData,
+    cameraMove,
   } = useMainContext();
   const [, setDataLoaded] = useState(false);
   const colors = useRef<string[]>([
@@ -53,15 +51,13 @@ const Main: React.FC = () => {
   // 26 101 125
 
   const onMouseMove = (e: { clientY: number }) => {
-    if (!euler?.current || !camera?.current) return;
     const { clientY } = e;
-
     const windowsHalfY = window.innerHeight / 2;
     const positionY = clientY - windowsHalfY;
     const percentY = positionY / windowsHalfY;
-
-    euler.current.x = -DegToRad(30) + percentY * -DegToRad(2);
-    camera.current.setRotationFromEuler(euler.current);
+    if (cameraMove !== null) {
+      cameraMove.current = percentY;
+    }
   };
 
   const data = useMemo(() => {
@@ -93,9 +89,9 @@ const Main: React.FC = () => {
     <div id={css.grid} onMouseMove={onMouseMove}>
       <div id={css.page}>
         <div id={css.header}>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div id={css.logo}></div>
+          <div id={css.menu}></div>
+          <div id={css.actions}></div>
         </div>
         <div id={css.body}>
           <div id={css.row1} className={css.row}>

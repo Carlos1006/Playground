@@ -123,18 +123,21 @@ const createSpotLight = () => {
 
 const HeightMap: FC = () => {
   const {
-    camera,
     canvasRef1,
     canvasRef2,
     imgContainerRef1,
     imgContainerRef2,
     clock,
+    cameraMove,
     setImgData,
   } = useMainContext();
 
   const ambientLight = useRef<THREE.HemisphereLight>(
     new THREE.HemisphereLight()
   );
+
+  const euler = useRef<THREE.Euler>(new THREE.Euler(0, 0, 0, "YXZ"));
+  const camera = useRef<THREE.PerspectiveCamera>(new THREE.PerspectiveCamera());
   const renderer = useRef<THREE.WebGLRenderer>(new THREE.WebGLRenderer());
   const mainContainer = useRef<THREE.Group>(new THREE.Group());
   const barsContainer = useRef<THREE.Group>(new THREE.Group());
@@ -166,7 +169,11 @@ const HeightMap: FC = () => {
     requestAnimationFrame(animate);
     barsContainer.current.rotation.y += speed.current * delta;
     renderer.current.render(scene.current, camera.current);
-  }, [camera, clock]);
+
+    const safeCameraMove = cameraMove?.current ?? 0;
+    euler.current.x = -DegToRad(30) + safeCameraMove * -DegToRad(4);
+    camera.current.setRotationFromEuler(euler.current);
+  }, [camera, clock, cameraMove]);
 
   const construct = useCallback(
     (width: number, height: number) => {
