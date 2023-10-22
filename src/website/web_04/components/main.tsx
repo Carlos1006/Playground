@@ -9,6 +9,8 @@ import css from "../styles/main.module.scss";
 import cmap from "../../../assets/maps/map1/cmap.png";
 import HeightMap from "./../components/heightMap";
 import { useMainContext } from "../hooks/useMainContext";
+import logoBW from "../assets/images/reducto_bw.png";
+import logo from "../assets/images/reducto.png";
 
 const Main: React.FC = () => {
   const {
@@ -89,13 +91,29 @@ const Main: React.FC = () => {
     <div id={css.grid} onMouseMove={onMouseMove}>
       <div id={css.page}>
         <div id={css.header}>
-          <div id={css.logo}></div>
+          <div id={css.logo}>
+            <img src={logo} />
+          </div>
           <div id={css.menu}></div>
           <div id={css.actions}></div>
         </div>
         <div id={css.body}>
           <div id={css.row1} className={css.row}>
-            <div id={css.block1_1} className={css.block}></div>
+            <div id={css.block1_1} className={css.block}>
+              <div className={css.subBlock}>
+                <span className={css.name}>Carlos Daniel</span>
+                <div className={css.reductoRow}>
+                  <span className={css.reducto}>REDU</span>
+                </div>
+                <div className={css.reductoRow}>
+                  <span className={css.reducto}>CT</span>
+                  <div className={css.reductoLogo}>
+                    <img src={logoBW} />
+                  </div>
+                </div>
+              </div>
+              <div className={css.subBlock}></div>
+            </div>
             <div
               id={css.block1_2}
               className={css.block}

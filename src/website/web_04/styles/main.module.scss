@@ -15,11 +15,23 @@
         bottom:0;
         z-index:2;
         #header {
-            height:7vh;
+            margin-top:1vh;
+            height:8vh;
             width:100vw;
+            display:flex;
+            align-items:center;
+            #logo {
+                width:6vh;
+                height:6vh;
+                margin-left:2.5vw;
+                img {
+                    width:100%;
+                    height:100%;
+                }
+            }
         }
         #body {
-            height:93vh;
+            height:91vh;
             width:100vw;
             display:flex;
             flex-direction:column;
@@ -35,11 +47,51 @@
             }
             #row1 {
                 flex-grow: 0.4;
-                margin-top:2vw;
+                margin-top:1vw;
                 #block1_1 {
                     flex-grow:0.93;
                     background-color:rgba(255, 255, 255, 0.08);
+                    // background: radial-gradient(circle at 50% 60%, transparent 5%, rgba(255, 255, 255, 0.08) 5.2%);
                     backdrop-filter: blur(4px);
+                    display:flex;
+                    .subBlock {
+                        &:first-child {
+                            width:70%;
+                            margin-left:2vw;
+                            height:100%;
+                            .name {
+                                font-family: 'Montserrat Alternates';
+                                font-size:1em;
+                                color:rgb(180, 180, 180);
+                                margin-bottom:1vh;
+                                margin-top:7vh;
+                                display:inline-block;
+                            }
+                            .reductoRow {
+                                display:flex;
+                                .reductoLogo {
+                                    height:6em;
+                                    width:6em;
+                                    margin-right:1vw;
+                                    img {
+                                        width:100%;
+                                        height:100%;
+                                    }
+                                }
+                            }
+                            .reducto {
+                                font-family: 'Monoton';
+                                color:white;
+                                font-size:6em;
+                                line-height:1em;
+                            }
+                        }
+                        &:last-child {
+                            width:30%;
+                            height:100%;
+                            background:blue;
+                        }
+                    }
                 }
                 #block1_2 {
                     flex-grow:0.07;
