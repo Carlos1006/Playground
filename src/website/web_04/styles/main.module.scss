@@ -1,6 +1,155 @@
 * {
     user-select: none;
 }
+
+@mixin subblock_1_1_left {
+    &:first-child {
+        width:70%;
+        margin-left:2vw;
+        height:100%;
+        .name {
+            font-family: 'Montserrat Alternates';
+            font-size:1em;
+            color:rgb(180, 180, 180);
+            margin-bottom:1vh;
+            margin-top:5vh;
+            display:inline-block;
+        }
+        .reductoRow {
+            display:flex;
+            .reductoLogo {
+                height:6em;
+                width:6em;
+                margin-right:1vw;
+                img {
+                    width:100%;
+                    height:100%;
+                }
+            }
+        }
+        .reducto {
+            font-family: 'Monoton';
+            color:white;
+            font-size:6em;
+            line-height:1em;
+        }
+        .description {
+            font-family: 'Cairo';
+            font-size:1em;
+            display:inline-block;
+            color:rgb(180, 180, 180);
+            margin-top:1.5vh;
+            margin-bottom:1vh;
+            width:40%;
+            line-height:1vw;
+        }
+        .actions {
+            display:flex;
+            margin-top:2vh;
+            div {
+                height:4vh;
+                border-radius:100pt;
+                cursor: pointer !important;
+                &#explore {
+                    width:8vw;
+                    background: radial-gradient(circle at calc(2px + 2vh) 2vh, transparent calc(2vh - 4px), rgba(74, 74, 92, 0.7) calc(2vh - 3px));
+                    backdrop-filter: blur(2px);
+                    display:flex;
+                    align-items:center;
+                    .icon {
+                        width:calc(4vh - 5px);
+                        height:calc(4vh - 5px);
+                        background-color:transparent;
+                    }
+                    span {
+                        font-family: 'Cairo';
+                        font-size:0.9em;
+                        color:white;
+                        margin-left:1.5vh;
+                        position: relative;
+                        top:-1px;
+                    }
+                }
+                &#linkedin {
+                    width:4vh;
+                    margin-left:1vh;
+                    background:rgb(40,40,50,0.8);
+                    border: 1px solid rgb(40,40,50,0.5 );
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    svg {
+                        width:2.3vh;
+                        height:2.3vh;
+                        fill:rgb(255, 255, 255,0.5);
+                    }
+                }
+                &#customers {
+                    width:10vw;
+                    margin-left:1vh;
+                    background:rgb(40,40,50,0.8);
+                    border: 1px solid rgb(40,40,50,0.5 );
+                    display:flex;
+                    align-items:center;
+                    div {
+                        width:calc(4vh - 5px);
+                        height:calc(4vh - 5px);
+                        border-radius:100pt;
+                        overflow: hidden;
+                        &:first-child {
+                            margin-left:3px;
+                        }
+                        &:not(:first-child) {
+                            position:relative;
+                            margin-left:-2vh;
+                        }
+                        img {
+                            width:100%;
+                            height:100%;
+                        }
+                    }
+                    span {
+                        display:flex;
+                        pointer-events:none;
+                        flex-direction: column;
+                        font-family: 'Montserrat Alternates';
+                        font-size:0.8em;
+                        color:white;
+                        margin-left:1vh;
+                        position: relative;
+                        line-height:1em;
+                        top:-1px;
+                        label:first-child {
+                            margin-top:0.5vh;
+                            font-weight:bold;
+                        }
+                        label:last-child {
+                            opacity:0.5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin subblock_1_1_right {
+    &:last-child {
+        width:30%;
+        height:100%;
+        display:flex;
+        justify-content: flex-end;
+        .line {
+            width:0.7vh;
+            height:100%;
+            margin-right:0.5vh;
+            &:last-child {
+                margin-right:2vw;
+            }
+        }
+    }
+}
+
 #grid {
     width:100vw;
     height: 100vh;
@@ -31,7 +180,7 @@
             }
         }
         #body {
-            height:91vh;
+            height:100vh;
             width:100vw;
             display:flex;
             flex-direction:column;
@@ -46,61 +195,27 @@
                 border-radius:30px;
             }
             #row1 {
-                flex-grow: 0.4;
+                height: 50%;
                 margin-top:1vw;
                 #block1_1 {
-                    flex-grow:0.93;
+                    flex-grow:0.9;
                     background-color:rgba(255, 255, 255, 0.08);
                     // background: radial-gradient(circle at 50% 60%, transparent 5%, rgba(255, 255, 255, 0.08) 5.2%);
                     backdrop-filter: blur(4px);
                     display:flex;
                     .subBlock {
-                        &:first-child {
-                            width:70%;
-                            margin-left:2vw;
-                            height:100%;
-                            .name {
-                                font-family: 'Montserrat Alternates';
-                                font-size:1em;
-                                color:rgb(180, 180, 180);
-                                margin-bottom:1vh;
-                                margin-top:7vh;
-                                display:inline-block;
-                            }
-                            .reductoRow {
-                                display:flex;
-                                .reductoLogo {
-                                    height:6em;
-                                    width:6em;
-                                    margin-right:1vw;
-                                    img {
-                                        width:100%;
-                                        height:100%;
-                                    }
-                                }
-                            }
-                            .reducto {
-                                font-family: 'Monoton';
-                                color:white;
-                                font-size:6em;
-                                line-height:1em;
-                            }
-                        }
-                        &:last-child {
-                            width:30%;
-                            height:100%;
-                            background:blue;
-                        }
+                        @include subblock_1_1_left;
+                        @include subblock_1_1_right;
                     }
                 }
                 #block1_2 {
-                    flex-grow:0.07;
+                    flex-grow:0.1;
                     margin-left:1vw;
                     background-color:rgb(223, 96, 46, 0.8);
                 }
             }
             #row2 {
-                flex-grow: 0.35;
+                height:30%;
                 margin-top:1vw;
                 #block2_1 {
                     flex-grow:0.5;
@@ -115,7 +230,7 @@
                 }
             }
             #row3 {
-                flex-grow: 0.25;
+                height:20%;
                 margin-top:1vw;
                 margin-bottom:2vw;
                 #block3_1 {

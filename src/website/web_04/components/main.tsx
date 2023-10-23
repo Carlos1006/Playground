@@ -1,16 +1,12 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import css from "../styles/main.module.scss";
 import cmap from "../../../assets/maps/map1/cmap.png";
 import HeightMap from "./../components/heightMap";
 import { useMainContext } from "../hooks/useMainContext";
-import logoBW from "../assets/images/reducto_bw.png";
-import logo from "../assets/images/reducto.png";
+import SubBlock_1_1_Left from "./subblock_1_1_left";
+import useRandomDataColor from "../hooks/useRandomDataColors";
+import { MAIN_COLORS, TEN_COLORS } from "../constants";
+import SubBlock_1_1_Right from "./subblock_1_1_right";
 
 const Main: React.FC = () => {
   const {
@@ -22,35 +18,11 @@ const Main: React.FC = () => {
     cameraMove,
   } = useMainContext();
   const [, setDataLoaded] = useState(false);
-  const colors = useRef<string[]>([
-    "rgb(12,73,103)",
-    "rgb(42,116,131)",
-    "rgb(37,118,136)",
-  ]);
+  const colors = useRef<string[]>(MAIN_COLORS);
+  const tenColors = useRef<Array<string>>(TEN_COLORS);
 
-  // 44 116 126
-  // 97 173 160
-  // 100 146 132
-
-  // 57 145 146
-  // 29 105 128
-  // 53 138 153
-
-  // 89 96 44
-  // 113 131 125
-  // 121 114 67
-
-  // 135 186 151
-  // 108 151 148
-  // 92 138 135
-
-  // 11 68 101
-  // 85 167 163
-  // 22 81 109
-
-  // 160 165 123
-  // 112 169 143
-  // 26 101 125
+  const { createRandomColor, rgbToString, convertRGBToHSL, hslToString } =
+    useRandomDataColor();
 
   const onMouseMove = (e: { clientY: number }) => {
     const { clientY } = e;
@@ -62,57 +34,40 @@ const Main: React.FC = () => {
     }
   };
 
-  const data = useMemo(() => {
-    return imgData === null ? null : imgData.data;
-  }, [imgData]);
-
-  const getRandomColor = useCallback(() => {
-    if (!data) return "rgb(0,0,0)";
-    const { length } = data;
-    const randomIndex = Math.floor(Math.random() * (length / 4));
-    const r = data[randomIndex * 4];
-    const g = data[randomIndex * 4 + 1];
-    const b = data[randomIndex * 4 + 2];
-    if (r > g || r > b || Math.abs(r - g) < 30) return getRandomColor();
-    const color = `rgb(${r},${g},${b})`;
-    return color;
-  }, [data]);
+  const getColors = useCallback(() => {
+    for (let i = 0; i < 3; i++) {
+      colors.current[i] = rgbToString(
+        ...createRandomColor((r, g, b) => {
+          return r > g || r > b || Math.abs(r - g) < 50;
+        })
+      );
+    }
+    const hsl: Array<[number, number, number]> = [];
+    for (let i = 0; i < 15; i++) {
+      hsl.push(convertRGBToHSL(...createRandomColor()));
+    }
+    hsl.sort((a, b) => {
+      return b[0] - a[0];
+    });
+    for (let i = 0; i < 10; i++) {
+      tenColors.current[i] = hslToString(...hsl[i]);
+    }
+  }, [convertRGBToHSL, createRandomColor, hslToString, rgbToString]);
 
   useEffect(() => {
-    console.log("imgData", imgData);
     if (!imgData) return;
-    for (let i = 0; i < 3; i++) {
-      colors.current[i] = getRandomColor();
-    }
+    getColors();
     setDataLoaded(true);
-  }, [getRandomColor, imgData]);
+  }, [getColors, imgData]);
 
   return (
     <div id={css.grid} onMouseMove={onMouseMove}>
       <div id={css.page}>
-        <div id={css.header}>
-          <div id={css.logo}>
-            <img src={logo} />
-          </div>
-          <div id={css.menu}></div>
-          <div id={css.actions}></div>
-        </div>
         <div id={css.body}>
           <div id={css.row1} className={css.row}>
             <div id={css.block1_1} className={css.block}>
-              <div className={css.subBlock}>
-                <span className={css.name}>Carlos Daniel</span>
-                <div className={css.reductoRow}>
-                  <span className={css.reducto}>REDU</span>
-                </div>
-                <div className={css.reductoRow}>
-                  <span className={css.reducto}>CT</span>
-                  <div className={css.reductoLogo}>
-                    <img src={logoBW} />
-                  </div>
-                </div>
-              </div>
-              <div className={css.subBlock}></div>
+              <SubBlock_1_1_Left />
+              <SubBlock_1_1_Right tenColors={tenColors.current} />
             </div>
             <div
               id={css.block1_2}
