@@ -7,6 +7,20 @@
         width:70%;
         margin-left:2vw;
         height:100%;
+        position: relative;
+        #bigLogo {
+            width:15vw;
+            height:15vw;
+            position: absolute;
+            top:50%;
+            transform:translateY(-50%);
+            right:2vw;
+            opacity:0.02;
+            img {
+                width:100%;
+                height:100%;
+            }
+        }
         .name {
             font-family: 'Montserrat Alternates';
             font-size:1em;
@@ -74,7 +88,7 @@
                         font-family: 'Cairo';
                         font-size:0.9em;
                         color:white;
-                        margin-left:1.5vh;
+                        margin-left:1.1vh;
                         position: relative;
                         top:-1px;
                     }
@@ -153,9 +167,183 @@
             height:100%;
             margin-right:0.5vh;
             &:last-child {
-                margin-right:2vw;
+                margin-right:3vw; // 2vw
             }
         }
+    }
+}
+
+@mixin subblock_1_2 {
+    #block1_2 {
+        width:5%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        margin-left:1vw;
+        backdrop-filter: blur(2px);
+        .icon {
+            width:1.2vw;
+            height:1.2vw;
+            svg {
+                width:100%;
+                height:100%;
+                fill:white;
+            }
+        }
+        #joinIcon {
+            margin-top:-0.5vw;
+            margin-bottom:0.5vw;
+            background-color:transparent;
+        }
+        .joinMessage {
+            display:inline-block;
+            writing-mode: vertical-lr;
+            rotate:180deg;
+            font-family: 'Gabarito';
+            color:white;
+            font-size:1.2em;
+            margin-bottom:1vw;
+            &~.icon {
+                margin-top:0.5vw;
+            }
+        }
+    }
+}
+
+@mixin subblock_2_2 {
+    #block2_2 {
+        flex-grow:0.5;
+        width: 50%;
+        margin-left:1vw;
+        background-color:rgba(119, 204, 207, 0.8);
+        position: relative;
+        display:flex;
+        flex-direction:column;
+        $cornerBorder: 3px;
+        $cornerRadius: 22px;
+        $cornerColor: rgb(255, 255, 255,  0.2);
+        .frameCorner {
+            position: absolute;
+            width:1.3vw;
+            height:1.3vw;
+            &:nth-child(1) {
+                left:1vh;
+                top:1vh;
+                border-radius:$cornerRadius 0 0 0;
+                border-top:4px solid $cornerColor;
+                border-left:4px solid $cornerColor;
+            }
+            &:nth-child(2) {
+                right:1vh;
+                top:1vh;
+                border-radius:0 $cornerRadius 0 0;
+                border-top:$cornerBorder solid $cornerColor;
+                border-right:$cornerBorder solid $cornerColor;
+            }
+            &:nth-child(3) {
+                right:1vh;
+                bottom:1vh;
+                border-radius:0 0 $cornerRadius 0;
+                border-bottom:$cornerBorder solid $cornerColor;
+                border-right:$cornerBorder solid $cornerColor
+            }
+            &:nth-child(4) {
+                left:1vh;
+                bottom:1vh;
+                border-radius:0 0 0 $cornerRadius;
+                border-bottom:$cornerBorder solid $cornerColor;
+                border-left:$cornerBorder solid $cornerColor
+            }
+        }
+        .subRow {
+            display:flex;
+            margin-left:2vw;
+            &#subRow1 {
+                margin-top:2vw;
+                margin-bottom:auto;
+                .egg {
+                    display:inline-block;
+                    width:2.5vw;
+                    height:3.8vw;
+                    margin-right:0.5vw;
+                    border-radius:30px;
+                    &#slide {
+                        width: calc(2.5vw - 4px);
+                        height: calc(3.8vw - 4px);
+                        background-color:rgba(255, 255, 255, 0.08);
+                        backdrop-filter: blur(4px);
+                        border:2px solid rgba(255, 255, 255, 0.459);
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        span {
+                            font-family: 'Inter';
+                            font-size:0.7em;
+                            letter-spacing:-1px;
+                            color:rgb(240, 240, 240);
+                        }
+                    }
+                    &#mii {
+                        overflow: hidden;
+                        display:flex;
+                        justify-content:center;
+                        img {
+                            height:100%;
+                        }
+                    }
+                }
+                #slideTitle {
+                    height:2vw;
+                    background: rgb(216, 216, 216);
+                    border-radius:30px;
+                    padding-left:1vw;
+                    padding-right:1vw;
+                    display:flex;
+                    align-items:center;
+                    margin-left:auto;
+                    margin-right:2vw;
+                    span {
+                        font-family: 'Inter';
+                        font-size:1em;
+                        font-weight:bold;
+                        letter-spacing:-1px;
+                    }
+                }
+            }
+            &#subRow2 {
+                margin-bottom:2vw;
+                display:flex;
+                flex-direction:row;
+                align-items:flex-end;
+                justify-content:space-between;
+                span {
+                    display:inline-block;
+                    width:60%;
+                    font-family: 'Inter';
+                    font-size:1.1em;
+                    line-height:1.4em;
+                    color:rgb(240, 240, 240);
+                    margin-right:1vw;
+                    &:last-child {
+                        margin-right:0;
+                    }
+                }
+                #nextSlide {
+                    width:1.7vw;
+                    height:1.7vw;
+                    margin-right:2vw;
+                    cursor: pointer !important;
+                    svg {
+                        width:100%;
+                        height:100%;
+                        fill:rgb(200, 200, 200);
+                    }
+                }
+            }
+        }
+        // backdrop-filter: blur(2px);
+        // box-shadow:0 0 4px 0 rgba(255, 255, 255, 0.3);
     }
 }
 
@@ -209,45 +397,25 @@
                 #block1_1 {
                     width:95%;
                     background-color:rgba(255, 255, 255, 0.08);
-                    // background: radial-gradient(circle at 50% 60%, transparent 5%, rgba(255, 255, 255, 0.08) 5.2%);
-                    backdrop-filter: blur(4px);
+                    backdrop-filter: blur(3px); // 4px
                     display:flex;
                     .subBlock {
                         @include subblock_1_1_left;
                         @include subblock_1_1_right;
                     }
                 }
-                #block1_2 {
-                    width:5%;
-                    display:flex;
-                    flex-direction:column;
-                    align-items:center;
-                    margin-left:1vw;
-                    background-color:rgb(223, 96, 46, 0.8);
-                    .joinMessage {
-                        display:inline-block;
-                        writing-mode: vertical-lr;
-                        rotate:180deg;
-                        font-family: 'Gabarito';
-                        color:white;
-                        font-size:1.2em;
-                    }
-                }
+                @include subblock_1_2;
             }
             #row2 {
                 height:30%;
                 margin-top:1vw;
                 #block2_1 {
                     flex-grow:0.5;
+                    width:50%;
                     background-color:transparent;
                 }
-                #block2_2 {
-                    flex-grow:0.5;
-                    margin-left:1vw;
-                    background-color:rgba(119, 204, 207, 0.8);
-                    // backdrop-filter: blur(2px);
-                    // box-shadow:0 0 4px 0 rgba(255, 255, 255, 0.3);
-                }
+                @include subblock_2_2;
+                
             }
             #row3 {
                 height:20%;
@@ -255,7 +423,19 @@
                 margin-bottom:2vw;
                 #block3_1 {
                     flex-grow:0.5;
-                    background-color:rgba(138, 119, 207, 0.8);
+                    position: relative;
+                    .fluid {
+                        position:absolute;
+                        left:100%;
+                        width:1vw;
+                        height:1.5vh;
+                        &#fluid1{
+                            top:calc(100% - 40px);
+                        }
+                        &#fluid2{
+                            top:calc(100% - 40px - 1.5vh);
+                        }
+                    }
                 }
                 #block3_2 {
                     flex-grow:0.5;

@@ -7,7 +7,10 @@ import SubBlock_1_1_Left from "./subblock_1_1_left";
 import useRandomDataColor from "../hooks/useRandomDataColors";
 import { MAIN_COLORS, TEN_COLORS } from "../constants";
 import SubBlock_1_1_Right from "./subblock_1_1_right";
-import { BsArrowUpRight } from "react-icons/bs";
+
+import SubBlock_1_2 from "./subblock_1_2";
+import SubBlock_2_2 from "./subblock_2_2";
+import SubBlock_3_1 from "./subblock_3_1";
 
 const Main: React.FC = () => {
   const {
@@ -40,17 +43,18 @@ const Main: React.FC = () => {
       colors.current[i] = rgbToString(
         ...createRandomColor((r, g, b) => {
           return r > g || r > b || Math.abs(r - g) < 50;
-        })
+        }),
+        0.8
       );
     }
     const hsl: Array<[number, number, number]> = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       hsl.push(convertRGBToHSL(...createRandomColor()));
     }
     hsl.sort((a, b) => {
       return b[0] - a[0];
     });
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       tenColors.current[i] = hslToString(...hsl[i]);
     }
   }, [convertRGBToHSL, createRandomColor, hslToString, rgbToString]);
@@ -70,34 +74,14 @@ const Main: React.FC = () => {
               <SubBlock_1_1_Left />
               <SubBlock_1_1_Right tenColors={tenColors.current} />
             </div>
-            <div
-              id={css.block1_2}
-              className={css.block}
-              style={{ backgroundColor: colors.current[0] }}
-            >
-              <div id={css.joinIcon} className={css.icon}>
-                <BsArrowUpRight />
-              </div>
-              <span className={css.joinMessage}>JOIN COMMUNITY</span>
-              <div id={css.email} className={css.icon}></div>
-              <div id={css.instagram} className={css.icon}></div>
-              <div id={css.whatsapp} className={css.icon}></div>
-            </div>
+            <SubBlock_1_2 color={colors.current[0]} />
           </div>
           <div id={css.row2} className={css.row}>
             <div id={css.block2_1} className={css.block}></div>
-            <div
-              id={css.block2_2}
-              className={css.block}
-              style={{ backgroundColor: colors.current[1] }}
-            ></div>
+            <SubBlock_2_2 color={colors.current[1]} />
           </div>
           <div id={css.row3} className={css.row}>
-            <div
-              id={css.block3_1}
-              className={css.block}
-              style={{ backgroundColor: colors.current[2] }}
-            ></div>
+            <SubBlock_3_1 color={colors.current[2]} />
             <div id={css.block3_2} className={css.block}>
               <div className={css.subBlock}></div>
               <div

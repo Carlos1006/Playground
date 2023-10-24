@@ -29,8 +29,8 @@ export default function useRandomDataColor() {
     return [r,g,b];
   }, [data, length]);
 
-  const rgbToString = useCallback((r:number, g:number, b:number):string => {
-    return `rgb(${r},${g},${b})`;
+  const rgbToString = useCallback((r:number, g:number, b:number, a = 1):string => {
+    return `rgb(${r},${g},${b},${a})`;
   }, []);
 
   const hslToString = useCallback((h:number, s:number, l:number):string => {
