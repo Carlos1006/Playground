@@ -59,7 +59,16 @@
                     .icon {
                         width:calc(4vh - 5px);
                         height:calc(4vh - 5px);
+                        margin-left:5px;
                         background-color:transparent;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        svg {
+                            width:80%;
+                            height:80%;
+                            fill:white;
+                        }
                     }
                     span {
                         font-family: 'Cairo';
@@ -198,7 +207,7 @@
                 height: 50%;
                 margin-top:1vw;
                 #block1_1 {
-                    flex-grow:0.9;
+                    width:95%;
                     background-color:rgba(255, 255, 255, 0.08);
                     // background: radial-gradient(circle at 50% 60%, transparent 5%, rgba(255, 255, 255, 0.08) 5.2%);
                     backdrop-filter: blur(4px);
@@ -209,9 +218,20 @@
                     }
                 }
                 #block1_2 {
-                    flex-grow:0.1;
+                    width:5%;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
                     margin-left:1vw;
                     background-color:rgb(223, 96, 46, 0.8);
+                    .joinMessage {
+                        display:inline-block;
+                        writing-mode: vertical-lr;
+                        rotate:180deg;
+                        font-family: 'Gabarito';
+                        color:white;
+                        font-size:1.2em;
+                    }
                 }
             }
             #row2 {

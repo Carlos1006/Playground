@@ -201,7 +201,6 @@ const HeightMap: FC = () => {
           barGrid.current[x][y] = bar;
         }
       }
-      console.log(barGrid.current);
 
       // mainContainer.add(referenceCube.current);
       mainContainer.current.add(spotLight.current);

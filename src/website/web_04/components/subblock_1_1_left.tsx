@@ -4,6 +4,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import mii_01 from "../assets/profiles/mii_0.png";
 import mii_02 from "../assets/profiles/mii_1.png";
 import mii_03 from "../assets/profiles/mii_3.png";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const SubBlock_1_1_Left = () => {
   return (
@@ -24,7 +25,9 @@ const SubBlock_1_1_Left = () => {
       </span>
       <div className={css.actions}>
         <div id={css.explore}>
-          <div className={css.icon}></div>
+          <div className={css.icon}>
+            <MdKeyboardDoubleArrowRight />
+          </div>
           <span>CONTACT ME</span>
         </div>
         <div id={css.linkedin}>

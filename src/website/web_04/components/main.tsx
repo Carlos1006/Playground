@@ -7,6 +7,7 @@ import SubBlock_1_1_Left from "./subblock_1_1_left";
 import useRandomDataColor from "../hooks/useRandomDataColors";
 import { MAIN_COLORS, TEN_COLORS } from "../constants";
 import SubBlock_1_1_Right from "./subblock_1_1_right";
+import { BsArrowUpRight } from "react-icons/bs";
 
 const Main: React.FC = () => {
   const {
@@ -73,7 +74,15 @@ const Main: React.FC = () => {
               id={css.block1_2}
               className={css.block}
               style={{ backgroundColor: colors.current[0] }}
-            ></div>
+            >
+              <div id={css.joinIcon} className={css.icon}>
+                <BsArrowUpRight />
+              </div>
+              <span className={css.joinMessage}>JOIN COMMUNITY</span>
+              <div id={css.email} className={css.icon}></div>
+              <div id={css.instagram} className={css.icon}></div>
+              <div id={css.whatsapp} className={css.icon}></div>
+            </div>
           </div>
           <div id={css.row2} className={css.row}>
             <div id={css.block2_1} className={css.block}></div>
