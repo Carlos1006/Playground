@@ -12,7 +12,7 @@ $line_width: 15%;
 $line_margin: 15%;
 
 $lid_width: 69.57%;
-$lid_top: calc(50% - #{$trashbin_height/2} - 1px);
+$lid_top: calc(50% - calc(#{$trashbin_height} / 2) - 1px);
 
 $border_width: 2px;
 $border_one_width: 1px;
@@ -33,8 +33,8 @@ $handler_big_width: 43.48%;
         width:$trashbin_width;
         height:$trashbin_height;
         position:absolute;
-        left: calc(50% - #{$trashbin_width/2} - #{$border_one_width});
-        top: calc(50% - #{$trashbin_height/2} - #{$border_one_width});
+        left: calc(50% - calc(#{$trashbin_width} / 2) - #{$border_one_width});
+        top: calc(50% - calc(#{$trashbin_height} / 2) - #{$border_one_width});
         border-radius:0 0 5px 5px;
         border:$border_width solid rgb(251,253,255);
         display:flex;
@@ -68,14 +68,14 @@ $handler_big_width: 43.48%;
         position:absolute;
         border-radius:100px;
         z-index: 6;
-        left: calc(50% - #{$lid_width/2} + #{$border_one_width});
+        left: calc(50% - calc(#{$lid_width} / 2) + #{$border_one_width});
         top: $lid_top;
         background-color:rgb(251,253,255);
     }
     .trashbinHandler {
         width:$handler_width;
         height:$handler_height;
-        left: calc(50% - #{$handler_width/2} - #{$border_one_width});
+        left: calc(50% - calc(#{$handler_width} / 2) - #{$border_one_width});
         border:$border_width solid rgb(251,253,255);
         top: calc(#{$lid_top} - #{$handler_height} - #{$border_width});
         position:absolute;
@@ -90,8 +90,8 @@ $handler_big_width: 43.48%;
         transition: all 0.4s ease-in-out;
         border:$border_big_width solid rgb(251,253,255);
         border-radius:0 0 8px 8px;
-        left: calc(50% - #{$trashbin_width/2} - #{$border_big_one_width});
-        top: calc(50% - #{$trashbin_height/2} - #{$border_big_one_width});
+        left: calc(50% - calc(#{$trashbin_width} / 2) - #{$border_big_one_width});
+        top: calc(50% - calc(#{$trashbin_height} / 2) - #{$border_big_one_width});
         .trashbinLine {
             opacity: 0;
             transition: all 0.3s linear;
@@ -101,13 +101,13 @@ $handler_big_width: 43.48%;
         width:$lid_big_width;
         transition: all 0.3s ease-in-out;
         height:$border_big_width;
-        left: calc(50% - #{$lid_big_width/2} + #{$border_big_one_width});
+        left: calc(50% - calc(#{$lid_big_width} / 2) + #{$border_big_one_width});
     }
     .trashbinHandler {
         border-radius:10px 10px 0 0 ;
         width:$handler_big_width;
         transition: all 0.4s ease-in-out;
-        left: calc(50% - #{$handler_big_width/2} - #{$border_big_one_width});
+        left: calc(50% - calc(#{$handler_big_width} / 2) - #{$border_big_one_width});
         border:$border_big_width solid rgb(251,253,255);
         top: calc(#{$lid_top} - #{$handler_height} - #{$border_big_width});
     }
@@ -167,7 +167,7 @@ $handler_big_width: 43.48%;
         position:absolute;
         width:$icon_side;
         height:$icon_side;
-        top:calc(50% - #{$icon_side/2});
+        top:calc(50% - calc(#{$icon_side} / 2));
         left: $sides_margin;
         transition: all 0.4s ease-in-out;
         @include trashbin;
@@ -177,7 +177,7 @@ $handler_big_width: 43.48%;
         position:absolute;
         width:calc(100% - #{$icon_side + $sides_margin*2 + $inner_margin} );
         height:$icon_side;
-        top:calc(50% - #{$icon_side/2});
+        top:calc(50% - calc(#{$icon_side} / 2));
         display:flex;
         align-items:center;
         opacity: 1;
@@ -250,8 +250,8 @@ $handler_big_width: 43.48%;
         .icon {
             height:$icon_big_side;
             width:$icon_big_side;
-            top: calc(50% - #{$icon_big_side/2});
-            left:calc(50% - #{$icon_big_side/2});
+            top: calc(50% - calc(#{$icon_big_side} / 2));
+            left:calc(50% - calc(#{$icon_big_side} / 2));
             @include trashbin_big;
         }
         .text {

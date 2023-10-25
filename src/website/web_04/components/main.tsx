@@ -11,6 +11,9 @@ import SubBlock_1_1_Right from "./subblock_1_1_right";
 import SubBlock_1_2 from "./subblock_1_2";
 import SubBlock_2_2 from "./subblock_2_2";
 import SubBlock_3_1 from "./subblock_3_1";
+import { BsFillDiamondFill } from "react-icons/bs";
+import SubBlock_3_2_Bottom from "./subblock_3_2_bottom";
+import SubBlock_3_2_Top from "./subblock_3_2_top";
 
 const Main: React.FC = () => {
   const {
@@ -39,7 +42,7 @@ const Main: React.FC = () => {
   };
 
   const getColors = useCallback(() => {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       colors.current[i] = rgbToString(
         ...createRandomColor((r, g, b) => {
           return r > g || r > b || Math.abs(r - g) < 50;
@@ -81,13 +84,19 @@ const Main: React.FC = () => {
             <SubBlock_2_2 color={colors.current[1]} />
           </div>
           <div id={css.row3} className={css.row}>
-            <SubBlock_3_1 color={colors.current[2]} />
+            <SubBlock_3_1
+              color={colors.current[2]}
+              color2={colors.current[3]}
+            />
             <div id={css.block3_2} className={css.block}>
-              <div className={css.subBlock}></div>
-              <div
-                className={css.subBlock}
-                style={{ borderColor: colors.current[2] }}
-              ></div>
+              <SubBlock_3_2_Top
+                color={colors.current[2]}
+                color2={colors.current[3]}
+              />
+              <SubBlock_3_2_Bottom
+                color={colors.current[2]}
+                color2={colors.current[3]}
+              />
             </div>
           </div>
         </div>

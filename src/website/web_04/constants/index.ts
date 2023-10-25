@@ -8,7 +8,8 @@ export const ROTATIONS_CAM_Z = [-15, 15];
 export const MAIN_COLORS: Array<string> = [
   "rgb(12,73,103)",
   "rgb(42,116,131)",
-  "rgb(37,118,136)"
+  "rgb(37,118,136)",
+  "rgb(37,118,136)",
 ];
 export const TEN_COLORS: Array<string> = [
   "rgb(44 , 116 , 126)",
