@@ -1,0 +1,85 @@
+$roof_width: 140vw;
+$roof_height: 40vh;
+
+$roof_left: calc(50vw - (#{$roof_width} / 2));
+$roof_right: calc(50vw + (#{$roof_width} / 2));
+$roof_top: calc(-1 * (#{$roof_height} / 2));
+
+#main {
+  width:100vw;
+  height:100vh;
+  background-color: #000;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  #roof {
+    width: $roof_width;
+    position: absolute;
+    left: $roof_left;
+    top: $roof_top;
+    height: $roof_height;
+    background:black;
+    border-radius:100%;
+    z-index: 10000;
+    clip-path: polygon($roof_left 50%, $roof_right 50%, $roof_right 100%, $roof_left 100%);
+  }
+  $visor_height: 60vh;
+  #visorContainer {
+    width:100vw;
+    height:60vh;
+    margin-top:calc(($roof_height / 4) + 2vw);
+    position:relative;
+    overflow:hidden;
+    $navigator_side: 5vw;
+    .navigator {
+      width:$navigator_side;
+      height:$navigator_side;
+      background:rgba(255, 255, 255, 0.3);
+      position:absolute;
+      top:calc(50% - (#{$navigator_side} / 2));
+      border-radius:100px;
+      z-index:100;
+      cursor: pointer !important;
+      &#navLeft {
+        left:calc(-1 * #{$navigator_side} * 0.2);
+      }
+      &#navRight {
+        right:calc(-1 * #{$navigator_side} * 0.2);
+      }
+    }
+    #visor {
+      width:100%;
+      height:$visor_height;
+      $visor_margin:calc((100vw - (60vh * 3)) / 2);
+      white-space: nowrap; /* Evita el salto de línea de los elementos */
+      .card {
+        display: inline-block;
+        width:$visor_height;
+        height:$visor_height;
+        margin-right: $visor_margin;
+        background:green;
+        img {
+          width:100%;
+          height:100%;
+          filter:hue-rotate(277deg) saturate(1.2);
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  $spinner_side: 33.33vw;
+  $spinner_half: calc(#{$spinner_side} / 2);
+  $spinner_quarter: calc(#{$spinner_side} / 4);
+  $spinner_left: calc(50vw - #{$spinner_half});
+  $spinner_bottom: calc(-1 * #{$spinner_side * 0.4});
+  #spinner {
+    height:$spinner_side;
+    width: $spinner_side;
+    position:absolute;
+    left:$spinner_left;
+    bottom:$spinner_bottom;
+    background:rgb(10,10,10,0.5);
+    border-radius:500px;
+  }
+}
