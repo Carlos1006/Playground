@@ -11,9 +11,9 @@ import SubBlock_1_1_Right from "./subblock_1_1_right";
 import SubBlock_1_2 from "./subblock_1_2";
 import SubBlock_2_2 from "./subblock_2_2";
 import SubBlock_3_1 from "./subblock_3_1";
-import { BsFillDiamondFill } from "react-icons/bs";
 import SubBlock_3_2_Bottom from "./subblock_3_2_bottom";
 import SubBlock_3_2_Top from "./subblock_3_2_top";
+import SubBlock_2_1 from "./subblock_2_1";
 
 const Main: React.FC = () => {
   const {
@@ -80,7 +80,7 @@ const Main: React.FC = () => {
             <SubBlock_1_2 color={colors.current[0]} />
           </div>
           <div id={css.row2} className={css.row}>
-            <div id={css.block2_1} className={css.block}></div>
+            <SubBlock_2_1 colors={tenColors.current} />
             <SubBlock_2_2 color={colors.current[1]} />
           </div>
           <div id={css.row3} className={css.row}>
