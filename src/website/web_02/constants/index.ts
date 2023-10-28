@@ -21,25 +21,26 @@ import imgCbp19 from "../assets/cyberpunk_19.png";
 import { IProfile } from "../types";
 
 export const PROFILES: IProfile[]  = [
- { image:imgCbp00,name:"Spike Spiegel"},
- { image:imgCbp01,name:"Jet Black"},
- { image:imgCbp02,name:"Faye Valentine"},
- { image:imgCbp03,name:"Edward Wong"},
- { image:imgCbp04,name:"Radical Edward"},
- { image:imgCbp05,name:"Hau Pepelu"},
- { image:imgCbp06,name:"Tivrusky IV"},
- { image:imgCbp07,name:"Ein"},
- { image:imgCbp08,name:"Vicious"},
- { image:imgCbp09,name:"Julia"},
- { image:imgCbp10,name:"Twinkle Maria"},
- { image:imgCbp11,name:"Murdock"},
- { image:imgCbp12,name:"Annie"},
- { image:imgCbp13,name:"Punch"},
- { image:imgCbp14,name:"Judy"},
- { image:imgCbp15,name:"Andy Von de Oniyate"},
- { image:imgCbp16,name:"Chessmaster Hex"},
- { image:imgCbp17,name:"Mad Pierrot"},
- { image:imgCbp18,name:"Tongpu"},
- { image:imgCbp19,name:"Lin"}
-].reverse();
+ { image:imgCbp19,name:"Spike"},
+ { image:imgCbp18,name:"Jet Black"},
+ { image:imgCbp17,name:"Faye"},
+ { image:imgCbp16,name:"Edward"},
+ { image:imgCbp15,name:"Radical"},
+ { image:imgCbp14,name:"Hau Pepelu"},
+ { image:imgCbp13,name:"Tivrusky IV"},
+ { image:imgCbp12,name:"Ein"},
+ { image:imgCbp11,name:"Vicious"},
+ { image:imgCbp10,name:"Julia"},
+ { image:imgCbp09,name:"Twinkle Maria"},
+ { image:imgCbp08,name:"Murdock"},
+ { image:imgCbp07,name:"Annie"},
+ { image:imgCbp06,name:"Punch"},
+ { image:imgCbp05,name:"Judy"},
+ { image:imgCbp04,name:"Andy Von"},
+ { image:imgCbp03,name:"Chessmaster"},
+ { image:imgCbp02,name:"Mad Pierrot"},
+ { image:imgCbp01,name:"Tongpu"},
+ { image:imgCbp00,name:"Lin"}
+];
 
+export const MAX = PROFILES.length;
