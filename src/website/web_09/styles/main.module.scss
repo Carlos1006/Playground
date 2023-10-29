@@ -11,6 +11,15 @@
   position:relative;
   position: absolute;
   z-index:10;
+  #title {
+    font-family: 'Orbitron';
+    font-size:12em;
+    font-weight:bold;
+    letter-spacing:1vh;
+    color:rgba(255, 255, 255, 0.03);
+    position: absolute;
+    left:3vw;
+  }
   button {
     width:100px;
     height:100px;
@@ -55,6 +64,20 @@
       font-size:1.2em;
       font-weight:300;
       color:rgba(255, 255, 255, 0.37);
+    }
+    &#nowName.hide {
+      opacity:0;
+      top:30%;
+      transition:all 0.1s cubic-bezier(.4,.02,.48,.82);
+    }
+    &#nextName {
+      top:60%;
+      opacity:0;
+    }
+    &#nextName.show {
+      opacity:1;
+      top:50%;
+      transition:all 0.1s cubic-bezier(.4,.02,.48,.82);
     }
   }
 }
