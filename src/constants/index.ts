@@ -46,7 +46,7 @@ export const COMPONENTS = [
   {
     path: "/dateToImg",
     name: "Date to Image",
-  }
+  },
 ];
 
 export const EXPERIMENTS = [
@@ -58,7 +58,7 @@ export const EXPERIMENTS = [
     path: "/grid",
     name: "Grid",
   },
-]
+];
 
 export const WEBSITES = [
   {
@@ -96,5 +96,9 @@ export const WEBSITES = [
   {
     path: "/web_09",
     name: "City Rotate",
-  }
-]
+  },
+  {
+    path: "/web_10",
+    name: "OktoKush",
+  },
+];

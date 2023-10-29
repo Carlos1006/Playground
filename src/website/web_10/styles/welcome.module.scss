@@ -1,0 +1,349 @@
+@use "./root";
+
+$widgetsSide:7vw;
+@mixin animate($function,$time:200ms) {
+    transition:all $time $function;
+}
+
+#main {
+    @include root.dim((w:100vw,h:100vh));
+    position:relative;
+    overflow:hidden;
+    [data-hidden='1'] {
+        opacity:0 !important;
+        pointer-events:none !important;
+    }
+    #background {
+        @include root.dim((w:100vw,h:100vh));
+        @include root.abs2((l:0,t:0));
+        #left {
+            @include root.abs2((l:0,t:0));
+            @include root.dim((w:50vw,h:100vh));
+            .screen {
+                @include root.abs2((l:0,t:0));
+                @include root.square(100%);
+                @include root.bg('background/canabbis2_darkBlue.png',(size:100vw auto));
+                filter:brightness(0.8) saturate(0.6);
+            }
+            #thc {
+                @include root.abs2((l:calc(#{$widgetsSide} + 1vw),t:0));
+                @include root.dim((w:8vw,h:7.5vw));
+                @include root.bg('assets/thc.svg',(size:100% auto));
+                @include animate(cubic-bezier(.37,.46,.82,.89),0.2s);
+                z-index:1;
+                &[data-hidden='1'] {
+                    left:$widgetsSide;
+                }
+            }
+            #appName {
+                @include root.abs2((r:1vw,t:29vw));
+                z-index:2;
+                @include root.flex(column,auto,flex-end);
+                #dots {
+                    @include root.flex();
+                    margin-bottom:1vh;
+                    .dot {
+                        @include root.square(1.5vh,100%);
+                        position:relative;
+                        background: #20c6a5;
+                        margin-right: 0.7vh;
+                        @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                        right:0;
+                        &[data-hidden='1'] {
+                            right:1vw;
+                        }
+                        &[data-index='0'] {transition-delay:300ms !important}
+                        &[data-index='1'] {transition-delay:200ms !important}
+                        &[data-index='2'] {transition-delay:100ms !important}
+                        &[data-index='3'] {
+                            background-color:#69cbbc;
+                        }
+                    }
+                }
+                #reducto {
+                    @include root.font(mont,1.2,rgba(130, 130, 130, 1));
+                    @include root.font(mont,1.2,rgba(130, 130, 130, 1));
+                    @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                    position:relative;
+                    right:0;
+                    &[data-hidden='1'] {
+                        right:1vw;
+                    }
+                }
+                #octokush {
+                    @include root.font(koulen,4);
+                    @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                    line-height:10vh;
+                    position:relative;
+                    right:0;
+                    &[data-hidden='1'] {
+                        right:1vw;
+                    }
+                }
+                .line {
+                    @include root.dim((w:10vw,h:1px));
+                    @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                    background-color:white;
+                    margin-top:1.5vh;
+                    margin-bottom:3vh;
+                    border-right:2vw solid #20c6a5;
+                    position:relative;
+                    right:0;
+                    &[data-hidden='1'] {
+                        right:1vw;
+                    }
+                }
+                #text {
+                    @include root.font(mont,1.1,rgba(250, 250, 250, 0.69));
+                    @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                    //@include root.font(mont,1.1,#20c6a5);
+                    position:relative;
+                    right:0;
+                    &[data-hidden='1'] {
+                        right:1vw;
+                    }
+                }
+                #go {
+                    @include root.font(mont,1.1,#20c6a5,bold);
+                    @include animate(cubic-bezier(.18,-0.03,.84,1.06),0.1s);
+                    margin-top:3vw;
+                    cursor:pointer;
+                    margin-right:2vw;
+                    position:relative;
+                    position:relative;
+                    right:0;
+                    &[data-hidden='1'] {
+                        right:1vw;
+                    }
+                    &::after {
+                        @include root.pseudo2((b:-2.3vw,l:calc(100% + 0.5vw)));
+                        @include root.square(2vw);
+                        @include root.bg('icon/down_green.svg',(size:100% auto));
+                        transform:rotate(-90deg);
+                        filter:brightness(2);
+                        margin-bottom:2vw;
+                    }
+                }
+            }
+        }
+        #right {
+            @include root.abs2((r:0,t:0));
+            @include root.dim((w:50vw,h:100vh));
+            overflow:hidden;
+            .screen {
+                @include root.abs2((r:0,t:0));
+                @include root.square(100%);
+                background-color:#0D0F1A;
+                filter:brightness(0.5);
+            }
+            #smoke {
+                @include root.abs2((r:0,t:0));
+                @include root.square(100%);
+                //@include root.bg('assets/clouds.png',(size:auto 100%));
+                pointer-events:none;
+                mix-blend-mode:multiply;
+                z-index:1;
+            }
+            .hexagon {
+                @include root.abs2();
+                @include root.square(25vw);
+                @include root.bg('images/hexagon.svg',(size:100% auto,x:center,y:2.1vw));
+                @include animate(cubic-bezier(.09,-0.09,.76,1.04),0.2s);
+                //opacity:0.4;
+                &[data-index='0'] {
+                    left:-8vw;
+                    &[data-hidden='1'] {
+                        left:-11vw !important;
+                    }
+                }
+                &[data-index='1'] {
+                    left: 1.3vw;
+                    top: 16vw;
+                    &[data-hidden='1'] {
+                        left:-2.3vw !important;
+                    }
+                }
+                &[data-index='2'] {
+                    top: 16vw;
+                    left: 19.8vw;
+                    &[data-hidden='1'] {
+                        left:16.3vw !important;
+                    }
+                    div {
+                        opacity:0.7;
+                        height:100%;
+                        margin-left:-0.1vw;
+                        @include root.flex(column,center,center);
+                        @include root.font(mont,0.9,rgba(255, 255, 255, 0.53));
+                        label {
+                            color:#20c6a5;
+                            display:inline-block;
+                            margin-bottom:1vh;
+                            margin-top:0.1vw;
+                        }
+                        span {
+                            display:inline-block;
+                            text-align:center;
+                            width:13vw;
+                        }
+                        #down {
+                            @include root.square(3vw);
+                            @include root.bg('icon/down.svg',(size:100% auto));
+                            margin-top:1vh;
+                        }
+                    }
+
+                }
+            }
+            #bigName {
+                @include root.abs2((b:0,l:0));
+                @include root.font(koulen,11,#00000029,bold);
+                line-height:8vh;
+                letter-spacing:-3px;
+            }
+            #commonProducts {
+                @include root.abs2((b:2vw,l:2vw));
+                @include root.dim((w:100%,h:12vw));
+                @include root.flex();
+                .product {
+                    @include root.dim((w:10vw,h:12vw));
+                    @include root.flex(column,auto,center);
+                    background: rgba(0, 0, 0, 0.7);
+                    border-radius:10px;
+                    margin-right:1vw;
+                    @include animate(cubic-bezier(.7,.27,.55,.93),0.3s);
+                    position:relative;
+                    top:0;
+                    &[data-hidden='1'] {
+                        top:2vw !important;
+                    }
+                    &.select {
+                        box-shadow:0 0 0 2px rgba(32, 198, 165, 0.1);
+                    }
+                    .productImage {
+                        margin-top:0.5vw;
+                        @include root.dim((w:4vw,h:6vw));
+                    }
+                    span {
+                        @include root.font(koulen,0.8,white);
+                        align-self:flex-start;
+                        margin-left:1vw;
+                    }
+                    p {
+                        @include root.font(mont,0.8,rgba(255, 255, 255, 0.53));
+                        display:inline-block;
+                        margin-left:1vw;
+                        margin-top:0;
+                        margin-right:1vw;
+                    }
+                    &:nth-child(1) {
+                        .productImage {
+                            @include root.bg('images/puffco.png',(size:auto 90%));
+                        }
+                    }
+                    &:nth-child(2) {
+                        .productImage {
+                            @include root.bg('images/due_dream.png',(size:auto 70%));
+                            filter: drop-shadow(0 0 1px #20c6a5);
+                        }
+                    }
+                    &:nth-child(3) {
+                        .productImage {
+                            @include root.bg('images/product_puffco_pipe.png',(size:100% auto));
+                            filter: drop-shadow(0 0 5px black);
+                        }
+                    }
+                    &:nth-child(4) {
+                        .productImage {
+                            @include root.bg('images/oil.png',(size:auto 80%));
+                            filter: drop-shadow(0 0 5px black);
+                        }
+                    }
+                }
+            }
+        }
+        #bigLogo {
+            $bigLogo:20vw;
+            @include root.abs2((l:calc(50% - (#{$bigLogo}) / 2),t:8vw));
+            @include root.dim((w:$bigLogo,h:$bigLogo));
+            @include root.bg('logo/logo2.1.png',(size:auto 100%));
+            @include animate(cubic-bezier(.7,.27,.55,.93),0.3s);
+            &[data-hidden='1'] {
+                top:10vw !important;
+            }
+        }
+
+    }
+    #foreground {
+        @include root.dim((w:100vw,h:100vh));
+        @include root.abs2((l:0,t:0));
+        @include root.flex();
+        z-index:1;
+        #leftBar {
+            @include root.dim((w:$widgetsSide,h:100vh));
+            @include root.flex(column,auto,center);
+            border-right:1px solid rgba(91, 102, 181, 0.17);
+            #logo {
+                @include root.square($widgetsSide);
+                @include root.bg('logo/logo2.1.png',(y:70%,size:50% auto));
+            }
+            #networks {
+                margin-top:15vw;
+                .network {
+                    @include root.square(4vw);
+                    cursor:pointer;
+                    &:nth-child(1) {@include root.bg('icon/facebook.svg',(y:70%,size:40% auto));}
+                    &:nth-child(2) {@include root.bg('icon/instagram.svg',(y:70%,size:40% auto));}
+                    &:nth-child(3) {@include root.bg('icon/twitter.svg',(y:70%,size:40% auto));}
+                }
+            }
+            // #tools {}
+        }
+        #body {
+            width: calc(100vw - 8vw);
+            height: 100vh;
+            position: relative;
+            #header {
+                @include root.dim((w:calc(100vw - #{$widgetsSide}),h:$widgetsSide));
+                @include root.flex(row,auto,center);
+                pointer-events: all;
+                >*:first-child {
+                    margin-left:auto;
+                }
+                #menu {
+                    @include root.square($widgetsSide);
+                    @include root.bg('icon/menu.svg',(size:35% auto));
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.roundButton {
+    margin-right: 1vw;
+    @include root.flex(row,center,center);
+    @include root.gradient2(to right,(#20c6a5,#69cbbc));
+    border-radius:30px;
+    border:0;
+    height:4vh;
+    padding:0 1vw;
+    cursor: pointer;
+    span {
+        @include root.font(mont,1,white);
+    }
+    &.border {
+        background:transparent !important;
+        border:1px solid #20c6a5 !important;
+    }
+}
+
+
+/*
+    #foreground {
+        background:url("src/resources/bg/cannabis.png") no-repeat center;
+        filter:brightness(0.7) saturate(1.6) hue-rotate(40deg) contrast(1.05);
+        opacity:0.6;
+    }*/
+//#020203
+//#07080d

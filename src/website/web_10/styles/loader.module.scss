@@ -1,0 +1,58 @@
+@use "./root";
+
+$side:8vw;
+$position:calc(50% - (#{$side} / 2));
+
+@keyframes smokeLeft {
+    0%   { transform: scale(1) translate(0, 0) }
+    10%  { opacity: 0.7; transform: scale(2) translate(0, -5px) }
+    100% { opacity: 0; transform: scale(4) translate(-20px, -50px) }
+}
+@keyframes smokeRight {
+    0%   { transform: scale(1) translate(0, 0) }
+    10%  { opacity: 0.7; transform: scale(2) translate(5, -5px) }
+    100% { opacity: 0; transform: scale(4) translate(20px, -50px) }
+}
+
+.loader {
+    @include root.abs2((l:$position,t:$position));
+    @include root.square($side);
+    @include root.flex(column,space-between,auto);
+    z-index:100000;
+    opacity:1;
+    pointer-events:none;
+    transition:opacity 0.3s ease-out;
+    &:not(.show) {
+        opacity:0;
+    }
+    >.loaderHexagon {
+        @include root.square($side);
+        background-color:#040508;
+        @include root.rounded-hex(35%, 5%, true);
+        position:relative;
+        //clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+        >div.bong {
+            @include root.square($side);
+            @include root.bg('icon/bong.svg',(size:70% auto,y:2.5vw,x:55%));
+            filter:brightness(0.7);
+        }
+        >div.smoke {
+            @include root.abs2((t:30%,l:45%));
+            @include root.square(1vh,100%);
+            //background-color:#0D0F1A;
+            background-color:#364641;
+            &[data-index='0'] {animation: smokeLeft 5s 0s infinite;}
+            &[data-index='1'] {animation: smokeLeft 5s 1s infinite;}
+            &[data-index='2'] {animation: smokeLeft 5s 2s infinite;}
+            &[data-index='3'] {animation: smokeLeft 5s 3s infinite;}
+            &[data-index='4'] {animation: smokeLeft 5s 4s infinite;}
+            &[data-index='5'] {animation: smokeRight 5s 0.5s infinite;}
+            &[data-index='6'] {animation: smokeRight 5s 1.5s infinite;}
+            &[data-index='7'] {animation: smokeRight 5s 2.5s infinite;}
+            &[data-index='8'] {animation: smokeRight 5s 3.5s infinite;}
+            &[data-index='9'] {animation: smokeRight 5s 4.5s infinite;}
+            animation-timing-function:cubic-bezier(.53,.35,.35,.58) !important;
+        }
+    }
+    filter:drop-shadow(0 0 5px #20c6a5);
+}

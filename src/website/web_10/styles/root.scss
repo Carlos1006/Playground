@@ -1,0 +1,428 @@
+// Nomenclatura General
+/*
+  w: Width,
+  h: Height,
+  l: Left,
+  r: Right,
+  t: Top,
+  b: Bottom,
+  s: Side,
+  br: Border,
+  ml: MarginLeft,
+  mlr: MarginLeftAndRight,
+  mcenter:cm: Central margin,
+  minner:im: inner margin
+*/
+@use 'sass:math';
+$fullW:100vw;
+$fullH:100vh;
+$full:100%;
+$bgNoRepeatCenter:no-repeat center;
+$white:white;
+
+@font-face {
+    font-family: Koulen;
+    src: url('../assets/fonts/Koulen-Regular.ttf');
+}
+body,html {
+    background:black !important;
+}
+$fonts:(
+        poppins:Poppins,
+        opensans:"Open Sans",
+        nunito:"Nunito",
+        koulen:Koulen,
+        ubuntu:"Ubuntu",
+        mont:"Montserrat"
+);
+
+$colors:(
+        0:#60b069,
+        1:#38c53f,
+        2:#3cb440,
+        3:#3f7d3f,
+        4:#354235,
+        5:#303030,
+        6:rgb(26,26,26),
+        7:rgb(20,21,20)
+);
+
+$appColors:(
+);
+$auxColor:(
+        0:rgb(220,245,225),
+        1:rgba(255, 255, 255, 0.8),
+        2:rgba(0, 5, 0, 0.2)
+);
+
+$statuses:(death, pending, catch, closed, urgent);
+$statusesSearch:(women, kid, lgbt, old, condition);
+$actions:(confirm, comments,flag, save);
+$missing:(days, comments,flag, save);
+$group:(members, reports,flag, save);
+$crimes:(gun,house,kill,spray,womanAbuse);
+$profile:(gender,birthday,since,city,homeland);
+$hour:(day);
+$weathers:(electricity,fire,flood,bump,hole,burning-house,no-electricity,no-wifi,no-water);
+$lgbt:"lgbt";
+
+$actionIconAdjustment:(
+        comments:(margin-left:1vw),
+        reports:(margin-left:1vw),
+        flag:(margin-left:auto),
+        save:(margin-right:1vw)
+);
+
+$iconColor:(
+        0:rgb(42, 157, 251),
+        1:#474f86,
+        2:#363c66,
+        death:rgb(50,50,50),
+        pending:rgb(68, 81, 130),
+        catch:rgb(14, 128, 235),
+        closed:#0f47d4,
+        search:rgb(33, 127, 204),
+        location:transparent,
+        confirm:transparent,
+        comments:transparent,
+        flag:transparent,
+        save:transparent,
+        gun:rgb(32, 36, 62),
+        house:rgb(32, 36, 62),
+        kill:rgb(32, 36, 62),
+        spray:rgb(32, 36, 62),
+        gender:rgb(10, 11, 18),
+        birthday:rgb(10, 11, 18),
+        since:rgb(10, 11, 18),
+        city:rgb(10, 11, 18),
+        homeland:rgb(10, 11, 18),
+        info:rgb(16, 18, 30),
+        analysis:transparent,
+        day:transparent,
+        pin:#363c66,
+        womanAbuse:rgb(32, 36, 62),
+        urgent:#217fcc,
+        women:#542be6,
+        kid:#4d245b,
+        old:#a26b0b,
+        condition:rgb(14, 128, 235)
+);
+$iconFile:(
+        death:'icon/skull_1.svg',
+        pending:"flag/resolve/pending.svg",
+        catch:"icon/user.svg",
+        closed:"flag/resolve/check.svg",
+        search:'flag/crime/search.svg',
+        alert:"icon/alert.svg",
+        urgent:"icon/alert.svg",
+        graph:"icon/graph.svg",
+        location:"icon/location_blue.svg",
+        confirm:'post_icon/confirm.svg',
+        confirmWhite:'post_icon/confirm_white.svg',
+        cancel:'post_icon/cancel.svg',
+        cancelWhite:'post_icon/cancel_white.svg',
+        comments:'post_icon/comments.svg',
+        flag:'post_icon/flag.svg',
+        save:'post_icon/save.svg',
+        gun:'flag/crime/gun.svg',
+        house:'flag/crime/house.svg',
+        kill:'flag/crime/kill.svg',
+        spray:'flag/crime/spray.svg',
+        gender:'icon/circle.svg',
+        birthday:'icon/cake.svg',
+        since:'icon/rocket.svg',
+        city:'icon/location.svg',
+        homeland:'icon/home.svg',
+        analysis:'icon/analysis.svg',
+        day:'flag/hour/day.svg',
+        info:'flag/hour/info.svg',
+        electricity:'flag/accident/electricity1.svg',
+        fire:'flag/accident/fire.svg',
+        flood:'flag/accident/flood1.svg',
+        bump:'flag/accident/hole0.svg',
+        hole:'flag/accident/hole1.svg',
+        burning-house:'flag/accident/burningHouse.svg',
+        no-electricity:'flag/accident/noElectricity0.svg',
+        no-wifi:'flag/accident/noWifi.svg',
+        no-water:'header/blocked_hover.svg',
+        no-water2:'flag/accident/noWater.svg',
+        pin:'post_icon/pin.svg',
+        pin_active:'post_icon/pin_active.svg',
+        cancel_white:'post_icon/cancel_white.svg',
+        womanAbuse:'flag/crime/woman_abuse.svg',
+        members:'flag/group/group_blue.svg',
+        reports:'flag/group/reports_blue.svg',
+        days:'flag/missing/days.svg',
+        women:"flag/vulnerable/female.svg",
+        kid:"flag/vulnerable/kids.svg",
+        old:"flag/vulnerable/old.svg",
+        condition:"flag/vulnerable/condition.svg"
+);
+$iconSize:(
+        death:auto 74%,
+        pending:auto 74%,
+        urgent:auto 86%,
+        catch:auto 74%,
+        closed:auto 100%,
+        location:auto 100%,
+        confirm:auto 74%,
+        comments:auto 105%,
+        flag:auto 96%,
+        save:auto auto,
+        gun:auto 67%,
+        house:auto 78%,
+        kill:auto 67%,
+        spray:auto 90%,
+        gender:auto 2.7vh,
+        birthday:auto 2.7vh,
+        since:auto 2.7vh,
+        city:auto 3vh,
+        homeland:auto 2.7vh,
+        info:59% auto,
+        fire:auto 90%,
+        bump:auto 90%,
+        hole:auto 90%,
+        no-wifi:auto 90%,
+        no-water:auto 70%,
+        no-water2:auto 50%,
+        womanAbuse:auto 80%,
+        members:auto 115%,
+        reports:auto 85%,
+        days:auto 95%,
+        women:auto 74%,
+        kid:auto 85%,
+        old:auto 85%,
+        condition:auto 85%
+);
+
+@mixin body() {
+    body,html {
+        background:rgba(40,40,40,1);
+        padding:0;
+        margin:0;
+    }
+}
+@mixin main() {
+    @include dimensions($fullW,$fullH);
+    background:appColor(3);
+}
+@mixin position($left:0,$top:0,$bottom:null,$right:null) {
+    left:$left;
+    top:$top;
+    @if $bottom!=null {
+        bottom:$bottom;
+    }
+    @if $right!=null {
+        right:$right;
+    }
+}
+@mixin abs($left:0,$top:0,$bottom:null,$right:null) {
+    position:absolute;
+    @include position($left,$top,$bottom,$right);
+}
+@mixin abs2($props:(),$fixed:false) {
+    @if($fixed) {
+        position:fixed;
+    }@else {
+        position:absolute;
+    }
+    @each $prop,$value in $props {
+        $side:null;
+        @if($prop==r) {
+            $side:right;
+        }@else if($prop==l) {
+            $side:left;
+        }@else if($prop==t) {
+            $side:top;
+        }@else if($prop==b) {
+            $side:bottom;
+        }
+        #{$side}:$value;
+    }
+}
+@mixin dimensions($width,$height) {
+    @if($width != null) {
+        width:$width;
+    }
+    @if($height != null) {
+        height:$height;
+    }
+}
+@mixin dim($dims:()) {
+    @each $prop,$value in $dims {
+        $newProp:'';
+        @if($prop==w) {
+            $newProp:width;
+        }@else if($prop==mw) {
+            $newProp:min-wdth;
+        }@else if($prop==h) {
+            $newProp:height;
+        }@else if($prop==mh) {
+            $newProp:min-height;
+        }
+        #{$newProp}:$value;
+    }
+}
+@mixin flex($direction:row,$justify:auto,$align:auto) {
+    display:flex;
+    flex-direction:$direction;
+    @if $justify != auto {
+        justify-content:$justify;
+    }
+    @if $align != auto {
+        align-items:$align;
+    }
+}
+@mixin square($size, $radius:0) {
+    width:$size;
+    height:$size;
+    @if $radius != 0 {
+        border-radius: $radius;
+    }
+}
+@mixin font($font,$size:1,$color:white,$weight:normal) {
+    font-family:font($font),sans-serif;
+    font-size:$size * 1em;
+    color:$color;
+    font-weight:$weight;
+}
+@mixin bg($file,$properties:()) {
+    @if($file != null) {
+        background-image:url("../assets/#{$file}");
+    }
+    background-repeat:no-repeat;
+    background-position:center;
+    @each $prop,$value in $properties {
+        @if $value != null {
+            @if ($prop == x or $prop == y)  {
+                background-position-#{$prop}:$value;
+            }@else {
+                background-#{$prop}:$value;
+            }
+        }
+    }
+}
+@mixin margin($margins) {
+    @each $prop,$value in $margins {
+        margin-#{$prop}:$value;
+    }
+}
+@mixin padding($margins) {
+    @each $prop,$value in $margins {
+        padding-#{$prop}:$value;
+    }
+}
+@mixin border($color,$type:1px solid,$sides:null) {
+    @if $sides == null {
+        border:$type $color;
+    }@else {
+        @each $prop in $sides {
+            border-#{$prop}:$type $color;
+        }
+    }
+}
+@mixin gradient($deg,$colors:()) {
+    $paths : $deg;
+    @each $value in $colors {
+        $paths:$paths,color($value);
+    }
+    background:linear-gradient($paths);
+}
+@mixin gradient2($deg,$colors:()) {
+    $paths : $deg;
+    @each $color in $colors {
+        $paths:$paths,$color;
+    }
+    background:linear-gradient($paths);
+}
+@mixin pseudo() {
+    content:'';
+}
+@mixin pseudo2($props:(),) {
+    content:'';
+    @include abs2($props);
+}
+@mixin sticky($top:0) {
+    position:sticky;
+    top:$top;
+}
+@mixin iconSet($status,$customColor:null) {
+    @include bg(iconFile($status),(color:iconColor($status),size:iconSize($status)));
+    @if(map-get($actionIconAdjustment,$status) != null) {
+        @each $rule,$set in map-get($actionIconAdjustment,$status) {
+            #{$rule}:#{$set};
+        }
+    }
+    @if($customColor != null) {
+        background-color:$customColor;
+    }
+}
+@mixin inputAdjust() {
+    outline:0;
+    resize:none;
+    margin:0;
+}
+@mixin lgbtGradient() {
+    background: linear-gradient(180deg, #FE0000 16.66%, #FD8C00 16.66%,#FD8C00 33.32%, #FFE500 33.32%,#FFE500 49.98%, #119F0B 49.98%,#119F0B 66.64%, #0644B3 66.64%,#0644B3 83.3%, #C22EDC 83.3%);
+}
+@mixin lgbtGradientOpacity() {
+    $opacity:0.3;
+    background: linear-gradient(180deg, rgba(254, 0, 0,$opacity) 16.66%, rgba(253, 140, 0,$opacity) 16.66%, rgba(253, 140, 0,$opacity) 33.32%, rgba(255, 229, 0,$opacity) 33.32%, rgba(255, 229, 0,$opacity) 49.98%, rgba(17, 159, 11,$opacity) 49.98%, rgba(17, 159, 11,$opacity) 66.64%, rgba(6, 68, 179,$opacity) 66.64%, rgba(6, 68, 179,$opacity) 83.3%, rgba(194, 46, 220,$opacity) 83.3%);
+}
+
+@function black($opacity) {
+    @return rgba( #000 , $opacity);
+}
+@function font($name) {
+    @return map-get($fonts,$name);
+}
+@function color($number) {
+    @return map-get($colors,$number);
+}
+@function appColor($number) {
+    @return map-get($appColors,$number);
+}
+@function auxColor($number) {
+    @return map-get($auxColor,$number);
+}
+@function iconColor($status) {
+    @return map-get($iconColor,$status);
+}
+@function iconFile($status) {
+    @return map-get($iconFile,$status);
+}
+@function iconSize($status) {
+    @return map-get($iconSize,$status);
+}
+@function frag($fraction:1) {
+    @return Calc(#{$full} / #{$fraction});
+}
+
+::placeholder {
+    color:rgb(220,225,240);
+}
+
+@mixin rounded-hex($main-radius: 30%, $rounding-radius: 10%, $rotated: false, $precision: 20) {
+    $n: 6;
+    $central-angle: math.div(360deg,$n);
+    $angle: ($n - 2)*math.div(180deg,$n);
+    $max-var-angle: 2*(90deg - math.div($angle,2));
+    $precision: 6;
+    $unit-var-angle: math.div($max-var-angle, $precision);
+
+    $r-diff: $main-radius + $rounding-radius;
+    $points: ();
+
+    @for $i from 0 to $n {
+        $vertex-angle: $i*$central-angle + if($rotated, -90deg, 0deg);
+        $vertex-x: 50% + $r-diff*math.cos($vertex-angle);
+        $vertex-y: 50% + $r-diff*math.sin($vertex-angle);
+        @for $j from 0 through $precision {
+            $curr-angle: $vertex-angle + ($j - .5*$precision)*$unit-var-angle;
+            $x: $vertex-x + $rounding-radius*math.cos($curr-angle);
+            $y: $vertex-y + $rounding-radius*math.sin($curr-angle);
+            $points: $points, $x $y;
+        }
+    }
+    clip-path: polygon($points);
+}
