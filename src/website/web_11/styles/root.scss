@@ -1,0 +1,132 @@
+$colors_map: (
+    0: rgb(40,39,42),
+    1: rgb(18,20,22),
+    2: rgb(17,19,21),
+    3: rgb(22 24 26),
+    4: rgb(13 14 16)
+);
+
+$fonts:(
+    poppins: Poppins,
+    roboto: Roboto,
+    mont: "Montserrat",
+    noto: "Noto Sans JP",
+    paint: "Finger Paint"
+);
+
+@mixin pseudo($props:(),$dims:()) {
+    content:'';
+    @include abs($props);
+    @include dim($dims);
+}
+
+@mixin flex($direction:row,$justify:auto,$align:auto) {
+    display:flex;
+    flex-direction:$direction;
+    @if $justify != auto {
+        justify-content:$justify;
+    }
+    @if $align != auto {
+        align-items:$align;
+    }
+}
+@mixin font($font,$size:1,$color:white,$weight:normal) {
+    font-family:font($font),sans-serif;
+    font-size:$size * 1em;
+    color:$color;
+    font-weight:$weight;
+}
+@mixin dim($dims:()) {
+    @each $prop,$value in $dims {
+        $newProp:'';
+        @if($prop==w) {
+            $newProp:width;
+        }@else if($prop==mw) {
+            $newProp:min-width;
+        }@else if($prop==h) {
+            $newProp:height;
+        }@else if($prop==mh) {
+            $newProp:min-height;
+        }@else if($prop==mxh) {
+            $newProp:max-height;
+        }@else if($prop==mxw) {
+            $newProp:max-width;
+        }
+        #{$newProp}:$value;
+    }
+}
+
+@mixin iblock() {
+    display:inline-block;
+    vertical-align:top;
+}
+
+@mixin abs($props:(),$fixed:false) {
+    @if($fixed) {
+        position:fixed;
+    }@else {
+        position:absolute;
+    }
+    @each $prop,$value in $props {
+        $side:null;
+        @if($prop==r) {
+            $side:right;
+        }@else if($prop==l) {
+            $side:left;
+        }@else if($prop==t) {
+            $side:top;
+        }@else if($prop==b) {
+            $side:bottom;
+        }
+        #{$side}:$value;
+    }
+}
+@mixin m($props:()) {
+    @each $prop,$value in $props {
+        $side:null;
+        @if($prop==r) {
+            $side:right;
+        }@else if($prop==l) {
+            $side:left;
+        }@else if($prop==t) {
+            $side:top;
+        }@else if($prop==b) {
+            $side:bottom;
+        }
+        margin-#{$side}:$value;
+    }
+}
+
+@mixin p($props:()) {
+    @each $prop,$value in $props {
+        $side:null;
+        @if($prop==r) {
+            $side:right;
+        }@else if($prop==l) {
+            $side:left;
+        }@else if($prop==t) {
+            $side:top;
+        }@else if($prop==b) {
+            $side:bottom;
+        }
+        padding-#{$side}:$value;
+    }
+}
+@mixin sqr($size, $radius:0) {
+    width:$size;
+    height:$size;
+    @if $radius != 0 {
+        border-radius: $radius;
+    }
+}
+@mixin center {
+    @include flex(row,center,center);
+}
+
+
+@function color($color) {
+    @return map-get($colors_map,$color);
+}
+@function font($name) {
+    @return map-get($fonts,$name);
+}

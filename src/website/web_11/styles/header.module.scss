@@ -1,0 +1,65 @@
+@use './root.scss';
+
+$header_height: 8vw;
+$header_wrapper_width: 92vw;
+
+#header {
+    @include root.dim((w:100vw,h:$header_height));
+    @include root.flex(row,center,center);
+    position:relative;
+    z-index:10;
+    #headerWrapper {
+        @include root.flex(row,space_between,center);
+        @include root.dim((w:$header_wrapper_width,h:$header_height));
+        .element {
+            @include root.flex(column,center,center);
+            @include root.dim((w:calc($header_wrapper_width / 6),h:$header_height));
+            span {
+                cursor: pointer;
+                &:first-child {
+                    @include root.font(noto,1.9,rgb(255,255,255,0.2),600);
+                    display:inline-block;
+                    background: -webkit-linear-gradient(rgb(255,255,255,0.2), rgb(255,255,255,0.05));
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                &:last-child {
+                    @include root.font(poppins,1,rgb(240,240,240));
+                    @include root.m((t:-0.6vw));
+                    @include root.flex(column,auto,center);
+                    z-index:1;
+                    position:relative;
+                    
+                }
+            }
+            &.selected {
+                span:last-child {
+                    &::after {
+                        @include root.pseudo((b:-1.5vw),(w:0.9vw,h:0.9vw));
+                        background-image:url("./../assets/images/selected.png");
+                        background-size:auto 100%;
+                        pointer-events:none;
+                    }
+                }
+            }
+        }
+        #logo {
+            @include root.dim((w:$header_height,h:$header_height));
+            @include root.center;
+            position: relative;
+            img {
+                margin-top:1vw;
+                @include root.sqr(5.5vw,0);
+            }
+            span {
+                @include root.font(paint,1.5,rgb(240,240,240));
+                @include root.m((t:-0.5vw));
+                @include root.abs((l:0,b:0.5vw));
+                @include root.iblock;
+                @include root.dim((w:100%));
+                text-align:center;
+            }
+        }
+    }
+    
+}

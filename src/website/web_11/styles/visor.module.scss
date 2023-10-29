@@ -1,0 +1,104 @@
+@use './root.scss';
+@use './Header.module.scss' as header;
+
+$carrousel_height: 20vw;
+$image_side: 15.5vw;
+$image_margin: ($carrousel_height - $image_side) / 2;
+
+.visor {
+    @include root.dim((w:100vw,h:calc(100vh - #{header.$header_height})));
+    @include root.flex(column,auto,center);
+    position:relative;
+    z-index:1;
+    .text {
+        @include root.flex(column,center,center);
+        @include root.m((t:1.5vw));
+        h1 {
+            @include root.font(mont,3.5,rgb(240,240,240),bold);
+            @include root.m((t:-2.5vw));
+            text-align:center;
+        }
+        h2 {
+            @include root.font(noto,5,rgb(255,255,255,0.2),600);
+            opacity:0.8;
+            display:inline-block;
+            background: -webkit-linear-gradient(rgb(255,255,255,0.2), rgb(255,255,255,0.05));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        span {
+            @include root.font(poppins,0.95,rgb(240,240,240),350);
+            @include root.m((t:0.5vw));
+            opacity:0.3;
+        }
+    }
+    .carrousel {
+        @include root.dim((w:100vw,h:$carrousel_height));
+        position: relative;
+        .bigText {
+            @include root.dim((w:100vw,h:$carrousel_height));
+            @include root.abs((t:0,b:0));
+            @include root.center;
+            span {
+                @include root.font(noto,18,rgb(255,255,255,0.1),600);
+                opacity:0.1;
+                letter-spacing:4vw
+            }
+        }
+        .image {
+            @include root.sqr($carrousel_height,0);
+            @include root.m((r:auto,l:auto));
+            position: relative;
+            z-index:1;
+            img {
+                @include root.abs((t:$image_margin,l:$image_margin));
+                @include root.sqr($image_side,0);
+                object-fit:contain;
+                &:first-child {
+                    filter: blur(6px) brightness(0.35);
+                    transform: scale(1.05);
+                }
+                &:last-child {
+                    filter: drop-shadow(0 0 1.5vw rgb(0,0,0,1)) brightness(0.9);
+                    opacity: 0.9;
+                }
+            }
+        }
+        .description {
+            @include root.font(poppins,0.95,rgba(240,240,240, 0.7),350);
+            @include root.dim((w:40vw));
+            @include root.m((l:30vw,t:-2vw,b:1.5vw));
+            display:inline-block;
+            text-align:center
+        }
+        .miniLogos {
+            @include root.flex(row,center,center);
+            .miniLogo {
+                @include root.sqr(2.3vw,100px);
+                border:0.3vw solid #{root.color(4)};
+                background-color:red;
+                overflow:hidden;
+                img {
+                    @include root.sqr(2vw,0);
+                    object-fit:contain;
+                }
+                &:not(:first-child) {
+                    @include root.m((l:-0.6vw));
+                }
+            }
+        }
+    }
+}
+
+.button {
+    @include root.dim((w:8vw,h:1.75vw));
+    @include root.m((t:1.5vw,l:auto,r:auto));
+    background-color:rgb(228 45 42);
+    .buttonIcon {
+        fill:rgb(255,255,255)
+    }
+}
+
+:export {
+    image_side:$image_side
+}

@@ -3,7 +3,7 @@ import Loader from "./components/loader";
 import css from "./styles/welcome.module.scss";
 
 const Web_10 = () => {
-  const [showingLoader, setShowingLoader] = useState(false);
+  const [showingLoader, setShowingLoader] = useState(true);
   const [molecule, setMolecule] = useState(1);
 
   const [hexagon1, setHexagon1] = useState(1);
@@ -49,7 +49,7 @@ const Web_10 = () => {
           setTimeout(() => setProduct4(0), 150);
         }, 350);
       }, 200);
-    }, 1000);
+    }, 2000);
   };
 
   useEffect(() => {

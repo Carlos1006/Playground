@@ -1,0 +1,16 @@
+@use './root.scss';
+
+.button {
+    @include root.flex(row,center,center);
+    border:0;
+    padding:0;
+    outline:0;
+    border-radius:8px;
+    >div {
+        margin-right:0.5vw;
+    }
+    span {
+        @include root.font(poppins,1,rgb(255,255,255));
+    }
+
+}

@@ -1,0 +1,27 @@
+@use './root.scss';
+
+$decorator_width: 130vw;
+$decorator_height: 80vh;
+$decorator_top: -15vw;
+$decorator_border_radius: 35vw;
+
+#main {
+    @include root.dim((w:100vw,h:100vh));
+    background-color:#{root.color(4)};
+    position:relative;
+    overflow:hidden;
+    #decorator {
+        // @include root.dim((w:$decorator_width,h:$decorator_height));
+        //@include root.abs((t:#{$decorator_top},l:calc( -1 * ( (#{$decorator_width} - 100vw) / 2 ))));
+        background-image: url("./../assets/images/noise3.png");
+        background-size:10vw 10vw;
+        background-repeat:repeat;
+        //border-radius:0 0 #{$decorator_border_radius} #{$decorator_border_radius};
+        background-color:#{transparentize(root.color(3),0.8)};
+        overflow:hidden;
+        opacity:0.8;
+
+        @include root.dim((w:100vw,h:100vh));
+        @include root.abs((t:0,l:0));
+    }
+}

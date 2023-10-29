@@ -99,6 +99,10 @@ export const WEBSITES = [
   },
   {
     path: "/web_10",
-    name: "OktoKush",
+    name: "OctoKush",
+  },
+  {
+    path: "/web_11",
+    name: "Sushi",
   },
 ];

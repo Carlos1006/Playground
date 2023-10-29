@@ -8,7 +8,7 @@ interface ILoader {
 const Loader: FC<ILoader> = ({ show }: ILoader) => {
   return (
     <>
-      <div className={`${css.loader} ${show ? "show" : ""}`}>
+      <div className={`${css.loader} ${show ? css.show : ""}`}>
         <div className={css.loaderHexagon}>
           {new Array(10).fill(0).map((_, i) => (
             <div className={css.smoke} data-index={i}></div>
