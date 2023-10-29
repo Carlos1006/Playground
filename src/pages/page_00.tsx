@@ -1,7 +1,12 @@
 import css from "../styles/main.module.scss";
 import Routes from "../routes/routes";
 import logo from "../assets/images/reducto.png";
-import { BsChevronLeft, BsFillBoxFill } from "react-icons/bs";
+import {
+  BsChevronLeft,
+  BsFillBoxFill,
+  BsChevronUp,
+  BsChevronDown,
+} from "react-icons/bs";
 import { AiOutlineMenu, AiFillExperiment } from "react-icons/ai";
 import { useRef, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -37,6 +42,27 @@ const Page_00 = () => {
     router.navigate(path);
   };
 
+  const [collapseComponent, setCollapseComponent] = useState(true);
+  const [collapseExperiment, setCollapseExperiment] = useState(false);
+  const [collapseWebsite, setCollapseWebsite] = useState(false);
+  const [collapseWedding, setCollapseWedding] = useState(false);
+
+  const toggleCollapseComponent = () => {
+    setCollapseComponent(!collapseComponent);
+  };
+
+  const toggleCollapseExperiment = () => {
+    setCollapseExperiment(!collapseExperiment);
+  };
+
+  const toggleCollapseWebsite = () => {
+    setCollapseWebsite(!collapseWebsite);
+  };
+
+  const toggleCollapseWedding = () => {
+    setCollapseWedding(!collapseWedding);
+  };
+
   return (
     <div id={css.main}>
       <div
@@ -58,50 +84,68 @@ const Page_00 = () => {
             <BsChevronLeft />
           </div>
         </div>
-        <div className={css.item}>
+        <div className={css.item} onClick={toggleCollapseComponent}>
           <div className={css.itemIcon}>
             <BsFillBoxFill />
           </div>
-          <span>Components</span>
+          <span>Components </span>
+          <div className={css.chevron}>
+            {collapseComponent ? <BsChevronDown /> : <BsChevronUp />}
+          </div>
         </div>
-        <div className={css.toggler}>
+        <div
+          className={`${css.toggler} ${collapseComponent ? css.collapse : ""}`}
+        >
           {COMPONENTS.map(({ name, path }, index) => (
             <div className={css.subitem} key={index}>
               <a href={path}>{name}</a>
             </div>
           ))}
         </div>
-        <div className={css.item}>
+        <div className={css.item} onClick={toggleCollapseExperiment}>
           <div className={css.itemIcon}>
             <AiFillExperiment />
           </div>
           <span>Experiments</span>
+          <div className={css.chevron}>
+            {collapseExperiment ? <BsChevronDown /> : <BsChevronUp />}
+          </div>
         </div>
-        <div className={css.toggler}>
+        <div
+          className={`${css.toggler} ${collapseExperiment ? css.collapse : ""}`}
+        >
           {EXPERIMENTS.map(({ name, path }, index) => (
             <div className={css.subitem} key={index}>
               <span onClick={() => hideAndNavigate(path)}>{name}</span>
             </div>
           ))}
         </div>
-        <div className={css.item}>
+        <div className={css.item} onClick={toggleCollapseWebsite}>
           <div className={css.itemIcon}>
             <HiMiniWindow />
           </div>
           <span>Heroe Banner</span>
+          <div className={css.chevron}>
+            {collapseWebsite ? <BsChevronDown /> : <BsChevronUp />}
+          </div>
         </div>
-        <div className={css.toggler}>
+        <div
+          className={`${css.toggler} ${collapseWebsite ? css.collapse : ""}`}
+        >
           {WEBSITES.map(({ name, path }, index) => (
             <div className={css.subitem} key={index}>
               <span onClick={() => hideAndNavigate(path)}>{name}</span>
             </div>
           ))}
         </div>
-        <div className={css.item}>
+        <div className={css.item} onClick={toggleCollapseWedding}>
           <div className={css.itemIcon}>
             <GiBigDiamondRing />
           </div>
           <span>Webdding</span>
+          <div className={css.chevron}>
+            {collapseWedding ? <BsChevronDown /> : <BsChevronUp />}
+          </div>
         </div>
       </div>
       <div id={css.body}>

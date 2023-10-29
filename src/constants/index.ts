@@ -46,11 +46,7 @@ export const COMPONENTS = [
   {
     path: "/dateToImg",
     name: "Date to Image",
-  },
-  {
-    path: "/loginRobot",
-    name: "Login Robot",
-  },
+  }
 ];
 
 export const EXPERIMENTS = [
