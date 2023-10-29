@@ -1,0 +1,115 @@
+#home,#background {
+  height:100%;
+  position:relative;
+  width:100%;
+}
+#background {
+  z-index:0;
+  position:absolute;
+  overflow:hidden;
+}
+#home {
+  background:linear-gradient(100deg, rgb(68, 68, 190) 0%, rgb(76, 192, 245) 100%);
+  display:flex;
+}
+.layer {
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  position:absolute;
+  pointer-events:none;
+}
+#grid {
+  background:url("../assets/home/Grid2.svg") no-repeat center;
+  background-position-x: 8vw;
+  background-position-y: 49vh;
+  background-size: auto 19vw;
+  /*opacity:0.4;*/
+  opacity:0.25;
+}
+#laptop {
+  background:url("../assets/home/Laptop5.svg") no-repeat center;
+  background-position-x: 2vw;
+  background-position-y: 19vh;
+  background-size: auto 36vw;
+}
+
+#views {
+  background:url("../assets/home/Views.svg") no-repeat center;
+  background-position-x: 12vw;
+  background-position-y: 28vh;
+  background-size: auto 21vw;
+  animation: upDown 1.5s alternate infinite ease-in-out;
+}
+
+@keyframes upDown {
+  to { transform:translateY(1vh);}
+}
+
+
+#mainTexts {
+  width:33vw;
+  /*height:100px;*/
+  margin-left:auto;
+  /*background:red;*/
+  margin-top:24vh;
+  margin-right:2vw;
+  display:flex;
+  flex-direction:column;
+  z-index:1;
+  position:relative;
+}
+#title {
+  font-family: "Montserrat",sans-serif;
+  font-weight: 500;
+  font-size: 3.3em;
+  color: rgb(255, 255, 255);
+  margin-left:2vw;
+}
+#subtitle {
+  font-family: "Poppins",sans-serif;
+  font-weight: 300;
+  font-size: 2.2em;
+  color: rgb(242, 242, 242);
+  margin-left: auto;
+  margin-right: 4vw;
+  opacity: 1;
+}
+
+#purpleShadow {
+  position:absolute;
+  border-radius:100%;
+  background:rgb(134, 92, 209);
+  height: 60vw;
+  width: 60vw;
+  bottom: -30vw;
+  right: -15vw;
+  filter: blur(60px);
+  background: radial-gradient(circle, rgb(134, 92, 209) 12%, rgba(119, 99, 238, 0.79) 85%, rgb(119, 99, 238) 0%);
+
+  opacity: 0.7;
+}
+
+
+#description {
+  margin-top:6vh;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+}
+#description>span {
+  font-family:"Nunito",sans-serif;
+  font-size:0.9em;
+  color:white;
+  display:inline-block;
+  margin-right:3vw;
+  margin-top:0.1vh;
+}
+
+
+.button {
+  margin-top:7vh;
+  margin-right:8vw;
+  margin-left:auto;
+}

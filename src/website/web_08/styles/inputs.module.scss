@@ -1,0 +1,28 @@
+.button {
+    width:12vw;
+    background:transparent;
+    font-size:1em;
+    height:5vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:0.6vh;
+    cursor: pointer;
+}
+.button>span {
+    pointer-events:none;
+    display:inline-block;
+    margin:0;
+    padding:0;
+    font-family:"Nunito",sans-serif;
+    font-weight:500;
+    user-select:none;
+}
+
+.stroke {
+    border:1px solid white;
+}
+.stroke>span {
+
+    color:white;
+}

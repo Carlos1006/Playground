@@ -1,0 +1,60 @@
+#menu {
+  width:16vw;
+  height:100vh;
+  background:black;
+  background:linear-gradient(to right, rgb(20, 21, 32) 0%, rgb(16, 18, 30) 100%);
+  display:flex;
+  flex-direction:column;
+}
+#menu>.link:first-child {
+  margin-top:6vh;
+}
+.link {
+  display:flex;
+  align-items:center;
+  margin-left:2vw;
+  margin-bottom:2vh;
+  cursor:pointer;
+}
+.link * {
+  pointer-events:none;
+}
+.link>.icon {
+  height:5vh;
+  width:5vh;
+  background:transparent no-repeat center;
+  background-size:auto 70%;
+  margin-right:0.7vw;
+}
+.link>.name {
+  font-family:'Nunito',sans-serif;
+  color:rgb(216, 216, 230);
+  font-size:0.95em;
+}
+
+.instagram {
+  background-image:url("../assets/menu/instagram.svg") !important;
+}
+.linkedin {
+  background-image:url("../assets/menu/linkedin.svg") !important;
+}
+.github {
+  background-image:url("../assets/menu/github.svg") !important;
+}
+.facebook {
+  background-image:url("../assets/menu/facebook.svg") !important;
+}
+
+#reducto {
+  margin-top:auto;
+  margin-bottom:6vh;
+}
+#reducto .icon {
+  background-image:url("../assets/logo/logo2.png") !important;
+  background-size:auto 85%;
+  margin-top:-1vh;
+  margin-right:0;
+}
+#reducto span {
+  opacity:0.7;
+}

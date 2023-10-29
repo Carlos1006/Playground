@@ -1,0 +1,436 @@
+:root {
+  --darkmode:#030313;
+  --darkmode2: rgba(3, 3, 19, 0.85);
+}
+
+#main {
+  height:100vh;
+  width:100vw;
+  /*background: linear-gradient(100deg, rgba(16,18,30,1) 0%, rgba(16,18,30,1) 100%);*/
+  /*background: linear-gradient(100deg, rgba(16,18,30,1) 0%, rgb(24, 27, 45) 100%);*/
+  /*background: linear-gradient(100deg, #1c1d25 0%, rgba(16,18,30,1) 100%);*/
+  position:relative;
+}
+#main #mainBackground {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:0;
+  height:100vh;
+  width:100vw;
+  background: linear-gradient(100deg, #1c1d25 0%, rgba(16,18,30,1) 100%);
+  transition:opacity 0.3s ease-in-out;
+}
+#main #mainBackground.darkmode {
+  opacity:0;
+}
+#main #mainBackground2 {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:0;
+  height:100vh;
+  width:100vw;
+  background: linear-gradient(100deg, rgb(255, 255, 255) 0%, rgb(194, 192, 255) 100%);
+}
+
+#logotypeContainer {
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  left:0;
+  top:0;
+}
+#logo {
+  height:50vh;
+  width:30vw;
+  position:absolute;
+  left:Calc(50% - 15vw);
+  top:Calc(50% - 25vh);
+  background:url("../../../assets/logotype/CD_blue.png") no-repeat center;
+  background-size:85% auto;
+  transition:all 0.4s cubic-bezier(.62,-1.15,.44,1.67);
+  transform:rotateZ(0) scale(1);
+  opacity:1;
+  transition-delay:0.3s;
+}
+.hiddenLogo {
+  transform:rotateZ(-70deg) scale(0.5) !important;
+  opacity:0 !important;
+}
+#texts {
+  width:100vw;
+  height:100vh;
+  position:relative;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+#texts>* {
+  margin-left:20vw;
+}
+#mainText {
+  font-family:"Poppins",sans-serif;
+  font-weight:500;
+  font-size:3.1em;
+  color:white;
+  margin-top:-5vh;
+  margin-bottom:1vh;
+  transition:color 0.3s ease-in-out;
+}
+.darkmode #mainText {
+  color:var(--darkmode2) !important;
+}
+#descriptionText {
+  transition:color 0.3s ease-in-out;
+  font-family:"Montserrat",sans-serif;
+  color:#56C3FD;
+  font-size:1.5em;
+  font-style:italic;
+}
+.darkmode #descriptionText {
+
+  color:rgb(86, 96, 253) !important;
+}
+#descriptionText>span {
+  display:inline-block;
+  height:100%;
+  min-width:17vw;
+}
+
+/*ABOUT ME BUTTON*/
+#aboutMe {
+  margin-top:3vh;
+  width:10vw;
+  height:5vh;
+  position:relative;
+}
+#aboutMeButton {
+  height:5vh;
+  width:8vw;
+  background:#543884;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  z-index:1;
+}
+#aboutMeButton>* {
+  pointer-events:none;
+}
+#aboutMeButton>span {
+  font-family:"Ubuntu",sans-serif;
+  font-weight:400;
+  color:white;
+  font-size:1.1em;
+  position:relative;
+  z-index:5;
+}
+.arrow {
+  position:absolute;
+  height:5vh;
+  width:1vw;
+  right:3vw;
+  top:0;
+  z-index:0;
+  transition:right 0.4s cubic-bezier(.66,.09,.7,1.39);
+}
+.arrow>svg {
+  height:100%;
+  fill:#e4e1fa;
+  transition:fill 0.3s ease-in-out;
+}
+.darkmode .arrow>svg {
+  fill:var(--darkmode2);
+}
+.onHover .arrow:not(#leftArrow) {
+  right:0;
+}
+.onHover .arrow#leftArrow {
+  right:1vw;
+}
+.buttonLayer {
+  position:absolute;
+  width:100%;
+  right:0;
+  height:100%;
+  transition:all 0.3s cubic-bezier(.66,.09,.48,.93);
+}
+
+.buttonLayer#blueLayer {
+  background:rgb(68, 68, 190);
+  z-index:2;
+  transition-delay:0s;
+}
+.buttonLayer#purpleLayer {
+  background:#543884;
+  z-index:3;
+  transition-delay:0.2s;
+}
+.onHover #purpleLayer {
+  width:0 !important;
+  transition-delay:0s;
+}
+.onHover #blueLayer {
+  width:0 !important;
+  transition-delay:0.2s;
+}
+.darkmode .buttonLayer#blueLayer {
+  background-color:rgb(76, 191, 245);
+}
+.darkmode .buttonLayer#purpleLayer,
+.darkmode #aboutMeButton{
+  background-color:rgb(73, 156, 229);
+}
+/*ABOUT ME BUTTON*/
+
+/*WHITE SCREEN*/
+#mainText>span,
+#descriptionText>span,
+#aboutMe{
+  position:relative;
+}
+#mainText>span::after,
+#descriptionText>span::after,
+#aboutMe::after {
+  width:110%;
+  height:100%;
+  background:#e4e1fa;
+  position:absolute;
+  right:-10%;
+  top:0;
+  z-index:100;
+  content:'';
+  transition:width 0.4s cubic-bezier(.57,.55,.44,1.01);
+}
+#descriptionText>span::after {
+  height:159%;
+}
+#mainText.removeWhiteScreen>span::after,
+#descriptionText.removeWhiteScreen>span::after,
+#aboutMe.removeWhiteScreen::after {
+  width:0 !important;
+}
+#mainText>span::after { transition-delay:0.1s; }
+#descriptionText>span::after { transition-delay:0.3s; }
+#aboutMe::after { transition-delay:0.4s; }
+/*WHITE SCREEN*/
+
+/*SIDEBAR*/
+#sideBar {
+  width:6vw;
+  height:100vh;
+  position:absolute;
+  right:0;
+  top:0;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.socialLink {
+  width:3vw;
+  height:3vw;
+  margin-top:1vh;
+  margin-bottom:1vh;
+  background:no-repeat center;
+  background-size:auto 90%;
+  opacity:0.7;
+  transition:opacity 0.3s ease;
+  cursor:pointer;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+}
+.socialLink:hover {
+  opacity:1;
+}
+#facebook>svg{
+  height:95%;
+}
+#instagram>svg {
+  width:85%;
+}
+#linkedin>svg {
+  width:90%;
+}
+.socialLink>svg {
+  fill:#e4e1fa;
+}
+.darkmode .socialLink>svg {
+  fill: var(--darkmode) !important;
+}
+/*SIDEBAR*/
+
+/*NAVBAR*/
+#navBar {
+  width:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  height:10vh;
+  z-index:11;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  opacity:0.8;
+  transition:top 0.3s cubic-bezier(.52,.59,.56,1.07);
+  transition-delay:0.7s;
+}
+#navBar.hiddenHeader {
+  top:-10vh;
+}
+#navbarLogo {
+  margin-left:10vw;
+  height:8vh;
+  width:8vh;
+  position:relative;
+}
+#navbarLogo::after,
+#navbarLogo::before {
+  background:url("../../../assets/logotype/CD_white.png") no-repeat center;
+  background-size:80% auto;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  content:'';
+  transition:opacity 0.3s ease-in-out;
+}
+#navbarLogo::before {
+  background-image:url("../../../assets/logotype/CD.1_black.png");
+  opacity:0;
+}
+.darkmode #navbarLogo::before {
+  opacity:1;
+}
+.darkmode #navbarLogo::after {
+  opacity:0;
+}
+
+#darkMode {
+  height:5vh;
+  width:5vh;
+  background-size:60% auto;
+  margin-right:10vw;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-end;
+  align-items:center;
+}
+.navLink:nth-child(2) {
+  margin-left:auto;
+}
+.navLink {
+  cursor:pointer;
+  margin-right:2vw;
+}
+.navLink>span {
+  font-family:"Poppins",sans-serif;
+  color:#e4e1fa;
+  font-size:1.2em;
+  transition:color 0.3s ease-in-out;
+}
+.darkmode .navLink>span {
+  color: var(--darkmode);
+}
+.underLink {
+  width:100%;
+  height:0.2vh;
+  position:relative;
+}
+.underLink>div {
+  position:absolute;
+  top:0;
+  height:100%;
+  width:0;
+  transition:all 0.3s cubic-bezier(.76,.06,.36,.99) !important;
+}
+.underLink>div:first-child {
+  background:rgb(68, 68, 190);
+  transition-delay:0.2s !important;
+}
+.underLink>div:last-child {
+  background:#543884;
+}
+.navLink:hover div,
+#darkMode:hover div {
+  width:100%;
+  left:0;
+  right:auto;
+}
+.navLink:not(:hover) div,
+#darkMode:not(:hover) div {
+  right:0;
+  left:auto;
+}
+
+.darkmode .underLink>div:first-child {
+  background-color:rgb(76, 191, 245);
+}
+.darkmode .underLink>div:last-child {
+  background-color:rgb(73, 156, 229);
+}
+/*NAVBAR*/
+
+
+/*FIGURES*/
+#figureContainer {
+  background:rgba(16,18,30,0.5);
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  z-index:9;
+  transition:opacity 0.3s ease-in-out;
+}
+.darkmode #figureContainer {
+  background:rgba(16,18,30,0.1) !important;
+}
+.figure {
+  position:absolute;
+  height:2vw;
+  width:2vw;
+  transition:all 0.2s ease;
+}
+.figure div {
+  width:100%;
+  height:100%;
+  background:no-repeat center;
+}
+.figure div.triangle {
+  background-size:auto 90%;
+  background-image:url("../assets/triangle.svg");
+}
+.figure div.square {
+  background-size:auto 100%;
+  background-image:url("../assets/square.svg");
+}
+.figure div.circle {
+  background-image:url("../assets/circle.svg");
+}
+/*FIGURES*/
+
+
+/*ICONS*/
+#darkmodeIcon {
+  width:60%;
+  margin-top:20%;
+  margin-bottom:auto;
+  fill:#e4e1fa;
+  transition:fill 0.3s ease-in-out;
+}
+.darkmode #darkmodeIcon {
+  fill: var(--darkmode);
+}
+
+

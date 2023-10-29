@@ -11,7 +11,7 @@ import { GiBigDiamondRing } from "react-icons/gi";
 const router = createBrowserRouter(Routes);
 
 const Page_00 = () => {
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(true);
   const [opacity, setOpacity] = useState(true);
   const time = useRef(0);
 

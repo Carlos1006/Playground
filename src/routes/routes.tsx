@@ -3,7 +3,6 @@ import Page_02 from "../pages/page_02";
 import Page_03 from "../pages/page_03";
 import Page_04 from "../pages/page_04";
 import Page_05 from "../pages/page_05";
-import Page_06 from "../pages/page_06";
 import Page_07 from "../pages/page_07";
 import Page_08 from "../pages/page_08";
 import Page_09 from "../pages/page_09";
@@ -16,6 +15,9 @@ import Web_02 from "../website/web_02";
 import Web_03 from "../website/web_03";
 import Web_04 from "../website/web_04";
 import Web_05 from "../website/web_05";
+import Web_06 from "../website/web_06";
+import Web_07 from "../website/web_07";
+import Web_08 from "../website/web_08";
 
 const Routes = [
   {
@@ -85,6 +87,18 @@ const Routes = [
   {
     path: "/web_05",
     element: <Web_05 />,
+  },
+  {
+    path: "/web_06",
+    element: <Web_06 />,
+  },
+  {
+    path: "/web_07",
+    element: <Web_07 />,
+  },
+  {
+    path: "/web_08",
+    element: <Web_08 />,
   },
 ];
 

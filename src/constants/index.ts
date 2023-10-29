@@ -73,4 +73,16 @@ export const WEBSITES = [
     path: "/web_05",
     name: "Reducto Forest",
   },
+  {
+    path: "/web_06",
+    name: "Squares",
+  },
+  {
+    path: "/web_07",
+    name: "CD",
+  },
+  {
+    path: "/web_08",
+    name: "Reducto SVG",
+  }
 ]
