@@ -96,5 +96,9 @@ export const WEBSITES = [
   {
     path: "/web_08",
     name: "Reducto SVG",
+  },
+  {
+    path: "/web_09",
+    name: "City Rotate",
   }
 ]

@@ -1,0 +1,191 @@
+#main {
+  width:100vw;
+  height:100vh;
+  background-color: #000;
+  display:flex;
+}
+
+#page {
+  width:100vw;
+  height:100vh;
+  position:relative;
+  position: absolute;
+  z-index:10;
+  button {
+    width:100px;
+    height:100px;
+    right:15vw;
+    bottom:15vh;
+    border-radius:100px;
+    border:0;
+    background-color: rgb(255, 255, 255, 0.05);
+    backdrop-filter: blur(1px) brightness(1.2);
+    position:absolute;
+    font-family:'Orbitron';
+    color:white;
+    font-size:1.1em;
+    cursor: pointer;
+    letter-spacing:2px;
+    transition:background-color 0.2s linear;
+    &:hover {
+      background-color: rgb(255, 255, 255, 0.1);
+    }
+  }
+  .name {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:80vw;
+    height:30vh;
+    .first {
+      font-family:'Orbitron';
+      font-size:5em;
+      letter-spacing:1vw;
+      margin-bottom:10px;
+      font-weight:500;
+      color:white;
+    }
+    .last {
+      font-family:'Inter';
+      font-size:1.2em;
+      font-weight:300;
+      color:rgba(255, 255, 255, 0.37);
+    }
+  }
+}
+
+
+$duration:1s;
+$display: display 0s linear;
+
+#frame{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  position:relative;
+  overflow: hidden;
+  filter:contrast(1.4) brightness(0.6);
+  >img {
+    width:120vw;
+    height:120vh;
+    object-fit:cover;
+    position:absolute;
+    left:-10vw;
+    top:-10vh;
+    &.rotate {
+      transform-origin: center center;
+    }
+  }
+  #ring {
+    width:60vw;
+    height:60vw;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    overflow: hidden;
+    transform-origin: center center;
+    >img {
+      position:absolute;
+      width:120vw;
+      height:120vh;
+      left:-30vw;
+      top:calc((60vw - 120vh) / 2);
+      object-fit:cover;
+      transform-origin: center center;
+      z-index:10;
+      filter: brightness(0.6);
+    }
+    #core {
+      width:35vw;
+      height:35vw;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      transform-origin: center center;
+      z-index:10;
+      overflow: hidden;
+      >img {
+        position:absolute;
+        width:120vw;
+        height:120vh;
+        left:-42.5vw;
+        top:calc((((60vw - 35vw) / 2) * -1) + ((60vw - 120vh) / 2));
+        object-fit:cover;
+        transform-origin: center center;
+        filter: brightness(1.1);
+      }
+    }
+  }
+
+  &.hide {
+    img.front {
+      opacity:0;
+    }
+  }
+
+  $elastic_0: cubic-bezier(.28,-0.57,.72,.99);
+  $elastic_1: cubic-bezier(.51,.26,.78,.67);
+
+  $rotate: rotate $duration $elastic_0;
+  $filter: filter $duration $elastic_1;
+  $opacity: opacity 0.4s linear;
+  $transition: $rotate, $filter, $opacity, $display;
+
+  &.state-1 {
+    filter:contrast(1.4) brightness(0.6) blur(2px);
+    transition:filter $duration cubic-bezier(.71,.06,.72,.79);
+    >img.rotate {
+      rotate: 15deg;
+      transition: $transition;
+    }
+    #ring {
+      >img {
+        rotate: -90deg;
+        filter: brightness(0.5) blur(3px);
+        transition: $transition;
+      } 
+      #core {
+        >img {
+          rotate: 90deg;
+          filter: brightness(0.7) blur(4px);
+          transition: $transition;
+        }
+      }
+    }
+  }
+
+  $duration2: 0.5s;
+  $elastic_2: cubic-bezier(.45,-0.72,.72,.99);
+  $elastic_3: cubic-bezier(.13,.72,.31,.98);
+
+  $rotate2: rotate $duration2 $elastic_2;
+  $filter2: filter $duration2 $elastic_3;
+  $opacity_2: opacity 0s linear;
+  $transition2: $rotate2, $filter2, $opacity_2, $display;
+
+  &.state-0 {
+    transition:filter $duration2 cubic-bezier(.13,.48,.64,1.01);
+    >img.rotate {
+      transition: $rotate2, $filter2;
+    }
+    #ring {
+      >img {
+        transition: $rotate2, $filter2;
+      } 
+      #core {
+        >img {
+          transition: $rotate2, $filter2;
+        }
+      }
+    }
+  }
+}
