@@ -1,0 +1,95 @@
+#dateImage {
+  width:100vw;
+  height:100vh;
+  position:relative;
+}
+.dataImage {
+  display:inline-block;
+  position:relative;
+  margin:2.5vw;
+  user-select:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.dataImage>span {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:10;
+  font-family:"Montserrat",sans-serif;
+  width:100%;
+  height:100%;
+  font-size:1.6em;
+  font-weight:500;
+  color:rgb(10,10,10);
+  color:rgb(250,250,250);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0.8;
+}
+
+.sqr {
+  float:left;
+  height:5vw;
+  width:5vw;
+  /*margin-left:1vw;*/
+  /*margin-top:1vw;*/
+}
+
+.sqr2 {
+  height:25vw;
+  width:25vw;
+  margin-left:1vw;
+  margin-top:1vw;
+  display:inline-block;
+}
+
+.sqrContainer,.subSqrContainer {
+  height:Calc(5vw * 3);
+  width:Calc(5vw * 3);
+  display:inline-block;
+  overflow:hidden;
+  background:black;
+}
+.sqr:nth-child(3n+1) {
+  clear:left;
+}
+.sqrContainer {
+  border-radius:5vh;
+  float:left;
+}
+.subSqrContainer {
+  filter:blur(33px);
+  animation: rotating 30s infinite;
+  /*filter:blur(60px) brightness(1.2);*/
+}
+
+// .sqrContainer {
+  /*animation: filter-animation 10s infinite;*/
+// }
+
+@keyframes filter-animation {
+  0% {
+      filter: hue-rotate(0deg);
+  }
+  50% {
+      filter: hue-rotate(100deg);
+  }
+  100% {
+      filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes rotating {
+  0% {
+      transform:rotate(0deg);
+  }
+  50% {
+      transform:rotate(360deg) scale(150%);
+  }
+  100% {
+      transform:rotate(0deg);
+  }
+}

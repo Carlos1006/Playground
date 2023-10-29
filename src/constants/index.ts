@@ -24,6 +24,10 @@ export const COMPONENTS = [
     name: "Subscribe Button",
   },
   {
+    path: "/robot",
+    name: "Robot",
+  },
+  {
     path: "/node_tree",
     name: "Node Tree",
   },
@@ -34,6 +38,14 @@ export const COMPONENTS = [
   {
     path: "/graph",
     name: "Graph",
+  },
+  {
+    path: "/loginRobot",
+    name: "Login Robot",
+  },
+  {
+    path: "/dateToImg",
+    name: "Date to Image",
   },
   {
     path: "/loginRobot",

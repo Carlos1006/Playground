@@ -27,11 +27,21 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    position:relative;
     &.row {
         flex-direction:row;
     }
     &.dark {
         background-color:rgba(1,0,18);
+    }
+    &.grid3 {
+        display:grid;
+        justify-content: unset;
+        align-items: unset;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-gap: 1vw;
+        overflow: auto;
     }
 }
 .divider {

@@ -3,12 +3,14 @@ import Page_02 from "../pages/page_02";
 import Page_03 from "../pages/page_03";
 import Page_04 from "../pages/page_04";
 import Page_05 from "../pages/page_05";
+import Page_06 from "../pages/page_06";
 import Page_07 from "../pages/page_07";
 import Page_08 from "../pages/page_08";
 import Page_09 from "../pages/page_09";
 import Page_10 from "../pages/page_10";
 import Page_11 from "../pages/page_11";
 import Page_12 from "../pages/page_12";
+import Page_13 from "../pages/page_13";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -45,6 +47,10 @@ const Routes = [
     element: <Page_05 />,
   },
   {
+    path: "/robot",
+    element: <Page_06 />,
+  },
+  {
     path: "/node_tree",
     element: <Page_07 />,
   },
@@ -67,6 +73,10 @@ const Routes = [
   {
     path: "/grid",
     element: <Page_12 />,
+  },
+  {
+    path: "/dateToImg",
+    element: <Page_13 />,
   },
   {
     path: "/web_01",
