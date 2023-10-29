@@ -105,4 +105,8 @@ export const WEBSITES = [
     path: "/web_11",
     name: "Sushi",
   },
+  {
+    path: "/web_12",
+    name: "Coffehub",
+  },
 ];

@@ -3,7 +3,7 @@
 
 $carrousel_height: 20vw;
 $image_side: 15.5vw;
-$image_margin: ($carrousel_height - $image_side) / 2;
+$image_margin: calc(($carrousel_height - $image_side) / 2);
 
 .visor {
     @include root.dim((w:100vw,h:calc(100vh - #{header.$header_height})));
