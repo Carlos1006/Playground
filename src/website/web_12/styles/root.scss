@@ -1,0 +1,158 @@
+$bgNoRepeatCenter:no-repeat center;
+$bgFullHeight:auto 100%;
+$bgFullWidth:100% auto;
+
+$fontMontserrat:"Montserrat";
+$fontOpenSans:"Open Sans";
+$fontNunito:"Nunito";
+
+$fonts:(
+    mont:"Montserrat",
+    opensans:"Open Sans",
+    nunito:"Nunito"
+);
+
+$colors:(
+    0:#8d5935,
+    1:#6f452a
+);
+
+@function black($opacity) {
+    @return rgba( #000 , $opacity);
+}
+@function path($file) {
+    @return "../assets/#{$file}";
+}
+@function img($name,$ext) {
+    @return url(path("#{$name}.#{$ext}"));
+}
+@function img($type,$name,$ext) {
+    @return url(path("#{$type}/#{$name}.#{$ext}")) $bgNoRepeatCenter;
+}
+@function color($number) {
+    @return map-get($colors,$number);
+}
+
+@mixin dim($dims:()) {
+    @each $prop,$value in $dims {
+        $newProp:'';
+        @if($prop==w) {
+            $newProp:width;
+        }@else if($prop==mw) {
+            $newProp:min-wdth;
+        }@else if($prop==h) {
+            $newProp:height;
+        }@else if($prop==mh) {
+            $newProp:min-height;
+        }@else if($prop==mxh) {
+            $newProp:max-height;
+        }
+        #{$newProp}:$value;
+    }
+}
+@mixin square($size, $radius:0) {
+    width:$size;
+    height:$size;
+    @if $radius != 0 {
+        border-radius: $radius;
+    }
+}
+@mixin flex($direction:row,$justify:auto,$align:auto) {
+    display:flex;
+    flex-direction:$direction;
+    @if $justify != auto {
+        justify-content:$justify;
+    }
+    @if $align != auto {
+        align-items:$align;
+    }
+}
+@mixin dimensions($width,$height) {
+    width:$width;
+    height:$height;
+}
+@mixin font($font,$size:1,$color:white,$weight:normal) {
+    font-family:font($font),sans-serif;
+    font-size:$size * 1em;
+    color:$color;
+    font-weight:$weight;
+}
+@mixin rotate($deg:0deg) {
+    transform:rotate($deg);
+}
+@mixin imgY($value:50%) {
+    background-position-y:$value;
+}
+@mixin pseudo($props:(),$dims:()) {
+    content:'';
+    @include abs2($props);
+    @include dim($dims);
+}
+@mixin position($left:0,$top:0,$bottom:null,$right:null) {
+    left:$left;
+    top:$top;
+    @if $bottom!=null {
+        bottom:$bottom;
+    }
+    @if $right!=null {
+        right:$right;
+    }
+}
+@mixin margin($properties) {
+    @each $prop,$val in $properties {
+        margin-#{$prop}:$val;
+    }
+}
+@mixin padding($properties) {
+    @each $prop,$val in $properties {
+        padding-#{$prop}:$val;
+    }
+}
+
+@mixin bg($file,$properties:()) {
+    @if($file != null) {
+        background-image:url("../assets/#{$file}");
+    }
+    background-repeat:no-repeat;
+    background-position:center;
+    @each $prop,$value in $properties {
+        @if $value != null {
+            @if ($prop == x or $prop == y)  {
+                background-position-#{$prop}:$value;
+            }@else {
+                background-#{$prop}:$value;
+            }
+        }
+    }
+}
+
+@function font($name) {
+    @return map-get($fonts,$name);
+}
+
+@mixin abs2($props:(),$fixed:false) {
+    @if($fixed) {
+        position:fixed;
+    }@else {
+        position:absolute;
+    }
+    @each $prop,$value in $props {
+        $side:null;
+        @if($prop==r) {
+            $side:right;
+        }@else if($prop==l) {
+            $side:left;
+        }@else if($prop==t) {
+            $side:top;
+        }@else if($prop==b) {
+            $side:bottom;
+        }
+        #{$side}:$value;
+    }
+}
+@mixin font2($font,$size:1,$color:white,$weight:normal) {
+    font-family:font($font),sans-serif;
+    font-size:$size * 1em;
+    color:$color;
+    font-weight:$weight;
+}

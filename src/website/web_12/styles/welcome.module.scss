@@ -1,0 +1,225 @@
+@use './root';
+
+.host {
+    @mixin animation($function) {
+        transition:all 0.2s $function;
+    }
+    @include root.flex();
+    >div {
+        &#tumbler {
+            @include root.dim((w:50vw,h:100vh));
+            @include root.abs2((l:Calc(50% - 25vw),t:0));
+            @include root.bg('images/tumbler4.png',(size:auto 55%));
+            filter:brightness(0.3) saturate(0.3) contrast(1.05) drop-shadow(0 0 3px rgba(0,0,0,0.5));
+            @include animation(cubic-bezier(.72,.5,.71,.5));
+            z-index:10;
+            &.hidden {
+                left:Calc(50% - 30vw);
+                opacity:0;
+            }
+        }
+        &#bigLogo {
+            @include root.square(35vw);
+            @include root.abs2((l:46vw,b:45vh));
+            @include root.bg('logo/Logo_Coffe3.png',(size:auto 55%));
+            @include animation(cubic-bezier(.37,.7,.53,.85));
+            z-index:8;
+            &.hidden {
+                background-size:auto 40%;
+                opacity:0;
+            }
+        }
+        &#bigHour {
+            @include root.abs2((l:5vw,t:5vw));
+            @include root.font(mont,11,rgba(255,255,255,0.06),medium);
+            writing-mode: vertical-lr;
+            user-select:none;
+            &.hidden {
+                opacity:0;
+            }
+        }
+        &#appName {
+            @include root.dim((w:40vw));
+            @include root.abs2((l:13vw,t:13vw));
+            #reducto {
+                @include root.flex(row,auto,center);
+                @include animation(cubic-bezier(.42,.83,.23,.7));
+                position:relative;
+                margin-bottom:2vw;
+                left:0;
+                label {
+                    @include root.font(mont,1,rgba(255,255,255,0.4),medium);
+                }
+                .dot {
+                    @include root.margin((left:1vw,right:1vw));
+                    @include root.square(1vh,100%);
+                    background-color:rgb(56, 34, 18);
+                }
+                &.hidden {
+                    left:-2vw;
+                    opacity:0;
+                }
+            }
+            >span {
+                @include root.font(mont,4.2,#8d5935,600);
+                @include animation(cubic-bezier(.42,.83,.23,.7));
+                position:relative;
+                left:0;
+                opacity:0.8;
+                display:inline-block;
+                margin-bottom:2vw;
+                &.hidden {
+                    left:-2vw;
+                    opacity:0;
+                }
+            }
+            p {
+                @include root.font(mont,1,rgba(255,255,2550,0.8));
+                @include animation(cubic-bezier(.26,.48,.55,.77));
+                position:relative;
+                left:0;
+                margin:0;
+                display:inline-block;
+                width:70%;
+                line-height:2.9vh;
+                &.hidden {
+                    left:-3vw;
+                    opacity:0;
+                }
+            }
+            div#learnMore {
+                @include root.font(mont,1.1,#bcab73,600);
+                @include animation(cubic-bezier(.26,.48,.55,.77));
+                position:relative;
+                left:0;
+                margin-top:5vw;
+                cursor:pointer;
+                &.hidden {
+                    left:-3vw;
+                    opacity:0;
+                }
+            }
+        }
+        &#moreInfo {
+            @include root.abs2((r:0,t:23vw));
+            @include root.dim((w:14vw,h:9vw));
+            @include root.padding((left:2vw,right:1vw));
+            @include animation(cubic-bezier(.69,.12,.64,.83));
+            background:rgb(15,15,15);
+            @include root.flex(row,auto,center);
+            &.hidden {
+                opacity:0;
+                width:8vw;
+            }
+            span {
+                @include root.font(mont,0.8,rgba(255,255,2550,0.5));
+                @include animation(cubic-bezier(.69,.12,.64,.83));
+                display:inline-block;
+                margin-left:-6vw;
+                line-height:2.5vh;
+                width:calc(100% - 3vw);
+                label {
+                    color:#8d5935;
+                    font-weight:500;
+                    width:100%;
+                    display:inline-block;
+                    margin-bottom:0.5vh;
+                }
+                &.hidden {
+                    opacity:0;
+                    margin-left:-4vw;
+                }
+            }
+            .goDown {
+                @include root.square(3vw,100%);
+                @include root.bg('icon/down.svg',(color:#050506,y:90%,size:70% auto));
+                @include root.margin((left:2.5vw));
+                cursor: pointer;
+            }
+        }
+        &#go {
+            @include root.abs2((l:Calc(50% + 2vw),t:65vh));
+            @include root.dim((w:20vw,h:7vh));
+            @include root.flex();
+            @include animation(cubic-bezier(.37,.7,.53,.85));
+            z-index:71;
+            cursor:pointer;
+            * {
+                user-select:none;
+            }
+            .goStart {
+                @include root.dim((w:Calc(100% - 7vh),h:100%));
+                background-color:#8d59351a;
+                @include root.flex(row,auto,center);
+                span {
+                    margin-left:1vw;
+                    @include root.font(mont);
+                }
+            }
+            .goButton {
+                @include root.square(7vh);
+                @include root.bg('icon/right.svg',(color:#382212,y:60%,size:50% auto));
+            }
+            &.hidden {
+                left:Calc(50% - 2vw);
+                opacity:0;
+            }
+        }
+    }
+    #background {
+        @include root.dim((w:100vw,h:100vh));
+        @include root.abs2((l:0,t:0));
+        @include root.bg('background/bg014.jpg',(size:100vw auto));
+        @include root.bg('background/bg014.jpg',(size:100vw auto,x:0,color:rgba(76, 80, 100, 0.6),blend-mode:multiply));
+        //@include root.bg('background/bg017.jpg',(size:100% auto));
+        //@include root.bg('background/bg018.jpg',(size:100% auto));
+        //@include root.bg('background/bg020.jpg',(size:100% auto));
+        //@include root.bg('background/bg021.jpg',(size:100% auto));
+        //@include root.bg('background/bg022.jpg',(size:100% auto));
+        //@include root.bg('background/bg023.jpg',(size:100% auto));
+        z-index:0;
+        filter:brightness(0.3) saturate(0.3) contrast(1.05);
+        >div#background2 {
+            @include root.dim((w:50vw,h:100vh));
+            @include root.abs2((r:0,t:0));
+            z-index:0;
+            background-color:rgb(40,40,40);
+        }
+    }
+    
+    #leftBar {
+        @include root.dim((w:8vw,h:100vh));
+        position:relative;
+        border-right:1px solid rgba(255,255,255,0.1);
+        #logo {
+            @include root.square(8vw);
+            @include root.bg('logo/Logo_Coffe5.png',(size:45% auto));
+        }
+    }
+    #body {
+        @include root.dim((w:92vw,h:100vh));
+        @include root.flex(column);
+        position:relative;
+        pointer-events:none;
+        #header {
+            @include root.dim((w:100%,h:8vw));
+            @include root.flex();
+            #menuButton {
+                @include root.square(8vw);
+                @include root.bg('icon/menu.svg',(size:30% auto));
+                margin-left:auto;
+                opacity:0.6;
+                cursor:pointer;
+                pointer-events:all;
+            }
+        }
+        #content {
+            @include root.dim((w:100%,h:92vw));
+        }
+    }
+}
+
+
+
+
+

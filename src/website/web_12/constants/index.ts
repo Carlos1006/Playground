@@ -1,1 +1,1 @@
-export const _NAME_ = "CoffeHub";
+export const NAME = "CoffeHub";
