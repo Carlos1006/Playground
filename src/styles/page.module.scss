@@ -17,6 +17,18 @@
         background-color:rgb(10,15,20);
         cursor: default !important;
     }
+    &.black {
+        background-color:rgb(0,0,0);
+        cursor: default !important;
+    }
+    &.relative {
+        width:99vw;
+        height:99vh;
+        position:relative;
+        display:inline-block;
+        overflow:hidden;
+        box-shadow:0 0 0 2vw black;
+    }
 }
 
 .component {

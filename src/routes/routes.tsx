@@ -11,6 +11,8 @@ import Page_10 from "../pages/page_10";
 import Page_11 from "../pages/page_11";
 import Page_12 from "../pages/page_12";
 import Page_13 from "../pages/page_13";
+import Page_14 from "../pages/page_14";
+import Page_15 from "../pages/page_15";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -81,6 +83,14 @@ const Routes = [
   {
     path: "/dateToImg",
     element: <Page_13 />,
+  },
+  {
+    path: "/gifToVideo",
+    element: <Page_14 />,
+  },
+  {
+    path: "/bubble",
+    element: <Page_15 />,
   },
   {
     path: "/web_01",

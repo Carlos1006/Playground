@@ -44,8 +44,8 @@ export const COMPONENTS = [
     name: "Login Robot",
   },
   {
-    path: "/dateToImg",
-    name: "Date to Image",
+    path: "/bubble",
+    name: "Bubbles",
   },
 ];
 
@@ -57,6 +57,14 @@ export const EXPERIMENTS = [
   {
     path: "/grid",
     name: "Grid",
+  },
+  {
+    path: "/dateToImg",
+    name: "Date to Image",
+  },
+  {
+    path: "/gifToVideo",
+    name: "Gif to Video",
   },
 ];
 
@@ -71,15 +79,15 @@ export const WEBSITES = [
   },
   {
     path: "/web_03",
-    name: "Reducto Cube",
+    name: "Cube",
   },
   {
     path: "/web_04",
-    name: "Reducto Terrain",
+    name: "Terrain",
   },
   {
     path: "/web_05",
-    name: "Reducto Forest",
+    name: "Forest",
   },
   {
     path: "/web_06",
@@ -91,7 +99,7 @@ export const WEBSITES = [
   },
   {
     path: "/web_08",
-    name: "Reducto SVG",
+    name: "SVG",
   },
   {
     path: "/web_09",
