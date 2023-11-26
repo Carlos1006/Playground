@@ -18,13 +18,11 @@ const DeleteFile = () => {
         setThrowDocument(true);
         await sleep(1050);
         setFillCheckmark(true);
-
         await sleep(200);
         await sleep(1000);
         setShowDocument(false);
         setCenter(false);
         setHideOk(true);
-
     }
 
     return <>
