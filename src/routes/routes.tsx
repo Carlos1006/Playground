@@ -33,7 +33,7 @@ const Routes = [
     element: <></>,
   },
   {
-    path: "day_night_toggle",
+    path: "/day_night_toggle",
     element: <Page_01 />,
   },
   {
