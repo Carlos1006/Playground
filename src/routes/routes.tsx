@@ -26,6 +26,7 @@ import Web_09 from "../website/web_09";
 import Web_10 from "../website/web_10";
 import Web_11 from "../website/web_11";
 import Web_12 from "../website/web_12";
+import Web_13 from "../website/web_13";
 
 const Routes = [
   {
@@ -139,6 +140,10 @@ const Routes = [
   {
     path: "/web_12",
     element: <Web_12 />,
+  },
+  {
+    path: "/web_13",
+    element: <Web_13 />,
   },
 ];
 

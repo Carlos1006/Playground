@@ -117,4 +117,8 @@ export const WEBSITES = [
     path: "/web_12",
     name: "Coffehub",
   },
+  {
+    path: "/web_13",
+    name: "Anime Landing",
+  },
 ];
