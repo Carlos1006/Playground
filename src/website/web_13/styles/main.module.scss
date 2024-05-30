@@ -49,21 +49,41 @@ $bottomRightMask-bottom: $padding;
 $containerCenterImage-left: 0;
 $containerCenterImage-top: -$containerTopHalf-height;
 
+// -- Center Statistics
+
+$centerStatistics-width: 18vw;
+$centerStatistics-height: 18vw;
+$centerStatistics-left: calc($padding * 2);
+$centerStatistics-top: calc($containerCenter-top + $containerCenter-height - $padding - $centerStatistics-height);
+$centerStatistics-corner: 6vw;
+$centerStatistics-radius: 30px;
+
+$centerStatistics-mask-width: $centerStatistics-corner;
+$centerStatistics-mask-height: $centerStatistics-corner;
+
+$centerStatistics-columnLeft-width: calc(100% - $centerStatistics-mask-width);
+$centerStatistics-columnLeft-height: 100%;
+
+$centerStatistics-columnRight-width: $centerStatistics-corner;
+$centerStatistics-columnRight-height: calc(100% - $centerStatistics-mask-height);
 
 #main {
   width: 100vw;
   height: 100vh;
   background-color:rgb(15,15,20);
   position:relative;
+  .imageSrc {
+    width: $image-width;
+    height: $image-height;
+    &.blur {
+      filter: blur(10px);
+    }
+  }
   #hero {
     width: 100vw;
     height: 100vh;
     background-color:rgb(15,15,20);
     position:relative;
-    .imageSrc {
-      width: $image-width;
-      height: $image-height;
-    }
     .containerCenterWide {
       // display:none;
       width: $containerCenter-width;
@@ -269,5 +289,97 @@ $containerCenterImage-top: -$containerTopHalf-height;
       }
     }
   }
-  
+
+  #centerStatistics {
+    height: $centerStatistics-height;
+    width: $centerStatistics-width;
+    left: $centerStatistics-left;
+    top: $centerStatistics-top;
+    z-index:20;
+    position:absolute;
+    .blurLayer {
+      width: 100%;
+      height: 100%;
+      position:absolute;
+      left:0;
+      top:0;
+      .columnLeft {
+        position:absolute;
+        left:0;
+        top:0;
+        width:$centerStatistics-columnLeft-width;
+        height:$centerStatistics-columnLeft-height;
+        overflow: hidden;
+        border-radius: $centerStatistics-radius $centerStatistics-radius 0 $centerStatistics-radius;
+        .image {
+            width: $image-width;
+            height: $image-height;
+            left: calc(-1 * $padding);
+            top: calc(-1 * ($centerStatistics-top  - $padding));
+            z-index:10;
+            position:absolute;
+        }
+      }
+      .columnRight {
+        position:absolute;
+        right:0;
+        bottom:0;
+        width:$centerStatistics-columnRight-width;
+        height:$centerStatistics-columnRight-height;
+        overflow: hidden;
+        border-radius: 0 $centerStatistics-radius $centerStatistics-radius 0;
+        .image {
+          width: $image-width;
+          height: $image-height;
+          left: calc(-1 * ( $centerStatistics-width - $centerStatistics-corner + $padding ));
+          top: calc(-1 * ($centerStatistics-top  - $padding + $centerStatistics-corner));
+          z-index:10;
+          position:absolute;
+      }
+      }
+      .mask {
+        position:absolute;
+        top:0;
+        right:0;
+        width:$centerStatistics-mask-height;
+        height:$centerStatistics-mask-height;
+        overflow: hidden;
+        &.topMask {
+          border-radius:$centerStatistics-radius;
+          z-index:11;
+        }
+        &.bottomMask {
+          border-radius:$centerStatistics-radius $centerStatistics-radius $centerStatistics-radius 0;
+          z-index:10;
+        }
+        .image {
+          left: calc(-1 * ( $centerStatistics-width - 6vw + $padding ));
+          top: calc(-1 * ($centerStatistics-top  - $padding));
+          width: $image-width;
+          height: $image-height;
+          z-index:10;
+          position:absolute;
+        }
+      }
+    }
+
+    .borderLayer {
+      width: 100%;
+      height: 100%;
+      position:absolute;
+      left:0;
+      top:0;
+      z-index:12;
+      .columnLeftBorder1 {
+        width: $centerStatistics-columnLeft-width;
+        height: calc($centerStatistics-corner / 2);
+        border-radius: $centerStatistics-radius $centerStatistics-radius 0 0;
+        border:2px solid white;
+        border-bottom:0;
+        position:absolute;
+        left:0;
+        top:0;
+      }
+    }
+  } 
 }

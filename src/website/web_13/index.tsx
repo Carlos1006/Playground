@@ -9,7 +9,25 @@ const AnimeLanding: FC = () => {
       <div id={css.topRightOptions}></div>
       <div id={css.bottomLeftTitle}></div>
       <div id={css.bottomRightSocial}></div>
-      <div id={css.centerStatistics}></div>
+      <div id={css.centerStatistics}>
+        <div className={css.borderLayer}>
+          <div className={css.columnLeftBorder1}></div>
+        </div>
+        <div className={css.blurLayer}>
+          <div className={css.columnLeft}>
+            <Background blur />
+          </div>
+          <div className={css.columnRight}>
+            <Background blur />
+          </div>
+          <div className={`${css.mask} ${css.topMask}`}>
+            <Background />
+          </div>
+          <div className={`${css.mask} ${css.bottomMask}`}>
+            <Background blur />
+          </div>
+        </div>
+      </div>
 
       <div id={css.hero}>
         <div className={css.containerCenterWide}>
