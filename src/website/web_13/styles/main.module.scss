@@ -56,7 +56,7 @@ $centerStatistics-height: 18vw;
 $centerStatistics-left: calc($padding * 2);
 $centerStatistics-top: calc($containerCenter-top + $containerCenter-height - $padding - $centerStatistics-height);
 $centerStatistics-corner: 6vw;
-$centerStatistics-radius: 30px;
+$centerStatistics-radius: 40px;
 
 $centerStatistics-mask-width: $centerStatistics-corner;
 $centerStatistics-mask-height: $centerStatistics-corner;
@@ -66,6 +66,9 @@ $centerStatistics-columnLeft-height: 100%;
 
 $centerStatistics-columnRight-width: $centerStatistics-corner;
 $centerStatistics-columnRight-height: calc(100% - $centerStatistics-mask-height);
+
+$centerStatistics-stroke: 1px;
+$centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.514);
 
 #main {
   width: 100vw;
@@ -374,11 +377,55 @@ $centerStatistics-columnRight-height: calc(100% - $centerStatistics-mask-height)
         width: $centerStatistics-columnLeft-width;
         height: calc($centerStatistics-corner / 2);
         border-radius: $centerStatistics-radius $centerStatistics-radius 0 0;
-        border:2px solid white;
+        border:$centerStatistics-border;
         border-bottom:0;
         position:absolute;
         left:0;
         top:0;
+      }
+      .cornerBorder1 {
+        position:absolute;
+        height: calc($centerStatistics-corner / 2);
+        width: calc($centerStatistics-corner / 2);
+        right: calc(($centerStatistics-corner / 2) + $centerStatistics-stroke );
+        top: calc($centerStatistics-corner / 2);
+        border:$centerStatistics-border;
+        border-radius:0 0 0 $centerStatistics-radius;
+        border-right:0;
+        border-top:0;
+      }
+      .columnRightBorder1 {
+        width: calc($centerStatistics-corner / 2);
+        height: calc($centerStatistics-columnRight-height + $centerStatistics-stroke );
+        border-radius: 0 $centerStatistics-radius $centerStatistics-radius 0;
+        border:$centerStatistics-border;
+        border-left:0;
+        position:absolute;
+        right:$centerStatistics-stroke ;
+        bottom:0;
+      }
+      .columnLeftBorder2 {
+        position:absolute;
+        left:0;
+        bottom:0;
+        border:$centerStatistics-border;
+        border-top:0;
+        border-right:0;
+        border-radius:0 0 0 $centerStatistics-radius;
+        width: calc($centerStatistics-columnLeft-width / 2);
+        height:calc($centerStatistics-columnLeft-height - $centerStatistics-corner / 2);
+      }
+      .columnRightBorder2 {
+        position:absolute;
+        left:0;
+        bottom:0;
+        height:100px;
+        width: calc(calc($centerStatistics-columnLeft-width / 2) + calc($centerStatistics-corner / 2) - $centerStatistics-stroke);
+        border:$centerStatistics-border;
+        left:calc($centerStatistics-columnLeft-width / 2);
+        border-left:0;
+        border-top:0;
+        border-right:0;
       }
     }
   } 

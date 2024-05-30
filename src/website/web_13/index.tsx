@@ -12,6 +12,10 @@ const AnimeLanding: FC = () => {
       <div id={css.centerStatistics}>
         <div className={css.borderLayer}>
           <div className={css.columnLeftBorder1}></div>
+          <div className={css.cornerBorder1}></div>
+          <div className={css.columnRightBorder1}></div>
+          <div className={css.columnLeftBorder2}></div>
+          <div className={css.columnRightBorder2}></div>
         </div>
         <div className={css.blurLayer}>
           <div className={css.columnLeft}>
