@@ -6,19 +6,19 @@ $image-width: calc(100vw - 2*$padding);
 $image-height: calc(100vh - 2*$padding);
 
 $containerCenter-width: 80vw;
-$containerCenter-height: 70vh;
+$containerCenter-height: 65vh;
 $containerCenter-left: $padding;
-$containerCenter-top: 5vmax;
+$containerCenter-top: 7vmax;
 
 $containerTopHalf-width: 50vw;
-$containerTopHalf-height: 3vmax;
+$containerTopHalf-height: 5vmax;
 $containerTopHalf-left: calc($padding + $containerCenter-width - $containerTopHalf-width);
 $containerTopHalf-top: $padding;
 
 $containerRightHalf-width: calc($maxWidth - $containerCenter-width - 2*$padding);
-$containerRightHalf-height: 50vh;
+$containerRightHalf-height: 45vh;
 $containerRightHalf-right: $padding;
-$containerRightHalf-top: 11vmax;
+$containerRightHalf-top: 13vmax;
 
 $containerBottomHalf-width: 40vw;
 $containerBottomHalf-height: calc($maxHeight - $containerCenter-height - $containerCenter-top - $padding);
@@ -186,7 +186,7 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
         width:100%;
         height:100%;
         background:rgb(15,15,20);
-        border-radius:0 0 20px 0;
+        border-radius:0 0 30px 0;
         z-index:11;
       }
       .image {
@@ -291,6 +291,7 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
         right:0;
       }
     }
+
   }
 
   #centerStatistics {
@@ -429,4 +430,55 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
       }
     }
   } 
+
+  #topLeftNav {
+    width: calc($topLeftMask-width - $padding);
+    height: calc($topLeftMask-height - $padding);
+    position:absolute;
+    left:$padding;
+    top:$padding;
+    z-index:30;
+    border-radius:100px;
+    display:flex;
+    button {
+      flex: 1;
+      border-radius:100px;
+      border:0;
+      padding:0;
+      &:nth-child(2) {
+        margin-left:1vw;
+        margin-right:1vw;
+      }
+    }
+  }
+  #topRightOptions {
+    width: calc($topRightMask-width - $padding);
+    height: calc($topRightMask-height - $padding);
+    background:rgb(42, 28, 75);
+    position:absolute;
+    right:$padding;
+    top:$padding;
+    z-index:30;
+    border-radius:10px;
+  }
+  #bottomLeftTitle {
+    width: calc($bottomLeftMask-width - $padding);
+    height: calc($bottomLeftMask-height - $padding);
+    background:rgb(42, 28, 75);
+    position:absolute;
+    left:$padding;
+    bottom:$padding;
+    z-index:30;
+    border-radius:30px;
+  }
+  #bottomRightSocial {
+    width: calc($bottomRightMask-width - $padding);
+    height: calc($bottomRightMask-height - $padding);
+    background:rgb(42, 28, 75);
+    position:absolute;
+    right:$padding;
+    bottom:$padding;
+    z-index:30;
+    border-radius:10px;
+  }
 }

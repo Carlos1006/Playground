@@ -5,7 +5,11 @@ import css from "./styles/main.module.scss";
 const AnimeLanding: FC = () => {
   return (
     <main id={css.main}>
-      <div id={css.topLeftNav}></div>
+      <div id={css.topLeftNav}>
+        <button>AI-Verse</button>
+        <button>Home</button>
+        <button>Sign up</button>
+      </div>
       <div id={css.topRightOptions}></div>
       <div id={css.bottomLeftTitle}></div>
       <div id={css.bottomRightSocial}></div>
