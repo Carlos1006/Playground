@@ -70,6 +70,13 @@ $centerStatistics-columnRight-height: calc(100% - $centerStatistics-mask-height)
 $centerStatistics-stroke: 1px;
 $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.514);
 
+// -- Top Right Options 
+$topRightOptions-width: calc($topRightMask-width - $padding);
+$topRightOptions-height: calc($topRightMask-height - $padding);
+
+$topRightOptions-rowTop: calc($topRightOptions-height / 2);
+
+
 #main {
   width: 100vw;
   height: 100vh;
@@ -301,6 +308,26 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
     top: $centerStatistics-top;
     z-index:20;
     position:absolute;
+    .blackLink {
+      position:absolute;
+      right:0;
+      top:0;
+      background:black;
+      border-radius:100px;
+      width:calc($centerStatistics-corner - $padding * 0.75);
+      height:calc($centerStatistics-corner - $padding * 0.75);
+      z-index: 30;
+      border:0;
+      padding: 0;
+      display:grid;
+      place-items:center;
+      cursor: pointer;
+      svg {
+        width:40%;
+        height:40%;
+        stroke:white;
+      }
+    }
     .blurLayer {
       width: 100%;
       height: 100%;
@@ -440,31 +467,110 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
     z-index:30;
     border-radius:100px;
     display:flex;
-    button {
-      flex: 1;
-      border-radius:100px;
-      border:0;
-      padding:0;
-      &:nth-child(2) {
-        margin-left:1vw;
-        margin-right:1vw;
+  }
+  .button {
+    flex: 1;
+    border-radius:100px;
+    border:0;
+    padding:0;
+    font-family:'Anta';
+    font-size:1.1em;
+    cursor: pointer;
+    transition:all 0.3s ease-in-out;
+    &:nth-child(2) {
+      margin-left:1vw;
+      margin-right:1vw;
+    }
+    &.light {
+      color:#191824;
+      background-color:rgb(240,245,255);
+      &:hover {
+        background-color:#68d2f5;
+      }
+    }
+    &.dark {
+      background-color:#191824;
+      color:rgb(240,245,255);
+      &:hover {
+        background-color:#392e67;
       }
     }
   }
+  
   #topRightOptions {
-    width: calc($topRightMask-width - $padding);
-    height: calc($topRightMask-height - $padding);
-    background:rgb(42, 28, 75);
+    width: $topRightOptions-width;
+    height: $topRightOptions-height;
+    // background-color:#191824;
     position:absolute;
     right:$padding;
     top:$padding;
     z-index:30;
     border-radius:10px;
+    .pinkLink {
+      position:absolute;
+      left:0;
+      bottom:0;
+      background:#f3bbf2;
+      border-radius:100px;
+      width:calc($topRightOptions-rowTop - $padding / 2);
+      height:calc($topRightOptions-rowTop - $padding / 2);
+      z-index: 30;
+      border:0;
+      padding: 0;
+      display:grid;
+      place-items:center;
+      cursor: pointer;
+      svg {
+        width:40%;
+        height:40%;
+        stroke:white;
+      }
+    }
+    .rowTop {
+      position:absolute;
+      width: 100%;
+      top:0;
+      left:0;
+      background-color:#191824;
+      height: $topRightOptions-rowTop;
+      border-radius:50px 50px 0 50px;
+    }
+    .rowBottom {
+      width: calc(100% - $topRightOptions-rowTop);
+      height: $topRightOptions-rowTop;
+      background-color:#191824;
+      right:0;
+      bottom:0;
+      position:absolute;
+      border-radius:0 0 50px 40px;
+    }
+    .cornerMask {
+      width: $topRightOptions-rowTop;
+      height: $topRightOptions-rowTop;
+      position:absolute;
+      left:0;
+      bottom:0;
+      background-color:#191824;
+      border-radius:0;
+      &::after {
+        content: "";
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:rgb(15,15,20);
+        border-radius:0 40px 0 0;
+        z-index:11;
+      }
+    }
   }
+
   #bottomLeftTitle {
     width: calc($bottomLeftMask-width - $padding);
     height: calc($bottomLeftMask-height - $padding);
     background:rgb(42, 28, 75);
+    background-color:#191824;
     position:absolute;
     left:$padding;
     bottom:$padding;
@@ -475,6 +581,7 @@ $centerStatistics-border: $centerStatistics-stroke solid rgba(255, 255, 255, 0.5
     width: calc($bottomRightMask-width - $padding);
     height: calc($bottomRightMask-height - $padding);
     background:rgb(42, 28, 75);
+    background-color:#191824;
     position:absolute;
     right:$padding;
     bottom:$padding;

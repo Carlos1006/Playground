@@ -1,19 +1,32 @@
 import { FC } from "react";
 import Background from "./components/background";
 import css from "./styles/main.module.scss";
+import { IoTrendingUpOutline } from "react-icons/io5";
 
 const AnimeLanding: FC = () => {
   return (
     <main id={css.main}>
       <div id={css.topLeftNav}>
-        <button>AI-Verse</button>
-        <button>Home</button>
-        <button>Sign up</button>
+        <button className={`${css.button} ${css.light}`}>AI-Verse</button>
+        <button className={`${css.button} ${css.dark}`}>Home</button>
+        <button className={`${css.button} ${css.dark}`}>Sign up</button>
       </div>
-      <div id={css.topRightOptions}></div>
+
+      <div id={css.topRightOptions}>
+        <button className={css.pinkLink}></button>
+        <div className={css.rowTop}></div>
+        <div className={css.rowBottom}></div>
+        <div className={css.cornerMask}></div>
+      </div>
+
       <div id={css.bottomLeftTitle}></div>
+
       <div id={css.bottomRightSocial}></div>
+
       <div id={css.centerStatistics}>
+        <button className={css.blackLink}>
+          <IoTrendingUpOutline />
+        </button>
         <div className={css.borderLayer}>
           <div className={css.columnLeftBorder1}></div>
           <div className={css.cornerBorder1}></div>
