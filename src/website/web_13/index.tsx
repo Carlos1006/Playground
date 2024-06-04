@@ -2,6 +2,7 @@ import { FC } from "react";
 import Background from "./components/background";
 import css from "./styles/main.module.scss";
 import { IoTrendingUpOutline } from "react-icons/io5";
+import { HiArrowUpLeft } from "react-icons/hi2";
 
 const AnimeLanding: FC = () => {
   return (
@@ -13,7 +14,9 @@ const AnimeLanding: FC = () => {
       </div>
 
       <div id={css.topRightOptions}>
-        <button className={css.pinkLink}></button>
+        <button className={css.pinkLink}>
+          <HiArrowUpLeft />
+        </button>
         <div className={css.rowTop}></div>
         <div className={css.rowBottom}></div>
         <div className={css.cornerMask}></div>
@@ -21,7 +24,14 @@ const AnimeLanding: FC = () => {
 
       <div id={css.bottomLeftTitle}></div>
 
-      <div id={css.bottomRightSocial}></div>
+      <div id={css.bottomRightSocial}>
+        <button className={css.outlineButton}>
+          <HiArrowUpLeft />
+        </button>
+        <div className={css.columnLeft}></div>
+        <div className={css.columnRight}></div>
+        <div className={css.cornerMask}></div>
+      </div>
 
       <div id={css.centerStatistics}>
         <button className={css.blackLink}>

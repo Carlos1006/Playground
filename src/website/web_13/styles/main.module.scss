@@ -1,6 +1,7 @@
 $padding: 2vmax;
 $maxHeight: 100vh;
 $maxWidth: 100vw;
+$font: 'Titillium Web';
 
 $image-width: calc(100vw - 2*$padding);
 $image-height: calc(100vh - 2*$padding);
@@ -75,6 +76,12 @@ $topRightOptions-width: calc($topRightMask-width - $padding);
 $topRightOptions-height: calc($topRightMask-height - $padding);
 
 $topRightOptions-rowTop: calc($topRightOptions-height / 2);
+
+// -- Bottom right social
+$bottomRightSocial-width: calc($bottomRightMask-width - $padding);
+
+$bottomRightSocial-columnLeft: calc($bottomRightSocial-width * 0.4);
+$bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
 
 
 #main {
@@ -490,6 +497,7 @@ $topRightOptions-rowTop: calc($topRightOptions-height / 2);
     }
     &.dark {
       background-color:#191824;
+      font-family:'Montserrat';
       color:rgb(240,245,255);
       &:hover {
         background-color:#392e67;
@@ -523,7 +531,7 @@ $topRightOptions-rowTop: calc($topRightOptions-height / 2);
       svg {
         width:40%;
         height:40%;
-        stroke:white;
+        fill:rgb(15,15,20);
       }
     }
     .rowTop {
@@ -577,15 +585,72 @@ $topRightOptions-rowTop: calc($topRightOptions-height / 2);
     z-index:30;
     border-radius:30px;
   }
+  
   #bottomRightSocial {
-    width: calc($bottomRightMask-width - $padding);
-    height: calc($bottomRightMask-height - $padding);
-    background:rgb(42, 28, 75);
-    background-color:#191824;
+    width: $bottomRightSocial-width;
+    height: $bottomRightSocial-width;
+    // background:rgb(42, 28, 75);
     position:absolute;
     right:$padding;
     bottom:$padding;
     z-index:30;
     border-radius:10px;
+    .columnLeft {
+      width: $bottomRightSocial-columnLeft;
+      height: calc(100% - $bottomRightSocial-columnRight * 0.4);
+      position:absolute;
+      left:0;
+      bottom:0;
+      background-color:#191824;
+      border-radius:30px 0 0 30px;
+    }
+    .columnRight {
+      width: $bottomRightSocial-columnRight;
+      height: 100%;
+      position:absolute;
+      right:0;
+      top:0;
+      background-color:#191824;
+      border-radius:30px 30px 30px 0;
+    }
+    .cornerMask {
+      height: calc($bottomRightSocial-columnRight * 0.4);
+      width: $bottomRightSocial-columnLeft;
+      position:absolute;
+      left:0;
+      top:0;
+      background-color:#191824;
+      &::after {
+        content: "";
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:rgb(15,15,20);
+        border-radius:0 0 25px 0;
+        z-index:11;
+      }
+    }
+    .outlineButton {
+      position:absolute;
+      left:0;
+      top:0;
+      background-color:rgb(15,15,20);
+      border:2px solid #191824;
+      border-radius:100px;
+      width:calc(($bottomRightSocial-columnLeft) - ($padding / 2));
+      height:calc(($bottomRightSocial-columnRight * 0.4) - ($padding / 2));
+      z-index: 30;
+      padding: 0;
+      display:grid;
+      place-items:center;
+      cursor: pointer;
+      svg {
+        width:50%;
+        height:50%;
+        fill:rgb(240,245,255);
+      }
+    }
   }
 }
