@@ -17,23 +17,55 @@ const AnimeLanding: FC = () => {
         <button className={css.pinkLink}>
           <HiArrowUpLeft />
         </button>
-        <div className={css.rowTop}></div>
-        <div className={css.rowBottom}></div>
+        <div className={css.rowTop}>
+          <button>Free Trial</button>
+          <button>Unlimited images</button>
+        </div>
+        <div className={css.rowBottom}>
+          <span>Join us Today!</span>
+        </div>
         <div className={css.cornerMask}></div>
       </div>
 
-      <div id={css.bottomLeftTitle}></div>
+      <div id={css.bottomLeftTitle}>
+        <span>Discover the</span>
+        <span>future of AI</span>
+      </div>
 
       <div id={css.bottomRightSocial}>
         <button className={css.outlineButton}>
           <HiArrowUpLeft />
         </button>
-        <div className={css.columnLeft}></div>
-        <div className={css.columnRight}></div>
+        <div className={css.columnLeft}>
+          <span>Artist all over the world</span>
+          <span>20k+</span>
+          <span>Artists</span>
+        </div>
+        <div className={css.columnRight}>
+          <div className={css.aiImage}></div>
+          <div className={css.aiImages}>
+            <div className={css.aiMiniImage1}></div>
+            <div className={css.aiMiniImage2}></div>
+            <div className={css.aiMiniImage3}></div>
+          </div>
+        </div>
         <div className={css.cornerMask}></div>
       </div>
 
       <div id={css.centerStatistics}>
+        <div className={css.centerStatisticsBody}>
+          <span>Creative insight</span>
+          <span>30K</span>
+          <span>active users</span>
+          <div className={css.barGraph}>
+            {/* BAR + Title 15 */}
+            {/* BAR + Title 16 */}
+            {/* BAR + Title 17 */}
+            {/* BAR + Title 18 */}
+            {/* BAR + Title 19 */}
+            {/* BAR + Title 20 */}
+          </div>
+        </div>
         <button className={css.blackLink}>
           <IoTrendingUpOutline />
         </button>

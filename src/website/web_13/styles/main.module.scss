@@ -463,6 +463,13 @@ $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
         border-right:0;
       }
     }
+
+    .centerStatisticsBody {
+      position:absolute;
+      width:100%;
+      height:100%;
+      z-index:29;
+    }
   } 
 
   #topLeftNav {
