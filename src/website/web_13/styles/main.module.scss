@@ -2,6 +2,7 @@ $padding: 2vmax;
 $maxHeight: 100vh;
 $maxWidth: 100vw;
 $font: 'Titillium Web';
+$minPadding: 1vmax;
 
 $image-width: calc(100vw - 2*$padding);
 $image-height: calc(100vh - 2*$padding);
@@ -549,6 +550,24 @@ $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
       background-color:#191824;
       height: $topRightOptions-rowTop;
       border-radius:50px 50px 0 50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      button {
+        width:calc(50% - $minPadding);
+        height:calc(100% - $minPadding * 2.3 );
+        border-radius:100px;
+        padding:0;
+        border:0;
+        font-family:'Montserrat';
+        font-size:0.85em;
+        line-height:13px;
+        color: #191824;
+        background-color: rgb(240, 245, 255);
+        &:nth-child(1) {
+          margin-right:calc($minPadding / 2);
+        }
+      }
     }
     .rowBottom {
       width: calc(100% - $topRightOptions-rowTop);
@@ -558,6 +577,14 @@ $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
       bottom:0;
       position:absolute;
       border-radius:0 0 50px 40px;
+      display: grid;
+      place-items:center;
+      span {
+        margin-top:-1vh;
+        font-family:'Noto Sans';
+        color: rgb(240, 245, 255);
+        font-size:1.4em;
+      }
     }
     .cornerMask {
       width: $topRightOptions-rowTop;
@@ -591,6 +618,17 @@ $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
     bottom:$padding;
     z-index:30;
     border-radius:30px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    flex-direction:column;
+    span {
+      font-size:3.3em;
+      margin-left:$padding;
+      color:rgb(240,245,255);
+      font-family:'Montserrat';
+      letter-spacing:5px;
+    }
   }
   
   #bottomRightSocial {
