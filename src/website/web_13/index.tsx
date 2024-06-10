@@ -4,6 +4,13 @@ import css from "./styles/main.module.scss";
 import { IoTrendingUpOutline } from "react-icons/io5";
 import { HiArrowUpLeft } from "react-icons/hi2";
 
+import pinkAnime from "./assets/pink_anime.png";
+import blackAnime from "./assets/black_anime.png";
+import octopus from "./assets/octopus.png";
+import cthulhu from "./assets/cthulhu.png";
+
+const DAY = 15;
+
 const AnimeLanding: FC = () => {
   return (
     <main id={css.main}>
@@ -42,11 +49,19 @@ const AnimeLanding: FC = () => {
           <span>Artists</span>
         </div>
         <div className={css.columnRight}>
-          <div className={css.aiImage}></div>
+          <div className={css.aiImage}>
+            <img src={pinkAnime} alt="pink anime" />
+          </div>
           <div className={css.aiImages}>
-            <div className={css.aiMiniImage1}></div>
-            <div className={css.aiMiniImage2}></div>
-            <div className={css.aiMiniImage3}></div>
+            <div className={`${css.aiMiniImage1} ${css.aiMiniImage}`}>
+              <img src={octopus} alt="octopus" />
+            </div>
+            <div className={`${css.aiMiniImage2} ${css.aiMiniImage}`}>
+              <img src={cthulhu} alt="cthulhu" />
+            </div>
+            <div className={`${css.aiMiniImage3} ${css.aiMiniImage}`}>
+              <img src={blackAnime} alt="black anime" />
+            </div>
           </div>
         </div>
         <div className={css.cornerMask}></div>
@@ -55,15 +70,21 @@ const AnimeLanding: FC = () => {
       <div id={css.centerStatistics}>
         <div className={css.centerStatisticsBody}>
           <span>Creative insight</span>
-          <span>30K</span>
-          <span>active users</span>
+          <div>
+            <span>30K</span>
+          </div>
+          <div>
+            <span>active users</span>
+          </div>
           <div className={css.barGraph}>
-            {/* BAR + Title 15 */}
-            {/* BAR + Title 16 */}
-            {/* BAR + Title 17 */}
-            {/* BAR + Title 18 */}
-            {/* BAR + Title 19 */}
-            {/* BAR + Title 20 */}
+            {Array.from({ length: 6 }, (_, i) => (
+              <div key={i} className={css.barContainer}>
+                <div></div>
+                <div>
+                  <span>{DAY + i}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <button className={css.blackLink}>
