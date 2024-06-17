@@ -1,0 +1,173 @@
+$paddingLeft: 10vw;
+$paddingTop: 5vw;
+$halfPaddingLeft: calc($paddingLeft / 2);
+$halfPaddingTop: calc($paddingTop / 2);
+
+$wideCenterW: 70vw;
+$wideCenterH: 60vh;
+$wideCenterL: $paddingLeft;
+$wideCenterT: $paddingTop;
+
+$bottomHalfW: 50vw;
+$bottomHalfH: calc(100vh - $wideCenterH - $paddingTop * 2);
+$bottomHalfL: calc($wideCenterW - $bottomHalfW + $paddingLeft);
+$bottomHalfB: $paddingTop;
+
+$rightHalfW: calc(100vw - $wideCenterW - $paddingLeft * 2);
+$rightHalfH: calc($wideCenterH - $paddingTop);
+$rightHalfR: $paddingLeft;
+$rightHalfB: calc($bottomHalfH + $paddingTop);
+
+$leftBottomW: calc($wideCenterW - $bottomHalfW);
+$leftBottomH: $bottomHalfH;
+$leftBottomL: $paddingLeft;
+$leftBottomB: $paddingTop;
+
+$rightBottomW: calc($rightHalfW + $halfPaddingLeft);
+$rightBottomH: calc($bottomHalfH + $halfPaddingTop);
+$rightBottomR: $halfPaddingLeft;
+$rightBottomB: $halfPaddingTop;
+
+$rightTopW: calc($rightHalfW + $halfPaddingLeft);
+$rightTopH: calc($wideCenterH - $rightHalfH + $halfPaddingTop);
+$rightTopR: $halfPaddingLeft;
+$rightTopT: $halfPaddingTop;
+
+$imageWidth: calc(100vw - $paddingLeft * 2);
+$imageHeight: calc(100vh - $paddingTop * 2);
+
+$bhImageL: calc(-1 * $leftBottomW);
+$bhImageT: calc(-1 * $wideCenterH);
+
+$rhImageL: calc(-1 * $wideCenterW);
+$rhImageT: calc(-1 * $paddingTop);
+
+#main {
+  width: 100vw;
+  height:100vh;
+  background-color:rgb(12,14,16);
+  position:relative;
+
+  #hero {
+    width: 100vw;
+    height: 100vh;
+    background-color:black;
+    position:relative;
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter:contrast(1.2) brightness(0.8) saturate(1.2);
+    }
+    .wideCenter {
+      width: $wideCenterW;
+      height: $wideCenterH;
+      left: $wideCenterL;
+      top: $wideCenterT;
+      background-color:rgb(33, 33, 33);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        left:0;
+        top:0;
+        background:purple;
+        z-index:100;
+      }
+    }
+    .bottomHalf {
+      width: $bottomHalfW;
+      height: $bottomHalfH;
+      left: $bottomHalfL;
+      bottom: $bottomHalfB;
+      background-color:rgb(27, 27, 27);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        left:$bhImageL;
+        top:$bhImageT;
+        background:purple;
+        z-index:100;
+      }
+    }
+    .rightHalf {
+      width: $rightHalfW;
+      height: $rightHalfH;
+      right: $rightHalfR;
+      bottom: $rightHalfB;
+      background-color:rgb(62, 62, 62);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        left:$rhImageL;
+        top:$rhImageT;
+        background:purple;
+        z-index:100;
+      }
+    }
+
+    .leftBottom {
+      width: $leftBottomW;
+      height: $leftBottomH;
+      left: $leftBottomL;
+      bottom: $leftBottomB;
+      background-color:rgb(43, 43, 43);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        left:0;
+        bottom:0;
+        background:purple;
+        z-index:100;
+      }
+    }
+    .rightBottom {
+      width: $rightBottomW;
+      height: $rightBottomH;
+      right: $rightBottomR;
+      bottom: $rightBottomB;
+      background-color:rgb(38, 38, 38);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        right:$halfPaddingLeft;
+        bottom:$halfPaddingTop;
+        background:purple;
+        z-index:100;
+      }
+    }
+    .rightTop {
+      width: $rightTopW;
+      height: $rightTopH;
+      right: $rightTopR;
+      top: $rightTopT;
+      background-color:rgb(72, 72, 72);
+      position:absolute;
+      overflow: hidden;
+      .image {
+        position:absolute;
+        width: $imageWidth;
+        height: $imageHeight;
+        right:$halfPaddingLeft;
+        top:$halfPaddingTop;
+        background:purple;
+        z-index:100;
+      }
+    }
+  }
+
+}
