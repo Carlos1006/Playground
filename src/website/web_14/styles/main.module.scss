@@ -202,16 +202,16 @@ $rhImageT: calc(-1 * $paddingTop);
   #header {
     width: calc(100vw - $paddingLeft * 2);
     height: $paddingTop;
-    background-color:red;
+    background-color:#ABCA;
     position:absolute;
     top:0;
     left:$paddingLeft;
     z-index:10000;
   }
   #footer {
-    width: calc(100vw - $paddingLeft * 2);
+    width: $wideCenterW;
     height: $paddingTop;
-    background-color:red;
+    background-color:#ABCA;
     position:absolute;
     bottom:0;
     left:$paddingLeft;
@@ -219,11 +219,50 @@ $rhImageT: calc(-1 * $paddingTop);
   }
   #sidebar {
     width: $paddingLeft;
-    height: calc(100vh - $paddingTop * 2);
-    background-color:red;
+    height: $wideCenterH;
+    background-color:#ABCA;
     position:absolute;
     top:$paddingTop;
     left:0;
     z-index:10000;
+  }
+  #sidebarRight {
+    width: $paddingLeft;
+    height: $wideCenterH;
+    background-color:#ABCA;
+    position:absolute;
+    top:$paddingTop;
+    right:0;
+    z-index:10000;
+  }
+  #miniVideo {
+    width: calc($rightBottomW);
+    height: calc($rightBottomH);
+    position:absolute;
+    bottom:calc($rightBottomB - 1vw);
+    right:calc($rightBottomR - 1vw);
+    z-index:10000;
+    background:#ABF;
+    border-radius:40px;
+  }
+  #rotativeLink {
+    height: calc($rightTopH);
+    aspect-ratio: 1/1;
+    position:absolute;
+    top:calc($rightTopT - 1vw);
+    right: calc(($rightTopR - 1vw) + ($rightTopW - $rightTopH));
+    z-index:10000;
+    background:#ABF;
+    border-radius:100px;
+  }
+  #cornerText {
+    width: calc($leftBottomW - 1vw);
+    height: calc($leftBottomH - 1vw);
+    position:absolute;
+    bottom:calc($leftBottomB);
+    left:calc($leftBottomL);
+    z-index:10000;
+    background:#ABF;
+    border-radius:0;
   }
 }

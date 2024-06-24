@@ -7,8 +7,11 @@ const AnimeLandingVideo: FC = () => {
     <main id={css.main}>
       <nav id={css.header}></nav>
       <aside id={css.sidebar}></aside>
-      <footer id={css.footer}></footer>
+      <aside id={css.sidebarRight}></aside>
       <div id={css.miniVideo}></div>
+      <footer id={css.footer}></footer>
+      <div id={css.rotativeLink}></div>
+      <div id={css.cornerText}></div>
 
       <div id={css.hero}>
         <div className={css.wideCenter}>
