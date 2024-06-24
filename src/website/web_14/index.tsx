@@ -1,10 +1,15 @@
 import css from "./styles/main.module.scss";
 import Background from "./components/background";
+import { FC } from "react";
 
-const AnimeLandingVideo = () => {
+const AnimeLandingVideo: FC = () => {
   return (
     <main id={css.main}>
-      {/* HERO CONTAINER */}
+      <nav id={css.header}></nav>
+      <aside id={css.sidebar}></aside>
+      <footer id={css.footer}></footer>
+      <div id={css.miniVideo}></div>
+
       <div id={css.hero}>
         <div className={css.wideCenter}>
           <Background key="wideCenter" />

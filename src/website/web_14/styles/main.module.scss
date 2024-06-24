@@ -51,7 +51,6 @@ $rhImageT: calc(-1 * $paddingTop);
   #hero {
     width: 100vw;
     height: 100vh;
-    background-color:black;
     position:relative;
     video {
       width: 100%;
@@ -67,13 +66,13 @@ $rhImageT: calc(-1 * $paddingTop);
       background-color:rgb(33, 33, 33);
       position:absolute;
       overflow: hidden;
+      border-radius:40px 40px 0 40px;
       .image {
         position:absolute;
         width: $imageWidth;
         height: $imageHeight;
         left:0;
         top:0;
-        background:purple;
         z-index:100;
       }
     }
@@ -85,13 +84,13 @@ $rhImageT: calc(-1 * $paddingTop);
       background-color:rgb(27, 27, 27);
       position:absolute;
       overflow: hidden;
+      border-radius:0 0 40px 40px;
       .image {
         position:absolute;
         width: $imageWidth;
         height: $imageHeight;
         left:$bhImageL;
         top:$bhImageT;
-        background:purple;
         z-index:100;
       }
     }
@@ -103,13 +102,13 @@ $rhImageT: calc(-1 * $paddingTop);
       background-color:rgb(62, 62, 62);
       position:absolute;
       overflow: hidden;
+      border-radius:0 40px 40px 0;
       .image {
         position:absolute;
         width: $imageWidth;
         height: $imageHeight;
         left:$rhImageL;
         top:$rhImageT;
-        background:purple;
         z-index:100;
       }
     }
@@ -128,8 +127,18 @@ $rhImageT: calc(-1 * $paddingTop);
         height: $imageHeight;
         left:0;
         bottom:0;
-        background:purple;
         z-index:100;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        z-index:100;
+        background:rgb(12,14,16);
+        border-radius:0 40px 0 0;
       }
     }
     .rightBottom {
@@ -146,8 +155,18 @@ $rhImageT: calc(-1 * $paddingTop);
         height: $imageHeight;
         right:$halfPaddingLeft;
         bottom:$halfPaddingTop;
-        background:purple;
         z-index:100;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        z-index:100;
+        background:rgb(12,14,16);
+        border-radius:40px 0 0 0;
       }
     }
     .rightTop {
@@ -164,10 +183,47 @@ $rhImageT: calc(-1 * $paddingTop);
         height: $imageHeight;
         right:$halfPaddingLeft;
         top:$halfPaddingTop;
-        background:purple;
         z-index:100;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        z-index:100;
+        background:rgb(12,14,16);
+        border-radius:0 0 0 60px;
       }
     }
   }
 
+  #header {
+    width: calc(100vw - $paddingLeft * 2);
+    height: $paddingTop;
+    background-color:red;
+    position:absolute;
+    top:0;
+    left:$paddingLeft;
+    z-index:10000;
+  }
+  #footer {
+    width: calc(100vw - $paddingLeft * 2);
+    height: $paddingTop;
+    background-color:red;
+    position:absolute;
+    bottom:0;
+    left:$paddingLeft;
+    z-index:10000;
+  }
+  #sidebar {
+    width: $paddingLeft;
+    height: calc(100vh - $paddingTop * 2);
+    background-color:red;
+    position:absolute;
+    top:$paddingTop;
+    left:0;
+    z-index:10000;
+  }
 }

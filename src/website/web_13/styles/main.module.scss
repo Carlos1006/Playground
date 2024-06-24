@@ -1,8 +1,8 @@
-$padding: 2vmax;
+$padding: 2vw;
 $maxHeight: 100vh;
 $maxWidth: 100vw;
 $font: 'Titillium Web';
-$minPadding: 1vmax;
+$minPadding: 1vw;
 
 $image-width: calc(100vw - 2*$padding);
 $image-height: calc(100vh - 2*$padding);
@@ -13,14 +13,14 @@ $containerCenter-left: $padding;
 $containerCenter-top: 7vmax;
 
 $containerTopHalf-width: 50vw;
-$containerTopHalf-height: 5vmax;
+$containerTopHalf-height: 5vw;
 $containerTopHalf-left: calc($padding + $containerCenter-width - $containerTopHalf-width);
 $containerTopHalf-top: $padding;
 
 $containerRightHalf-width: calc($maxWidth - $containerCenter-width - 2*$padding);
 $containerRightHalf-height: 45vh;
 $containerRightHalf-right: $padding;
-$containerRightHalf-top: 13vmax;
+$containerRightHalf-top: 13vw;
 
 $containerBottomHalf-width: 40vw;
 $containerBottomHalf-height: calc($maxHeight - $containerCenter-height - $containerCenter-top - $padding);
@@ -84,7 +84,9 @@ $bottomRightSocial-width: calc($bottomRightMask-width - $padding);
 $bottomRightSocial-columnLeft: calc($bottomRightSocial-width * 0.4);
 $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
 
-
+img {
+  object-fit: cover;
+}
 #main {
   width: 100vw;
   height: 100vh;
@@ -739,7 +741,7 @@ $bottomRightSocial-columnRight: calc($bottomRightSocial-width * 0.6);
   
   #bottomRightSocial {
     width: $bottomRightSocial-width;
-    height: $bottomRightSocial-width;
+    height: calc($bottomRightMask-height - $padding);
     // background:rgb(42, 28, 75);
     position:absolute;
     right:$padding;
