@@ -42,10 +42,13 @@ $bhImageT: calc(-1 * $wideCenterH);
 $rhImageL: calc(-1 * $wideCenterW);
 $rhImageT: calc(-1 * $paddingTop);
 
+$background: rgb(12,14,16);
+$background: rgb(5,5,5);
+
 #main {
   width: 100vw;
   height:100vh;
-  background-color:rgb(12,14,16);
+  background-color:$background;
   position:relative;
 
   #hero {
@@ -63,7 +66,7 @@ $rhImageT: calc(-1 * $paddingTop);
       height: $wideCenterH;
       left: $wideCenterL;
       top: $wideCenterT;
-      background-color:rgb(33, 33, 33);
+      // background-color:rgb(33, 33, 33);
       position:absolute;
       overflow: hidden;
       border-radius:40px 40px 0 40px;
@@ -75,13 +78,39 @@ $rhImageT: calc(-1 * $paddingTop);
         top:0;
         z-index:100;
       }
+      #wideCenterContent {
+        width: calc($leftBottomW - 1.5vw);
+        height: calc($wideCenterH - 3vw);
+        left: 1.5vw;
+        top: 1.5vw;
+        position:absolute;
+        z-index:100;
+        border-radius:30px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        .blurContent {
+          width: 100%;
+          border-radius:30px;
+          height:10vw;
+          // background-color:rgb(12,14,16,0.8);
+          background-color:rgba(255,255,255,0.02);
+          backdrop-filter: blur(20px);
+          &:nth-child(1) {
+            height:calc(60% - 0.75vw);
+          };
+          &:nth-child(2) {
+            height:calc(40% - 0.75vw);
+          };
+        }
+      }
     }
     .bottomHalf {
       width: $bottomHalfW;
       height: $bottomHalfH;
       left: $bottomHalfL;
       bottom: $bottomHalfB;
-      background-color:rgb(27, 27, 27);
+      // background-color:rgb(27, 27, 27);
       position:absolute;
       overflow: hidden;
       border-radius:0 0 40px 40px;
@@ -99,7 +128,7 @@ $rhImageT: calc(-1 * $paddingTop);
       height: $rightHalfH;
       right: $rightHalfR;
       bottom: $rightHalfB;
-      background-color:rgb(62, 62, 62);
+      // background-color:rgb(62, 62, 62);
       position:absolute;
       overflow: hidden;
       border-radius:0 40px 40px 0;
@@ -118,7 +147,7 @@ $rhImageT: calc(-1 * $paddingTop);
       height: $leftBottomH;
       left: $leftBottomL;
       bottom: $leftBottomB;
-      background-color:rgb(43, 43, 43);
+      // background-color:rgb(43, 43, 43);
       position:absolute;
       overflow: hidden;
       .image {
@@ -137,7 +166,7 @@ $rhImageT: calc(-1 * $paddingTop);
         bottom: 0;
         left: 0;
         z-index:100;
-        background:rgb(12,14,16);
+        background:$background;
         border-radius:0 40px 0 0;
       }
     }
@@ -146,7 +175,7 @@ $rhImageT: calc(-1 * $paddingTop);
       height: $rightBottomH;
       right: $rightBottomR;
       bottom: $rightBottomB;
-      background-color:rgb(38, 38, 38);
+      // background-color:rgb(38, 38, 38);
       position:absolute;
       overflow: hidden;
       .image {
@@ -165,7 +194,7 @@ $rhImageT: calc(-1 * $paddingTop);
         bottom: 0;
         left: 0;
         z-index:100;
-        background:rgb(12,14,16);
+        background:$background;
         border-radius:40px 0 0 0;
       }
     }
@@ -174,7 +203,7 @@ $rhImageT: calc(-1 * $paddingTop);
       height: $rightTopH;
       right: $rightTopR;
       top: $rightTopT;
-      background-color:rgb(72, 72, 72);
+      // background-color:rgb(72, 72, 72);
       position:absolute;
       overflow: hidden;
       .image {
@@ -193,7 +222,7 @@ $rhImageT: calc(-1 * $paddingTop);
         bottom: 0;
         left: 0;
         z-index:100;
-        background:rgb(12,14,16);
+        background:$background;
         border-radius:0 0 0 60px;
       }
     }
@@ -202,7 +231,7 @@ $rhImageT: calc(-1 * $paddingTop);
   #header {
     width: calc(100vw - $paddingLeft * 2);
     height: $paddingTop;
-    background-color:#ABCA;
+    // background-color:#ABCA;
     position:absolute;
     top:0;
     left:$paddingLeft;
@@ -211,7 +240,7 @@ $rhImageT: calc(-1 * $paddingTop);
   #footer {
     width: $wideCenterW;
     height: $paddingTop;
-    background-color:#ABCA;
+    // background-color:#ABCA;
     position:absolute;
     bottom:0;
     left:$paddingLeft;
@@ -220,7 +249,7 @@ $rhImageT: calc(-1 * $paddingTop);
   #sidebar {
     width: $paddingLeft;
     height: $wideCenterH;
-    background-color:#ABCA;
+    // background-color:#ABCA;
     position:absolute;
     top:$paddingTop;
     left:0;
@@ -229,7 +258,7 @@ $rhImageT: calc(-1 * $paddingTop);
   #sidebarRight {
     width: $paddingLeft;
     height: $wideCenterH;
-    background-color:#ABCA;
+    // background-color:#ABCA;
     position:absolute;
     top:$paddingTop;
     right:0;

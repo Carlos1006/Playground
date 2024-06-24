@@ -12,10 +12,13 @@ const AnimeLandingVideo: FC = () => {
       <footer id={css.footer}></footer>
       <div id={css.rotativeLink}></div>
       <div id={css.cornerText}></div>
-
       <div id={css.hero}>
         <div className={css.wideCenter}>
           <Background key="wideCenter" />
+          <div id={css.wideCenterContent}>
+            <div className={css.blurContent}></div>
+            <div className={css.blurContent}></div>
+          </div>
         </div>
         <div className={css.bottomHalf}>
           <Background key="bottomHalf" />
