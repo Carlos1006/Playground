@@ -122,6 +122,10 @@ export const WEBSITES = [
     name: "Anime Landing",
   },
   {
+    path: "/web_13_1",
+    name: "Anime Landing (New Model)",
+  },
+  {
     path: "/web_14",
     name: "Anime Landing Video",
   }
