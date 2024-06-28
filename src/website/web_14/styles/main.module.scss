@@ -265,14 +265,25 @@ $background: rgb(5,5,5);
     z-index:10000;
   }
   #miniVideo {
-    width: calc($rightBottomW);
-    height: calc($rightBottomH);
+    inline-size: calc($rightBottomW);
+    block-size: calc($rightBottomH);
     position:absolute;
     bottom:calc($rightBottomB - 1vw);
     right:calc($rightBottomR - 1vw);
     z-index:10000;
     background:#ABF;
+    container:miniVide / size;
     border-radius:40px;
+    #dot {
+      position:absolute;
+      inline-size:10cqi;
+      block-size:10cqb;
+      left: 10px;
+      top: 10px;
+      background:#fff;
+      border-radius:100px;
+      z-index:1000;
+    }
   }
   #rotativeLink {
     height: calc($rightTopH);

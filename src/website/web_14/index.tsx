@@ -8,7 +8,9 @@ const AnimeLandingVideo: FC = () => {
       <nav id={css.header}></nav>
       <aside id={css.sidebar}></aside>
       <aside id={css.sidebarRight}></aside>
-      <div id={css.miniVideo}></div>
+      <div id={css.miniVideo}>
+        <div id={css.dot}></div>
+      </div>
       <footer id={css.footer}></footer>
       <div id={css.rotativeLink}></div>
       <div id={css.cornerText}></div>
