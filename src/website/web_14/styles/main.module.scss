@@ -1,19 +1,19 @@
-$paddingLeft: 10vw;
-$paddingTop: 5vw;
+$paddingLeft: 10cqi;
+$paddingTop: 5cqi;
 $halfPaddingLeft: calc($paddingLeft / 2);
 $halfPaddingTop: calc($paddingTop / 2);
 
-$wideCenterW: 70vw;
-$wideCenterH: 60vh;
+$wideCenterW: 70cqi;
+$wideCenterH: 60cqb;
 $wideCenterL: $paddingLeft;
 $wideCenterT: $paddingTop;
 
-$bottomHalfW: 50vw;
-$bottomHalfH: calc(100vh - $wideCenterH - $paddingTop * 2);
+$bottomHalfW: 50cqi;
+$bottomHalfH: calc(100cqb - $wideCenterH - $paddingTop * 2);
 $bottomHalfL: calc($wideCenterW - $bottomHalfW + $paddingLeft);
 $bottomHalfB: $paddingTop;
 
-$rightHalfW: calc(100vw - $wideCenterW - $paddingLeft * 2);
+$rightHalfW: calc(100cqi - $wideCenterW - $paddingLeft * 2);
 $rightHalfH: calc($wideCenterH - $paddingTop);
 $rightHalfR: $paddingLeft;
 $rightHalfB: calc($bottomHalfH + $paddingTop);
@@ -50,10 +50,11 @@ $background: rgb(5,5,5);
   height:100vh;
   background-color:$background;
   position:relative;
+  container:main / size;
 
   #hero {
-    width: 100vw;
-    height: 100vh;
+    width: 100cqi;
+    height: 100cqb;
     position:relative;
     video {
       width: 100%;
@@ -70,6 +71,7 @@ $background: rgb(5,5,5);
       position:absolute;
       overflow: hidden;
       border-radius:40px 40px 0 40px;
+      container: wideCenter / block-size;
       .image {
         position:absolute;
         width: $imageWidth;
@@ -79,10 +81,10 @@ $background: rgb(5,5,5);
         z-index:100;
       }
       #wideCenterContent {
-        width: calc($leftBottomW - 1.5vw);
-        height: calc($wideCenterH - 3vw);
-        left: 1.5vw;
-        top: 1.5vw;
+        width: calc($leftBottomW - 1.5cqi);
+        height: calc($wideCenterH - 5cqb);
+        left: 2.5cqb;
+        top: 2.5cqb;
         position:absolute;
         z-index:100;
         border-radius:30px;
@@ -92,7 +94,6 @@ $background: rgb(5,5,5);
         .blurContent {
           width: 100%;
           border-radius:30px;
-          height:10vw;
           // background-color:rgb(12,14,16,0.8);
           background-color:rgba(255,255,255,0.02);
           backdrop-filter: blur(20px);
@@ -229,13 +230,25 @@ $background: rgb(5,5,5);
   }
 
   #header {
-    width: calc(100vw - $paddingLeft * 2);
+    width: calc(100cqi - $paddingLeft * 2);
     height: $paddingTop;
     // background-color:#ABCA;
     position:absolute;
     top:0;
     left:$paddingLeft;
     z-index:10000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    container:header / size;
+    span {
+      cursor:pointer;
+      font-family:"Inter";
+      color:white;
+      font-size:17cqb;
+      margin-inline-start:5cqi;
+      margin-inline-end:5cqi;
+    }
   }
   #footer {
     width: $wideCenterW;
@@ -268,12 +281,62 @@ $background: rgb(5,5,5);
     inline-size: calc($rightBottomW);
     block-size: calc($rightBottomH);
     position:absolute;
-    bottom:calc($rightBottomB - 1vw);
-    right:calc($rightBottomR - 1vw);
+    bottom:calc($rightBottomB - 1cqi);
+    right:calc($rightBottomR - 1cqi);
     z-index:10000;
-    background:#ABF;
+    // background:#ABF;
     container:miniVide / size;
     border-radius:40px;
+    overflow: hidden;
+    .shadow {
+      width: 100%;
+      height: 100%;
+      position:absolute;
+      background:rgba(0,0,0,0.45);
+      z-index:1000;
+      container:miniVideoShadow / size;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+      .playButton {
+        width: 28cqi;
+        height: 28cqi;
+        border-radius:100cqi;
+        position:absolute;
+        left: calc(50% - 14cqi);
+        top: calc(50% - 14cqi);
+        background-color:rgba(0,0,0,0.1);
+        border:1px solid rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        container:playButton / size;
+        svg {
+          width: 40cqi;
+          height: 40cqi;
+          position:absolute;
+          left: calc(50% - 20cqi);
+          top: calc(50% - 20cqi);
+          fill:rgba(255, 255, 255, 0.8);
+          transition: fill 0.3s ease-in-out;
+        }
+      }
+      &:hover:has(.playButton) {
+        background:rgba(0,0,0,0.3);
+        .playButton {
+          background-color:rgba(0,0,0,0);
+          border-color:white;
+          svg {
+            fill:white;
+          }
+        }
+      }
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position:relative;
+      object-position: 85% center;
+    }
     #dot {
       position:absolute;
       inline-size:10cqi;
@@ -289,20 +352,61 @@ $background: rgb(5,5,5);
     height: calc($rightTopH);
     aspect-ratio: 1/1;
     position:absolute;
-    top:calc($rightTopT - 1vw);
-    right: calc(($rightTopR - 1vw) + ($rightTopW - $rightTopH));
+    top:calc($rightTopT - 1cqi);
+    right: calc(($rightTopR - 1cqi) + ($rightTopW - $rightTopH));
     z-index:10000;
     background:#ABF;
     border-radius:100px;
   }
   #cornerText {
-    width: calc($leftBottomW - 1vw);
-    height: calc($leftBottomH - 1vw);
+    width: calc($leftBottomW - 1cqi);
+    height: calc($leftBottomH - 1cqi);
     position:absolute;
     bottom:calc($leftBottomB);
     left:calc($leftBottomL);
     z-index:10000;
-    background:#ABF;
+    // background:#ABF;
     border-radius:0;
+    .cornerTextContainer {
+      width: 100%;
+      height: 100%;
+      container: cornerText / size;
+      display:flex;
+      flex-direction:column;
+      position:absolute;
+      left:0;
+      top:0;
+      .lbArrow {
+        width:auto;
+        display:inline-block;
+        position:absolute;
+        bottom:0;
+        right:15cqi;
+        cursor:pointer;
+        svg{
+          width: 30cqi;
+          height: 25cqi;
+          fill:white;
+        }
+      }
+      span {
+        margin-left:3cqi;
+        color:white;
+        font-size:8cqi;
+        // font-family: "Anta";
+        font-family:"Inter";
+        &:first-child {
+          margin-top:3cqi;
+        }
+        &:not(:last-child) {
+          font-weight:300;
+        }
+        &:nth-last-child(1 of span) {
+          margin-top:5cqb;
+          font-weight:bold;
+          cursor:pointer;
+        }
+      }
+    }
   }
 }

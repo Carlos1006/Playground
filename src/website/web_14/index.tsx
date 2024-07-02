@@ -1,19 +1,49 @@
 import css from "./styles/main.module.scss";
 import Background from "./components/background";
 import { FC } from "react";
+import { LiaLongArrowAltRightSolid as ArrowIcon } from "react-icons/lia";
+import { TfiArrowRight } from "react-icons/tfi";
+import { TfiArrowTopRight } from "react-icons/tfi";
+import { LiaLongArrowAltUpSolid } from "react-icons/lia";
+import { LiaLongArrowAltDownSolid } from "react-icons/lia";
+import { RiInstagramLine } from "react-icons/ri";
+import { RiTwitterXLine } from "react-icons/ri";
+import { ImYoutube } from "react-icons/im";
+import animeGirlImg from "./assets/animeGirl.png";
+import { PiPlayThin as PlayIcon } from "react-icons/pi";
 
 const AnimeLandingVideo: FC = () => {
   return (
     <main id={css.main}>
-      <nav id={css.header}></nav>
+      <nav id={css.header}>
+        <span>Home</span>
+        <span>Story</span>
+        <span>Characters</span>
+        <span>Media</span>
+      </nav>
       <aside id={css.sidebar}></aside>
       <aside id={css.sidebarRight}></aside>
       <div id={css.miniVideo}>
-        <div id={css.dot}></div>
+        <div className={css.shadow}>
+          <div className={css.playButton}>
+            <PlayIcon />
+          </div>
+        </div>
+        <img src={animeGirlImg} alt=""></img>
+        {/* <div id={css.dot}></div> */}
       </div>
       <footer id={css.footer}></footer>
       <div id={css.rotativeLink}></div>
-      <div id={css.cornerText}></div>
+      <div id={css.cornerText}>
+        <div className={css.cornerTextContainer}>
+          <span>Ready to join the</span>
+          <span>adventure?</span>
+          <span>Sign up</span>
+          <div className={css.lbArrow}>
+            <ArrowIcon />
+          </div>
+        </div>
+      </div>
       <div id={css.hero}>
         <div className={css.wideCenter}>
           <Background key="wideCenter" />
