@@ -6,9 +6,9 @@ import { TfiArrowRight } from "react-icons/tfi";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { LiaLongArrowAltUpSolid } from "react-icons/lia";
 import { LiaLongArrowAltDownSolid } from "react-icons/lia";
-import { RiInstagramLine } from "react-icons/ri";
-import { RiTwitterXLine } from "react-icons/ri";
-import { ImYoutube } from "react-icons/im";
+import { RiInstagramLine as IgIcon } from "react-icons/ri";
+import { RiTwitterXLine as XIcon } from "react-icons/ri";
+import { ImYoutube as YoutubeIcon } from "react-icons/im";
 import animeGirlImg from "./assets/animeGirl.png";
 import { PiPlayThin as PlayIcon } from "react-icons/pi";
 
@@ -21,7 +21,17 @@ const AnimeLandingVideo: FC = () => {
         <span>Characters</span>
         <span>Media</span>
       </nav>
-      <aside id={css.sidebar}></aside>
+      <aside id={css.sidebar}>
+        <div className={css.sidebarSocial}>
+          <IgIcon />
+        </div>
+        <div className={css.sidebarSocial}>
+          <YoutubeIcon />
+        </div>
+        <div className={css.sidebarSocial}>
+          <XIcon />
+        </div>
+      </aside>
       <aside id={css.sidebarRight}></aside>
       <div id={css.miniVideo}>
         <div className={css.shadow}>

@@ -33,8 +33,8 @@ $rightTopH: calc($wideCenterH - $rightHalfH + $halfPaddingTop);
 $rightTopR: $halfPaddingLeft;
 $rightTopT: $halfPaddingTop;
 
-$imageWidth: calc(100vw - $paddingLeft * 2);
-$imageHeight: calc(100vh - $paddingTop * 2);
+$imageWidth: calc(100cqi - $paddingLeft * 2);
+$imageHeight: calc(100cqb - $paddingTop * 2);
 
 $bhImageL: calc(-1 * $leftBottomW);
 $bhImageT: calc(-1 * $wideCenterH);
@@ -48,6 +48,8 @@ $background: rgb(5,5,5);
 #main {
   width: 100vw;
   height:100vh;
+  min-width: 1200px;
+  min-height: 920px;
   background-color:$background;
   position:relative;
   container:main / size;
@@ -267,6 +269,28 @@ $background: rgb(5,5,5);
     top:$paddingTop;
     left:0;
     z-index:10000;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:end;
+    container: sidebar / size;
+    row-gap: 2cqb;
+    span {
+      color:white;
+    }
+    .sidebarSocial {
+      width: 25cqi;
+      height: 25cqi;
+      border-radius:10ex;
+      background:white;
+      display:grid;
+      place-items:center;
+      container:sidebarSocial / size;
+      svg {
+        width:50cqi;
+        height:50cqi;
+      }
+    }
   }
   #sidebarRight {
     width: $paddingLeft;
