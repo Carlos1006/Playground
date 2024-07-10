@@ -2,7 +2,6 @@ import css from "./styles/main.module.scss";
 import Background from "./components/background";
 import { FC } from "react";
 import { LiaLongArrowAltRightSolid as ArrowIcon } from "react-icons/lia";
-import { TfiArrowRight } from "react-icons/tfi";
 import { TfiArrowTopRight as ArrowTopRightIcon } from "react-icons/tfi";
 import { LiaLongArrowAltUpSolid as ArrowTopIcon } from "react-icons/lia";
 import { LiaLongArrowAltDownSolid as ArrowBottomIcon } from "react-icons/lia";
