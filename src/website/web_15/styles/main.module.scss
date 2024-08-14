@@ -1,0 +1,83 @@
+#main {
+  width: 100vw;
+  height: 100vh;
+  container: main / size;
+  background:rgb(5,5,6);
+  #wrapper {
+    width: 100cqi;
+    height: 100cqb;
+    display:grid;
+    grid-template-columns: 100px 120px 150px 220px 1fr 1fr 150px;
+    grid-template-rows: 70px 75px 1fr 1fr 1fr 220px 60px 20px;
+    grid-template-areas: "hd00 hd00 hd00 hd00 hd00 hd00 hd00"
+                         "el01 el01 el01 el01 el00 el00 el02"
+                         "el01 el01 el01 el01 el10 el11 el02"
+                         "el01 el01 el01 el01 el12 el11 el02"
+                         "el01 el01 el01 el01 el12 el11 el20"
+                         "el30 el40 el41 el42 el12 el13 el20"
+                         "fo00 fo00 fo00 fo00 fo00 fo00 fo00"
+                         "gp00 gp00 gp00 gp00 gp00 gp00 gp00";
+    row-gap:10px;
+    column-gap:10px;
+    .header {
+      grid-area: hd00;
+      background-color:#333;
+    }
+    .element00 {
+      grid-area: el00;
+      background-color:#ddd;
+    }
+    .element01 {
+      grid-area: el01;
+      background-color:#ddd;
+    }
+    .element02 {
+      grid-area: el02;
+      background-color:#ddd;
+    }
+    .element10 {
+      grid-area: el10;
+      background-color:pink;
+    }
+    .element11 {
+      grid-area: el11;
+      background-color:pink;
+    }
+    .element12 {
+      grid-area: el12;
+      background-color:pink;
+    }
+    .element13 {
+      grid-area: el13;
+      background-color:pink;
+    }
+    .element20 {
+      grid-area: el20;
+      background-color:rgb(192, 246, 255);
+    }
+    .element30 {
+      grid-area: el30;
+      background-color:rgb(56, 56, 58);
+    }
+    .element40 {
+      grid-area: el40;
+      background-color:rgb(99, 102, 116);
+    }
+    .element41 {
+      grid-area: el41;
+      background-color:rgb(99, 102, 116);
+    }
+    .element42 {
+      grid-area: el42;
+      background-color:rgb(99, 102, 116);
+    }
+    .footer {
+      grid-area: fo00;
+      background-color:rgb(69, 77, 37);
+    }
+    .gap {
+      grid-area: gp00;
+      background-color:rgb(5, 4, 8);
+    }
+  }
+}

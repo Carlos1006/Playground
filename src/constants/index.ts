@@ -128,5 +128,9 @@ export const WEBSITES = [
   {
     path: "/web_14",
     name: "Anime Landing Video",
+  },
+  {
+    path: "/web_15",
+    name: "Bento Grid",
   }
 ];
