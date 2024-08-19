@@ -1,10 +1,18 @@
 import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import css from "./styles/main.module.scss";
-import Image from "./components/image";
-import Image2 from "./components/image2";
-import Image3 from "./components/image3";
-import Image4 from "./components/image4";
+import BlueGradient from "./components/blueGradient";
+import PinkCthulhu from "./components/pinkCthulhu";
+import GrayCthulhu from "./components/grayCthulhu";
+import GreenCthulhu from "./components/greenCthulhu";
+import BlueCthulhu from "./components/blueCthulhu";
+import GrayGradient from "./components/grayGradient";
 import Background from "./components/background";
+import Text from "./components/text";
+import Arrow from "./components/arrow";
+import Disk from "./components/disk";
+import { GoArrowUpRight as TopRightArrowIcon } from "react-icons/go";
+import IconMenu from "./components/iconMenu";
+import ArrowRight from "./components/arrowRight";
 
 const BentoGrid: FC = () => {
   const [width, setWidth] = useState<number>(0);
@@ -66,26 +74,8 @@ const BentoGrid: FC = () => {
         </div>
         <div className={css.element01}>
           <div className={css.wrapper}>
-            <div className={css.arrow}>
-              <div className={css.arrow01}></div>
-              <div className={css.octopus}>
-                <span>🐙</span>
-              </div>
-              <div className={css.arrow02}></div>
-            </div>
-            <div className={css.text}>
-              <span>
-                The Great
-                <br />
-                Old One
-                <br />
-                Is
-                <br />
-                Coming...
-                <br />
-                &nbsp;
-              </span>
-            </div>
+            <Arrow />
+            <Text />
             <Background />
           </div>
         </div>
@@ -93,55 +83,60 @@ const BentoGrid: FC = () => {
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement02}>
               <div className={css.overflowWrapper}>
-                <Image4 />
+                <BlueCthulhu />
               </div>
-              <div
-                style={{ width: width00, height: height00 }}
-                className={css.image04}
-              ></div>
+              <GrayGradient width={width00} height={height00} />
             </div>
           </div>
         </div>
         <div className={css.element10}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement10}>
-              <Image width={width} height={height} />
+              <BlueGradient width={width} height={height} />
+              <PinkCthulhu width={width} height={height} />
             </div>
           </div>
         </div>
         <div className={css.element11}>
           <div className={css.overflowWrapper01}>
-            <div
-              style={{
-                width: width00,
-                height: height00,
-                right: -right00,
-                top: -top00,
-              }}
-              className={css.image04}
-            ></div>
+            <GrayGradient
+              width={width00}
+              height={height00}
+              right={-right00}
+              top={-top00}
+            />
             <div className={css.overflowWrapper02}></div>
           </div>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement11}>
-              <Image width={width} height={height} />
+              <BlueGradient width={width} height={height} />
+              <TopRightArrowIcon className={css.topRightArrowIcon} />
+              <Disk />
+              <PinkCthulhu width={width} height={height} />
             </div>
           </div>
         </div>
         <div className={css.element12}>
           <div className={css.wrapper01}>
-            <Image width={width} height={height} />
+            <BlueGradient width={width} height={height} />
+            <PinkCthulhu width={width} height={height} />
           </div>
         </div>
         <div className={css.element13}>
           <div className={css.wrapper01} ref={refElement13}>
-            <Image width={width} height={height} />
+            <IconMenu />
+            <div className={css.more}>
+              <span>+10 Lorem ipsum</span>
+              <ArrowRight width={"12cqmax"} />
+            </div>
+            <BlueGradient width={width} height={height} />
+            <PinkCthulhu width={width} height={height} />
           </div>
         </div>
         <div className={css.element20}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
-              <Image3 />
+              <GreenCthulhu />
             </div>
           </div>
         </div>
@@ -153,20 +148,20 @@ const BentoGrid: FC = () => {
         <div className={css.element40}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
-              <Image2 />
+              <GrayCthulhu />
             </div>
           </div>
         </div>
         <div className={css.element41}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
-              <Image2 />
+              <GrayCthulhu />
             </div>
           </div>
         </div>
         <div className={css.element42}>
           <div className={css.wrapper01}>
-            <Image2 />
+            <GrayCthulhu />
           </div>
         </div>
         <div className={css.footer}>

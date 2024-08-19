@@ -1,15 +1,14 @@
 import { FC } from "react";
 import css from "../styles/main.module.scss";
-import image from "../assets/cthulhu3.png";
+import image from "../assets/cthulhu4.png";
 
-const Image2: FC = () => {
+const BlueCthulhu: FC = () => {
   return (
-    <div className={css.image01}>
-      <div />
+    <div className={css.image03}>
       <img src={image} alt="Cthulhu" />
       <img src={image} alt="Cthulhu" />
     </div>
   );
 };
 
-export default Image2;
+export default BlueCthulhu;

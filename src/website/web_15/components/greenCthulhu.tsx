@@ -2,7 +2,7 @@ import { FC } from "react";
 import css from "../styles/main.module.scss";
 import image from "../assets/cthulhu2.png";
 
-const Image3: FC = () => {
+const GreenCthulhu: FC = () => {
   return (
     <div className={css.image02}>
       <img src={image} alt="Cthulhu" />
@@ -11,4 +11,4 @@ const Image3: FC = () => {
   );
 };
 
-export default Image3;
+export default GreenCthulhu;

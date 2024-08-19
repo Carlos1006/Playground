@@ -1,9 +1,12 @@
 import { FC } from "react";
-import { ImageProps } from "../types";
+import { PinkCthulhuProps } from "../types";
 import css from "../styles/main.module.scss";
 import image from "../assets/cthulhu.png";
 
-const Image: FC<ImageProps> = ({ height, width }: ImageProps) => {
+const PinkCthulhu: FC<PinkCthulhuProps> = ({
+  height,
+  width,
+}: PinkCthulhuProps) => {
   return (
     <div style={{ width, height }} className={css.image00}>
       <img src={image} alt="Cthulhu" />
@@ -12,4 +15,4 @@ const Image: FC<ImageProps> = ({ height, width }: ImageProps) => {
   );
 };
 
-export default Image;
+export default PinkCthulhu;
