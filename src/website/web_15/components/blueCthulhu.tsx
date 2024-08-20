@@ -7,6 +7,7 @@ const BlueCthulhu: FC = () => {
     <div className={css.image03}>
       <img src={image} alt="Cthulhu" />
       <img src={image} alt="Cthulhu" />
+      <img src={image} alt="Cthulhu" />
     </div>
   );
 };

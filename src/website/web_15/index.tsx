@@ -13,6 +13,8 @@ import Disk from "./components/disk";
 import { GoArrowUpRight as TopRightArrowIcon } from "react-icons/go";
 import IconMenu from "./components/iconMenu";
 import ArrowRight from "./components/arrowRight";
+import TopLink from "./components/topLink";
+import Marquee from "./components/marquee";
 
 const BentoGrid: FC = () => {
   const [width, setWidth] = useState<number>(0);
@@ -22,6 +24,8 @@ const BentoGrid: FC = () => {
   const [height00, setHeight00] = useState<number>(0);
   const [right00, setRight00] = useState<number>(0);
   const [top00, setTop00] = useState<number>(0);
+
+  const [remove, setRemove] = useState<number>(0);
 
   const refElement10 = useRef<HTMLDivElement>(null);
   const refElement11 = useRef<HTMLDivElement>(null);
@@ -56,6 +60,10 @@ const BentoGrid: FC = () => {
       setRight00(refElement02.current.offsetWidth);
       setTop00(refElement00.current.offsetHeight);
     }
+
+    if (refElement02.current) {
+      setRemove(refElement02.current.offsetWidth);
+    }
   }, [refElement10, refElement11, refElement13, refElement00, refElement02]);
 
   return (
@@ -65,6 +73,7 @@ const BentoGrid: FC = () => {
         <div className={css.element00}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
+              <TopLink remove={remove} />
               <div
                 style={{ width: width00, height: height00 }}
                 className={css.image04}
@@ -166,7 +175,9 @@ const BentoGrid: FC = () => {
         </div>
         <div className={css.footer}>
           <div className={css.overflowWrapper} />
-          <div className={css.wrapper}></div>
+          <div className={css.wrapper}>
+            <Marquee />
+          </div>
         </div>
         <div className={css.gap} />
       </div>

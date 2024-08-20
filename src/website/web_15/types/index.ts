@@ -13,5 +13,9 @@ export interface GrayGradientProps {
 }
 
 export interface ArrowRightProps {
-  width: number;
+  width: string;
+}
+
+export interface TopLinkProps {
+  remove: number;
 }
