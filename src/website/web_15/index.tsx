@@ -10,7 +10,10 @@ import Background from "./components/background";
 import Text from "./components/text";
 import Arrow from "./components/arrow";
 import Disk from "./components/disk";
-import { GoArrowUpRight as TopRightArrowIcon } from "react-icons/go";
+import {
+  GoArrowUpRight as TopRightArrowIcon,
+  GoArrowDown as DownArrowIcon,
+} from "react-icons/go";
 import IconMenu from "./components/iconMenu";
 import ArrowRight from "./components/arrowRight";
 import TopLink from "./components/topLink";
@@ -69,7 +72,11 @@ const BentoGrid: FC = () => {
   return (
     <div id={css.main}>
       <div id={css.wrapper}>
-        <div className={css.header} />
+        <div className={css.header}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <div className={css.element00}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
@@ -145,13 +152,22 @@ const BentoGrid: FC = () => {
         <div className={css.element20}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
+              <span>
+                Click here to <br />
+                learn more about <br />
+                Cosmic Horror
+              </span>
               <GreenCthulhu />
             </div>
           </div>
         </div>
         <div className={css.element30}>
           <div className={css.wrapper01}>
-            <div className={css.wrapper02}></div>
+            <div className={css.wrapper02}>
+              <span>
+                Read More <DownArrowIcon />
+              </span>
+            </div>
           </div>
         </div>
         <div className={css.element40}>

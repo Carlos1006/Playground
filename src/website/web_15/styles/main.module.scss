@@ -176,6 +176,21 @@
     .header {
       grid-area: hd00;
       background-color:black;
+      display:grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: "logo menu actions";
+      column-gap: 10cqi;
+      padding:10px;
+      >div:nth-child(1) {
+        // background-color:red;
+      }
+      >div:nth-child(2) {
+        // background-color:blue;
+      }
+      >div:nth-child(3) {
+        // background-color:green;
+      }
     }
     .element00 {
       grid-area: el00;
@@ -660,11 +675,27 @@
         display:flex;
         justify-content:end;
         align-items:center;
+        container: element20 / size;
         .wrapper02 {
           width: calc(100% - 10px);
           height: calc(100% - 20px);
           background-color:#70c6e2;
           border-radius:15px 0 0 15px;
+          position:relative;
+          span {
+            z-index:10;
+            display: block;
+            width: 100%;
+            text-align:center;
+            margin-top:20cqmin;
+            padding-left:10cqi;
+            padding-right:10cqi;
+            font-size: 2.2ex;
+            font-family: 'Space Grotesk';
+            font-weight:400;
+            position:absolute;
+            color:rgba(255, 255, 255, 0.795);
+          }
           .image02 {
             position:relative;
             @include image3;
@@ -684,11 +715,27 @@
         background-color:#fff;
         display:grid;
         place-items: center;
+        container: element30 / size;
         .wrapper02 {
           width: calc(100% - 8px);
           height: calc(100% - 30px);
           background-color:black;
           border-radius:30px;
+          display:grid;
+          place-items: center;
+          span {
+            font-family: 'Space Grotesk';
+            font-size: 2.5ex;
+            color:rgb(245, 245, 253);
+            text-transform: capitalize;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            svg {
+              margin-top: 2cqi;
+              width: 3ex;
+              height: 3ex;
+            }
+          }
         }
       }
     }
