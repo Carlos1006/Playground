@@ -14,10 +14,12 @@ import {
   GoArrowUpRight as TopRightArrowIcon,
   GoArrowDown as DownArrowIcon,
 } from "react-icons/go";
+
 import IconMenu from "./components/iconMenu";
 import ArrowRight from "./components/arrowRight";
 import TopLink from "./components/topLink";
 import Marquee from "./components/marquee";
+import Header from "./components/header";
 
 const BentoGrid: FC = () => {
   const [width, setWidth] = useState<number>(0);
@@ -72,11 +74,7 @@ const BentoGrid: FC = () => {
   return (
     <div id={css.main}>
       <div id={css.wrapper}>
-        <div className={css.header}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <Header />
         <div className={css.element00}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
