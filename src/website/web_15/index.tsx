@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import css from "./styles/main.module.scss";
 import BlueGradient from "./components/blueGradient";
 import PinkCthulhu from "./components/pinkCthulhu";
@@ -32,6 +32,8 @@ const BentoGrid: FC = () => {
 
   const [remove, setRemove] = useState<number>(0);
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
   const refElement10 = useRef<HTMLDivElement>(null);
   const refElement11 = useRef<HTMLDivElement>(null);
   const refElement13 = useRef<HTMLDivElement>(null);
@@ -43,36 +45,46 @@ const BentoGrid: FC = () => {
     document.title = "Bento Grid";
   }, []);
 
-  useLayoutEffect(() => {
-    if (refElement10.current && refElement11.current) {
-      setWidth(
-        refElement10.current.offsetWidth + refElement11.current.offsetWidth + 10
-      );
-    }
-    if (refElement11.current && refElement13.current) {
-      setHeight(
-        refElement11.current.offsetHeight +
-          refElement13.current.offsetHeight +
-          10
-      );
-    }
+  useEffect(() => {
+    const observer = new ResizeObserver(() => {
+      if (refElement10.current && refElement11.current) {
+        setWidth(
+          refElement10.current.offsetWidth +
+            refElement11.current.offsetWidth +
+            10
+        );
+      }
+      if (refElement11.current && refElement13.current) {
+        setHeight(
+          refElement11.current.offsetHeight +
+            refElement13.current.offsetHeight +
+            10
+        );
+      }
 
-    if (refElement00.current && refElement02.current) {
-      setWidth00(refElement00.current.offsetWidth);
-      setHeight00(
-        refElement00.current.offsetHeight + refElement02.current.offsetHeight
-      );
-      setRight00(refElement02.current.offsetWidth);
-      setTop00(refElement00.current.offsetHeight);
-    }
+      if (refElement00.current && refElement02.current) {
+        setWidth00(refElement00.current.offsetWidth);
+        setHeight00(
+          refElement00.current.offsetHeight + refElement02.current.offsetHeight
+        );
+        setRight00(refElement02.current.offsetWidth);
+        setTop00(refElement00.current.offsetHeight);
+      }
 
-    if (refElement02.current) {
-      setRemove(refElement02.current.offsetWidth);
+      if (refElement02.current) {
+        setRemove(refElement02.current.offsetWidth);
+      }
+    });
+    if (mainRef.current) {
+      observer.observe(mainRef.current);
     }
-  }, [refElement10, refElement11, refElement13, refElement00, refElement02]);
+    return () => {
+      observer.disconnect();
+    };
+  }, [mainRef]);
 
   return (
-    <div id={css.main}>
+    <div id={css.main} ref={mainRef}>
       <div id={css.wrapper}>
         <Header />
         <div className={css.element00}>
