@@ -1,0 +1,40 @@
+.element20 {
+  grid-area: el20;
+  background-color:black;
+  .wrapper01 {
+    width: 100%;
+    height: calc(100% - 20px);
+    margin-top:10px;
+    background-color:#fff;
+    border-radius:20px 0 0 20px;
+    display:flex;
+    justify-content:end;
+    align-items:center;
+    container: element20 / size;
+    .wrapper02 {
+      width: calc(100% - 10px);
+      height: calc(100% - 20px);
+      background-color:#70c6e2;
+      border-radius:15px 0 0 15px;
+      position:relative;
+      span {
+        z-index:10;
+        display: block;
+        width: 100%;
+        text-align:center;
+        margin-top:20cqmin;
+        padding-left:10cqi;
+        padding-right:10cqi;
+        font-size: 2.2ex;
+        font-family: 'Space Grotesk';
+        font-weight:400;
+        position:absolute;
+        color:rgba(255, 255, 255, 0.795);
+      }
+      .image02 {
+        position:relative;
+        @include image3;
+      }
+    }
+  }
+}

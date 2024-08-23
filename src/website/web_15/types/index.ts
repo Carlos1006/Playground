@@ -19,3 +19,8 @@ export interface ArrowRightProps {
 export interface TopLinkProps {
   remove: number;
 }
+
+export interface HeaderProps {
+  darkMode: boolean;
+  onDarkModeChange: () => Promise<void>;
+}

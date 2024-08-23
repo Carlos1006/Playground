@@ -4,10 +4,19 @@ import { RxTriangleDown as TriangleDownIcon } from "react-icons/rx";
 import { IoSearch as SearchIcon } from "react-icons/io5";
 import { GoLocation as LocationIcon } from "react-icons/go";
 import { ImBooks as BooksIcon } from "react-icons/im";
+import { HeaderProps } from "../types";
+import { IoMdSunny as SunIcon, IoMdMoon as MoonIcon } from "react-icons/io";
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({
+  darkMode,
+  onDarkModeChange,
+}: HeaderProps) => {
+  const handleDarkModeChange = (): void => {
+    onDarkModeChange();
+  };
+
   return (
-    <div className={css.header}>
+    <div className={`${css.header} ${darkMode ? css.darkMode : ""}`}>
       <div>
         <p>Cthulhu</p>
       </div>
@@ -35,9 +44,19 @@ const Header: FC = () => {
           </div>
         </div>
         <div className={css.headerLink}>
+          <div className={css.connector} />
+          <div className={css.hideConnector}></div>
           <div className={css.headerLinkContent}>
             <SearchIcon />
             <input placeholder="Search" />
+          </div>
+        </div>
+        <div
+          className={`${css.headerLink} ${css.yellowIcon}`}
+          onClick={handleDarkModeChange}
+        >
+          <div className={css.headerLinkContent}>
+            {darkMode ? <SunIcon /> : <MoonIcon />}
           </div>
         </div>
       </div>

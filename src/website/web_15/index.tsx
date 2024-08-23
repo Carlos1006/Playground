@@ -24,13 +24,31 @@ import Header from "./components/header";
 const BentoGrid: FC = () => {
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
-
   const [width00, setWidth00] = useState<number>(0);
   const [height00, setHeight00] = useState<number>(0);
   const [right00, setRight00] = useState<number>(0);
   const [top00, setTop00] = useState<number>(0);
-
   const [remove, setRemove] = useState<number>(0);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  // Dark Mode Change
+  const [changingDarkMode, setChangingDarkMode] = useState<boolean>(false);
+  const [headerDarkMode, setHeaderDarkMode] = useState<boolean>(false);
+  const [element00DarkMode, setElement00DarkMode] = useState<boolean>(false);
+  const [element01DarkMode, setElement01DarkMode] = useState<boolean>(false);
+  const [element02DarkMode, setElement02DarkMode] = useState<boolean>(false);
+  const [element10DarkMode, setElement10DarkMode] = useState<boolean>(false);
+  const [element11DarkMode, setElement11DarkMode] = useState<boolean>(false);
+  const [element12DarkMode, setElement12DarkMode] = useState<boolean>(false);
+  const [element13DarkMode, setElement13DarkMode] = useState<boolean>(false);
+  const [element20DarkMode, setElement20DarkMode] = useState<boolean>(false);
+  const [element30DarkMode, setElement30DarkMode] = useState<boolean>(false);
+  const [element40DarkMode, setElement40DarkMode] = useState<boolean>(false);
+  const [element41DarkMode, setElement41DarkMode] = useState<boolean>(false);
+  const [element42DarkMode, setElement42DarkMode] = useState<boolean>(false);
+  const [footerDarkMode, setFooterDarkMode] = useState<boolean>(false);
+  const [gapDarkMode, setGapDarkMode] = useState<boolean>(false);
+  // ------------------------------
 
   const mainRef = useRef<HTMLDivElement>(null);
 
@@ -83,11 +101,28 @@ const BentoGrid: FC = () => {
     };
   }, [mainRef]);
 
+  const onDarkModeChange = async (): Promise<void> => {
+    if (changingDarkMode) return;
+    setChangingDarkMode(true);
+
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    setHeaderDarkMode(newMode);
+
+    setChangingDarkMode(false);
+  };
+
   return (
     <div id={css.main} ref={mainRef}>
-      <div id={css.wrapper}>
-        <Header />
-        <div className={css.element00}>
+      <div
+        id={css.wrapper}
+        className={`${darkMode ? "darkMode" : "lightMode"}`}
+      >
+        <Header darkMode={headerDarkMode} onDarkModeChange={onDarkModeChange} />
+        <div
+          className={`
+            ${css.element00} ${element00DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
               <TopLink remove={remove} />
@@ -98,14 +133,20 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element01}>
+        <div
+          className={`
+            ${css.element01} ${element01DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper}>
             <Arrow />
             <Text />
             <Background />
           </div>
         </div>
-        <div className={css.element02}>
+        <div
+          className={`
+            ${css.element02} ${element02DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement02}>
               <div className={css.overflowWrapper}>
@@ -115,7 +156,10 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element10}>
+        <div
+          className={`
+            ${css.element10} ${element10DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement10}>
               <BlueGradient width={width} height={height} />
@@ -123,7 +167,10 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element11}>
+        <div
+          className={`
+            ${css.element11} ${element11DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.overflowWrapper01}>
             <GrayGradient
               width={width00}
@@ -142,13 +189,19 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element12}>
+        <div
+          className={`
+            ${css.element12} ${element12DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <BlueGradient width={width} height={height} />
             <PinkCthulhu width={width} height={height} />
           </div>
         </div>
-        <div className={css.element13}>
+        <div
+          className={`
+            ${css.element13} ${element13DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01} ref={refElement13}>
             <IconMenu />
             <div className={css.more}>
@@ -159,7 +212,10 @@ const BentoGrid: FC = () => {
             <PinkCthulhu width={width} height={height} />
           </div>
         </div>
-        <div className={css.element20}>
+        <div
+          className={`
+            ${css.element20} ${element20DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <span>
@@ -171,7 +227,10 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element30}>
+        <div
+          className={`
+            ${css.element30} ${element30DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <span>
@@ -180,32 +239,41 @@ const BentoGrid: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.element40}>
+        <div
+          className={`
+            ${css.element40} ${element40DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <GrayCthulhu />
             </div>
           </div>
         </div>
-        <div className={css.element41}>
+        <div
+          className={`
+            ${css.element41} ${element41DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <GrayCthulhu />
             </div>
           </div>
         </div>
-        <div className={css.element42}>
+        <div
+          className={`
+            ${css.element42} ${element42DarkMode ? css.darkMode : ""}`}
+        >
           <div className={css.wrapper01}>
             <GrayCthulhu />
           </div>
         </div>
-        <div className={css.footer}>
+        <div className={`${css.footer} ${footerDarkMode ? css.darkMode : ""}`}>
           <div className={css.overflowWrapper} />
           <div className={css.wrapper}>
             <Marquee />
           </div>
         </div>
-        <div className={css.gap} />
+        <div className={`${css.gap} ${gapDarkMode ? css.darkMode : ""}`} />
       </div>
     </div>
   );

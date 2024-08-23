@@ -1,0 +1,17 @@
+
+.arrowRight {
+  height:2px;
+  background:rgb(26, 26, 30);
+  position:relative;
+  &::before {
+    content: "";
+    position:absolute;
+    width: 15px;
+    height: 15px;
+    top: calc(50% - 7.5px - 1px);
+    right: 2px;
+    border-top: 2px solid rgb(26, 26, 30);
+    border-right: 2px solid rgb(26, 26, 30);
+    transform: rotate(45deg);
+  }
+}
