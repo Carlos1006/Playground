@@ -1,3 +1,7 @@
+$transition_00: background-color 0.2s ease-in-out;
+$transition_01: color 0.2s ease-in-out;
+$transition_02: fill 0.2s ease-in-out;
+
 .header {
   grid-area: hd00;
   background-color:black;
@@ -10,19 +14,21 @@
   padding:10px;
   div.headerLink {
     cursor: pointer;
-    background-color:rgb(120 120 120);
     border-radius:100px;
     display:grid;
     place-items:center;
     position: relative;
+    background-color:rgb(120 120 120);
+    transition: $transition_00;
     .hideConnector {
       width:50%;
       height:100%;
       position:absolute;
       top:0;
       right:0;
-      background-color:rgb(120 120 120);
       border-radius:100px;
+      background-color:rgb(120 120 120);
+      transition: $transition_00;
     }
     .connector {
       position:absolute;
@@ -30,8 +36,9 @@
       right: -1.25cqi;
       width: 1.5cqi;
       height: 0.7cqi;
-      background-color:rgb(120 120 120);
       pointer-events:none;
+      background-color:rgb(120 120 120);
+      transition: $transition_00;
       &::after, &::before {
         content: "";
         position:absolute;
@@ -53,7 +60,6 @@
       top:-0.2cqi;
       z-index: 1000;
       right:0;
-      background-color:#ffcb4e;
       width:1cqi;
       height:1cqi;
       border-radius:100px;
@@ -61,7 +67,9 @@
       place-items:center;
       font-family: 'Space Grotesk';
       font-size: 1.5ex;
+      background-color:#ffcb4e;
       color:rgb(15,15,20);
+      transition: $transition_00, $transition_01;
     }
     >div.headerLinkContent {
       width: calc(100% - 20px);
@@ -111,8 +119,10 @@
     }
     &.yellow {
       background-color:#ffcb4e;
+      transition: $transition_00;
       .hideConnector {
         background-color:#ffcb4e;
+        transition: $transition_00;
       }  
       >div.headerLinkContent {
         background-color:transparent;
@@ -121,6 +131,7 @@
         align-items:center;
         span {
           color:rgb(15,15,20);
+          transition: $transition_01;
         }
         .triangleIcon {
           width:2.5ex;
@@ -128,6 +139,7 @@
           margin-left:0.5cqmin;
           &,* {
             fill:rgb(15,15,20);
+            transition: $transition_02;
           }
         }
       }
@@ -135,6 +147,7 @@
     &.yellowIcon {
       svg {
         fill: #ffcb4e;
+        transition: $transition_02;
       }
       >div {
         display:flex;
@@ -180,5 +193,6 @@
     width: 3.5ex;
     height: 3.5ex;
     fill: #ffcb4e;
+    transition: $transition_02;
   }
 }

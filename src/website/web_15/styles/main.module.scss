@@ -10,6 +10,11 @@
   height: 100vh;
   container: main / size;
   background:rgb(5,5,6);
+
+  // &.darkMode {
+    // background:blue !important;
+  // }
+  
   #wrapper {
     width: 100cqi;
     height: 100cqb;
@@ -42,7 +47,7 @@
     @import './light/footer';
     @import './light/gap';
 
-    .darkMode {
+    &.darkMode {
       @import './dark/header';
       @import './dark/element00';
       @import './dark/element01';

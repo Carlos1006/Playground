@@ -14,12 +14,12 @@ import {
   GoArrowUpRight as TopRightArrowIcon,
   GoArrowDown as DownArrowIcon,
 } from "react-icons/go";
-
 import IconMenu from "./components/iconMenu";
 import ArrowRight from "./components/arrowRight";
 import TopLink from "./components/topLink";
 import Marquee from "./components/marquee";
 import Header from "./components/header";
+import { sleep } from "../../utils";
 
 const BentoGrid: FC = () => {
   const [width, setWidth] = useState<number>(0);
@@ -104,20 +104,21 @@ const BentoGrid: FC = () => {
   const onDarkModeChange = async (): Promise<void> => {
     if (changingDarkMode) return;
     setChangingDarkMode(true);
-
     const newMode = !darkMode;
     setDarkMode(newMode);
     setHeaderDarkMode(newMode);
+    await sleep(200);
 
     setChangingDarkMode(false);
   };
 
   return (
-    <div id={css.main} ref={mainRef}>
-      <div
-        id={css.wrapper}
-        className={`${darkMode ? "darkMode" : "lightMode"}`}
-      >
+    <div
+      className={`${darkMode ? css.darkMode : ""}`}
+      id={css.main}
+      ref={mainRef}
+    >
+      <div id={css.wrapper} className={`${darkMode ? css.darkMode : ""}`}>
         <Header darkMode={headerDarkMode} onDarkModeChange={onDarkModeChange} />
         <div
           className={`
