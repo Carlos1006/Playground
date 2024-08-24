@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = ({
   };
 
   return (
-    <div className={`${css.header} ${darkMode ? css.darkMode : ""}`}>
+    <div className={`${css.header} ${darkMode ? css.darkModeHeader : ""}`}>
       <div>
         <p>Cthulhu</p>
       </div>

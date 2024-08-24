@@ -1,6 +1,4 @@
-$transition_00: background-color 0.2s ease-in-out;
-$transition_01: color 0.2s ease-in-out;
-$transition_02: fill 0.2s ease-in-out;
+@import '../anim';
 
 .header {
   grid-area: hd00;
@@ -19,7 +17,7 @@ $transition_02: fill 0.2s ease-in-out;
     place-items:center;
     position: relative;
     background-color:rgb(120 120 120);
-    transition: $transition_00;
+    transition: $transition_bg;
     .hideConnector {
       width:50%;
       height:100%;
@@ -28,7 +26,7 @@ $transition_02: fill 0.2s ease-in-out;
       right:0;
       border-radius:100px;
       background-color:rgb(120 120 120);
-      transition: $transition_00;
+      transition: $transition_bg;
     }
     .connector {
       position:absolute;
@@ -38,7 +36,7 @@ $transition_02: fill 0.2s ease-in-out;
       height: 0.7cqi;
       pointer-events:none;
       background-color:rgb(120 120 120);
-      transition: $transition_00;
+      transition: $transition_bg;
       &::after, &::before {
         content: "";
         position:absolute;
@@ -69,7 +67,7 @@ $transition_02: fill 0.2s ease-in-out;
       font-size: 1.5ex;
       background-color:#ffcb4e;
       color:rgb(15,15,20);
-      transition: $transition_00, $transition_01;
+      transition: $transition_bg, $transition_color;
     }
     >div.headerLinkContent {
       width: calc(100% - 20px);
@@ -119,10 +117,10 @@ $transition_02: fill 0.2s ease-in-out;
     }
     &.yellow {
       background-color:#ffcb4e;
-      transition: $transition_00;
+      transition: $transition_bg;
       .hideConnector {
         background-color:#ffcb4e;
-        transition: $transition_00;
+        transition: $transition_bg;
       }  
       >div.headerLinkContent {
         background-color:transparent;
@@ -131,7 +129,7 @@ $transition_02: fill 0.2s ease-in-out;
         align-items:center;
         span {
           color:rgb(15,15,20);
-          transition: $transition_01;
+          transition: $transition_color;
         }
         .triangleIcon {
           width:2.5ex;
@@ -139,7 +137,7 @@ $transition_02: fill 0.2s ease-in-out;
           margin-left:0.5cqmin;
           &,* {
             fill:rgb(15,15,20);
-            transition: $transition_02;
+            transition: $transition_fill;
           }
         }
       }
@@ -147,7 +145,7 @@ $transition_02: fill 0.2s ease-in-out;
     &.yellowIcon {
       svg {
         fill: #ffcb4e;
-        transition: $transition_02;
+        transition: $transition_fill;
       }
       >div {
         display:flex;
@@ -193,6 +191,6 @@ $transition_02: fill 0.2s ease-in-out;
     width: 3.5ex;
     height: 3.5ex;
     fill: #ffcb4e;
-    transition: $transition_02;
+    transition: $transition_fill;
   }
 }

@@ -1,0 +1,19 @@
+@mixin image4Dark {
+  img {
+    filter:saturate(0.2) contrast(1.2);
+    &:first-child {
+      opacity:0.9;
+      filter: blur(10px) saturate(0.5);
+    }
+    &:nth-child(2) {
+      opacity:0.8;
+      filter: blur(15px) saturate(0.5);
+    }
+  }
+}
+
+
+@mixin image5Dark {
+  position:absolute;
+  background: linear-gradient(135deg, rgb(19, 19, 22) 0%, rgb(26, 26, 31) 59%, rgb(32, 32, 37) 100%);
+}

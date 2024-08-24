@@ -1,25 +1,15 @@
 .element10 {
   grid-area: el10;
-  background-color:#fff;
+
+  &.darkMode0 {
+    background-color:rgb(40,42,45);
+  }
+
   .wrapper01 {
-    width: 100%;
-    height: 100%;
     background-color:black;
-    border-radius:20px 0 0 0;
-    display:flex;
-    justify-content:end;
-    align-items:center;
     .wrapper02 {
-      width: calc(100% - 10px);
-      height: calc(100% - 20px);
-      background-color:#ceb7e9;
-      border-radius:20px;
-      position:relative;
-      overflow: hidden;
       .image00 {
         @include image;
-        left:0;
-        top:0;
       }
     }
   }

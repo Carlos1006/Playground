@@ -1,13 +1,16 @@
+@import '../anim';
+
 .element02 {
   grid-area: el02;
-  background-color:black;
   >.wrapper01 {
     width: 100%;
     height: 100%;
-    background-color:#fff;
     border-radius:0 20px 0 20px;
+    background-color:#fff;
+    transition: $transition_bg;
     .image04 {
       @include image5;
+      transition: $transition_filter;
       bottom:0;
       right:0;
     }

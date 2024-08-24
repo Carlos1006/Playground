@@ -1,3 +1,5 @@
+@import '../anim';
+
 .footer {
   grid-area: fo00;
   background-color:black;
@@ -17,6 +19,7 @@
     width: 100%;
     height: calc(100% - 10px);
     background-color:#ffcb4e;
+    transition: $transition_bg;
     .marquee {
       width:100%;
       height:100%;
@@ -35,6 +38,7 @@
           font-size: 2.5ex;
           font-family: 'Space Grotesk';
           color:rgba(15,15,20, 1);
+          transition:$transition_color;
           flex: 0 0 auto;
           font-weight:bold;
           &:not(.dot) {

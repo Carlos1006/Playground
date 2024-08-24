@@ -1,14 +1,16 @@
+@import '../anim';
+
 .element11 {
   grid-area: el11;
-  background-color:#fff;
   position:relative;
+  background-color:#fff;
+  transition: $transition_bg;
   .overflowWrapper01 {
     position:absolute;
     top:-10px;
     left:0;
     width: calc(100% + 10px);
     height: 50px;
-    background:#c6c6e5;
     z-index:1000;
     overflow: hidden;
     .image04 {
@@ -36,7 +38,6 @@
     .wrapper02 {
       width: calc(100% - 20px);
       height: calc(100% - 20px);
-      background-color:#ceb7e9;
       border-radius:20px;
       position:relative;
       overflow: hidden;

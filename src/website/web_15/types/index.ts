@@ -22,5 +22,5 @@ export interface TopLinkProps {
 
 export interface HeaderProps {
   darkMode: boolean;
-  onDarkModeChange: () => Promise<void>;
+  onDarkModeChange: () => void;
 }

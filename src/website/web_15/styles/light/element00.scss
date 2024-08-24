@@ -1,11 +1,13 @@
+@import '../anim';
+
 .element00 {
   grid-area: el00;
-  background-color:black;
   >.wrapper01 {
     width: 100%;
     height: 100%;
-    background-color:#fff;
     position:relative;
+    background-color:#fff;
+    transition: $transition_bg;
     .topLink {
       width: 100%;
       height: 100%;
