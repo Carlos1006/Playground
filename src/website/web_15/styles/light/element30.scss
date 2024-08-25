@@ -8,6 +8,7 @@
     margin-top:10px;
     border-radius:100px;
     background-color:#fff;
+    transition: $transition_bg;
     display:grid;
     place-items: center;
     container: element30 / size;

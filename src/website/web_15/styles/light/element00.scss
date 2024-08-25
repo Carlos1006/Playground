@@ -31,12 +31,14 @@
           font-family: 'Space Grotesk';
           font-size: 2.5ex;
           color:rgba(15,15,20, 1);
+          transition:$transition_color;
           text-transform: capitalize;
         }
         .arrowTail {
           width:100%;
           height:2px;
           background:rgb(26, 26, 30);
+          transition:$transition_bg;
         }
       }
     }
@@ -49,6 +51,7 @@
       position:relative;
       .image04 {
         @include image5;
+        transition: $transition_bg;
         left:0;
         top:0;
       }

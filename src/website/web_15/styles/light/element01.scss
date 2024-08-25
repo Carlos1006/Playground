@@ -28,6 +28,7 @@
         top:40%;
         clip-path:polygon(70% -20px, 200% -20px, 200% 50%, 70% 50%);
         box-shadow: 0 0 0 20px rgb(122, 87, 219);
+        transition: $transition_shadow;
       }
       .octopus {
         width: 4cqi;
@@ -50,6 +51,7 @@
         right: calc(4cqi - 20px);
         top: calc(45% + 5cqi);
         background: rgb(122, 87, 219);
+        transition: $transition_bg;
         border-radius:0 0 10px 10px;
         &::after, &::before {
           content: "";
@@ -58,6 +60,7 @@
           height: 70%;
           bottom:0;
           background: rgb(122, 87, 219);
+          transition: $transition_bg;
           border-radius:0 0 10px 10px;
           transform-origin: 50% calc(100% - 10px);
         }
@@ -87,6 +90,7 @@
         background: linear-gradient(180deg, rgba(111,29,203,1) 0%,  rgb(3, 18, 32) 100%);
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        transition: $transition_bg;
       }
     }
     .background {

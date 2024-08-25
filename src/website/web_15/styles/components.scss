@@ -1,7 +1,10 @@
 
+@import './anim';
+
 .arrowRight {
   height:2px;
   background:rgb(26, 26, 30);
+  transition:$transition_bg;
   position:relative;
   &::before {
     content: "";
@@ -12,6 +15,7 @@
     right: 2px;
     border-top: 2px solid rgb(26, 26, 30);
     border-right: 2px solid rgb(26, 26, 30);
+    transition:$transition_border;
     transform: rotate(45deg);
   }
 }

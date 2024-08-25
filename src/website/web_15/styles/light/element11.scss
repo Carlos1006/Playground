@@ -15,6 +15,7 @@
     overflow: hidden;
     .image04 {
       @include image5;
+      transition: $transition_bg;
       bottom:0;
       right:0;
     }

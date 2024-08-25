@@ -1,3 +1,5 @@
+@import '../anim';
+
 .element20 {
   grid-area: el20;
   background-color:black;
@@ -5,16 +7,16 @@
     width: 100%;
     height: calc(100% - 20px);
     margin-top:10px;
-    background-color:#fff;
     border-radius:20px 0 0 20px;
     display:flex;
     justify-content:end;
     align-items:center;
     container: element20 / size;
+    background-color:#fff;
+    transition: $transition_bg;
     .wrapper02 {
       width: calc(100% - 10px);
       height: calc(100% - 20px);
-      background-color:#70c6e2;
       border-radius:15px 0 0 15px;
       position:relative;
       span {
@@ -34,6 +36,10 @@
       .image02 {
         position:relative;
         @include image3;
+        transition: $transition_bg;
+        img {
+          transition: $transition_filter;
+        }
       }
     }
   }

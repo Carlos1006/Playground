@@ -191,7 +191,7 @@ const BentoGrid: FC = () => {
             <PinkCthulhu width={width} height={height} />
           </div>
         </div>
-        <div className={`${css.element20} ${darkMode ? css.darkMode : ""}`}>
+        <div className={`${css.element20} ${darkMode ? css.darkMode20 : ""}`}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <span>

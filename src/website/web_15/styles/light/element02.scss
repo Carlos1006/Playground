@@ -10,7 +10,7 @@
     transition: $transition_bg;
     .image04 {
       @include image5;
-      transition: $transition_filter;
+      transition: $transition_bg;
       bottom:0;
       right:0;
     }
@@ -30,7 +30,9 @@
         top:-75px;
         .image03 {
           @include image4;
-          
+          >img {
+            transition: $transition_filter;
+          }
         }
       }
     }
