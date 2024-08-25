@@ -1,25 +1,8 @@
 .element42 {
-  grid-area: el42;
-  background-color:black;
-  position:relative;
   .wrapper01 {
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
-    margin-left:10px;
-    margin-top:10px;
-    border-radius:100px;
-    display:grid;
-    place-items: center;
-    overflow: hidden;
-    position:relative;
     .image01 {
-      @include image2;
-      left:-210px;
+      @include image2Dark;
     }
-    .wrapper02 {
-      width: calc(100% - 8px);
-      height: calc(100% - 30px);
-      border-radius:30px;
-    }
+    //? .wrapper02 {}
   }
 }

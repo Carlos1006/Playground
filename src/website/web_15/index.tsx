@@ -28,7 +28,7 @@ const BentoGrid: FC = () => {
   const [right00, setRight00] = useState<number>(0);
   const [top00, setTop00] = useState<number>(0);
   const [remove, setRemove] = useState<number>(0);
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   // Dark Mode Change
   const [beginDarkMode, setBeginDarkMode] = useState<boolean>(false);

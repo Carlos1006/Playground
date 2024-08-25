@@ -1,20 +1,8 @@
 .element40 {
-  grid-area: el40;
-  background-color:black;
   .wrapper01 {
-    width: calc(100% - 10px);
-    overflow: hidden;
-    height: 100%;
     .wrapper02 {
-      width: calc(220px - 20px);
-      height: calc(220px - 20px);
-      margin-top:10px;
-      border-radius:100px;
-      position:relative;
-      overflow: hidden;
       .image01 {
-        @include image2;
-        left:0px;
+        @include image2Dark;
       }
     }
   }
