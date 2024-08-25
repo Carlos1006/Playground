@@ -1,5 +1,6 @@
 .element12 {
   grid-area: el12;
+  background:black;
   .wrapper01 {
     width: calc(100% - 10px);
     height: calc(100% - 10px);
@@ -12,6 +13,10 @@
     overflow: hidden;
     .image00 {
       @include image;
+      transition: $transition_bg;
+      img {
+        transition: $transition_filter;
+      }
       left:0;
       bottom:0;
     }

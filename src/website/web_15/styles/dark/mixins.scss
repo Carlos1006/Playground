@@ -35,3 +35,35 @@
     }
   }
 }
+
+@mixin imageDark {
+  z-index:100;
+  position:absolute;
+  background: rgb(83,25,148);
+  border-radius:20px;
+  background: linear-gradient(137deg, #17968d 0%, #115d6e 40%, #072c42 100%);
+  background: linear-gradient(137deg, #0d7770 0%, #115d6e 40%, #072c42 100%);
+  img {
+    width: 75%;
+    left: -3%;
+    top: 10%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    position:absolute;
+    opacity:0.9;
+    &:first-child {
+      opacity:0.8;
+      filter: blur(10px) hue-rotate(166deg);
+    }
+    &:last-child {
+      filter:saturate(0.6) hue-rotate(166deg) brightness(0.95) contrast(1.05);
+    }
+  }
+  &.gradient {
+    z-index:10;
+  }
+  &:not(.gradient) {
+    z-index:100;
+    background: none;
+  }
+}

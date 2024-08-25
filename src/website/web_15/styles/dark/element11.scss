@@ -19,18 +19,18 @@
     background-color:black;
     .wrapper02 {
       .image00 {
-        @include image;
+        @include imageDark;
       }
       .topRightArrowIcon {
-        fill:rgba(26, 26, 30, 1);
+        fill:rgba(230, 230, 230, 1);
       }
       .disk {
         &Inner {
-          border:2px dashed rgba(26, 26, 26, 0.521);
+          border:2px dashed rgba(230, 230, 230, 0.521);
         }
         &Front {
           span {
-            color:rgba(26, 26, 30, 1);
+            color:rgba(230, 230, 230, 1);
           }
         }
       }

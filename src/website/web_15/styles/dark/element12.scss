@@ -2,20 +2,8 @@
   grid-area: el12;
   background-color:black;
   .wrapper01 {
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
-    margin-left:10px;
-    margin-bottom:10px;
-    border-radius:20px;
-    background-color:#ceb7e9;
-    display:grid;
-    place-items:center;
-    position:relative;
-    overflow: hidden;
     .image00 {
-      @include image;
-      left:0;
-      bottom:0;
+      @include imageDark;
     }
   }
 }

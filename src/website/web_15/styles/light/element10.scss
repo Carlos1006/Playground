@@ -20,6 +20,10 @@
       overflow: hidden;
       .image00 {
         @include image;
+        transition: $transition_bg;
+        img {
+          transition: $transition_filter;
+        }
         left:0;
         top:0;
       }

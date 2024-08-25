@@ -47,6 +47,10 @@
         @include image;
         right:0;
         top:0;
+        transition: $transition_bg;
+        img {
+          transition: $transition_filter;
+        }
       }
       .topRightArrowIcon {
         z-index:15;
@@ -56,6 +60,7 @@
         width: 7cqi;
         height: 7cqi;
         fill:rgba(26, 26, 30, 1);
+        transition: $transition_fill;
       }
       .disk {
         width: 75cqmin;
@@ -68,6 +73,7 @@
         &Inner {
           position:absolute;
           border:2px dashed rgba(26, 26, 26, 0.521);
+          transition: $transition_border;
           width: 100%;
           height: 100%;
           border-radius:1000px;
@@ -82,6 +88,7 @@
           span {
             font-family: 'Space Grotesk';
             color:rgba(26, 26, 30, 1);
+            transition: $transition_color;
             font-size: 3ex;
             text-transform: capitalize;
           }

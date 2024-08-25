@@ -9,7 +9,7 @@
     background-color:black;
     .wrapper02 {
       .image00 {
-        @include image;
+        @include imageDark;
       }
     }
   }
