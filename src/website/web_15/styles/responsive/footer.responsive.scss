@@ -1,0 +1,16 @@
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .footer {
+    .overflowWrapper {
+      left:calc(10px + 30px - 7px) !important;
+    }
+    .wrapper {
+      .marquee {
+        &Wrapper {
+          >div {
+            font-size: 2.3ex !important;
+          }
+        }
+      }
+    }
+  }
+}

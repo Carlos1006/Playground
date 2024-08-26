@@ -11,3 +11,21 @@
     }
   }
 }
+
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .element30 {
+    .wrapper01 {
+      .wrapper02 {
+        height: calc(100% - 20px) !important;
+        span {
+          font-size: 1.7ex !important;
+          svg {
+            margin-top: 1cqi !important;
+            width: 2.5ex !important;
+            height: 2.5ex !important;
+          }
+        }
+      }
+    }
+  }
+}

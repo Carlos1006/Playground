@@ -1,0 +1,10 @@
+@mixin arrow_1366 {
+  height:1px !important;
+  &::after, &::before {
+    border-width: 1px !important;
+    height:10px !important;
+    width: 10px !important;
+    right: 0 !important;
+    top: calc(50% - 4px - 1px) !important;
+  }
+}

@@ -6,7 +6,6 @@
       @include image1_1600;
     }
   }
-
   .element11 {
     .image00 {
       @include image1_1600;
@@ -23,13 +22,11 @@
       }
     }
   }
-
   .element12 {
     .image00 {
       @include image1_1600;
     }
   }
-  
   .element13 {
     .more {
       span {
@@ -40,5 +37,72 @@
       @include image1_1600;
     }
   }
+}
 
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .element10 {
+    .image00 {
+      @include image1_1366;
+    }
+  }
+  .element11 {
+    .image00 {
+      @include image1_1366;
+    }
+    .topRightArrowIcon {
+      top:3cqi !important;
+      right:3cqi !important;
+      width: 8cqi !important;
+      height: 8cqi !important;
+    }
+    .disk {
+      width: 90cqmin !important;
+      height: 90cqmin !important;
+      top:calc(50% - 45cqmin) !important;
+      left:calc(50% - 45cqmin) !important;
+      &Front {
+        span {
+          font-size: 2.2ex !important;
+        }
+      }
+    }
+  }
+  .element12 {
+    display: none !important;
+    .image00 {
+      @include image1_1366;
+    }
+  }
+  .element13 {
+    .more {
+      span {
+        font-size: 1.7ex !important;
+      }
+      .arrowRight {
+        @include arrow_1366;
+      }
+    }
+    .iconMenu {
+      gap: 6cqmin !important;
+      padding: 6cqmin !important;
+      .iconOption {
+        width: 30cqmin !important;
+        height: 30cqmin !important;
+        border:3cqmin solid transparent;
+        >span {
+          font-size: 15cqmin !important;
+        }
+        >div {
+          width: 8cqmin !important;
+          height: 12cqmin !important;
+        }
+        &:hover {
+          width: 40cqmin !important;
+        }
+      }
+    }
+    .image00 {
+      @include image1_1366;
+    }
+  }
 }

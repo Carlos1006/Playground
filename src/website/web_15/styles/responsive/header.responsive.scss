@@ -1,0 +1,48 @@
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .header {
+    div.headerLink {
+      .notification {
+        font-size: 1.2ex !important;
+      }
+      >div.headerLinkContent {
+        span {
+          font-size: 1.5ex !important;
+        }
+        &:has(input) {
+          grid-template-columns:20px 10px 10px 1fr 20px !important;
+          svg {
+            width: 15px !important;
+            height: 15px !important;
+          }
+          input {
+            font-size: 1.5ex !important;
+          }
+        }
+      }
+      &.yellow {
+        >div.headerLinkContent {
+          width: calc(100% - 10px) !important;
+          .triangleIcon {
+            width:2ex !important;
+            height:2ex !important;
+          }
+        }
+      }
+    }
+    >div:nth-child(1) {
+      p {
+        font-size: 4rex !important;
+      }
+    }
+    >div:nth-child(2) {
+      grid-template-columns: 1fr 3fr 1fr 2fr 1fr !important;
+    }
+    >div:nth-child(3) {
+      grid-template-columns: 0.4fr 1.2fr 0.5fr !important;
+    }
+    div>svg.bookIcon {
+      width: 3ex !important;
+      height: 3ex !important;
+    }
+  }
+}

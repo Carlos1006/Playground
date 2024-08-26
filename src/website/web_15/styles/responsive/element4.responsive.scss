@@ -25,3 +25,42 @@
     }
   }
 }
+
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .element40 {
+    .wrapper01 {
+      .wrapper02 {
+        width: calc(140px - 20px) !important;
+        height: calc(140px - 20px) !important;
+        margin-top:15px !important;
+        .image01 {
+          @include image2_1366;
+        }
+      }
+    }
+  }
+  
+  .element41 {
+    .wrapper01 {
+      .wrapper02 {
+        width: calc(140px - 20px) !important;
+        height: calc(140px - 20px) !important;
+        margin-top:15px !important;
+        .image01 {
+          @include image2_1366;
+          left:-80px !important;
+        }
+      }
+    }
+  }
+  
+  .element42 {
+    .wrapper01 {
+      margin-top:15px !important;
+      .image01 {
+        @include image2_1366;
+        left:-200px !important;
+      }
+    }
+  }
+}

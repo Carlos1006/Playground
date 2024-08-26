@@ -38,6 +38,7 @@ const BentoGrid: FC = () => {
 
   const refElement10 = useRef<HTMLDivElement>(null);
   const refElement11 = useRef<HTMLDivElement>(null);
+  const refElement12 = useRef<HTMLDivElement>(null);
   const refElement13 = useRef<HTMLDivElement>(null);
 
   const refElement00 = useRef<HTMLDivElement>(null);
@@ -175,7 +176,7 @@ const BentoGrid: FC = () => {
           </div>
         </div>
         <div className={`${css.element12} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.wrapper01}>
+          <div className={css.wrapper01} ref={refElement12}>
             <BlueGradient width={width} height={height} />
             <PinkCthulhu width={width} height={height} />
           </div>

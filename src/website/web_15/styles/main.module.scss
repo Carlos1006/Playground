@@ -53,9 +53,12 @@
 }
 
 @import './responsive/main.responsive';
+@import './responsive/components.responsive';
 @import './responsive/mixins.responsive';
+@import './responsive/header.responsive';
 @import './responsive/element0.responsive';
 @import './responsive/element1.responsive';
 @import './responsive/element2.responsive';
 @import './responsive/element3.responsive';
 @import './responsive/element4.responsive';
+@import './responsive/footer.responsive';

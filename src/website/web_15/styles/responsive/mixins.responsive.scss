@@ -16,34 +16,6 @@
 @mixin image2_1600 {
   inline-size: 390px !important;
   block-size: 160px !important;
-  top:0px;
-  position: absolute;
-  border:1px solid black;
-  border-radius:10000px;
-  background: rgb(34,193,195);
-  background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(45,253,62,1) 100%);
-  >div {
-    width: 100%;
-    height: 100%;
-    position:absolute;
-    left:0;
-    top:0;
-    z-index:100;
-    background:linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(45,253,62,1) 100%);
-    mix-blend-mode: multiply;
-    opacity:0.8;
-  }
-  img {
-    height: 200%;
-    object-fit: contain;
-    position:absolute;
-    left:10%;
-    top:-20%;
-    &:first-child {
-      opacity:0.7;
-      filter: blur(10px);
-    }
-  }
 }
 
 @mixin image4_1600 {
@@ -52,5 +24,38 @@
     height: 80% !important;
     left: -70% !important;
     bottom:-13% !important;
+  }
+}
+
+// ----------------------
+
+@mixin image1_1366 {
+  img {
+    left: -8% !important;
+    top: 18% !important;
+  }
+}
+
+@mixin image4_1366 {
+  img {
+    height: 70% !important;
+    left: -55% !important;
+    bottom:-11% !important;
+  }
+}
+
+@mixin image3_1366 {
+  img {
+    width: 120% !important;
+    left: -8% !important;
+  }
+}
+
+@mixin image2_1366 {
+  inline-size: 320px !important;
+  block-size: 120px !important;
+  img {
+    height: 300% !important;
+    top:-38% !important;
   }
 }

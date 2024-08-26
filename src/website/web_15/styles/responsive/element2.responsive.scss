@@ -10,3 +10,16 @@
     }
   }
 }
+
+@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+  .element20 {
+    .wrapper02 {
+      span {
+        font-size: 1.8ex !important;
+      }
+      .image02 {
+        @include image3_1366;
+      }
+    }
+  }
+}
