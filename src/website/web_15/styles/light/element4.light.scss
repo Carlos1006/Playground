@@ -2,9 +2,11 @@
   grid-area: el40;
   background-color:black;
   .wrapper01 {
+    container: el40 / block-size;
     width: calc(100% - 10px);
     overflow: hidden;
     height: 100%;
+    // background:red;
     .wrapper02 {
       width: calc(220px - 20px);
       height: calc(220px - 20px);

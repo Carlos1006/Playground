@@ -53,8 +53,11 @@
 }
 
 @mixin image2 {
-  inline-size: 420px;
+  inline-size: calc(4.68cqi + 6.2cqi + 11.45cqi - 10px);
   block-size: 200px;
+  // background-color:green; // ! Temporal
+  // overflow: hidden; // ! Temporal
+  // z-index:200; // ! Temporal
   top:0px;
   position: absolute;
   border:1px solid black;

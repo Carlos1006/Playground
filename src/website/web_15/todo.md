@@ -2,7 +2,7 @@
 
 # Laptop
 
-- 1366x768 - HD
+- +1366x768 - HD
 - +1600x900 - HD+
 - +1920x1080 - Full HD (FHD)
 - 2560x1440 - Quad HD (QHD)
@@ -52,3 +52,22 @@
 - 324x394 - Apple Watch Series 4-6, SE (40mm)
 - 368x448 - Apple Watch Series 4-6, SE (44mm)
 - 396x484 - Apple Watch Series 7-8 (45mm)
+
+## WIDTH
+
+1. 3840
+2. 3440
+3. 3200
+4. 2560
+5. 1920
+6. 1600
+7. 1366
+8. 1280
+
+## Height
+
+1. 2160
+2. 1800
+3. 1440
+4. 1080
+5. 900

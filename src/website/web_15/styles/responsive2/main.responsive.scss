@@ -1,0 +1,19 @@
+// @container main (width > 3840px) {}
+// @container main (3840px >= width > 3840) {}
+// @container main (3840px >= width > 3200) {}
+// @container main (3200px >= width > 2560) {}
+// @container main (2560px >= width > 1920) {}
+@container main (1920px > width >= 1600) {}
+@container main (1600px > width >= 1366) {}
+@container main (1366px > width >= 1280) {}
+@container main (1280px > width >= 1024) {}
+@container main (1024px > width >= 768) {}
+@container main (768px > width >= 640) {}
+@container main (640px > width >= 480) {}
+
+// @container main (height > 2160px) {}
+// @container main (2160px >= height > 1440) {}
+// @container main (1440px >= height > 1080) {}
+@container main (1080px > height >= 900) {}
+@container main (900px > height >= 800) {}
+@container main (800px > height >= 600) {}

@@ -69,7 +69,7 @@
 }
 
 @mixin image2Dark {
-  inline-size: 420px;
+  inline-size: calc(4.68cqi + 6.2cqi + 11.45cqi - 10px);
   block-size: 200px;
   top:0px;
   position: absolute;

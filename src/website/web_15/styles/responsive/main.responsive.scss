@@ -1,12 +1,27 @@
 
-@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {  
+@container main (1920px > width >= 1600px)  {  
   #wrapper {
     grid-template-columns: 100px 90px 120px 180px 1fr 1fr 150px !important;
     grid-template-rows: 70px 75px 1fr 1fr 1fr 180px 60px 20px !important;
   }
 }
 
-@container main (1600px > width >= 1367px) and (900px > height >= 768px) {  
+@container main (1600px > width >= 1367px)  {  
+  #wrapper {
+    grid-template-columns: 70px 80px 110px 140px 0.4fr 0.6fr 130px !important;
+    grid-template-rows: 65px 60px 1fr 1fr 1fr 140px 50px 10px !important;
+    grid-template-areas: "hd00 hd00 hd00 hd00 hd00 hd00 hd00"
+                         "el01 el01 el01 el01 el00 el00 el00"
+                         "el01 el01 el01 el01 el10 el11 el02"
+                         "el01 el01 el01 el01 el10 el11 el02"
+                         "el01 el01 el01 el01 el10 el11 el20"
+                         "el30 el40 el41 el42 el10 el13 el20"
+                         "fo00 fo00 fo00 fo00 fo00 fo00 fo00"
+                         "gp00 gp00 gp00 gp00 gp00 gp00 gp00" !important;
+  }
+}
+
+@container main (1367px > width >= 1280px)  {  
   #wrapper {
     grid-template-columns: 70px 80px 110px 140px 0.4fr 0.6fr 130px !important;
     grid-template-rows: 65px 60px 1fr 1fr 1fr 140px 50px 10px !important;
