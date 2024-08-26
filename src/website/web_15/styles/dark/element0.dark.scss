@@ -1,0 +1,90 @@
+@import "./mixins.dark";
+$pink: rgb(178, 178, 240);
+$pink: rgb(178, 240, 240);
+
+.element00.darkMode0 {
+  >.wrapper01 {
+    background-color:rgb(40,42,45);
+    .topLink {
+      .topLinkWrapper {
+        span {
+          color:$pink;
+        }
+        .arrowTail {
+          background:$pink;
+        }
+        .arrowRight {
+          background:$pink;
+          &::after, &::before {
+            border-color:$pink;
+          }
+        }
+      }
+    }
+    .wrapper02 {
+      .image04 {
+        @include image5Dark;
+      }
+    }
+  }
+}
+
+.element01.darkMode0 {
+  >.wrapper {
+    background-color:rgb(40,42,45);
+    >div.arrow {
+      .arrow01 {
+        box-shadow: 0 0 0 20px #1aa8ca;
+      }
+      .octopus {
+        animation: rotateHue 10s linear infinite;
+        //? span {}
+      }
+      .arrow02 {
+        background: #1998cf;
+        &::after, &::before {
+          background: #1998cf;
+        }
+        //? &::after {}
+        //? &::before {}
+      }
+    }
+    >div.text {
+      span {
+        transform: scale(0.7,1);
+        background: linear-gradient(180deg, rgba(111,29,203,1) 0%,  rgb(22, 123, 218) 100%);
+        background: linear-gradient(180deg, rgb(29, 203, 188) 0%,  rgb(22, 123, 218) 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    .background {
+      filter:invert(1);
+      opacity:0.03;
+    }
+  }
+}
+
+.element02 {
+  grid-area: el02;
+
+  &.darkMode0 {
+    >.wrapper01 {
+      background-color:rgb(40,42,45);
+    }
+  }
+
+  >.wrapper01 {
+    background-color:#fff;
+    .image04 {
+      @include image5Dark;
+    }
+    .wrapper02 {
+      .overflowWrapper {
+        .image03 {
+          @include image4Dark;
+        }
+      }
+    }
+  }
+}

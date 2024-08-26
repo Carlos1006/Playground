@@ -1,0 +1,27 @@
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {
+  .element40 {
+    .wrapper02 {
+      width: calc(180px - 20px) !important;
+      height: calc(180px - 20px) !important;
+      .image01 {
+        @include image2_1600;
+      }
+    }
+  }
+
+  .element41 {
+    .wrapper02 {
+      width: calc(180px - 20px) !important;
+      height: calc(180px - 20px) !important;
+      .image01 {
+        @include image2_1600;
+      }
+    }
+  }
+
+  .element42 {
+    .image01 {
+      @include image2_1600;
+    }
+  }
+}

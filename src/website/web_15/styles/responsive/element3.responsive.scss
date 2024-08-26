@@ -1,0 +1,13 @@
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {
+  .element30 {
+    .wrapper01 {
+      width: calc(100% - 20px) !important;
+      height: calc(100% - 10px) !important;
+      .wrapper02 {
+        span {
+          font-size: 2.2ex !important;
+        }
+      }
+    }
+  }
+}

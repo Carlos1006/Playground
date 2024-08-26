@@ -1,3 +1,70 @@
+.element10 {
+  grid-area: el10;
+
+  &.darkMode0 {
+    background-color:rgb(40,42,45);
+  }
+
+  .wrapper01 {
+    background-color:black;
+    .wrapper02 {
+      .image00 {
+        @include imageDark;
+      }
+    }
+  }
+}
+
+.element11 {
+  grid-area: el11;
+  position:relative;
+
+  &.darkMode0 {
+    .overflowWrapper01 {
+      .overflowWrapper02 {
+        background-color:rgb(40,42,45);
+      }
+    }
+  }
+
+  .overflowWrapper01 {
+    .image04 {
+      @include image5Dark;
+    }
+  }
+  .wrapper01 {
+    background-color:black;
+    .wrapper02 {
+      .image00 {
+        @include imageDark;
+      }
+      .topRightArrowIcon {
+        fill:rgba(230, 230, 230, 1);
+      }
+      .disk {
+        &Inner {
+          border:2px dashed rgba(230, 230, 230, 0.521);
+        }
+        &Front {
+          span {
+            color:rgba(230, 230, 230, 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+.element12 {
+  grid-area: el12;
+  background-color:black;
+  .wrapper01 {
+    .image00 {
+      @include imageDark;
+    }
+  }
+}
+
 .element13 {
   container: element13 / size;
   background-color:black;
@@ -26,12 +93,6 @@
         >div {
           background-color:rgba(30,30,30,0.2);
         }
-
-        //? &:hover {
-          //? >span {}
-          //? >div {}
-        //? }
-
 
         &:nth-child(1 of .iconOption) {
           background-color:darken(desaturate( #22c1c3, 40%), 20%);

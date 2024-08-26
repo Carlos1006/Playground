@@ -1,0 +1,7 @@
+
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {  
+  #wrapper {
+    grid-template-columns: 100px 90px 120px 180px 1fr 1fr 150px !important;
+    grid-template-rows: 70px 75px 1fr 1fr 1fr 180px 60px 20px !important;
+  }
+}

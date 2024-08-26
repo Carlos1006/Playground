@@ -1,0 +1,31 @@
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {
+  .element01 {
+    >.wrapper {
+      >div.arrow {
+        .octopus {
+          top: 48% !important;
+          right: calc(3.8cqi - 2.4cqi) !important;
+        }
+        .arrow02 {
+          top: calc(49.5% + 4cqi) !important;
+        }
+      }
+      >div.text {
+        span {
+          font-size:17.5ex !important;
+        }
+      }
+      .background {
+        img {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+  
+  .element02 {
+    .image03 {
+      @include image4_1600;
+    }
+  }
+}

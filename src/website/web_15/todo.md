@@ -3,8 +3,8 @@
 # Laptop
 
 - 1366x768 - HD
-- 1600x900 - HD+
-- 1920x1080 - Full HD (FHD)
+- +1600x900 - HD+
+- +1920x1080 - Full HD (FHD)
 - 2560x1440 - Quad HD (QHD)
 - 3200x1800 - QHD+
 - 3840x2160 - Ultra HD (UHD) o 4K

@@ -1,0 +1,12 @@
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {
+  .element20 {
+    .wrapper02 {
+      span {
+        font-size: 2ex !important;
+      }
+      .image02 {
+        @include image3_1600;
+      }
+    }
+  }
+}

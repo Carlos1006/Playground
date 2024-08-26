@@ -1,0 +1,44 @@
+@import '../responsive/mixins.responsive';
+
+@container main (1920px > width >= 1600px) and (1080px > height >= 900px) {  
+  .element10 {
+    .image00 {
+      @include image1_1600;
+    }
+  }
+
+  .element11 {
+    .image00 {
+      @include image1_1600;
+    }
+    .disk {
+      width: 65cqmin !important;
+      height: 65cqmin !important;
+      top:calc(50% - 32.5cqi) !important;
+      left:calc(50% - 32.5cqi) !important;
+      &Front {
+        span {
+          font-size: 2ex !important;
+        }
+      }
+    }
+  }
+
+  .element12 {
+    .image00 {
+      @include image1_1600;
+    }
+  }
+  
+  .element13 {
+    .more {
+      span {
+        font-size: 2ex !important;
+      }
+    }
+    .image00 {
+      @include image1_1600;
+    }
+  }
+
+}

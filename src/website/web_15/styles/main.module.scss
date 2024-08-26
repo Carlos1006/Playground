@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Play:wght@400;700&display=swap');
 @import './mixins';
+@import './anim';
 
 // hue-rotate(672deg)
 // invert(1)
@@ -11,10 +12,6 @@
   container: main / size;
   background:rgb(5,5,6);
 
-  // &.darkMode {
-    // background:blue !important;
-  // }
-  
   #wrapper {
     width: 100cqi;
     height: 100cqb;
@@ -31,45 +28,34 @@
                          "gp00 gp00 gp00 gp00 gp00 gp00 gp00";
 
     @import './components.scss';
-    @import './light/header';
-    @import './light/element00';
-    @import './light/element01';
-    @import './light/element02';
-    @import './light/element10';
-    @import './light/element11';
-    @import './light/element12';
-    @import './light/element13';
-    @import './light/element20';
-    @import './light/element30';
-    @import './light/element40';
-    @import './light/element41';
-    @import './light/element42';
-    @import './light/footer';
-    @import './light/gap';
+
+    @import './light/header.light';
+    @import './light/element0.light';
+    @import './light/element1.light';
+    @import './light/element2.light';
+    @import './light/element3.light';
+    @import './light/element4.light';
+    @import './light/footer.light';
+    @import './light/gap.light';
 
     &.darkMode {
-      @import './dark/header';
-      @import './dark/element00';
-      @import './dark/element01';
-      @import './dark/element02';
-      @import './dark/element10';
-      @import './dark/element11';
-      @import './dark/element12';
-      @import './dark/element13';
-      @import './dark/element20';
-      @import './dark/element30';
-      @import './dark/element40';
-      @import './dark/element41';
-      @import './dark/element42';
-      @import './dark/footer';
-      @import './dark/gap';
+      @import './dark/header.dark';
+      @import './dark/element0.dark';
+      @import './dark/element1.dark';
+      @import './dark/element2.dark';
+      @import './dark/element3.dark';
+      @import './dark/element4.dark';
+      @import './dark/footer.dark';
+      @import './dark/gap.dark';
     }
 
   }
 }
 
-@container main (width < 1300px) {
-  * {
-    display:none;
-  }
-}
+@import './responsive/main.responsive';
+@import './responsive/mixins.responsive';
+@import './responsive/element0.responsive';
+@import './responsive/element1.responsive';
+@import './responsive/element2.responsive';
+@import './responsive/element3.responsive';
+@import './responsive/element4.responsive';
