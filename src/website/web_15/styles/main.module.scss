@@ -9,6 +9,8 @@
 #main {
   width: 100vw;
   height: 100vh;
+  min-height: 900px;
+  min-width: 1280px;
   overflow: auto;
   container: main / size;
   background:rgb(5,5,6);
@@ -16,8 +18,6 @@
   #wrapper {
     width: 100cqi;
     height: 100cqb;
-    min-height: 900px;
-    min-width: 1280px;
     display:grid;
     // grid-template-columns: 100px 90px 120px 220px 1fr 1fr 150px;
     grid-template-columns: 5.20cqi 4.68cqi 6.2cqi 11.45cqi 1fr 1fr 7.81cqi;

@@ -134,15 +134,17 @@
       height: 100%;
       position:relative;
       z-index:100;
+      container: element01 / size;
       span {
         font-family: "Oswald", sans-serif;
         display:block;
-        font-size:21ex;
-        line-height:1.8ex;
+        font-size:20cqb;
+        line-height:24cqb;
+        white-space: nowrap;
         font-weight:700;
         transform-origin: 0 0;
         margin-left:1cqi;
-        margin-top:1cqi;
+        // margin-top:1cqi;
         transform: scale(0.7,1);
         background: linear-gradient(180deg, rgba(111,29,203,1) 0%,  rgb(3, 18, 32) 100%);
         background-clip: text;
