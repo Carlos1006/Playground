@@ -1,27 +1,11 @@
-.element40 {
-  .wrapper01 {
-    .wrapper02 {
-      .image01 {
-        @include image2Dark;
-      }
-    }
-  }
+.element40.darkMode {
+  @include image2Dark;
 }
 
-.element41 {
-  .wrapper01 {
-    .wrapper02 {
-      .image01 {
-        @include image2Dark;
-      }
-    }
-  }
+.element41.darkMode {
+  @include image2Dark;
 }
 
-.element42 {
-  .wrapper01 {
-    .image01 {
-      @include image2Dark;
-    }
-  }
+.element42.darkMode {
+  @include image2Dark;
 }

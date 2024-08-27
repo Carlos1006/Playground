@@ -1,8 +1,7 @@
-import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import css from "./styles/main.module.scss";
 import BlueGradient from "./components/blueGradient";
 import PinkCthulhu from "./components/pinkCthulhu";
-import GrayCthulhu from "./components/grayCthulhu";
 import GreenCthulhu from "./components/greenCthulhu";
 import BlueCthulhu from "./components/blueCthulhu";
 import GrayGradient from "./components/grayGradient";
@@ -19,22 +18,22 @@ import ArrowRight from "./components/arrowRight";
 import TopLink from "./components/topLink";
 import Marquee from "./components/marquee";
 import Header from "./components/header";
+import { useFavicon } from "./hooks/useFavicon";
+import { useDarkMode } from "./hooks/useDarkMode";
+import { useResizeObserver } from "./hooks/useObserver";
+import { DimensionProps, RightTopProps } from "./types";
+import { DEFAULT_DIM, DEFAULT_RIGHT_TOP, GAP } from "./constants";
+import GrayCthulhu2 from "./components/grayCthulhu2";
 
 const BentoGrid: FC = () => {
-  const [width, setWidth] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const [width00, setWidth00] = useState<number>(0);
-  const [height00, setHeight00] = useState<number>(0);
-  const [right00, setRight00] = useState<number>(0);
-  const [top00, setTop00] = useState<number>(0);
-  const [remove, setRemove] = useState<number>(0);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-
-  // Dark Mode Change
-  const [beginDarkMode, setBeginDarkMode] = useState<boolean>(false);
-  // ------------------------------
-
   const mainRef = useRef<HTMLDivElement>(null);
+
+  const [element1, setElement1] = useState<DimensionProps>(DEFAULT_DIM);
+  const [element0Link, setElement0Link] = useState<DimensionProps>(DEFAULT_DIM);
+
+  const [element0Compensation, setElement0Compensation] =
+    useState<RightTopProps>(DEFAULT_RIGHT_TOP);
+  const [removeTopLinkWidth, setRemoveTopLinkWidth] = useState<number>(0);
 
   const refElement10 = useRef<HTMLDivElement>(null);
   const refElement11 = useRef<HTMLDivElement>(null);
@@ -44,67 +43,100 @@ const BentoGrid: FC = () => {
   const refElement00 = useRef<HTMLDivElement>(null);
   const refElement02 = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    document.title = "Bento Grid";
-  }, []);
+  const refElement40 = useRef<HTMLDivElement>(null);
+  const refElement41 = useRef<HTMLDivElement>(null);
+  const refElement42 = useRef<HTMLDivElement>(null);
+  const refElement42Wrapper = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new ResizeObserver(() => {
+  const [element4Side, setElement4Side] = useState<number>(0);
+  const [grayCthulhuWidth, setGrayCthulhuWidth] = useState<number>(0);
+  const [grayCthulhu41Left, setGrayCthulhu41Left] = useState<number>(0);
+  const [grayCthulhu42Left, setGrayCthulhu42Left] = useState<number>(0);
+
+  useResizeObserver({
+    target: mainRef,
+    callback: () => {
+      // ? CALCULATE ELEMENT 1 WIDTH AND HEIGHT
+      let element1Width = 0;
+      let element1Height = 0;
       if (refElement10.current && refElement11.current) {
-        setWidth(
+        element1Width =
           refElement10.current.offsetWidth +
-            refElement11.current.offsetWidth +
-            10
-        );
+          refElement11.current.offsetWidth +
+          GAP;
       }
       if (refElement11.current && refElement13.current) {
-        setHeight(
+        element1Height =
           refElement11.current.offsetHeight +
-            refElement13.current.offsetHeight +
-            10
-        );
+          refElement13.current.offsetHeight +
+          GAP;
       }
+      setElement1({ width: element1Width, height: element1Height });
 
+      // *-----------------------------------------------------------------------
+
+      // ? CALCULATE ELEMENT 0 WIDTH AND HEIGHT
+      let element0LinkWidth = 0;
+      let element0LinkHeight = 0;
+      let element0LinkTopCompensation = 0;
+      let element0LinkRightCompensation = 0;
       if (refElement00.current && refElement02.current) {
-        setWidth00(refElement00.current.offsetWidth);
-        setHeight00(
-          refElement00.current.offsetHeight + refElement02.current.offsetHeight
-        );
-        setRight00(refElement02.current.offsetWidth);
-        setTop00(refElement00.current.offsetHeight);
+        element0LinkWidth = refElement00.current.offsetWidth;
+        element0LinkHeight =
+          refElement00.current.offsetHeight + refElement02.current.offsetHeight;
+        // ? COMPENSATE FOR THE TOP AND RIGHT POSITION OF THE LINK
+        element0LinkTopCompensation = -refElement00.current.offsetHeight;
+        element0LinkRightCompensation = -refElement02.current.offsetWidth;
       }
+      setElement0Link({ width: element0LinkWidth, height: element0LinkHeight });
+      setElement0Compensation({
+        right: element0LinkRightCompensation,
+        top: element0LinkTopCompensation,
+      });
 
+      // *-----------------------------------------------------------------------
+
+      // ? REMOVE TOP LINK WIDTH
+      let removeTopLinkWidth = 0;
       if (refElement02.current) {
-        setRemove(refElement02.current.offsetWidth);
+        removeTopLinkWidth = refElement02.current.offsetWidth;
       }
-    });
-    if (mainRef.current) {
-      observer.observe(mainRef.current);
-    }
-    return () => {
-      observer.disconnect();
-    };
-  }, [mainRef]);
+      setRemoveTopLinkWidth(removeTopLinkWidth);
 
-  const onDarkModeChange = (): void => {
-    setBeginDarkMode((prev) => !prev);
-  };
+      // *-----------------------------------------------------------------------
 
-  useLayoutEffect(() => {
-    setDarkMode((prev) => !prev);
-  }, [beginDarkMode]);
+      if (refElement42.current) {
+        const minSide = Math.min(
+          refElement42.current.offsetWidth,
+          refElement42.current.offsetHeight
+        );
+        setElement4Side(minSide);
 
-  useLayoutEffect(() => {
-    let link: HTMLLinkElement | null =
-      document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.getElementsByTagName("head")[0].appendChild(link);
-    }
-    link.href =
-      "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐙</text></svg>";
-  }, []);
+        if (
+          refElement40.current &&
+          refElement41.current &&
+          refElement42Wrapper.current
+        ) {
+          const rect40 = refElement40.current.getBoundingClientRect();
+          const rect41 = refElement41.current.getBoundingClientRect();
+          const rect42Wrapper =
+            refElement42Wrapper.current.getBoundingClientRect();
+
+          const fullWidth = rect42Wrapper.left + minSide - rect40.left;
+
+          const leftElement41 = rect41.left - rect40.left;
+          const leftElement42 = rect42Wrapper.left - rect40.left;
+
+          setGrayCthulhuWidth(fullWidth);
+          setGrayCthulhu41Left(-leftElement41);
+          setGrayCthulhu42Left(-leftElement42);
+        }
+      }
+    },
+  });
+
+  useFavicon();
+  const { darkMode, onDarkModeChange } = useDarkMode();
 
   return (
     <div
@@ -117,11 +149,8 @@ const BentoGrid: FC = () => {
         <div className={`${css.element00} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
-              <TopLink remove={remove} />
-              <div
-                style={{ width: width00, height: height00 }}
-                className={css.image04}
-              ></div>
+              <TopLink remove={removeTopLinkWidth} />
+              <div style={element0Link} className={css.image04}></div>
             </div>
           </div>
         </div>
@@ -138,7 +167,7 @@ const BentoGrid: FC = () => {
               <div className={css.overflowWrapper}>
                 <BlueCthulhu />
               </div>
-              <GrayGradient width={width00} height={height00} />
+              <GrayGradient {...element0Link} />
             </div>
           </div>
         </div>
@@ -151,34 +180,29 @@ const BentoGrid: FC = () => {
         >
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement10}>
-              <BlueGradient width={width} height={height} />
-              <PinkCthulhu width={width} height={height} />
+              <BlueGradient {...element1} />
+              <PinkCthulhu {...element1} />
             </div>
           </div>
         </div>
         <div className={`${css.element11} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.overflowWrapper01}>
-            <GrayGradient
-              width={width00}
-              height={height00}
-              right={-right00}
-              top={-top00}
-            />
+            <GrayGradient {...element0Link} {...element0Compensation} />
             <div className={css.overflowWrapper02}></div>
           </div>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement11}>
-              <BlueGradient width={width} height={height} />
+              <BlueGradient {...element1} />
               <TopRightArrowIcon className={css.topRightArrowIcon} />
               <Disk />
-              <PinkCthulhu width={width} height={height} />
+              <PinkCthulhu {...element1} />
             </div>
           </div>
         </div>
         <div className={`${css.element12} ${darkMode ? css.darkMode : ""}`}>
           <div className={css.wrapper01} ref={refElement12}>
-            <BlueGradient width={width} height={height} />
-            <PinkCthulhu width={width} height={height} />
+            <BlueGradient {...element1} />
+            <PinkCthulhu {...element1} />
           </div>
         </div>
         <div className={`${css.element13} ${darkMode ? css.darkMode : ""}`}>
@@ -188,8 +212,8 @@ const BentoGrid: FC = () => {
               <span>+10 Lorem ipsum</span>
               <ArrowRight width={"12cqmax"} />
             </div>
-            <BlueGradient width={width} height={height} />
-            <PinkCthulhu width={width} height={height} />
+            <BlueGradient {...element1} />
+            <PinkCthulhu {...element1} />
           </div>
         </div>
         <div className={`${css.element20} ${darkMode ? css.darkMode20 : ""}`}>
@@ -214,22 +238,31 @@ const BentoGrid: FC = () => {
           </div>
         </div>
         <div className={`${css.element40} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.wrapper01}>
-            <div className={css.wrapper02}>
-              <GrayCthulhu />
-            </div>
+          <div className={css.wrapper01} ref={refElement40}>
+            <GrayCthulhu2
+              squareSide={element4Side}
+              left={0}
+              width={grayCthulhuWidth}
+            />
           </div>
         </div>
         <div className={`${css.element41} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.wrapper01}>
-            <div className={css.wrapper02}>
-              <GrayCthulhu />
-            </div>
+          <div className={css.wrapper01} ref={refElement41}>
+            <GrayCthulhu2
+              squareSide={element4Side}
+              left={grayCthulhu41Left}
+              width={grayCthulhuWidth}
+            />
           </div>
         </div>
         <div className={`${css.element42} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.wrapper01}>
-            <GrayCthulhu />
+          <div className={css.wrapper01} ref={refElement42}>
+            <GrayCthulhu2
+              ref={refElement42Wrapper}
+              squareSide={element4Side}
+              left={grayCthulhu42Left}
+              width={grayCthulhuWidth}
+            />
           </div>
         </div>
         <div className={`${css.footer} ${darkMode ? css.darkMode : ""}`}>
@@ -245,3 +278,4 @@ const BentoGrid: FC = () => {
 };
 
 export default BentoGrid;
+// "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",

@@ -24,3 +24,13 @@ export interface HeaderProps {
   darkMode: boolean;
   onDarkModeChange: () => void;
 }
+
+export interface DimensionProps {
+  width: number;
+  height: number;
+}
+
+export interface RightTopProps {
+  right: number;
+  top: number;
+}
