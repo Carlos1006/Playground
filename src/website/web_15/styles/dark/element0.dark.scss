@@ -82,10 +82,8 @@ $pink: rgb(178, 240, 240);
       @include image5Dark;
     }
     .wrapper02 {
-      .overflowWrapper {
-        .image03 {
-          @include image4Dark;
-        }
+      .image03 {
+        @include image4Dark;
       }
     }
   }

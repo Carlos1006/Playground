@@ -164,9 +164,7 @@ const BentoGrid: FC = () => {
         <div className={`${css.element02} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement02}>
-              <div className={css.overflowWrapper}>
-                <BlueCthulhu />
-              </div>
+              <BlueCthulhu />
               <GrayGradient {...element0Link} />
             </div>
           </div>

@@ -195,21 +195,14 @@
       width: calc(100% - 10px);
       margin-left:10px;
       position:relative;
-      top:-10px;
-      height: calc(100%);
+      top:-75px;
+      height: calc(100% + 65px);
       border-radius:0 0 0 20px;
       overflow: hidden;
-      .overflowWrapper {
-        width:100%;
-        z-index:10;
-        height: calc(100% + 75px);
-        position:absolute;
-        top:-75px;
-        .image03 {
-          @include image4;
-          >img {
-            transition: $transition_filter;
-          }
+      .image03 {
+        @include image4;
+        >img {
+          transition: $transition_filter;
         }
       }
     }

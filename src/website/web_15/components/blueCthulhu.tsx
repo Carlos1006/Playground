@@ -1,6 +1,6 @@
 import { FC } from "react";
 import css from "../styles/main.module.scss";
-import image from "../assets/cthulhu4.png";
+import image from "../assets/cthulhu4_1.png";
 
 const BlueCthulhu: FC = () => {
   return (
