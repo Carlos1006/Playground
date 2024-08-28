@@ -1,5 +1,3 @@
-@import '../anim';
-
 .element10 {
   grid-area: el10;
   background-color:#fff;
@@ -97,10 +95,11 @@
         width: 75cqmin;
         height: 75cqmin;
         position:absolute;
-        top:calc(50% - 37.5cqi);
-        left:calc(50% - 37.5cqi);
+        top:calc(50% - 37.5cqmin);
+        left:calc(50% - 37.5cqmin);
         z-index:15;
         border-radius:1000px;
+        container: disk / size;
         &Inner {
           position:absolute;
           border:2px dashed rgba(26, 26, 26, 0.521);
@@ -120,7 +119,7 @@
             font-family: 'Space Grotesk';
             color:rgba(26, 26, 30, 1);
             transition: $transition_color;
-            font-size: 3ex;
+            font-size: 5cqmin;
             text-transform: capitalize;
           }
         }

@@ -68,73 +68,78 @@
     overflow: hidden;
     background-color:#fff;
     transition: $transition_bg;
+    container: element01 / size;
     >div.arrow {
-      width: 100%;
-      height: 100%;
+      width: 100cqi;
+      height: 100cqb;
       position:absolute;
       z-index:100;
       display:flex;
       justify-content:center;
       align-items:center;
+      $arrowWidth: 20cqi;
+      $arrowHeight: 15cqb;
+      $border: 5cqmax;
+      $left: 60cqi;
+      $top: 42cqb;
       .arrow01 {
-        width: 12cqi;
-        height: 5cqi;
-        border-radius:20px;
+        border-radius:0 30px 0 0;
+        box-shadow: 0 0 0 $border rgb(122, 87, 219);
+        width: $arrowWidth;
+        height: $arrowHeight;
         position:absolute;
-        right: 4cqi;
-        top:40%;
-        clip-path:polygon(70% -20px, 200% -20px, 200% 50%, 70% 50%);
-        box-shadow: 0 0 0 20px rgb(122, 87, 219);
+        left: $left;
+        top: $top;
+        clip-path:polygon($border -#{$border}, calc( $arrowWidth + $border) -#{$border}, calc($arrowWidth + $border) calc($arrowHeight - 10px), $border calc($arrowHeight - 10px));
         transition: $transition_shadow;
       }
       .octopus {
-        width: 4cqi;
-        height: 4cqi;
-        font-size:4cqi;
+        width: calc($border * 2);
+        height: calc($border * 2);
         position:absolute;
-        top: 47.2%;
-        right: calc(4cqi - 2.4cqi);
+        top: calc($top + $arrowHeight);
+        left: calc($left + $arrowWidth - ($border / 2));
         animation: rotateHue 10s linear infinite;
         span {
           position:relative;
-          left: -0.75cqi;
-          top: -0.9cqi;
+          font-size: calc($border * 2);
+          left: -2cqmax;
+          top: -2.5cqmax;
         }
       }
       .arrow02 {
-        width: 20px;
-        height:80px;
+        width: $border;
+        height: 15cqmax;
         position:absolute;
-        right: calc(4cqi - 20px);
-        top: calc(45% + 5cqi);
+        left: calc($left + $arrowWidth);
+        top: calc($top + $arrowHeight + ($border * 2) + 1cqmax);
         background: rgb(122, 87, 219);
         transition: $transition_bg;
         border-radius:0 0 10px 10px;
         &::after, &::before {
           content: "";
           position:absolute;
-          width: 100%;
+          width: 90%;
           height: 70%;
           bottom:0;
           background: rgb(122, 87, 219);
           transition: $transition_bg;
-          border-radius:0 0 10px 10px;
+          border-radius:5px 5px 20px 20px;
           transform-origin: 50% calc(100% - 10px);
         }
         &::after {
-          transform: rotate(45deg);
+          transform: rotate(50deg);
         }
         &::before {
-          transform: rotate(-45deg);
+          transform: rotate(-50deg);
         }
       }
     }
     >div.text {
-      width: 130%;
-      height: 100%;
+      width: 130cqi;
+      height: 100cqb;
       position:relative;
       z-index:100;
-      container: element01 / size;
       span {
         font-family: "Oswald", sans-serif;
         display:block;
@@ -144,7 +149,6 @@
         font-weight:700;
         transform-origin: 0 0;
         margin-left:1cqi;
-        // margin-top:1cqi;
         transform: scale(0.7,1);
         background: linear-gradient(180deg, rgba(111,29,203,1) 0%,  rgb(3, 18, 32) 100%);
         background-clip: text;
@@ -153,8 +157,8 @@
       }
     }
     .background {
-      width: 100%;
-      height: 100%;
+      width: 100cqi;
+      height: 100cqb;
       left:0;
       top:0;
       position:absolute;

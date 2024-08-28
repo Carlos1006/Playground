@@ -33,20 +33,22 @@ $pink: rgb(178, 240, 240);
   >.wrapper {
     background-color:rgb(40,42,45);
     >div.arrow {
+      $arrowWidth: 20cqi;
+      $arrowHeight: 15cqb;
+      $border: 5cqmax;
+      $left: 60cqi;
+      $top: 42cqb;
       .arrow01 {
-        box-shadow: 0 0 0 20px #1aa8ca;
+        box-shadow: 0 0 0 $border #1aa8ca;
       }
       .octopus {
         animation: rotateHue 10s linear infinite;
-        //? span {}
       }
       .arrow02 {
         background: #1998cf;
         &::after, &::before {
           background: #1998cf;
         }
-        //? &::after {}
-        //? &::before {}
       }
     }
     >div.text {
