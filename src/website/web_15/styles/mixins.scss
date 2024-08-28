@@ -6,10 +6,14 @@
   background: linear-gradient(133deg, rgba(83,25,148,1) 0%, rgb(28, 19, 190) 100%);
   background: rgb(111,29,203);
   background: linear-gradient(137deg, rgba(111,29,203,1) 0%, rgba(17,118,209,1) 52%, rgba(49,17,209,1) 100%);
+  container: element1 / size;
   img {
-    width: 75%;
-    left: -3%;
-    top: 10%;
+    height: 107cqmin;
+    max-width:75cqmax;
+    left: -4cqmax;
+    bottom: -11cqmax;
+    // width: 73cqmax;
+    // min-width:100cqmin;
     aspect-ratio: 1/1;
     object-fit: contain;
     position:absolute;
@@ -111,12 +115,14 @@
     position:relative;
     width: calc(100% - 10px);
     height: calc(100% - 10px);
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
     &>div.fixedSquare {
       position: absolute;
       #{$side}:0;
       overflow: hidden;
       border-radius:10000px;
-      // background-image: linear-gradient(135deg, white 0%, black 100%);
       background:linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(45,253,62,1) 100%);
       transition: $transition_bg;
       .fullImage {
