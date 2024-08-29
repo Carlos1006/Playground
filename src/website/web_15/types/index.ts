@@ -34,3 +34,8 @@ export interface RightTopProps {
   right: number;
   top: number;
 }
+
+export interface TogglerProps {
+  onClick: () => void;
+  isOn: boolean;
+}

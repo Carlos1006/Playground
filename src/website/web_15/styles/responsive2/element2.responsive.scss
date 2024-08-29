@@ -1,0 +1,15 @@
+@container main (width <= 1400px) {
+  .element20 {
+    background-color:transparent !important;
+    position:absolute;
+    width:150px;
+    height: calc(50cqb - 60px - 20px);
+    bottom: calc(60px + 20px);
+    z-index:99999;
+    right:-150px;
+    transition:right 0.2s ease-in-out;
+    &.show {
+      right:0;
+    }
+  }
+}

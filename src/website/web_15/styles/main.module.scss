@@ -4,8 +4,9 @@
 @import './mixins';
 @import './anim';
 
-// hue-rotate(672deg)
-// invert(1)
+// hue-rotate( 672deg )
+// invert( 1 )
+
 #main {
   width: 100vw;
   height: 100vh;
@@ -14,6 +15,7 @@
   overflow: auto;
   container: main / size;
   background:rgb(5,5,6);
+  overflow: hidden;
 
   #wrapper {
     width: 100cqi;
@@ -45,6 +47,7 @@
     @import './light/gap.light';
 
     &.darkMode {
+      @import './dark/components.dark';
       @import './dark/header.dark';
       @import './dark/element0.dark';
       @import './dark/element1.dark';
@@ -59,6 +62,10 @@
 }
 
 @import './responsive2/main.responsive';
+@import './responsive2/components.responsive';
+@import './responsive2/element0.responsive';
+@import './responsive2/element1.responsive';
+@import './responsive2/element2.responsive';
 
 
 // @import './responsive/main.responsive';

@@ -1,0 +1,45 @@
+@container main (width <= 1860px) {
+  .element01 {
+    >.wrapper {
+      >div.arrow {
+        scale: 0.7;
+        right:0;
+        translate: 10% -3%;
+      }
+    }
+  }
+}
+
+@container main (width <= 1630px) {
+  .element01 {
+    >.wrapper {
+      >div.arrow {
+        translate: 15% -3%;
+      }
+    }
+  }
+}
+
+@container main (width <= 1400px) {
+  .element02 {
+    position:fixed;
+    width:150px;
+    height:calc(50cqb - 70px - 75px - 10px);
+    top: calc(70px + 75px + 10px);
+    z-index:99999;
+    right:-150px;
+    transition:right 0.2s ease-in-out;
+    &.show {
+      right:0;
+    }
+    .wrapper01 {
+      border-radius:20px 0 0 20px !important;
+      .wrapper02{
+        border-radius:10px 0 0 10px !important;
+        height:calc(100% - 20px) !important;
+        top:10px !important;
+      }
+    }
+    
+  }
+}

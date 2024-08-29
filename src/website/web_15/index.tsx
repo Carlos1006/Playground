@@ -24,6 +24,7 @@ import { useResizeObserver } from "./hooks/useObserver";
 import { DimensionProps, RightTopProps } from "./types";
 import { DEFAULT_DIM, DEFAULT_RIGHT_TOP, GAP } from "./constants";
 import GrayCthulhu2 from "./components/grayCthulhu2";
+import Toggler from "./components/toggler";
 
 const BentoGrid: FC = () => {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -52,6 +53,8 @@ const BentoGrid: FC = () => {
   const [grayCthulhuWidth, setGrayCthulhuWidth] = useState<number>(0);
   const [grayCthulhu41Left, setGrayCthulhu41Left] = useState<number>(0);
   const [grayCthulhu42Left, setGrayCthulhu42Left] = useState<number>(0);
+
+  const [showElement2_3, setShowElement2_3] = useState<boolean>(false);
 
   useResizeObserver({
     target: mainRef,
@@ -145,6 +148,10 @@ const BentoGrid: FC = () => {
       ref={mainRef}
     >
       <div id={css.wrapper} className={`${darkMode ? css.darkMode : ""}`}>
+        <Toggler
+          isOn={showElement2_3}
+          onClick={() => setShowElement2_3(!showElement2_3)}
+        />
         <Header darkMode={darkMode} onDarkModeChange={onDarkModeChange} />
         <div className={`${css.element00} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.wrapper01}>
@@ -161,7 +168,12 @@ const BentoGrid: FC = () => {
             <Background />
           </div>
         </div>
-        <div className={`${css.element02} ${darkMode ? css.darkMode0 : ""}`}>
+        <div
+          className={`
+            ${css.element02} 
+            ${showElement2_3 ? css.show : ""}
+            ${darkMode ? css.darkMode0 : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement02}>
               <BlueCthulhu />
@@ -214,7 +226,12 @@ const BentoGrid: FC = () => {
             <PinkCthulhu {...element1} />
           </div>
         </div>
-        <div className={`${css.element20} ${darkMode ? css.darkMode20 : ""}`}>
+        <div
+          className={`
+            ${css.element20} 
+            ${showElement2_3 ? css.show : ""} 
+            ${darkMode ? css.darkMode20 : ""}`}
+        >
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <span>
