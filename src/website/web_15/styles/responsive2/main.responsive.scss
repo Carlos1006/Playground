@@ -1,31 +1,41 @@
-// @container main (width > 3840px) {}
-// @container main (3840px >= width > 3840) {}
-// @container main (3840px >= width > 3200) {}
-// @container main (3200px >= width > 2560) {}
-// @container main (2560px >= width > 1920) {}
-//? @container main (1920px > width >= 1600) {}
-//? @container main (1600px > width >= 1366) {}
-//? @container main (1366px > width >= 1280) {}
-//? @container main (1280px > width >= 1024) {}
-//? @container main (1024px > width >= 768) {}
-//? @container main (768px > width >= 640) {}
-//? @container main (640px > width >= 480) {}
-
-// @container main (height > 2160px) {}
-// @container main (2160px >= height > 1440) {}
-// @container main (1440px >= height > 1080) {}
-//? @container main (1080px > height >= 900) {}
-//? @container main (900px > height >= 800) {}
-//? @container main (800px > height >= 600) {}
-
 @container main (width <= 1600px) {
   #wrapper {
     grid-template-columns: 6cqi 7cqi 9cqi 13cqi 1fr 1fr 9cqi !important;
   }
 }
 
-@container main (width <= 1400px) {
+@container main (870px < width <= 1400px) {
   #wrapper {
     grid-template-columns: 6cqi 7cqi 9cqi 13cqi 1fr 1fr !important;
+  }
+}
+
+@media (width <= 870px) {
+  #main {
+    height: 100lvh !important;
+    min-width:unset !important;
+    min-height:unset !important;
+  }
+}
+
+@container main (width <= 870px) {
+  #wrapper {
+    grid-template-columns: 0.7fr 0.8fr repeat(2, 1fr) 0.5fr 1.5fr !important;
+    grid-template-columns: 1.2fr 0.8fr repeat(2, 1fr) 0.8fr 1.2fr !important;
+    grid-template-rows: 70px 75px 1fr 50px 1fr 1fr 180px 60px 10px !important;
+
+    grid-template-areas: "hd00 hd00 hd00 hd00 hd00 hd00"
+                         "el01 el01 el01 el01 el01 el01"
+                         "el01 el01 el01 el01 el01 el01"
+                         "el00 el00 el00 el00 el00 el00"
+                         "el12 el12 el12 el11 el11 el11"
+                         "el13 el13 el13 el11 el11 el11"
+                         "el30 el40 el41 el42 el42 el20"
+                         "fo00 fo00 fo00 fo00 fo00 fo00"
+                         "gp00 gp00 gp00 gp00 gp00 gp00" !important;
+
+    .toggler {
+      display: none !important;
+    }
   }
 }

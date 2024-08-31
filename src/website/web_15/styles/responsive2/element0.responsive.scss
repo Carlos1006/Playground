@@ -43,3 +43,22 @@
     
   }
 }
+
+@container main (width <= 870px) {
+  .element01 {
+    .wrapper {
+    width: calc(100% - 20px) !important;
+    border-radius:20px 20px 0 0 !important;
+    }
+  }
+
+  .element00 {
+    >.wrapper01 {
+      background-color:transparent !important;
+    }
+    .wrapper02 {
+      width: calc(100% - 20px) !important;
+      border-radius:0 0 20px 20px !important;
+    }
+  }
+}

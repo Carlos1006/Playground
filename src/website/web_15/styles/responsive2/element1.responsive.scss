@@ -8,53 +8,60 @@
 }
 
 @container main (height <= 1000px ) {
-  .element10 {
-    .image00 {
-      @include image_1000;
-    }
-  }
-  
-  .element11 {
-    .image00 {
-      @include image_1000;
-    }
-  }
-  
-  .element12 {
-    .image00 {
-      @include image_1000;
-    }
-  }
-  
-  .element13 {
-    .image00 {
-      @include image_1000;
+  @each $element in 10 11 12 13 {
+    .element#{$element} {
+      .image00 {
+        @include image_1000;
+      }
     }
   }
 }
 
 @container main (height <= 930px) {
-  .element10 {
-    .image00 {
-      @include image_930;
+  @each $element in 10 11 12 13 {
+    .element#{$element} {
+      .image00 {
+        @include image_930;
+      }
     }
   }
-  
-  .element11 {
-    .image00 {
-      @include image_930;
-    }
-  }
-  
-  .element12 {
-    .image00 {
-      @include image_930;
-    }
-  }
-  
+}
+
+@container main (width <= 870px) {
   .element13 {
-    .image00 {
-      @include image_930;
+    .wrapper01 {
+      width: calc(100% - 10px) !important;
+      height: calc(100% - 10px) !important;
+      .image00 {
+        left:0 !important;
+        bottom:0 !important;
+      }
+    }
+  }
+  .element11 {
+    .wrapper01 {
+      width: calc(100%) !important;
+      height: calc(100% - 10px) !important;
+      .wrapper02 {
+        width: calc(100% - 20px) !important;
+        height: calc(100%) !important;
+      }
+    }
+  }
+  .element12 {
+    .wrapper01 {
+      .image00 {
+        left:0 !important;
+        top:0 !important;
+      }
+    }
+  }
+
+  @each $element in 10 11 12 13 {
+    .element#{$element} {
+      .image00 {
+        @include image_870;
+      }
     }
   }
 }

@@ -153,3 +153,9 @@
     }
   }
 }
+
+@media (width <= 870px) {
+  #navigator, #menu {
+    display: none !important
+  };
+}

@@ -66,20 +66,38 @@ const BentoGrid: FC = () => {
   useResizeObserver({
     target: mainRef,
     callback: () => {
+      if (!mainRef.current) return;
+      const { width, height } = mainRef.current.getBoundingClientRect();
+
       // ? CALCULATE ELEMENT 1 WIDTH AND HEIGHT
       let element1Width = 0;
       let element1Height = 0;
-      if (refElement10.current && refElement11.current) {
-        element1Width =
-          refElement10.current.offsetWidth +
-          refElement11.current.offsetWidth +
-          GAP;
-      }
-      if (refElement11.current && refElement13.current) {
-        element1Height =
-          refElement11.current.offsetHeight +
-          refElement13.current.offsetHeight +
-          GAP;
+      if (width > 870) {
+        if (refElement10.current && refElement11.current) {
+          element1Width =
+            refElement10.current.offsetWidth +
+            refElement11.current.offsetWidth +
+            GAP;
+        }
+        if (refElement11.current && refElement13.current) {
+          element1Height =
+            refElement11.current.offsetHeight +
+            refElement13.current.offsetHeight +
+            GAP;
+        }
+      } else {
+        if (refElement12.current && refElement13.current) {
+          element1Height =
+            refElement12.current.offsetHeight +
+            refElement13.current.offsetHeight +
+            GAP;
+        }
+        if (refElement11.current && refElement12.current) {
+          element1Width =
+            refElement11.current.offsetWidth +
+            refElement12.current.offsetWidth +
+            GAP;
+        }
       }
       setElement1({ width: element1Width, height: element1Height });
 
@@ -144,6 +162,10 @@ const BentoGrid: FC = () => {
       }
 
       // ELEMENT 1
+      const leftExtra = width > 870 ? 0.0593 : 0.08;
+      const rightExtra = width > 870 ? 0.0775 : 0.04;
+      const extraLeft = width > 870 ? 0 : 10;
+
       if (refDisk.current && refElement12.current && refElement10.current) {
         const { left: diskLeft } = refDisk.current.getBoundingClientRect();
         const { left: element12Left = null } =
@@ -156,15 +178,13 @@ const BentoGrid: FC = () => {
         );
 
         const imageWidth = diskLeft - element1Left;
-        const leftExtraWidth = imageWidth * 0.0593;
-        const rightExtraWidth = imageWidth * 0.0775;
+        const leftExtraWidth = imageWidth * leftExtra;
+        const rightExtraWidth = imageWidth * rightExtra;
         const finalWidth = imageWidth + leftExtraWidth + rightExtraWidth;
         const bottom = finalWidth * 0.1532;
-        //46px 775px 60px
-        // 5.93% 100% 7.75%
-        console.log({ imageWidth });
+
         setPinkCthulhuWidth(finalWidth);
-        setPinkCthulhuLeft(-leftExtraWidth);
+        setPinkCthulhuLeft(-leftExtraWidth - extraLeft);
         setPinkCthulhuBottom(-bottom);
       }
     },
