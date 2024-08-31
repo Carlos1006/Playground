@@ -6,7 +6,6 @@
 
 // hue-rotate( 672deg )
 // invert( 1 )
-
 #main {
   width: 100vw;
   height: 100vh;
@@ -62,6 +61,7 @@
 }
 
 @import './responsive2/main.responsive';
+@import './responsive2/mixins.responsive';
 @import './responsive2/components.responsive';
 @import './responsive2/element0.responsive';
 @import './responsive2/element1.responsive';

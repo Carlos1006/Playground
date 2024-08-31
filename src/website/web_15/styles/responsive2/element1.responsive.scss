@@ -6,3 +6,55 @@
     }
   }
 }
+
+@container main (height <= 1000px ) {
+  .element10 {
+    .image00 {
+      @include image_1000;
+    }
+  }
+  
+  .element11 {
+    .image00 {
+      @include image_1000;
+    }
+  }
+  
+  .element12 {
+    .image00 {
+      @include image_1000;
+    }
+  }
+  
+  .element13 {
+    .image00 {
+      @include image_1000;
+    }
+  }
+}
+
+@container main (height <= 930px) {
+  .element10 {
+    .image00 {
+      @include image_930;
+    }
+  }
+  
+  .element11 {
+    .image00 {
+      @include image_930;
+    }
+  }
+  
+  .element12 {
+    .image00 {
+      @include image_930;
+    }
+  }
+  
+  .element13 {
+    .image00 {
+      @include image_930;
+    }
+  }
+}

@@ -3,7 +3,11 @@ export interface BlueGradientProps {
   height: number;
 }
 
-export type PinkCthulhuProps = BlueGradientProps;
+export interface PinkCthulhuProps extends BlueGradientProps {
+  imgWidth: number;
+  imgLeft: number;
+  imgBottom: number;
+}
 
 export interface GrayGradientProps {
   width: number;
@@ -38,4 +42,10 @@ export interface RightTopProps {
 export interface TogglerProps {
   onClick: () => void;
   isOn: boolean;
+}
+
+export interface GrayCthulhu2Props {
+  squareSide: number;
+  left: number;
+  width: number;
 }

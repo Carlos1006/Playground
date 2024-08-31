@@ -6,11 +6,22 @@ import image from "../assets/cthulhu.png";
 const PinkCthulhu: FC<PinkCthulhuProps> = ({
   height,
   width,
+  imgWidth,
+  imgLeft,
+  imgBottom,
 }: PinkCthulhuProps) => {
   return (
     <div style={{ width, height }} className={css.image00}>
-      <img src={image} alt="Cthulhu" />
-      <img src={image} alt="Cthulhu" />
+      <img
+        style={{ width: imgWidth, left: imgLeft, bottom: imgBottom }}
+        src={image}
+        alt="Cthulhu"
+      />
+      <img
+        style={{ width: imgWidth, left: imgLeft, bottom: imgBottom }}
+        src={image}
+        alt="Cthulhu"
+      />
     </div>
   );
 };

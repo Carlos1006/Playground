@@ -1,0 +1,11 @@
+@mixin image_1000 {
+  img {
+    max-width:850px !important;
+  }
+}
+
+@mixin image_930 {
+  img {
+    max-width:700px !important;
+  }
+}

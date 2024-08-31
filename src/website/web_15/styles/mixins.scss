@@ -8,12 +8,8 @@
   background: linear-gradient(137deg, rgba(111,29,203,1) 0%, rgba(17,118,209,1) 52%, rgba(49,17,209,1) 100%);
   container: element1 / size;
   img {
-    height: 107cqmin;
-    max-width:75cqmax;
-    left: -4cqmax;
-    bottom: -11cqmax;
-    // width: 73cqmax;
-    // min-width:100cqmin;
+    bottom: -12.5vmin;
+    max-width:900px;
     aspect-ratio: 1/1;
     object-fit: contain;
     position:absolute;

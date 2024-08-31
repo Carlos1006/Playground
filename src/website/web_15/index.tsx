@@ -56,6 +56,13 @@ const BentoGrid: FC = () => {
 
   const [showElement2_3, setShowElement2_3] = useState<boolean>(false);
 
+  const [pinkCthulhuWidth, setPinkCthulhuWidth] = useState<number>(0);
+  const [pinkCthulhuLeft, setPinkCthulhuLeft] = useState<number>(0);
+  const [pinkCthulhuBottom, setPinkCthulhuBottom] = useState<number>(0);
+
+  //--Element 1
+  const refDisk = useRef<HTMLSpanElement>(null);
+
   useResizeObserver({
     target: mainRef,
     callback: () => {
@@ -135,6 +142,31 @@ const BentoGrid: FC = () => {
           setGrayCthulhu42Left(-leftElement42);
         }
       }
+
+      // ELEMENT 1
+      if (refDisk.current && refElement12.current && refElement10.current) {
+        const { left: diskLeft } = refDisk.current.getBoundingClientRect();
+        const { left: element12Left = null } =
+          refElement12.current.getBoundingClientRect();
+        const { left: element10Left = null } =
+          refElement10.current.getBoundingClientRect();
+
+        const element1Left = Number(
+          element12Left ? element12Left : element10Left
+        );
+
+        const imageWidth = diskLeft - element1Left;
+        const leftExtraWidth = imageWidth * 0.0593;
+        const rightExtraWidth = imageWidth * 0.0775;
+        const finalWidth = imageWidth + leftExtraWidth + rightExtraWidth;
+        const bottom = finalWidth * 0.1532;
+        //46px 775px 60px
+        // 5.93% 100% 7.75%
+        console.log({ imageWidth });
+        setPinkCthulhuWidth(finalWidth);
+        setPinkCthulhuLeft(-leftExtraWidth);
+        setPinkCthulhuBottom(-bottom);
+      }
     },
   });
 
@@ -191,7 +223,12 @@ const BentoGrid: FC = () => {
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement10}>
               <BlueGradient {...element1} />
-              <PinkCthulhu {...element1} />
+              <PinkCthulhu
+                {...element1}
+                imgWidth={pinkCthulhuWidth}
+                imgLeft={pinkCthulhuLeft}
+                imgBottom={pinkCthulhuBottom}
+              />
             </div>
           </div>
         </div>
@@ -204,15 +241,25 @@ const BentoGrid: FC = () => {
             <div className={css.wrapper02} ref={refElement11}>
               <BlueGradient {...element1} />
               <TopRightArrowIcon className={css.topRightArrowIcon} />
-              <Disk />
-              <PinkCthulhu {...element1} />
+              <Disk ref={refDisk} />
+              <PinkCthulhu
+                {...element1}
+                imgWidth={pinkCthulhuWidth}
+                imgLeft={pinkCthulhuLeft}
+                imgBottom={pinkCthulhuBottom}
+              />
             </div>
           </div>
         </div>
         <div className={`${css.element12} ${darkMode ? css.darkMode : ""}`}>
           <div className={css.wrapper01} ref={refElement12}>
             <BlueGradient {...element1} />
-            <PinkCthulhu {...element1} />
+            <PinkCthulhu
+              {...element1}
+              imgWidth={pinkCthulhuWidth}
+              imgLeft={pinkCthulhuLeft}
+              imgBottom={pinkCthulhuBottom}
+            />
           </div>
         </div>
         <div className={`${css.element13} ${darkMode ? css.darkMode : ""}`}>
@@ -223,7 +270,12 @@ const BentoGrid: FC = () => {
               <ArrowRight width={"12cqmax"} />
             </div>
             <BlueGradient {...element1} />
-            <PinkCthulhu {...element1} />
+            <PinkCthulhu
+              {...element1}
+              imgWidth={pinkCthulhuWidth}
+              imgLeft={pinkCthulhuLeft}
+              imgBottom={pinkCthulhuBottom}
+            />
           </div>
         </div>
         <div

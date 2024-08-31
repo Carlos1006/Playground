@@ -1,12 +1,7 @@
 import { forwardRef } from "react";
 import css from "../styles/main.module.scss";
 import image from "../assets/cthulhu3.png";
-
-interface GrayCthulhu2Props {
-  squareSide: number;
-  left: number;
-  width: number;
-}
+import { GrayCthulhu2Props } from "../types";
 
 const GrayCthulhu2 = forwardRef<HTMLDivElement, GrayCthulhu2Props>(
   ({ squareSide, left, width }, ref) => {
