@@ -47,14 +47,72 @@
 @container main (width <= 870px) {
   .element01 {
     .wrapper {
-    width: calc(100% - 20px) !important;
-    border-radius:20px 20px 0 0 !important;
+      width: calc(100% - 20px) !important;
+      border-radius:20px 20px 0 0 !important;
+      >div.text {
+        width: 100cqi !important;
+        height: 100cqb !important;
+        span {
+          font-size:27cqb !important;
+          line-height:32cqb !important;
+          font-weight:700 !important;
+          margin-left:3cqi !important;
+          transform: scale(0.8,1) !important;
+        }
+      }
+      >div.arrow {
+        $arrowWidth: 40cqi;
+        $arrowHeight: 50cqb;
+        $border: 5cqmax;
+        $left: 45cqi;
+        $top: 10cqb;
+        .arrow01 {
+          width: $arrowWidth !important;
+          height: $arrowHeight !important;
+          left: $left !important;
+          top: $top !important;
+          clip-path:polygon($border -#{$border}, calc( $arrowWidth + $border) -#{$border}, calc($arrowWidth + $border) calc($arrowHeight - 10px), $border calc($arrowHeight - 10px)) !important;
+        }
+        .octopus {
+          width: calc($border * 2) !important;
+          height: calc($border * 2) !important;
+          top: calc($top + $arrowHeight) !important;
+          left: calc($left + $arrowWidth - ($border / 2)) !important;
+          animation: rotateHue 10s linear infinite !important;
+          span {
+            font-size: calc($border * 2) !important;
+            left: -1cqmax !important;
+            top: -0.5cqmax !important;
+          }
+        }
+        .arrow02 {
+          width: $border !important;
+          height: 15cqmax !important;
+          left: calc($left + $arrowWidth) !important;
+          top: calc($top + $arrowHeight + ($border * 2) + 2.5cqmax) !important;
+        }
+      }
     }
   }
 
   .element00 {
     >.wrapper01 {
       background-color:transparent !important;
+      .topLink {
+        .topLinkWrapper {
+          justify-content:stretch !important;
+          grid-template-columns: auto 1fr !important;
+          padding-left: 3cqi !important;
+          padding-right: 5cqi !important;
+          span {
+            white-space: nowrap !important;
+            font-size: 1.5ex !important;
+          }
+          .arrowTail {
+            display:none !important;
+          }
+        }
+      }
     }
     .wrapper02 {
       width: calc(100% - 20px) !important;

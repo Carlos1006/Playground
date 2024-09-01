@@ -1,0 +1,7 @@
+@container main (width <= 870px) {
+  @each $element in 0 1 2 {
+    .element4#{$element} {
+      @include image2_870;
+    }
+  }
+}

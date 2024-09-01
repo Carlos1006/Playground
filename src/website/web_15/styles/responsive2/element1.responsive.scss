@@ -32,6 +32,35 @@
     .wrapper01 {
       width: calc(100% - 10px) !important;
       height: calc(100% - 10px) !important;
+      .more {
+        display:none !important;
+      }
+      .iconMenu {
+        gap: 6cqmin !important;
+        padding: 6cqmin !important;
+        .iconOption {
+          width: 33cqmin !important;
+          height: 33cqmin !important;
+          max-height: 17cqmax !important;
+          max-width: 17cqmax !important;
+          >span {
+            font-size: 1.9ex !important;
+            top: 0 !important;
+          }
+          &:hover {
+            >span {
+              opacity:1;
+            }
+            >div {
+              opacity:0;
+            }
+          }
+          &:hover {
+            width: 50cqmin !important;
+            max-width: 50cqmin !important;
+          }
+        }
+      }
       .image00 {
         left:0 !important;
         bottom:0 !important;
@@ -45,6 +74,23 @@
       .wrapper02 {
         width: calc(100% - 20px) !important;
         height: calc(100%) !important;
+        .topRightArrowIcon {
+          top:7cqi !important;
+          right:7cqi !important;
+          width: 15cqi !important;
+          height: 15cqi !important;
+        }
+        .disk {
+          width: 80cqmin !important;
+          height: 80cqmin !important;
+          top:calc(50% - 40cqmin);
+          left:calc(50% - 40cqmin);
+          &Front {
+            span {
+              font-size: 6cqmin !important;
+            }
+          }
+        }
       }
     }
   }

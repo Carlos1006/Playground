@@ -49,3 +49,11 @@ export interface GrayCthulhu2Props {
   left: number;
   width: number;
 }
+
+export interface TextProps {
+  isMobile: boolean;
+}
+
+export interface MarqueeProps {
+  isMobile: boolean;
+}

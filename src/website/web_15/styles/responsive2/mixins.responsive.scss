@@ -15,3 +15,11 @@
     max-width:480px !important;
   }
 }
+
+@mixin image2_870($side: left) {
+  img {
+    height: 280% !important;
+    left:5% !important;
+    top:-35% !important;
+  }
+}

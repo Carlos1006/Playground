@@ -3,3 +3,17 @@
     display:none !important;
   }
 }
+
+@container main (width <= 870px) {
+  .arrowRight {
+    height:1px !important;
+    &::before {
+      width: 10px !important;
+      height: 10px !important;
+      top: calc(50% - 5px) !important;
+      right: 1px !important;
+      border-top-width:1px !important;
+      border-right-width:1px !important;
+    }
+  }
+}

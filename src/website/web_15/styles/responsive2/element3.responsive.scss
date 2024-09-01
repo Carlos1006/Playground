@@ -1,3 +1,35 @@
-@container main (width <= 1400px) {
-  
+@container main (width <= 870px) {
+  .element30 {
+    .wrapper01 {
+      margin-left:10px;
+      margin-top:10px;
+      border-radius:100px;
+      background-color:#fff;
+      transition: $transition_bg;
+      display:grid;
+      place-items: center;
+      container: element30 / size;
+      .wrapper02 {
+        width: calc(100% - 8px);
+        height: calc(100% - 20px) !important;
+        background-color:black;
+        border-radius:30px;
+        display:grid;
+        place-items: center;
+        span {
+          font-family: 'Space Grotesk';
+          font-size: 9cqmax !important;
+          color:rgb(245, 245, 253);
+          text-transform: capitalize;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          svg {
+            margin-top: 2cqi;
+            width: 10cqmax !important;
+            height: 10cqmax !important;
+          }
+        }
+      }
+    }
+  }
 }

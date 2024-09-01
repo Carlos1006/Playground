@@ -18,16 +18,52 @@
   .element20 {
     height: 100% !important;
     .wrapper01 {
-      width: calc(100% - 10px) !important;
+      width: calc(100%) !important;
       justify-content:center !important;
-      border-radius:20px !important;
+      border-radius:20px 0 0 2px !important;
       background:transparent !important;
     }
     .wrapper02 {
       width: calc(100%) !important;
       height: 100% !important;
-      border-radius:20px !important;
+      border-radius:20px 0 0 20px !important;
+      background: linear-gradient(180deg, rgba(112,198,226,1) 0%, rgb(25, 139, 141) 100%);
       overflow: hidden;
+      .image02 {
+        background:none !important;
+        position:relative !important;
+        z-index:100 !important;
+        user-select: none !important;
+      }
+      span {
+        z-index:0 !important;
+        font-size: 12.5cqb !important;
+        font-weight:bold !important;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+        // mix-blend-mode: color-burn !important;
+        &::first-letter {
+          text-transform:uppercase !important;
+        }
+      }
+    }
+    
+    &:active {
+      .image02 {
+        z-index:0 !important;
+      }
+      span {
+        z-index:100 !important;
+        mix-blend-mode: unset !important;
+      }
+    }
+  }
+}
+
+
+@container main (width <= 870px) {
+  .element20.darkMode20 {
+    .wrapper02 {
+      background: linear-gradient(90deg, rgb(20, 111, 112) 0%, rgb(19, 109, 27) 100%) !important;
     }
   }
 }

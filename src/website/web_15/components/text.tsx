@@ -1,7 +1,8 @@
 import { FC } from "react";
 import css from "../styles/main.module.scss";
+import { TextProps } from "../types";
 
-const Text: FC = () => {
+const Text: FC<TextProps> = ({ isMobile }: TextProps) => {
   return (
     <div className={css.text}>
       <span>
@@ -9,10 +10,10 @@ const Text: FC = () => {
         <br />
         Old One
         <br />
-        Is
-        <br />
+        Is{isMobile && <>&nbsp;</>}
+        {!isMobile && <br />}
         Coming...
-        <br />
+        {!isMobile && <br />}
         &nbsp;
       </span>
     </div>

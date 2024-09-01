@@ -22,7 +22,7 @@
   #wrapper {
     grid-template-columns: 0.7fr 0.8fr repeat(2, 1fr) 0.5fr 1.5fr !important;
     grid-template-columns: 1.2fr 0.8fr repeat(2, 1fr) 0.8fr 1.2fr !important;
-    grid-template-rows: 70px 75px 1fr 50px 1fr 1fr 180px 60px 10px !important;
+    grid-template-rows: 70px 75px 1fr 50px 1.2fr 0.8fr 170px 50px 15px !important;
 
     grid-template-areas: "hd00 hd00 hd00 hd00 hd00 hd00"
                          "el01 el01 el01 el01 el01 el01"

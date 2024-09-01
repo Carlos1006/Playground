@@ -62,12 +62,19 @@ const BentoGrid: FC = () => {
 
   //--Element 1
   const refDisk = useRef<HTMLSpanElement>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useResizeObserver({
     target: mainRef,
     callback: () => {
       if (!mainRef.current) return;
-      const { width, height } = mainRef.current.getBoundingClientRect();
+      const { width } = mainRef.current.getBoundingClientRect();
+
+      if (width <= 870) {
+        setIsMobile(true);
+      } else if (width > 870) {
+        setIsMobile(false);
+      }
 
       // ? CALCULATE ELEMENT 1 WIDTH AND HEIGHT
       let element1Width = 0;
@@ -129,8 +136,9 @@ const BentoGrid: FC = () => {
       if (refElement02.current) {
         removeTopLinkWidth = refElement02.current.offsetWidth;
       }
-      setRemoveTopLinkWidth(removeTopLinkWidth);
-
+      if (width > 870) {
+        setRemoveTopLinkWidth(removeTopLinkWidth);
+      }
       // *-----------------------------------------------------------------------
 
       if (refElement42.current) {
@@ -163,7 +171,7 @@ const BentoGrid: FC = () => {
 
       // ELEMENT 1
       const leftExtra = width > 870 ? 0.0593 : 0.08;
-      const rightExtra = width > 870 ? 0.0775 : 0.04;
+      const rightExtra = width > 870 ? 0.0775 : 0.08;
       const extraLeft = width > 870 ? 0 : 10;
 
       if (refDisk.current && refElement12.current && refElement10.current) {
@@ -216,7 +224,7 @@ const BentoGrid: FC = () => {
         <div className={`${css.element01} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.wrapper}>
             <Arrow />
-            <Text />
+            <Text isMobile={isMobile} />
             <Background />
           </div>
         </div>
@@ -307,9 +315,26 @@ const BentoGrid: FC = () => {
           <div className={css.wrapper01}>
             <div className={css.wrapper02}>
               <span>
-                Click here to <br />
-                learn more about <br />
-                Cosmic Horror
+                {!isMobile && (
+                  <>
+                    Click here to <br />
+                    learn more about <br />
+                    Cosmic Horror
+                  </>
+                )}
+                {isMobile && (
+                  <>
+                    <label>Learn</label>
+                    <br />
+                    <label>more</label>
+                    <br />
+                    <label>about</label>
+                    <br />
+                    <label>Cosmic</label>
+                    <br />
+                    <label>Horror</label>
+                  </>
+                )}
               </span>
               <GreenCthulhu />
             </div>
@@ -355,7 +380,7 @@ const BentoGrid: FC = () => {
         <div className={`${css.footer} ${darkMode ? css.darkMode : ""}`}>
           <div className={css.overflowWrapper} />
           <div className={css.wrapper}>
-            <Marquee />
+            <Marquee isMobile={isMobile} />
           </div>
         </div>
         <div className={`${css.gap} ${darkMode ? css.darkMode : ""}`} />
