@@ -3,5 +3,10 @@
     .dot {
       font-size:3.5ex !important;
     }
+    .marquee {
+      &Wrapper {
+        animation: scroll 5s linear infinite !important;
+      }
+    }
   }
 }

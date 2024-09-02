@@ -11,10 +11,9 @@
   height: 100vh;
   min-height: 900px;
   min-width: 1280px;
-  overflow: auto;
+  overflow: hidden;
   container: main / size;
   background:rgb(5,5,6);
-  overflow: hidden;
 
   #wrapper {
     width: 100cqi;
@@ -35,8 +34,8 @@
                          "gp00 gp00 gp00 gp00 gp00 gp00 gp00";
 
     @import './components.scss';
-
     @import './light/header.light';
+    @import './light/menu.light';
     @import './light/element0.light';
     @import './light/element1.light';
     @import './light/element2.light';
@@ -53,6 +52,7 @@
       @import './dark/element2.dark';
       @import './dark/element3.dark';
       @import './dark/element4.dark';
+      @import './dark/menu.dark';
       @import './dark/footer.dark';
       @import './dark/gap.dark';
     }
@@ -63,6 +63,7 @@
 @import './responsive2/main.responsive';
 @import './responsive2/mixins.responsive';
 @import './responsive2/components.responsive';
+@import './responsive2/header.responsive';
 @import './responsive2/element0.responsive';
 @import './responsive2/element1.responsive';
 @import './responsive2/element2.responsive';

@@ -1,0 +1,8 @@
+.menu {
+  svg {
+    &:not(:has(~ input)) {
+      stroke:#167561 !important;
+      fill:#167561 !important;
+    }
+  }
+}

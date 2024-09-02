@@ -9,73 +9,116 @@ import { IoMdSunny as SunIcon, IoMdMoon as MoonIcon } from "react-icons/io";
 
 const Header: FC<HeaderProps> = ({
   darkMode,
+  isMobile,
   onDarkModeChange,
+  onMenuClick,
+  showingMenu,
 }: HeaderProps) => {
   const handleDarkModeChange = (): void => {
     onDarkModeChange();
   };
 
   return (
-    <div className={`${css.header} ${darkMode ? css.darkModeHeader : ""}`}>
+    <div
+      className={`${css.header} ${!isMobile ? css.desktop : ""} ${
+        darkMode ? css.darkModeHeader : ""
+      }`}
+    >
       <div>
         <p>Cthulhu</p>
       </div>
-      <div>
-        <div className={css.headerLink}>
-          <div className={css.connector} />
-          <div className={css.hideConnector}></div>
-          <div className={css.headerLinkContent}>
-            <span>Home</span>
+      {isMobile && (
+        <>
+          <div
+            className={`${css.headerLink} ${css.mobileLink} ${css.yellowIcon}`}
+          >
+            <div className={css.connector} />
+            <div className={css.hideConnector}></div>
+            <div
+              className={css.headerLinkContent}
+              onClick={handleDarkModeChange}
+            >
+              {darkMode ? <SunIcon /> : <MoonIcon />}
+            </div>
           </div>
-        </div>
-        <div className={`${css.headerLink} ${css.yellow}`}>
-          <div className={css.connector} />
-          <div className={css.hideConnector}></div>
-          <div className={css.headerLinkContent}>
-            <span>Collections</span>
-            <TriangleDownIcon className={css.triangleIcon} />
+          <div
+            className={`${css.headerLink} ${css.mobileLink} ${css.yellowIcon}`}
+          >
+            <span className={css.notification}>2</span>
+            <div className={css.headerLinkContent}>
+              <BooksIcon />
+            </div>
           </div>
-        </div>
-        <div className={css.headerLink}>
-          <div className={css.connector} />
-          <div className={css.hideConnector}></div>
-          <div className={css.headerLinkContent}>
-            <span>About</span>
+          <div
+            className={`${css.mobileMenu} ${showingMenu ? css.isOn : ""}`}
+            onClick={onMenuClick}
+          >
+            <div />
+            <div />
+            <div />
           </div>
-        </div>
-        <div className={css.headerLink}>
-          <div className={css.connector} />
-          <div className={css.hideConnector}></div>
-          <div className={css.headerLinkContent}>
-            <SearchIcon />
-            <input placeholder="Search" />
+        </>
+      )}
+      {!isMobile && (
+        <>
+          <div>
+            <div className={css.headerLink}>
+              <div className={css.connector} />
+              <div className={css.hideConnector}></div>
+              <div className={css.headerLinkContent}>
+                <span>Home</span>
+              </div>
+            </div>
+            <div className={`${css.headerLink} ${css.yellow}`}>
+              <div className={css.connector} />
+              <div className={css.hideConnector}></div>
+              <div className={css.headerLinkContent}>
+                <span>Collections</span>
+                <TriangleDownIcon className={css.triangleIcon} />
+              </div>
+            </div>
+            <div className={css.headerLink}>
+              <div className={css.connector} />
+              <div className={css.hideConnector}></div>
+              <div className={css.headerLinkContent}>
+                <span>About</span>
+              </div>
+            </div>
+            <div className={css.headerLink}>
+              <div className={css.connector} />
+              <div className={css.hideConnector}></div>
+              <div className={css.headerLinkContent}>
+                <SearchIcon />
+                <input placeholder="Search" />
+              </div>
+            </div>
+            <div
+              className={`${css.headerLink} ${css.yellowIcon}`}
+              onClick={handleDarkModeChange}
+            >
+              <div className={css.headerLinkContent}>
+                {darkMode ? <SunIcon /> : <MoonIcon />}
+              </div>
+            </div>
           </div>
-        </div>
-        <div
-          className={`${css.headerLink} ${css.yellowIcon}`}
-          onClick={handleDarkModeChange}
-        >
-          <div className={css.headerLinkContent}>
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+          <div>
+            <div className={`${css.headerLink} ${css.yellowIcon}`}>
+              <div className={css.connector} />
+              <div className={css.hideConnector}></div>
+              <div className={css.headerLinkContent}>
+                <LocationIcon />
+                <span>Location</span>
+              </div>
+            </div>
+            <div className={css.headerLink}>
+              <span className={css.notification}>2</span>
+              <div className={css.headerLinkContent}>
+                <BooksIcon className={css.bookIcon} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div>
-        <div className={`${css.headerLink} ${css.yellowIcon}`}>
-          <div className={css.connector} />
-          <div className={css.hideConnector}></div>
-          <div className={css.headerLinkContent}>
-            <LocationIcon />
-            <span>Location</span>
-          </div>
-        </div>
-        <div className={css.headerLink}>
-          <span className={css.notification}>2</span>
-          <div className={css.headerLinkContent}>
-            <BooksIcon className={css.bookIcon} />
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

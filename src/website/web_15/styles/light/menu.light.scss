@@ -1,0 +1,58 @@
+.menu {
+  position: fixed;
+  top: 0;
+  top: 70px;
+  z-index:10000;
+  backdrop-filter: blur(7px);
+  background: radial-gradient(circle, rgba(0,0,0,0.24) 0%, rgba(0,0,0,1) 90%);
+  width: 100vw;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  &.isOn {
+    opacity: 1;
+    pointer-events: all;
+  }
+  div {
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    justify-content:center;
+    input {
+      font-size: 8cqi;
+      background: transparent;
+      outline: none;
+      border:0;
+      width: 30cqi;
+      margin-top:3px;
+      color:white;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.322);
+      }
+    }
+    span{ 
+      color: white;
+      font-size: 8cqi;
+      font-weight: 600;
+      margin: 0 10px;
+      cursor: pointer;
+      font-family: 'Space Grotesk';
+    }
+    svg {
+      width: 7cqi;
+      height: 7cqi;
+      fill: white;
+      stroke: white;
+      &:not(:has(~ input)) {
+        stroke:#ffcb4e;
+        fill:#ffcb4e;
+      }
+    }
+    
+  }
+}

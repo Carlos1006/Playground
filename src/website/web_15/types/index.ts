@@ -25,8 +25,11 @@ export interface TopLinkProps {
 }
 
 export interface HeaderProps {
+  isMobile: boolean;
   darkMode: boolean;
   onDarkModeChange: () => void;
+  onMenuClick: () => void;
+  showingMenu: boolean;
 }
 
 export interface DimensionProps {
@@ -56,4 +59,8 @@ export interface TextProps {
 
 export interface MarqueeProps {
   isMobile: boolean;
+}
+
+export interface MenuProps {
+  show: boolean;
 }

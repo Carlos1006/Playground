@@ -25,6 +25,8 @@ import { DimensionProps, RightTopProps } from "./types";
 import { DEFAULT_DIM, DEFAULT_RIGHT_TOP, GAP } from "./constants";
 import GrayCthulhu2 from "./components/grayCthulhu2";
 import Toggler from "./components/toggler";
+import Menu from "./components/menu";
+import useMetaInjections from "./hooks/useMetaInjections";
 
 const BentoGrid: FC = () => {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -36,33 +38,31 @@ const BentoGrid: FC = () => {
     useState<RightTopProps>(DEFAULT_RIGHT_TOP);
   const [removeTopLinkWidth, setRemoveTopLinkWidth] = useState<number>(0);
 
+  const refElement00 = useRef<HTMLDivElement>(null);
+  const refElement02 = useRef<HTMLDivElement>(null);
   const refElement10 = useRef<HTMLDivElement>(null);
   const refElement11 = useRef<HTMLDivElement>(null);
   const refElement12 = useRef<HTMLDivElement>(null);
   const refElement13 = useRef<HTMLDivElement>(null);
-
-  const refElement00 = useRef<HTMLDivElement>(null);
-  const refElement02 = useRef<HTMLDivElement>(null);
-
   const refElement40 = useRef<HTMLDivElement>(null);
   const refElement41 = useRef<HTMLDivElement>(null);
   const refElement42 = useRef<HTMLDivElement>(null);
   const refElement42Wrapper = useRef<HTMLDivElement>(null);
+  const refDisk = useRef<HTMLSpanElement>(null);
+  const refElement30 = useRef<HTMLDivElement>(null);
 
   const [element4Side, setElement4Side] = useState<number>(0);
   const [grayCthulhuWidth, setGrayCthulhuWidth] = useState<number>(0);
   const [grayCthulhu41Left, setGrayCthulhu41Left] = useState<number>(0);
   const [grayCthulhu42Left, setGrayCthulhu42Left] = useState<number>(0);
-
   const [showElement2_3, setShowElement2_3] = useState<boolean>(false);
-
   const [pinkCthulhuWidth, setPinkCthulhuWidth] = useState<number>(0);
   const [pinkCthulhuLeft, setPinkCthulhuLeft] = useState<number>(0);
   const [pinkCthulhuBottom, setPinkCthulhuBottom] = useState<number>(0);
-
-  //--Element 1
-  const refDisk = useRef<HTMLSpanElement>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [element30TailLeft, setElement30TailLeft] = useState<number>(0);
+  const { darkMode, onDarkModeChange } = useDarkMode();
+  const [showingMenu, setShowingMenu] = useState<boolean>(false);
 
   useResizeObserver({
     target: mainRef,
@@ -195,11 +195,22 @@ const BentoGrid: FC = () => {
         setPinkCthulhuLeft(-leftExtraWidth - extraLeft);
         setPinkCthulhuBottom(-bottom);
       }
+
+      // ELEMENT 30
+      if (refElement30.current) {
+        const { left: tailLeft, width: tailWidth } =
+          refElement30.current.getBoundingClientRect();
+        setElement30TailLeft(tailLeft + tailWidth / 2 - 2.5);
+      }
     },
   });
 
   useFavicon();
-  const { darkMode, onDarkModeChange } = useDarkMode();
+  useMetaInjections();
+
+  const onMenuClick = (): void => {
+    setShowingMenu((prev) => !prev);
+  };
 
   return (
     <div
@@ -208,11 +219,18 @@ const BentoGrid: FC = () => {
       ref={mainRef}
     >
       <div id={css.wrapper} className={`${darkMode ? css.darkMode : ""}`}>
+        {isMobile && <Menu show={showingMenu} />}
         <Toggler
           isOn={showElement2_3}
           onClick={() => setShowElement2_3(!showElement2_3)}
         />
-        <Header darkMode={darkMode} onDarkModeChange={onDarkModeChange} />
+        <Header
+          darkMode={darkMode}
+          onDarkModeChange={onDarkModeChange}
+          isMobile={isMobile}
+          showingMenu={showingMenu}
+          onMenuClick={onMenuClick}
+        />
         <div className={`${css.element00} ${darkMode ? css.darkMode0 : ""}`}>
           <div className={css.wrapper01}>
             <div className={css.wrapper02} ref={refElement00}>
@@ -341,7 +359,7 @@ const BentoGrid: FC = () => {
           </div>
         </div>
         <div className={`${css.element30} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.wrapper01}>
+          <div className={css.wrapper01} ref={refElement30}>
             <div className={css.wrapper02}>
               <span>
                 Read More <DownArrowIcon />
@@ -378,7 +396,12 @@ const BentoGrid: FC = () => {
           </div>
         </div>
         <div className={`${css.footer} ${darkMode ? css.darkMode : ""}`}>
-          <div className={css.overflowWrapper} />
+          <div
+            className={css.overflowWrapper}
+            style={{
+              left: element30TailLeft,
+            }}
+          />
           <div className={css.wrapper}>
             <Marquee isMobile={isMobile} />
           </div>
