@@ -23,6 +23,12 @@
     gap: 10px;
     align-items:center;
     justify-content:center;
+    &:first-child {
+      margin-top: 10cqb;
+    }
+    &:last-child {
+      margin-bottom: 30cqb;
+    }
     input {
       font-size: 8cqi;
       background: transparent;
