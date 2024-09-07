@@ -47,6 +47,10 @@ export const COMPONENTS = [
     path: "/bubble",
     name: "Bubbles",
   },
+  {
+    path: "/bargraph3d",
+    name: "Bar Graph 3D",
+  },
 ];
 
 export const EXPERIMENTS = [
