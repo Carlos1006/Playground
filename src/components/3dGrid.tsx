@@ -5,13 +5,13 @@ import hmap from "../assets/maps/map1/hmap.png";
 import * as THREE from "three";
 import { DegToRad, Random } from "../website/web_03/utils";
 
-const createScene = () => {
+const createScene = (): THREE.Scene => {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x222244, 50, 100);
   return scene;
 };
 
-const createBar = (x: number, y: number, z: number, height = 1) => {
+const createBar = (x: number, y: number, z: number, height = 1): THREE.Mesh => {
   const barGeometry = new THREE.BoxGeometry(0.1, height, 0.1);
   const barMaterial = new THREE.MeshPhongMaterial({
     color: "rgb(47,180,200)",
@@ -31,7 +31,7 @@ const createBar = (x: number, y: number, z: number, height = 1) => {
   return bar;
 };
 
-const createBase = () => {
+const createBase = (): THREE.Mesh => {
   const flatCubeGeometry = new THREE.BoxGeometry(5.3, 5, 5.3);
   const flatCubeMaterial = new THREE.MeshPhongMaterial({
     color: "rgb(23,23,30)",
@@ -48,13 +48,16 @@ const createBase = () => {
   return flatCube;
 };
 
-const createCamera = (width: number, height: number) => {
+const createCamera = (
+  width: number,
+  height: number
+): THREE.PerspectiveCamera => {
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
   camera.position.z = 5;
   return camera;
 };
 
-const createRenderer = (width: number, height: number) => {
+const createRenderer = (width: number, height: number): THREE.WebGLRenderer => {
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
     antialias: true,
@@ -65,7 +68,7 @@ const createRenderer = (width: number, height: number) => {
   return renderer;
 };
 
-const createAmbientLight = () => {
+const createAmbientLight = (): THREE.HemisphereLight => {
   const mainLight = new THREE.HemisphereLight(
     "rgb(128,128,128)",
     "rgb(84,85,255)",
@@ -75,7 +78,7 @@ const createAmbientLight = () => {
   return mainLight;
 };
 
-const createReferenceCube = () => {
+const createReferenceCube = (): THREE.Mesh => {
   const geometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshPhongMaterial({
     color: 0x049ef4,
@@ -92,7 +95,7 @@ const createReferenceCube = () => {
   return cube;
 };
 
-const createSpotLight = () => {
+const createSpotLight = (): THREE.Mesh => {
   const light = new THREE.SpotLight("rgb(133,248,248)", 20);
   light.angle = 1.05;
   light.decay = 2;
@@ -261,7 +264,7 @@ const Grid: React.FC = () => {
         canvasContext1.current = ctx;
         const image = new Image();
         image.src = cmap;
-        image.onload = () => {
+        image.onload = (): void => {
           ctx.drawImage(image, 0, 0, width, width);
         };
       }
@@ -284,7 +287,7 @@ const Grid: React.FC = () => {
         canvasContext2.current = ctx;
         const image = new Image();
         image.src = hmap;
-        image.onload = () => {
+        image.onload = (): void => {
           ctx.drawImage(image, 0, 0, width, width);
         };
       }
@@ -481,12 +484,12 @@ const Grid: React.FC = () => {
         <div
           className={css.imageContainer}
           ref={imgContainerRef1}
-          onMouseMove={(e) => drag(e, draggerRef, imgContainerRef1)}
+          onMouseMove={(e): void => drag(e, draggerRef, imgContainerRef1)}
         >
           <div
             ref={draggerRef}
             className={css.dragger}
-            onMouseDown={(e) => onMouseDown(e, draggerRef)}
+            onMouseDown={(e): void => onMouseDown(e, draggerRef)}
             onMouseUp={onMouseUp}
           >
             <canvas ref={innerCanvas1} />
@@ -496,12 +499,12 @@ const Grid: React.FC = () => {
         <div
           className={css.imageContainer}
           ref={imgContainerRef2}
-          onMouseMove={(e) => drag(e, draggerRef2, imgContainerRef2)}
+          onMouseMove={(e): void => drag(e, draggerRef2, imgContainerRef2)}
         >
           <div
             ref={draggerRef2}
             className={css.dragger}
-            onMouseDown={(e) => onMouseDown(e, draggerRef2)}
+            onMouseDown={(e): void => onMouseDown(e, draggerRef2)}
             onMouseUp={onMouseUp}
           >
             <canvas ref={innerCanvas2} />

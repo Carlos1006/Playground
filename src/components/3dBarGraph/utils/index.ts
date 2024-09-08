@@ -8,9 +8,10 @@ export function createScene(): THREE.Scene {
 
 export function createCamera(
   width: number,
-  height: number
+  height: number,
+  fov: number
 ): THREE.PerspectiveCamera {
-  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 1000);
   camera.position.z = 3;
   return camera;
 }

@@ -1,77 +1,73 @@
-import { FC, useCallback, useLayoutEffect, useRef } from "react";
-import * as THREE from "three";
-import css from "./styles/main.module.scss";
-import { DegToRad } from "../../website/web_03/utils";
+import { FC, useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { IBarGraph3D } from "./types";
+import { OrbitControls } from "@react-three/drei";
+import Bar from "./components/Bar";
+import Base from "./components/Base";
+import CameraRig from "./components/CameraRig";
+import { Random } from "../../website/web_03/utils";
 import {
-  createScene,
-  createCamera,
-  createRenderer,
-  createReferenceCube,
-  createAmbientLight,
-  createSpotLight,
-} from "./utils";
+  CAMERA_INIT_POSITION,
+  GROUP,
+  MAX_VALUE,
+  MIN_VALUE,
+  ORBIT_CONTROLS,
+  POINT_LIGHT,
+  SPOT_LIGHT,
+} from "./constants";
+import css from "./styles/main.module.scss";
 
-const BarGraph3D: FC = () => {
-  const renderRef = useRef<HTMLDivElement>(null);
-  const canvasRender1 = useRef<number>(0);
+const BarGraph3D: FC<IBarGraph3D> = ({ fov }: IBarGraph3D) => {
+  const orbitRef = useRef<unknown>();
 
-  const scene = useRef<THREE.Scene>(new THREE.Scene());
-  const mainContainer = useRef<THREE.Group>(new THREE.Group());
-  const camera = useRef<THREE.PerspectiveCamera>(new THREE.PerspectiveCamera());
-  const renderer = useRef<THREE.WebGLRenderer>(new THREE.WebGLRenderer());
-  const clock = useRef<THREE.Clock>(new THREE.Clock());
-  const referenceCube = useRef<THREE.Mesh>(new THREE.Mesh());
-  const ambientLight = useRef<THREE.HemisphereLight>(
-    new THREE.HemisphereLight()
-  );
-  const spotLight = useRef<THREE.Mesh>(new THREE.Mesh());
-
-  const add = (object: THREE.Object3D): void => {
-    if (scene.current) {
-      scene.current.add(object);
-    }
-  };
-
-  const animate = (): void => {
-    const delta = clock.current.getDelta();
-    requestAnimationFrame(animate);
-    // cube.rotation.y += 0.8 * delta;
-    // barsContainer.current.rotation.y += speed.current * delta;
-    renderer.current.render(scene.current, camera.current);
-  };
-
-  const construct = useCallback((width: number, height: number): void => {
-    scene.current = createScene();
-    camera.current = createCamera(width, height);
-    renderer.current = createRenderer(width, height);
-    referenceCube.current = createReferenceCube();
-    ambientLight.current = createAmbientLight();
-    spotLight.current = createSpotLight();
-
-    mainContainer.current.add(spotLight.current);
-    mainContainer.current.add(ambientLight.current);
-    // mainContainer.current.add(barsContainer.current);
-    mainContainer.current.add(referenceCube.current);
-
-    mainContainer.current.rotation.x = DegToRad(30); // 25 20
-    mainContainer.current.rotation.y = DegToRad(45); // 45 30
-
-    add(mainContainer.current);
-    renderRef.current?.appendChild(renderer.current.domElement);
-    animate();
-  }, []);
-
-  useLayoutEffect(() => {
-    canvasRender1.current = canvasRender1.current + 1;
-    if (renderRef.current && canvasRender1.current === 1) {
-      const { width, height } = renderRef.current.getBoundingClientRect();
-      construct(width, height);
-    }
-  }, [renderRef, construct]);
+  const [gridValues] = useState<number[][]>(() => {
+    const gridValues = Array.from({ length: 20 }).map(() =>
+      Array.from({ length: 10 }).map(() => Random(MIN_VALUE, MAX_VALUE))
+    );
+    return gridValues;
+  });
 
   return (
     <div className={css.barGraph3D}>
-      <div ref={renderRef} className={css.render}></div>
+      <Canvas
+        camera={{
+          position: CAMERA_INIT_POSITION,
+        }}
+      >
+        <OrbitControls
+          ref={orbitRef as never}
+          target={ORBIT_CONTROLS.TARGET}
+          autoRotate={ORBIT_CONTROLS.AUTO_ROTATE}
+          autoRotateSpeed={ORBIT_CONTROLS.AUTO_ROTATE_SPEED}
+        />
+        <ambientLight intensity={Math.PI / 2} />
+        <spotLight
+          position={SPOT_LIGHT.POSITION}
+          intensity={SPOT_LIGHT.INTENSITY}
+          penumbra={SPOT_LIGHT.PENUMBRA}
+          decay={SPOT_LIGHT.DECAY}
+          angle={SPOT_LIGHT.ANGLE}
+        />
+        <pointLight
+          intensity={POINT_LIGHT.INTENSITY}
+          position={POINT_LIGHT.POSITION}
+          decay={POINT_LIGHT.DECAY}
+        />
+        <group position={GROUP.POSITION}>
+          <Base />
+          {Array.from({ length: 20 }).map((_, x) =>
+            Array.from({ length: 10 }).map((_, y) => (
+              <Bar
+                key={`${x}${y}`}
+                slotX={x + 1}
+                slotY={y + 1}
+                value={gridValues[x][y]}
+              />
+            ))
+          )}
+        </group>
+        <CameraRig fov={fov} orbit={orbitRef} />
+      </Canvas>
     </div>
   );
 };
