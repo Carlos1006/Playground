@@ -70,6 +70,10 @@ export const EXPERIMENTS = [
     path: "/gifToVideo",
     name: "Gif to Video",
   },
+  {
+    path: "/jquery",
+    name: "jQuery 4 Testing",
+  },
 ];
 
 export const WEBSITES = [
@@ -136,5 +140,5 @@ export const WEBSITES = [
   {
     path: "/web_15",
     name: "Bento Grid",
-  }
+  },
 ];

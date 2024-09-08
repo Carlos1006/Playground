@@ -14,6 +14,7 @@ import Page_13 from "../pages/page_13";
 import Page_14 from "../pages/page_14";
 import Page_15 from "../pages/page_15";
 import Page_16 from "../pages/page_16";
+import Page_17 from "../pages/page_17";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -100,6 +101,10 @@ const Routes = [
   {
     path: "/bargraph3d",
     element: <Page_16 />,
+  },
+  {
+    path: "/jquery",
+    element: <Page_17 />,
   },
   {
     path: "/web_01",
