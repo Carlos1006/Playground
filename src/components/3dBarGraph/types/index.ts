@@ -8,6 +8,7 @@ export interface IBar {
   slotX: number;
   slotY: number;
   value: number;
+  onHover: (x: number, y: number, value: boolean) => void;
 }
 
 export interface ICameraRig {

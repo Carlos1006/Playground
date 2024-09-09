@@ -27,8 +27,28 @@ const BarGraph3D: FC<IBarGraph3D> = ({ fov }: IBarGraph3D) => {
     return gridValues;
   });
 
+  const [hoverStatus, setHoverStatus] = useState<boolean[][]>(() =>
+    Array.from({ length: 20 }).map(() =>
+      Array.from({ length: 10 }).map(() => false)
+    )
+  );
+
+  const onHoverChange = (x: number, y: number, status: boolean): void => {
+    setHoverStatus((prev) => {
+      const newStatus = [...prev];
+      newStatus[x - 1][y - 1] = status;
+      return newStatus;
+    });
+  };
+
+  const isOneHovered = hoverStatus.some((row) => row.some((status) => status));
   return (
-    <div className={css.barGraph3D}>
+    <div
+      className={css.barGraph3D}
+      style={{
+        cursor: isOneHovered ? "pointer" : "auto",
+      }}
+    >
       <Canvas
         camera={{
           position: CAMERA_INIT_POSITION,
@@ -62,6 +82,7 @@ const BarGraph3D: FC<IBarGraph3D> = ({ fov }: IBarGraph3D) => {
                 slotX={x + 1}
                 slotY={y + 1}
                 value={gridValues[x][y]}
+                onHover={onHoverChange}
               />
             ))
           )}

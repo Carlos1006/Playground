@@ -81,3 +81,7 @@ export function createRenderer(
   renderer.setSize(width, height);
   return renderer;
 }
+
+export function getContrastColor(color: number): number {
+  return color ^ 0xffffff;
+}

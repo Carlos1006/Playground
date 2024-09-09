@@ -9,6 +9,17 @@ const Box = (props: ThreeElements["mesh"]): JSX.Element => {
   const ref = useRef<THREE.Mesh>(null);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
+
+  const handlePointerOver = (event: THREE.Event): void => {
+    event.stopPropagation(); // Detener la propagación del evento
+    hover(true);
+  };
+
+  const handlePointerOut = (event: THREE.Event): void => {
+    event.stopPropagation(); // Detener la propagación del evento
+    hover(false);
+  };
+
   useFrame((_, delta) => {
     if (!ref.current) return;
     ref.current.rotation.x += delta;
@@ -19,8 +30,15 @@ const Box = (props: ThreeElements["mesh"]): JSX.Element => {
       ref={ref}
       scale={clicked ? 1.5 : 1}
       onClick={(): void => click(!clicked)}
-      onPointerOver={(): void => hover(true)}
-      onPointerOut={(): void => hover(false)}
+      onPointerOver={handlePointerOver}
+      onPointerOut={handlePointerOut}
+      raycast={(raycaster, intersects): void => {
+        if (!ref.current) return;
+        const intersected = raycaster.intersectObject(ref.current, true);
+        if (intersected.length > 0) {
+          intersects.push(intersected[0]);
+        }
+      }}
     >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
