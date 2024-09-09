@@ -1,0 +1,64 @@
+.button {
+  padding: 1vh 2vh;
+  border-radius: 2vh;
+  margin-right:1vw;
+  cursor: pointer;
+  border: 0;
+  color: white;
+  font-family:'Roboto';
+  font-size:2ex;
+  font-weight:bold;
+  letter-spacing:0.2ex;
+  text-transform:uppercase;
+  background-image:linear-gradient(90deg, rgb(31, 112, 150), rgb(83, 99, 243)),
+}
+
+.input {
+  width:20vw;
+  padding: 1vh 2vh;
+  border-radius: 2vh;
+  cursor: pointer;
+  border: 0;
+  color: white;
+  border: 1px solid rgba(185, 185, 185, 0.5);
+  background-color: rgba(185, 185, 185, 0);
+  font-family:'Roboto';
+  font-size:2ex;
+  font-weight:bold;
+  letter-spacing:0.2ex;
+  text-transform:uppercase;
+  &::placeholder {
+    color: rgba(185, 185, 185, 0.5);
+  }
+}
+
+.card {
+  background-color:gray;
+}
+
+.grid {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows:100px 1fr;
+  grid-gap: 1vh;
+  grid-template-areas:
+    "header"
+    "main";
+  width: 100vw !important;
+  height: 100vh !important;
+  align-items:stretch !important;
+  .header {
+    grid-area: header !important;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap:1vw;
+  }
+  .content {
+    grid-area: main !important;
+    display:grid;
+    gap:1vw;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
