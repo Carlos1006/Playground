@@ -7,6 +7,17 @@ const Page_17: FC = () => {
   useEffect(() => {
     $("#buton").on("click", (): void => {
       alert("jQuery works");
+
+      $.ajax({
+        url: "https://pokeapi.co/api/v2/pokemon/ditto",
+        method: "GET",
+        success: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          alert("Error fetching Pokémon data");
+        },
+      });
     });
     return () => {
       $("#buton").off("click");
@@ -15,12 +26,12 @@ const Page_17: FC = () => {
 
   return (
     <>
-      <div className={`${css.page} ${css.black} ${css.relative}`}>
+      <div id="main" className={`${css.page} ${css.black} ${css.relative}`}>
         <button
           id="buton"
           style={{
             margin: "10vw",
-            padding: "1vh",
+            padding: "1vh 2vh",
             borderRadius: "2vh",
             cursor: "pointer",
             border: 0,
@@ -29,7 +40,7 @@ const Page_17: FC = () => {
               "linear-gradient(90deg, rgb(10,10,10), rgb(60,60,60))",
           }}
         >
-          Example
+          Test Alert
         </button>
       </div>
     </>
