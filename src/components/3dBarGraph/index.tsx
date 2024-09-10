@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { IBarGraph3D } from "./types";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, OrthographicCamera } from "@react-three/drei";
 import Bar from "./components/Bar";
 import Base from "./components/Base";
 import CameraRig from "./components/CameraRig";
@@ -17,7 +17,11 @@ import {
 } from "./constants";
 import css from "./styles/main.module.scss";
 
-const BarGraph3D: FC<IBarGraph3D> = ({ fov }: IBarGraph3D) => {
+const BarGraph3D: FC<IBarGraph3D> = ({
+  fov,
+  autoRotate,
+  orthographic,
+}: IBarGraph3D) => {
   const orbitRef = useRef<unknown>();
 
   const [gridValues] = useState<number[][]>(() => {
@@ -57,9 +61,12 @@ const BarGraph3D: FC<IBarGraph3D> = ({ fov }: IBarGraph3D) => {
         <OrbitControls
           ref={orbitRef as never}
           target={ORBIT_CONTROLS.TARGET}
-          autoRotate={ORBIT_CONTROLS.AUTO_ROTATE}
+          autoRotate={autoRotate}
           autoRotateSpeed={ORBIT_CONTROLS.AUTO_ROTATE_SPEED}
         />
+        {orthographic && (
+          <OrthographicCamera makeDefault position={[0, 14, 0]} zoom={180} />
+        )}
         <ambientLight intensity={Math.PI / 2} />
         <spotLight
           position={SPOT_LIGHT.POSITION}

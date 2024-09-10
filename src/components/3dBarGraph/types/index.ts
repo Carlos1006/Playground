@@ -2,6 +2,8 @@ import { MutableRefObject } from "react";
 
 export interface IBarGraph3D {
   fov: number;
+  autoRotate: boolean;
+  orthographic: boolean;
 }
 
 export interface IBar {
