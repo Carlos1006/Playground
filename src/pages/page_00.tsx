@@ -8,34 +8,34 @@ import {
   BsChevronDown,
 } from "react-icons/bs";
 import { AiOutlineMenu, AiFillExperiment } from "react-icons/ai";
-import { useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { COMPONENTS, EXPERIMENTS, WEBSITES } from "../constants";
 import { HiMiniWindow } from "react-icons/hi2";
-import { GiBigDiamondRing } from "react-icons/gi";
+// import { GiBigDiamondRing } from "react-icons/gi";
 const router = createBrowserRouter(Routes);
 
-const Page_00 = () => {
+const Page_00: FC = () => {
   const [collapse, setCollapse] = useState(true);
   const [opacity, setOpacity] = useState(true);
   const time = useRef(0);
 
-  const toggleCollapse = () => {
+  const toggleCollapse = (): void => {
     setCollapse(!collapse);
   };
 
-  const onHover = () => {
+  const onHover = (): void => {
     clearTimeout(time.current);
     setOpacity(false);
   };
 
-  const onLeave = () => {
+  const onLeave = (): void => {
     time.current = setTimeout(() => {
       setOpacity(true);
     }, 1000);
   };
 
-  const hideAndNavigate = async (path: string) => {
+  const hideAndNavigate = async (path: string): Promise<void> => {
     setOpacity(true);
     setCollapse(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -45,23 +45,23 @@ const Page_00 = () => {
   const [collapseComponent, setCollapseComponent] = useState(true);
   const [collapseExperiment, setCollapseExperiment] = useState(false);
   const [collapseWebsite, setCollapseWebsite] = useState(false);
-  const [collapseWedding, setCollapseWedding] = useState(false);
+  // const [collapseWedding, setCollapseWedding] = useState(false);
 
-  const toggleCollapseComponent = () => {
+  const toggleCollapseComponent = (): void => {
     setCollapseComponent(!collapseComponent);
   };
 
-  const toggleCollapseExperiment = () => {
+  const toggleCollapseExperiment = (): void => {
     setCollapseExperiment(!collapseExperiment);
   };
 
-  const toggleCollapseWebsite = () => {
+  const toggleCollapseWebsite = (): void => {
     setCollapseWebsite(!collapseWebsite);
   };
 
-  const toggleCollapseWedding = () => {
-    setCollapseWedding(!collapseWedding);
-  };
+  // const toggleCollapseWedding = (): void => {
+  //   setCollapseWedding(!collapseWedding);
+  // };
 
   return (
     <div id={css.main}>
@@ -116,7 +116,9 @@ const Page_00 = () => {
         >
           {EXPERIMENTS.map(({ name, path }, index) => (
             <div className={css.subitem} key={index}>
-              <span onClick={() => hideAndNavigate(path)}>{name}</span>
+              <span onClick={(): Promise<void> => hideAndNavigate(path)}>
+                {name}
+              </span>
             </div>
           ))}
         </div>
@@ -134,11 +136,13 @@ const Page_00 = () => {
         >
           {WEBSITES.map(({ name, path }, index) => (
             <div className={css.subitem} key={index}>
-              <span onClick={() => hideAndNavigate(path)}>{name}</span>
+              <span onClick={(): Promise<void> => hideAndNavigate(path)}>
+                {name}
+              </span>
             </div>
           ))}
         </div>
-        <div className={css.item} onClick={toggleCollapseWedding}>
+        {/* <div className={css.item} onClick={toggleCollapseWedding}>
           <div className={css.itemIcon}>
             <GiBigDiamondRing />
           </div>
@@ -146,7 +150,7 @@ const Page_00 = () => {
           <div className={css.chevron}>
             {collapseWedding ? <BsChevronDown /> : <BsChevronUp />}
           </div>
-        </div>
+        </div> */}
       </div>
       <div id={css.body}>
         <RouterProvider router={router} />
