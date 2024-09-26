@@ -51,6 +51,14 @@ export const COMPONENTS = [
     path: "/bargraph3d",
     name: "Bar Graph 3D",
   },
+  {
+    path: "/audiosphere",
+    name: "Audio Sphere",
+  },
+  {
+    path: "/audioFreqs",
+    name: "Audio Frequencies",
+  },
 ];
 
 export const EXPERIMENTS = [

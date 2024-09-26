@@ -15,6 +15,8 @@ import Page_14 from "../pages/page_14";
 import Page_15 from "../pages/page_15";
 import Page_16 from "../pages/page_16";
 import Page_17 from "../pages/page_17";
+import Page_18 from "../pages/page_18";
+import Page_19 from "../pages/page_19";
 
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
@@ -105,6 +107,14 @@ const Routes = [
   {
     path: "/jquery",
     element: <Page_17 />,
+  },
+  {
+    path: "/audiosphere",
+    element: <Page_18 />,
+  },
+  {
+    path: "/audiofreqs",
+    element: <Page_19 />,
   },
   {
     path: "/web_01",
