@@ -17,8 +17,8 @@ const Robot0: FC<RobotProps> = ({ size, coords = ["0", "0"] }: RobotProps) => {
 
   useEffect(() => {
     if (bodyRef.current === null) return;
-    const { clientWidth, clientHeight } = bodyRef.current;
-    const [w, h] = [clientWidth / 20, clientHeight / 20];
+    const { clientWidth } = bodyRef.current; // clientHeight
+    // const [w, h] = [clientWidth / 20, clientHeight / 20];
     const styles = `
             :root {
                 --len:${clientWidth / 5}px;
@@ -39,6 +39,7 @@ const Robot0: FC<RobotProps> = ({ size, coords = ["0", "0"] }: RobotProps) => {
         setActiveTooth(0);
       }
     }, 200);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teeth]);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const Robot0: FC<RobotProps> = ({ size, coords = ["0", "0"] }: RobotProps) => {
     if (!isActive && !once) {
       setRotate(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
   useEffect(() => {
@@ -69,12 +71,12 @@ const Robot0: FC<RobotProps> = ({ size, coords = ["0", "0"] }: RobotProps) => {
 
   return (
     <div
-      onMouseDown={() => setIsActive(true)}
-      onMouseUp={() => setIsActive(false)}
-      onMouseLeave={() => {
+      onMouseDown={(): void => setIsActive(true)}
+      onMouseUp={(): void => setIsActive(false)}
+      onMouseLeave={(): void => {
         setIsHover(false);
       }}
-      onMouseEnter={() => {
+      onMouseEnter={(): void => {
         setIsHover(true);
       }}
       className={css.robot}

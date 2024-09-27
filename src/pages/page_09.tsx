@@ -1,7 +1,8 @@
+import { FC } from "react";
 import RouletteGraph from "../components/rouletteGraph";
 import css from "../styles/page.module.scss";
 
-const Page_09 = () => {
+const Page_09: FC = () => {
   const COLORS: string[] = [
     "#13263a",
     "#74b8fe",
@@ -40,13 +41,11 @@ const Page_09 = () => {
   ];
 
   return (
-    <>
-      <div className={`${css.component} ${css.row}`}>
-        <RouletteGraph values={values1} />
-        <div className={css.pageDividerVertical} />
-        <RouletteGraph values={values2} relative title="Pie Chart" />
-      </div>
-    </>
+    <div className={`${css.component} ${css.row}`}>
+      <RouletteGraph values={values1} />
+      <div className={css.pageDividerVertical} />
+      <RouletteGraph values={values2} relative title="Pie Chart" />
+    </div>
   );
 };
 

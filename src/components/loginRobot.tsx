@@ -64,7 +64,7 @@ const contextDefault = {
 };
 const LoginContext = createContext(contextDefault);
 
-const useDebounce = (value: number, delay: number) => {
+const useDebounce = (value: number, delay: number): number => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedValue(value), delay);
@@ -260,13 +260,13 @@ const Robot: React.FC = () => {
     return focusPassword || hoverPassword;
   }, [focusPassword, hoverPassword]);
 
-  const temporalLight = async (level: 0 | 1 | 2 | 3 | 4 | 5) => {
+  const temporalLight = async (level: 0 | 1 | 2 | 3 | 4 | 5): Promise<void> => {
     setTemporalLevel(level);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setTemporalLevel(0);
   };
 
-  const errorAnim = async () => {
+  const errorAnim = async (): Promise<void> => {
     await new Promise((resolve) => setTimeout(resolve, 150));
     setTemporalLevel(3);
     setCloseEyes(true);
@@ -277,7 +277,7 @@ const Robot: React.FC = () => {
     setMouthRed(false);
   };
 
-  const successAnim = async () => {
+  const successAnim = async (): Promise<void> => {
     await new Promise((resolve) => setTimeout(resolve, 150));
     setTemporalLevel(4);
     setMouthBlue(true);
@@ -429,36 +429,36 @@ const LoginRobot: React.FC = () => {
     setLockPosition(true);
   }, [robotPosition.x, robotPosition.y]);
 
-  const onUserBlur = () => {
+  const onUserBlur = (): void => {
     setLockPosition(false);
   };
 
-  const onPasswordBlur = () => {
+  const onPasswordBlur = (): void => {
     setLockPosition(false);
     setFocusPassword(false);
   };
 
-  const onPasswordMouseEnter = () => {
+  const onPasswordMouseEnter = (): void => {
     setHoverPassword(true);
   };
 
-  const onPasswordMouseLeave = () => {
+  const onPasswordMouseLeave = (): void => {
     setHoverPassword(false);
   };
 
-  const onRecoverMouseEnter = () => {
+  const onRecoverMouseEnter = (): void => {
     setHoverRecover(true);
   };
 
-  const onRecoverMouseLeave = () => {
+  const onRecoverMouseLeave = (): void => {
     setHoverRecover(false);
   };
 
-  const onSubmitMouseEnter = () => {
+  const onSubmitMouseEnter = (): void => {
     setHoverSubmit(true);
   };
 
-  const onSubmitMouseLeave = () => {
+  const onSubmitMouseLeave = (): void => {
     setHoverSubmit(false);
   };
 
@@ -524,9 +524,9 @@ const LoginRobot: React.FC = () => {
           />
           <div className={`${css.icon} ${css.eye}`}>
             {eye ? (
-              <AiFillEyeInvisible onClick={() => setEye(!eye)} />
+              <AiFillEyeInvisible onClick={(): void => setEye(!eye)} />
             ) : (
-              <AiFillEye onClick={() => setEye(!eye)} />
+              <AiFillEye onClick={(): void => setEye(!eye)} />
             )}
           </div>
         </div>

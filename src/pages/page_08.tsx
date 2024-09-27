@@ -1,8 +1,15 @@
-import { useCallback, useRef, useState } from "react";
+import {
+  FC,
+  MouseEvent,
+  useCallback,
+  useRef,
+  useState,
+  WheelEvent,
+} from "react";
 import NodeTree from "../components/nodeTree_01";
 import css from "../styles/page.module.scss";
 
-const Page_03 = () => {
+const Page_03: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastClientX, setLastClientX] = useState(0);
@@ -14,18 +21,18 @@ const Page_03 = () => {
   const [scalewidth, setScalewidth] = useState<number>(0);
   const [scaleheight, setScaleheight] = useState<number>(0);
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: MouseEvent): void => {
     setIsScrolling(true);
     setLastClientX(e.clientX);
     setLastClientY(e.clientY);
     e.preventDefault();
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (): void => {
     setIsScrolling(false);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent): void => {
     if (!isScrolling || containerRef.current === null) return;
     const deltaX = lastClientX - e.clientX; // Invertimos el desplazamiento en el eje X
     const deltaY = lastClientY - e.clientY; // Invertimos el desplazamiento en el eje Y
@@ -35,7 +42,7 @@ const Page_03 = () => {
     containerRef.current.scrollTop += deltaY;
   };
 
-  const handleZoom = (e) => {
+  const handleZoom = (e: WheelEvent<HTMLDivElement>): void => {
     return;
     e.preventDefault();
     const scaleStep = 0.1;

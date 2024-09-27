@@ -72,7 +72,7 @@ const Grid: React.FC = () => {
 
       renderRef.current.appendChild(renderer.domElement);
 
-      const animate = () => {
+      const animate = (): void => {
         const delta = clock.getDelta();
         requestAnimationFrame(animate);
         cube.rotation.y += 0.8 * delta;

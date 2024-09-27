@@ -1,4 +1,13 @@
-import { FC, useCallback, useEffect, useId, useRef, useState, MouseEvent, useMemo } from "react";
+import {
+  FC,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  MouseEvent,
+  useMemo,
+} from "react";
 import css from "../styles/rouletteGraph.module.scss";
 
 interface IValues {
@@ -24,7 +33,7 @@ interface IRoulette {
 
 type VoidFunction = (e: globalThis.MouseEvent) => void;
 
-const {sin: Sine, cos: Cosine, atan2: ArcTan2 , PI} = Math;
+const { sin: Sine, cos: Cosine, atan2: ArcTan2, PI } = Math;
 const view = 360;
 const half = view / 2;
 const R2D = 180 / PI;
@@ -67,30 +76,25 @@ const RouletteGraph: FC<IRoulette> = ({
   const id = useId();
   const maskId = `mask-${id}`;
 
-  const start = useCallback(
-    (e:MouseEvent<HTMLDivElement>) => {
-      if (rotateRef.current === null) return;
-      e.preventDefault();
-      const clientRect = rotateRef.current.getBoundingClientRect();
-      const {
-        top, left, height, width,
-      } = clientRect;
-      const newCenter = {
-        x: left + width / 2,
-        y: top + height / 2,
-      };
-      const x = e.clientX - newCenter.x;
-      const y = e.clientY - newCenter.y;
-      const newStartAngle = R2D * ArcTan2(y, x);
-      setCenter(newCenter);
-      setStartAngle(newStartAngle);
-      setActive(true);
-    },
-    []
-  );
+  const start = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    if (rotateRef.current === null) return;
+    e.preventDefault();
+    const clientRect = rotateRef.current.getBoundingClientRect();
+    const { top, left, height, width } = clientRect;
+    const newCenter = {
+      x: left + width / 2,
+      y: top + height / 2,
+    };
+    const x = e.clientX - newCenter.x;
+    const y = e.clientY - newCenter.y;
+    const newStartAngle = R2D * ArcTan2(y, x);
+    setCenter(newCenter);
+    setStartAngle(newStartAngle);
+    setActive(true);
+  }, []);
 
   const rotate = useCallback(
-    (e:globalThis.MouseEvent) => {
+    (e: globalThis.MouseEvent) => {
       e.preventDefault();
       if (!active || lock) return;
       setCancelClick(true);
@@ -109,14 +113,14 @@ const RouletteGraph: FC<IRoulette> = ({
     setActive(false);
     setTimeout(() => {
       setCancelClick(false);
-    },100);
+    }, 100);
   }, [angle, rotation]);
 
   const onSectorClick = useCallback(
-    async(object: IObject) => {
+    async (object: IObject) => {
       if (cancelClick) return;
-      if(lock) return;
-      setLock(true); 
+      if (lock) return;
+      setLock(true);
       setAnimate(true);
       const averageAngle = (object.angleRange[0] + object.angleRange[1]) / 2;
       const refAngle = invertAngle(averageAngle);
@@ -125,7 +129,9 @@ const RouletteGraph: FC<IRoulette> = ({
       await new Promise((resolve) => setTimeout(resolve, 500));
       setAnimate(false);
       setLock(false);
-    }, [cancelClick, lock]);
+    },
+    [cancelClick, lock]
+  );
 
   useEffect(() => {
     const draws: IObject[] = [];
@@ -168,7 +174,6 @@ const RouletteGraph: FC<IRoulette> = ({
         setCurrent(value);
       }
     });
-
   }, [finalAngle, objects]);
 
   useEffect(() => {
@@ -178,15 +183,15 @@ const RouletteGraph: FC<IRoulette> = ({
 
   useEffect(() => {
     isMountedRef.current = true;
-     // Función para manejar el evento "mousemove"
-    const handleMouseMove = (e: globalThis.MouseEvent) => {
+    // Función para manejar el evento "mousemove"
+    const handleMouseMove = (e: globalThis.MouseEvent): void => {
       if (isMountedRef.current && rotateEventRef.current) {
         rotateEventRef.current(e);
       }
     };
 
     // Función para manejar el evento "mouseup"
-    const handleMouseUp = (e: globalThis.MouseEvent) => {
+    const handleMouseUp = (e: globalThis.MouseEvent): void => {
       if (isMountedRef.current && stopEventRef.current) {
         stopEventRef.current(e);
       }
@@ -210,7 +215,7 @@ const RouletteGraph: FC<IRoulette> = ({
     } else {
       return `${current?.value}`;
     }
-  },[current, relative]);
+  }, [current, relative]);
 
   return (
     <>
@@ -232,13 +237,27 @@ const RouletteGraph: FC<IRoulette> = ({
         >
           <svg viewBox={`0 0 ${view} ${view}`}>
             <mask id={maskId}>
-              <g className={`${animate ? css.animate : ""}`} transform={`rotate(${-finalAngle} ${half} ${half})`}>
+              <g
+                className={`${animate ? css.animate : ""}`}
+                transform={`rotate(${-finalAngle} ${half} ${half})`}
+              >
                 <rect width="100%" height="100%" fill="white" />
-                <polygon points={`${view - (50 + 2)},${half - triangleHalf} ${view - (50 + 2)},${half + triangleHalf} ${view - 50 + triangleHalf},${half}`} fill="black" />
+                <polygon
+                  points={`${view - (50 + 2)},${half - triangleHalf} ${
+                    view - (50 + 2)
+                  },${half + triangleHalf} ${view - 50 + triangleHalf},${half}`}
+                  fill="black"
+                />
                 <circle r={half - 50} cx={half} cy={half} fill="black" />
               </g>
             </mask>
-            <circle mask={`url(#${maskId})`} r={half-1} cx={half} cy={half} fill="rgb(120,120,120)" />
+            <circle
+              mask={`url(#${maskId})`}
+              r={half - 1}
+              cx={half}
+              cy={half}
+              fill="rgb(120,120,120)"
+            />
             {objects.map((object: IObject, index: number) => {
               return (
                 <path
@@ -246,7 +265,9 @@ const RouletteGraph: FC<IRoulette> = ({
                   key={index}
                   d={object.draw}
                   fill={object.color}
-                  onClick={() => { onSectorClick(object) }}
+                  onClick={(): void => {
+                    onSectorClick(object);
+                  }}
                 />
               );
             })}

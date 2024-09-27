@@ -20,8 +20,8 @@ const RobotDev: FC<RobotDevProps> = ({
 
   useEffect(() => {
     if (bodyRef.current === null) return;
-    const { clientWidth, clientHeight } = bodyRef.current;
-    const [w, h] = [clientWidth / 20, clientHeight / 20];
+    const { clientWidth } = bodyRef.current; // clientHeight
+    // const [w, h] = [clientWidth / 20, clientHeight / 20];
     const styles = `
             :root {
                 --len:${clientWidth / 5}px;
@@ -41,7 +41,9 @@ const RobotDev: FC<RobotDevProps> = ({
         setActiveTooth(0);
       }
     }, 200);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teeth]);
+
   useEffect(() => {
     if (isActive && once) {
       setOnce(false);
@@ -49,7 +51,9 @@ const RobotDev: FC<RobotDevProps> = ({
     if (!isActive && !once) {
       setRotate(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
+
   useEffect(() => {
     if (rotate) {
       setTimeout(() => {
@@ -69,12 +73,12 @@ const RobotDev: FC<RobotDevProps> = ({
 
   return (
     <div
-      onMouseDown={() => setIsActive(true)}
-      onMouseUp={() => setIsActive(false)}
-      onMouseLeave={() => {
+      onMouseDown={(): void => setIsActive(true)}
+      onMouseUp={(): void => setIsActive(false)}
+      onMouseLeave={(): void => {
         setIsHover(false);
       }}
-      onMouseEnter={() => {
+      onMouseEnter={(): void => {
         setIsHover(true);
       }}
       className={css.robot}

@@ -136,7 +136,6 @@ const Node: FC<NodeComponentProps> = ({
   style = {},
   defaultOpen = false,
   propagatedOpen = null,
-  parentOffset = { left: 0, top: 0 },
   alignment = "horizontal",
   siblings = 1,
   index = -1,
@@ -144,7 +143,7 @@ const Node: FC<NodeComponentProps> = ({
   const { triggerOffset, setTriggerOffset } = useContext(NodeTreeContext);
   const [open, setOpen] = useState<boolean>(defaultOpen);
   const [showLines, setShowLines] = useState<boolean>(false);
-  const onClick = () => {
+  const onClick = (): void => {
     setOpen((prev) => !prev);
     setTriggerOffset(Math.random());
   };
@@ -156,7 +155,7 @@ const Node: FC<NodeComponentProps> = ({
   });
   const color = useMemo(() => getRandomColor(), []);
 
-  const getOffset = () => {
+  const getOffset = (): void => {
     if (ref.current) {
       const { left, top } = ref.current.getBoundingClientRect();
       setOffset({ left, top });
@@ -173,6 +172,7 @@ const Node: FC<NodeComponentProps> = ({
         setShowLines(true);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propagatedOpen]);
 
   useEffect(() => {

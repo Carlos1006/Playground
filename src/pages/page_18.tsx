@@ -4,11 +4,9 @@ import AudioSphere from "../components/audioSphere";
 
 const Page_18: FC = () => {
   return (
-    <>
-      <div className={`${css.page} ${css.black} ${css.relative}`}>
-        <AudioSphere />
-      </div>
-    </>
+    <div className={`${css.page} ${css.black} ${css.relative}`}>
+      <AudioSphere />
+    </div>
   );
 };
 

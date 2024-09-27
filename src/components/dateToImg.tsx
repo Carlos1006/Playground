@@ -31,7 +31,7 @@ const DateImage: FC<DateImageProps> = ({
   pad = false,
 }: DateImageProps) => {
   const [code, setCode] = useState<string[] | null>(null);
-  const load = () => {
+  const load = (): void => {
     const date = new Date();
     date.setSeconds(0);
     date.setMilliseconds(0);
@@ -52,6 +52,7 @@ const DateImage: FC<DateImageProps> = ({
     setCode(hashs);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(load, []);
 
   return (
