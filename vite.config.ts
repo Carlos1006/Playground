@@ -41,5 +41,7 @@ export default defineConfig({
     "**/*.eot",
     "**/*.ttf",
     "**/*.otf",
+    "**/*.ico",
+    "**/*.fbx",
   ],
 });
