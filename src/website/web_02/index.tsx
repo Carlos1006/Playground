@@ -100,13 +100,13 @@ const Web_02: React.FC = () => {
     return (-c / 2) * (t * (t - 2) - 1) + b;
   }
 
-  const scrollToValue = (value: number) => {
+  const scrollToValue = (value: number): void => {
     if (visorRef.current) {
       start.current = visorRef.current.scrollLeft;
       target.current = value;
       startTime.current = performance.now();
 
-      const animateScroll = (currentTime: number) => {
+      const animateScroll = (currentTime: number): void => {
         const elapsedTime = currentTime - startTime.current;
         if (visorRef.current) {
           visorRef.current.scrollLeft = easeInOut(
@@ -148,7 +148,7 @@ const Web_02: React.FC = () => {
     []
   );
 
-  const onNext = async () => {
+  const onNext = async (): Promise<void> => {
     if (!canClick) return;
     setCanClick(false);
     setAngle(angle - 90);
@@ -170,7 +170,7 @@ const Web_02: React.FC = () => {
     setCanClick(true);
   };
 
-  const onPrev = async () => {
+  const onPrev = async (): Promise<void> => {
     if (!canClick) return;
     setCanClick(false);
     setAngle(angle + 90);

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { IHeaderMenu } from "../types";
 import { _atr_ } from "../utils";
-import css from "../styles/Header.module.scss";
+import css from "../styles/header.module.scss";
 import image from "../assets/images/sushi_logo.png";
 
-const Header = () => {
+const Header: FC = () => {
   const leftElements: IHeaderMenu[] = [
     {
       japaneseTitle: "主頁",

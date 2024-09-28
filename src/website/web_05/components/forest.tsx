@@ -14,19 +14,22 @@ interface IForest {
   className?: string;
 }
 
-const createScene = () => {
+const createScene = (): THREE.Scene => {
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2("rgb(10,10,10)", 0.11);
   return scene;
 };
 
-const createCamera = (width: number, height: number) => {
+const createCamera = (
+  width: number,
+  height: number
+): THREE.PerspectiveCamera => {
   const camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
   camera.position.set(0, 1.5, 8);
   return camera;
 };
 
-const createMainLight = () => {
+const createMainLight = (): THREE.HemisphereLight => {
   const mainLight = new THREE.HemisphereLight(
     "rgb(100,100,100)",
     0xffffff,
@@ -36,7 +39,7 @@ const createMainLight = () => {
   return mainLight;
 };
 
-const createRenderer = (width: number, height: number) => {
+const createRenderer = (width: number, height: number): THREE.WebGLRenderer => {
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0);
@@ -45,7 +48,7 @@ const createRenderer = (width: number, height: number) => {
   return renderer;
 };
 
-const createFloor = () => {
+const createFloor = (): THREE.Mesh => {
   const floorColor = "rgb(8,114,128)";
   const floorMat = new THREE.MeshStandardMaterial({
     roughness: 1,
@@ -60,7 +63,7 @@ const createFloor = () => {
   return floorMesh;
 };
 
-const createKeyLight = () => {
+const createKeyLight = (): THREE.PointLight => {
   const lightColor = "rgb(200,200,200)";
   const bulbGeometry = new THREE.SphereGeometry(0.17, 16, 8);
   const bulbLight = new THREE.PointLight(lightColor, 10, 10, 3);
@@ -81,7 +84,7 @@ const createKeyLight = () => {
   return bulbLight;
 };
 
-const createFillLight = () => {
+const createFillLight = (): THREE.PointLight => {
   const lightColor2 = "rgb(0,100,100)";
   const bulbGeometry2 = new THREE.SphereGeometry(0.001, 16, 8);
   const bulbLight2 = new THREE.PointLight(lightColor2, 6, 10, 5);
@@ -99,7 +102,7 @@ const createFillLight = () => {
   return bulbLight2;
 };
 
-const createBackLight = () => {
+const createBackLight = (): THREE.PointLight => {
   const lightColor3 = "rgb(0,70,100)";
   const bulbGeometry3 = new THREE.SphereGeometry(0.001, 16, 8);
   const bulbLight3 = new THREE.PointLight(lightColor3, 9, 10, 10);
@@ -117,7 +120,7 @@ const createBackLight = () => {
   return bulbLight3;
 };
 
-const createBack2Light = () => {
+const createBack2Light = (): THREE.PointLight => {
   const lightColor2 = "rgb(0,50,100)";
   const bulbGeometry2 = new THREE.SphereGeometry(0.001, 16, 8);
   const bulbLight2 = new THREE.PointLight(lightColor2, 8, 10, 7);
@@ -224,7 +227,7 @@ const Forest: FC<IForest> = ({ mainContainer, className = "" }: IForest) => {
 
   const renderCount = useRef(0);
 
-  const createComposer = () => {
+  const createComposer = (): void => {
     const hblur = new ShaderPass(HorizontalBlurShader);
     const vblur = new ShaderPass(VerticalBlurShader);
     vblur.renderToScreen = true;
@@ -246,7 +249,7 @@ const Forest: FC<IForest> = ({ mainContainer, className = "" }: IForest) => {
     renderer.current.render(scene.current, camera.current);
   }, []);
 
-  const loadModels = async () => {
+  const loadModels = async (): Promise<void> => {
     const rocks = await loadRocks();
     mainObject.current.add(rocks);
 

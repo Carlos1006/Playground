@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import * as THREE from "three";
 import { IMainContext, MainContext } from "./createContext";
 
-const MainContextProvider = ({ children }: { children: React.ReactNode }) => {
+const MainContextProvider: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const imgContainerRef1 = useRef<HTMLDivElement>(null);
   const canvasRef1 = useRef<HTMLCanvasElement>(null);
   const imgContainerRef2 = useRef<HTMLDivElement>(null);

@@ -1,8 +1,9 @@
 import css from "../styles/home.module.scss";
 import Map from "./map";
 import Button from "./button";
+import { FC } from "react";
 
-const Home = () => {
+const Home: FC = () => {
   // const title = "REDUCTO";
   const title = "SITIO WEB";
   const subtitle = "DESARROLLO WEB";

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import css from "./styles/main.module.scss";
 
 // import darkMode from "../../resources/banner/darkMode.svg";
@@ -13,7 +13,7 @@ const myAboutMe = "Acerca de mi";
 const x = 0;
 const y = 1;
 
-const Web_07 = () => {
+const Web_07: FC = () => {
   const aboutMeButtonRef = useRef<HTMLDivElement>(null);
 
   const [hiddenLogo, setHiddenLogo] = useState(true);
@@ -31,15 +31,15 @@ const Web_07 = () => {
     setDarkMode(!onDarkMode);
   }, [onDarkMode]);
 
-  const aboutMeHoverHandle = () => {
+  const aboutMeHoverHandle = (): void => {
     setActiveTranslation(false);
     setOnHover(true);
   };
-  const aboutMeEndHoverHandle = () => {
+  const aboutMeEndHoverHandle = (): void => {
     setActiveTranslation(true);
     setOnHover(false);
   };
-  const mouseMoveHandler = ({ clientX, clientY }: IMouseMove) => {
+  const mouseMoveHandler = ({ clientX, clientY }: IMouseMove): void => {
     if (activeTranslation) {
       setTranslateX(clientX - viewportDimensions[x]);
       setTranslateY(clientY - viewportDimensions[y]);

@@ -1,4 +1,4 @@
-import css from "../styles/Inputs.module.scss";
+import css from "../styles/inputs.module.scss";
 import { IButton } from "../types";
 import { FC } from "react";
 

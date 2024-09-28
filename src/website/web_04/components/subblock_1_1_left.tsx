@@ -5,8 +5,9 @@ import mii_01 from "../assets/profiles/mii_0.png";
 import mii_02 from "../assets/profiles/mii_1.png";
 import mii_03 from "../assets/profiles/mii_3.png";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { FC } from "react";
 
-const SubBlock_1_1_Left = () => {
+const SubBlock_1_1_Left: FC = () => {
   return (
     <div className={css.subBlock}>
       <span className={css.name}>Carlos Daniel</span>

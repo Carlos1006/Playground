@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function useMetaInjections() {
+function useMetaInjections(): void {
   useEffect(() => {
     // add meta to change status bar color
     console.log("useMetaInjections");
@@ -13,7 +13,7 @@ function useMetaInjections() {
       document.getElementsByTagName("head")[0].appendChild(meta);
     }
     meta.content = "#000000";
-    return () => {
+    return (): void => {
       meta?.remove();
     };
   }, []);

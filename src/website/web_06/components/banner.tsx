@@ -18,7 +18,7 @@ const Banner: FC<IBanner> = ({ children }: IBanner) => {
   const myDescription1 = "Lic. en Multimedia y Animacion Digital";
   const myDescription0 = "Desarrollador FrontEnd";
 
-  const animation = (_value: number) => {
+  const animation = (_value: number): void => {
     if (_value <= lastStep) {
       setTimeout(() => {
         setStep(_value);
@@ -33,6 +33,7 @@ const Banner: FC<IBanner> = ({ children }: IBanner) => {
   useEffect(() => {
     setCircleStep(1);
     animation(step);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

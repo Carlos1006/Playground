@@ -1,4 +1,4 @@
-import css from "../styles/Visor.module.scss";
+import css from "../styles/visor.module.scss";
 
 import { MdRestaurant } from "react-icons/md";
 
@@ -9,12 +9,13 @@ import mini_03 from "../assets/test/logo_wok.jpg";
 import mini_04 from "../assets/test/logo_yamatop.jpg";
 import sushiImg from "../assets/pictures/sushi_00.png";
 import { Button } from "./inputs";
+import { FC } from "react";
 
 const MINI_LOGOS = [mini_00, mini_01, mini_02, mini_03, mini_04];
 const MAIN_IMG_SIDE = 500;
 const TEXT = `Originario de Japón. Consiste en un pequeño bloque de arroz cocido con vinagre de arroz, cubierto con una fina rebanada de pescado crudo o mariscos. El nigiri sushi se dice que se originó en la ciudad de Edo (ahora conocida como Tokio) en el siglo XIX.`;
 
-const Visor = () => {
+const Visor: FC = () => {
   return (
     <>
       <div className={css.visor}>

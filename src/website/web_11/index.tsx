@@ -1,9 +1,10 @@
+import { FC } from "react";
 import Header from "./components/header";
 import Visor from "./components/visor";
-import css from "./styles/Home.module.scss";
+import css from "./styles/home.module.scss";
 import "./styles/globals.scss";
 
-const Web_11 = () => {
+const Web_11: FC = () => {
   return (
     <>
       <div id={css.main}>

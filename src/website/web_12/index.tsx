@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import Loader from "./components/loader";
 import { NAME } from "./constants";
 import css from "./styles/welcome.module.scss";
 
-const Web_12 = () => {
+const Web_12: FC = () => {
   const [hour, setHour] = useState<string>("00");
   const [minute, setMinute] = useState<string>("00");
   const [showLoader, setShowLoader] = useState<boolean>(true);
@@ -19,7 +19,7 @@ const Web_12 = () => {
   const [rightText, setRightText] = useState<boolean>(false);
   const [go, setGo] = useState<boolean>(false);
 
-  function checkDate() {
+  function checkDate(): void {
     const date = new Date();
     const minute = date.getMinutes();
     const hour = date.getHours();

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .element10 {
   grid-area: el10;
   background-color:#fff;
@@ -245,49 +247,49 @@
 
 
         &:nth-child(1 of .iconOption) {
-          background-color:desaturate( #22c1c3, 30%);
+          background-color:color.adjust($color: #22c1c3, $saturation: -30%);
           transition:all 0.2s linear, $transition_bg;
           >span {
             filter:hue-rotate(20deg);
           }
           &:hover {
-            border-color:lighten(desaturate( #22c1c3, 30%), 20%);
+            border-color:color.adjust($color: color.adjust( $color: #22c1c3, $saturation: -30%), $lightness: 20%);
             transition: $transition_border;
           }
         }
         &:nth-child(2 of .iconOption) {
           // background-color:#26d596;
-          background-color:desaturate( #26d596, 30%);
+          background-color:color.adjust($color: #26d596,$saturation: -30%);
           transition:all 0.2s linear, $transition_bg;
           >span {
             filter:hue-rotate(200deg);
           }
           &:hover {
-            border-color:lighten(desaturate( #26d596, 30%), 10%);     
+            border-color:color.adjust($color: color.adjust( $color: #26d596, $saturation: -30%),$lightness: 10%); 
             transition: $transition_border;
           }
         }
         &:nth-child(3 of .iconOption) {
           // background-color:#2aeb66;
-          background-color:desaturate( #2aeb66, 30%);
+          background-color:color.adjust($color: #2aeb66,$saturation: -30%);
           transition:all 0.2s linear, $transition_bg;
           >span {
             filter:hue-rotate(300deg);
           }
           &:hover {
-            border-color:lighten(desaturate( #2aeb66, 30%), 10%);
+            border-color:color.adjust($color: color.adjust( $color: #2aeb66, $saturation: -30%), $lightness: 10%);
             transition: $transition_border;
           }
         }
         &:nth-child(4 of .iconOption) {
           // background-color:#2dfd3e;
-          background-color:desaturate( #2dfd3e, 30%);
+          background-color:color.adjust($color: #2dfd3e,$saturation: -30%);
           transition:all 0.2s linear, $transition_bg;
           >span {
             filter:hue-rotate(10deg);
           }
           &:hover {
-            border-color:lighten(desaturate( #2dfd3e, 30%), 10%);
+            border-color:color.adjust($color: color.adjust($color: #2dfd3e,$saturation: -30%), $lightness: 10%);
             transition: $transition_border;
           }
         }

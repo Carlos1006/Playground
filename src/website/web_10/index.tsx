@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import Loader from "./components/loader";
 import css from "./styles/welcome.module.scss";
 
-const Web_10 = () => {
+const Web_10: FC = () => {
   const [showingLoader, setShowingLoader] = useState(true);
   const [molecule, setMolecule] = useState(1);
 
@@ -24,7 +24,7 @@ const Web_10 = () => {
   const [text, setText] = useState(1);
   const [more, setMore] = useState(1);
 
-  const onLoad = () => {
+  const onLoad = (): void => {
     setTimeout(() => {
       setShowingLoader(false);
       setTimeout(() => {

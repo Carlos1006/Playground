@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import css from "../styles/main.module.scss";
 import cmap from "../../../assets/maps/map1/cmap.png";
 import HeightMap from "./../components/heightMap";
@@ -15,7 +15,7 @@ import SubBlock_3_2_Bottom from "./subblock_3_2_bottom";
 import SubBlock_3_2_Top from "./subblock_3_2_top";
 import SubBlock_2_1 from "./subblock_2_1";
 
-const Main: React.FC = () => {
+const Main: FC = () => {
   const {
     canvasRef1,
     canvasRef2,
@@ -31,7 +31,7 @@ const Main: React.FC = () => {
   const { createRandomColor, rgbToString, convertRGBToHSL, hslToString } =
     useRandomDataColor();
 
-  const onMouseMove = (e: { clientY: number }) => {
+  const onMouseMove = (e: { clientY: number }): void => {
     const { clientY } = e;
     const windowsHalfY = window.innerHeight / 2;
     const positionY = clientY - windowsHalfY;
@@ -52,7 +52,7 @@ const Main: React.FC = () => {
     }
     const hsl: Array<[number, number, number]> = [];
     for (let i = 0; i < 20; i++) {
-      hsl.push(convertRGBToHSL(...createRandomColor()));
+      hsl.push(convertRGBToHSL(...createRandomColor(() => false))); // this may be a bug or be true
     }
     hsl.sort((a, b) => {
       return b[0] - a[0];

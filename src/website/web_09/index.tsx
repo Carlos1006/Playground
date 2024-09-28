@@ -1,8 +1,8 @@
 import css from "./styles/main.module.scss";
-import { useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { FUTURE_CITIES } from "./constants";
 
-const Web_09 = () => {
+const Web_09: FC = () => {
   const [state, setState] = useState<0 | 1 | 2>(0);
   const [hide, setHide] = useState(false);
   const [show, setShow] = useState(false);
@@ -12,7 +12,7 @@ const Web_09 = () => {
   const [hideName, setHideName] = useState(false);
   const [showName, setShowName] = useState(false);
 
-  const onClick = async () => {
+  const onClick = async (): Promise<void> => {
     if (busy) return;
     setBusy(true);
     setShow(true);

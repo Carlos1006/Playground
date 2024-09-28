@@ -1,8 +1,9 @@
+import { FC } from "react";
 import css from "../styles/header.module.scss";
 import Button from "./button";
 import Link from "./headerLink";
 
-const Header = () => {
+const Header: FC = () => {
   const title = "REDUCTO";
 
   return (

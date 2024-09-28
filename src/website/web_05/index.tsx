@@ -11,10 +11,10 @@ const Main: FC = () => {
   const mainContainer = useRef<HTMLDivElement>(null);
   const [onHover, setOnHover] = useState(false);
 
-  const onMouseEnter = () => {
+  const onMouseEnter = (): void => {
     setOnHover(true);
   };
-  const onMouseLeave = () => {
+  const onMouseLeave = (): void => {
     setOnHover(false);
   };
 

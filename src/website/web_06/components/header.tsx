@@ -1,7 +1,8 @@
 import css from "../styles/header.module.scss";
 import CDG1 from "../../../assets/logotype/CDG1.png";
+import { FC } from "react";
 
-const Header = () => {
+const Header: FC = () => {
   return (
     <div id={css.header}>
       <div id={css.headerMargin}>

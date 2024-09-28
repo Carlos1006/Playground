@@ -59,6 +59,10 @@ export const COMPONENTS = [
     path: "/audioFreqs",
     name: "Audio Frequencies",
   },
+  {
+    path: "/rocket",
+    name: "Rocket",
+  },
 ];
 
 export const EXPERIMENTS = [

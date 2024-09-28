@@ -1,5 +1,5 @@
 import { FC } from "react";
-import css from "../styles/Navigator.module.scss";
+import css from "../styles/navigator.module.scss";
 
 interface LinkProps {
   selected: boolean;

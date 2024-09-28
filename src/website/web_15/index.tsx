@@ -222,7 +222,7 @@ const BentoGrid: FC = () => {
         {isMobile && <Menu show={showingMenu} />}
         <Toggler
           isOn={showElement2_3}
-          onClick={() => setShowElement2_3(!showElement2_3)}
+          onClick={(): void => setShowElement2_3(!showElement2_3)}
         />
         <Header
           darkMode={darkMode}

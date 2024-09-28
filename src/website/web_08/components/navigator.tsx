@@ -1,7 +1,8 @@
-import css from "../styles/Navigator.module.scss";
+import { FC } from "react";
+import css from "../styles/navigator.module.scss";
 import Link from "./navigatorLink";
 
-const Navigator = () => {
+const Navigator: FC = () => {
   return (
     <div id={css.navigator}>
       <Link selected={true} text={"Inicio"} />

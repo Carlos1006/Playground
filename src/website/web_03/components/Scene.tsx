@@ -138,7 +138,7 @@ const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
         return group;
       };
 
-      const animate = () => {
+      const animate = (): void => {
         orbitControl.update();
         renderer.render(scene, camera);
 
@@ -158,7 +158,7 @@ const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
         requestAnimationFrame(animate);
       };
 
-      const step = () => {
+      const step = (): void => {
         const delta = clock.getDelta();
         for (let x = 0; x < cubos.length; x++) {
           for (let z = 0; z < cubos[x].length; z++) {
@@ -181,7 +181,7 @@ const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
         }
       };
 
-      const cloneCube = (cubo: THREE.Group<THREE.Object3DEventMap>) => {
+      const cloneCube = (cubo: THREE.Group<THREE.Object3DEventMap>): void => {
         for (let x = -8; x < 6; x++) {
           if (Array.isArray(cubos[x + 8]) == false) {
             cubos[x + 8] = [];
@@ -224,7 +224,7 @@ const Scene: FC<SceneProps> = ({ id, children }: SceneProps) => {
         }
       };
 
-      const preloadCubo = async () => {
+      const preloadCubo = async (): Promise<void> => {
         const group = await loadCubo();
         cloneCube(group);
       };

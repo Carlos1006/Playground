@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { MainContext } from "../context/createContext";
+import { IMainContext, MainContext } from "../context/createContext";
 
-export function useMainContext() {
+export function useMainContext(): IMainContext {
   return useContext(MainContext);
 }

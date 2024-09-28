@@ -1,7 +1,8 @@
+import { FC } from "react";
 import css from "../styles/menu.module.scss";
 import Link from "./link";
 
-const Menu = () => {
+const Menu: FC = () => {
   return (
     <div id={css.menu}>
       {/*fill="#e4e1fa"*/}

@@ -14,8 +14,8 @@ const SubBlock_2_1: FC<ISubBlock_2_1> = ({ colors }: ISubBlock_2_1) => {
           style={
             hover == 1 ? { color: colors[0], filter: "brightness(1.8)" } : {}
           }
-          onMouseEnter={() => setHover(1)}
-          onMouseLeave={() => setHover(0)}
+          onMouseEnter={(): void => setHover(1)}
+          onMouseLeave={(): void => setHover(0)}
         >
           About
         </span>
@@ -23,8 +23,8 @@ const SubBlock_2_1: FC<ISubBlock_2_1> = ({ colors }: ISubBlock_2_1) => {
           style={
             hover == 2 ? { color: colors[1], filter: "brightness(1.8)" } : {}
           }
-          onMouseEnter={() => setHover(2)}
-          onMouseLeave={() => setHover(0)}
+          onMouseEnter={(): void => setHover(2)}
+          onMouseLeave={(): void => setHover(0)}
         >
           Projects
         </span>
@@ -32,8 +32,8 @@ const SubBlock_2_1: FC<ISubBlock_2_1> = ({ colors }: ISubBlock_2_1) => {
           style={
             hover == 3 ? { color: colors[2], filter: "brightness(1.8)" } : {}
           }
-          onMouseEnter={() => setHover(3)}
-          onMouseLeave={() => setHover(0)}
+          onMouseEnter={(): void => setHover(3)}
+          onMouseLeave={(): void => setHover(0)}
         >
           Contact
         </span>
@@ -41,8 +41,8 @@ const SubBlock_2_1: FC<ISubBlock_2_1> = ({ colors }: ISubBlock_2_1) => {
           style={
             hover == 4 ? { color: colors[3], filter: "brightness(1.8)" } : {}
           }
-          onMouseEnter={() => setHover(4)}
-          onMouseLeave={() => setHover(0)}
+          onMouseEnter={(): void => setHover(4)}
+          onMouseLeave={(): void => setHover(0)}
         >
           Resume
         </span>
@@ -50,8 +50,8 @@ const SubBlock_2_1: FC<ISubBlock_2_1> = ({ colors }: ISubBlock_2_1) => {
           style={
             hover == 5 ? { color: colors[4], filter: "brightness(1.8)" } : {}
           }
-          onMouseEnter={() => setHover(5)}
-          onMouseLeave={() => setHover(0)}
+          onMouseEnter={(): void => setHover(5)}
+          onMouseLeave={(): void => setHover(0)}
         >
           Hiring
         </span>
