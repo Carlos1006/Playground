@@ -21,7 +21,7 @@ const Space: FC = () => {
       />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <AsteroidProvider>
-        <Physics gravity={[0, -1, 0]} interpolate={false} colliders={"hull"}>
+        <Physics gravity={[0, 0, 0]} interpolate={false} colliders={"hull"}>
           <Rocket url={model} textureUrl={texture} />
           <Asteroid />
           <Floor />
