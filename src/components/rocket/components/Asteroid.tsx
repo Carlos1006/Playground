@@ -3,8 +3,11 @@ import { FC, useRef } from "react";
 import * as THREE from "three";
 import { RigidBody } from "@react-three/rapier";
 import useAsteroidContext from "../hooks/useAsteroidContext";
+import { IAsteroid } from "../types";
 
-const Asteroid: FC = () => {
+const Asteroid: FC<IAsteroid> = ({
+  position = new THREE.Vector3(0, 3, 0),
+}: IAsteroid) => {
   const ref = useRef<THREE.Group>(null);
   const { fbx } = useAsteroidContext();
 
@@ -18,7 +21,7 @@ const Asteroid: FC = () => {
   const vector: THREE.Vector3 = new THREE.Vector3(scale, scale, scale);
 
   return (
-    <RigidBody position={new THREE.Vector3(0, 3, 0)}>
+    <RigidBody position={position}>
       <group ref={ref} scale={vector}>
         {fbx && <primitive object={fbx.clone()} />}
       </group>

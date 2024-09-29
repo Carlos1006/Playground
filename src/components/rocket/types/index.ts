@@ -8,3 +8,7 @@ export interface IAsteroidContext {
 export interface IAsteroidProvider {
   children: ReactNode;
 }
+
+export interface IAsteroid {
+  position?: THREE.Vector3;
+}
