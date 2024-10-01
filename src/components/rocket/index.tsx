@@ -1,14 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import model from "./models/rocket.fbx";
-import texture from "./textures/rocket1.jpg";
 import { Physics } from "@react-three/rapier";
-import Rocket from "./components/ShipQuaternion";
+import Rocket from "./components/ShipMouse";
 import * as THREE from "three";
 import Asteroid from "./components/Asteroid";
 import AsteroidProvider from "./components/AsteroidProvider";
 import Floor from "./components/Floor";
-// import { OrthographicCamera } from "@react-three/drei";
+import { OrthographicCamera } from "@react-three/drei";
 
 const Space: FC = () => {
   const [positions, setPositions] = useState<THREE.Vector3[]>([]);
@@ -28,7 +27,7 @@ const Space: FC = () => {
       eventSource={document.getElementById("root") as HTMLElement} // Specifies the DOM element to listen for pointer events
       eventPrefix="page" // The event prefix that is cast into canvas pointer x/y events
     >
-      {/* <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={150} /> */}
+      <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={150} />
       <ambientLight intensity={Math.PI / 2} />
       <spotLight
         position={[10, 10, 10]}
@@ -40,7 +39,7 @@ const Space: FC = () => {
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <AsteroidProvider>
         <Physics gravity={[0, 0, 0]} interpolate={false} colliders={"hull"}>
-          <Rocket url={model} textureUrl={texture} />
+          <Rocket url={model} />
           <Asteroid />
           {positions.map((position, index) => (
             <Asteroid key={index} position={position} />

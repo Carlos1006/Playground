@@ -56,16 +56,27 @@ const Rocket: FC<{ url: string; textureUrl: string }> = ({ url }) => {
 
       // Definir la fuerza del impulso basado en la dirección y velocidad deseada
       const strength = Math.min(distance * 0.0005, 1); // Ajusta el factor 0.2 según tus necesidades
+      const capStrength = 0.0003;
 
-      const impulse = direction.normalize().multiplyScalar(strength);
+      const cappedStrength = Math.min(strength, capStrength);
 
-      // Aplicar el impulso en el eje X e Y (Z = 0 para evitar cambios en Z)
-      rigidBodyRef.current.applyImpulse(
-        { x: impulse.x, y: impulse.y, z: 0 },
-        true
-      );
+      console.log("Strength: ", cappedStrength);
+
+      const impulse = direction.normalize().multiplyScalar(cappedStrength);
+
+      if (distance > 1) {
+        // Aplicar el impulso en el eje X e Y (Z = 0 para evitar cambios en Z)
+        rigidBodyRef.current.applyImpulse(
+          { x: impulse.x, y: impulse.y, z: 0 },
+          true
+        );
+      } else {
+        // Establecer la velocidad del RigidBody a 0 en X e Y para detenerlo
+        rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
+      }
 
       const currentPos = rigidBodyRef.current.translation();
+
       // Calculate the rotation angle and smoothly rotate the rocket
       const rotationAngle = Math.atan2(
         worldY - currentPos.y,
