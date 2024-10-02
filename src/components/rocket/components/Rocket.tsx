@@ -102,7 +102,7 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
 
   useFrame(() => {
     if (ref.current) {
-      ref.current.rotation.y += 0.01;
+      ref.current.rotation.y += 0.015;
     }
   });
 
