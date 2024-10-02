@@ -1,4 +1,4 @@
-import { useRef, FC, useMemo } from "react";
+import { useRef, FC } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { between } from "../utils";
@@ -10,9 +10,9 @@ const Particle: FC<{ position: THREE.Vector3 }> = ({ position }) => {
   // Factores de movimiento aleatorios para cada partícula
   const randomX = useRef(between(-1, 1) / 500);
   const randomZ = useRef(between(-1, 1) / 500);
-  const randomY = useRef(between(0.5, 2) / 500); // Movimiento más suave hacia arriba
+  // const randomY = useRef(between(0.5, 2) / 500); // Movimiento más suave hacia arriba
   const timeToWait = useRef(between(0, 5)); // Tiempo de espera inicial
-  const scale = 1;
+  const scale = useRef(1);
 
   // Configuración de desvanecimiento
   const opacity = useRef(1.0); // Transparencia inicial de la partícula
@@ -28,7 +28,7 @@ const Particle: FC<{ position: THREE.Vector3 }> = ({ position }) => {
 
       // Reducir la opacidad para dar efecto de humo que se desvanece
       opacity.current = Math.max(0, opacity.current - fadeSpeed);
-      ref.current.material.opacity = opacity.current;
+      (ref.current.material as THREE.Material).opacity = opacity.current;
 
       // Agrandar ligeramente la partícula para simular expansión del humo
       ref.current.scale.addScalar(0.001);
