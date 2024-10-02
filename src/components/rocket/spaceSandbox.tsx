@@ -7,14 +7,10 @@ import * as THREE from "three";
 import Asteroid from "./components/Asteroid";
 import AsteroidProvider from "./components/AsteroidProvider";
 import Floor from "./components/Floor";
-import Stars from "./components/Stars";
-// import AnimatedParticles from "./components/AnimatedParticles";
-// import { Stars } from "@react-three/drei";
-// import { OrthographicCamera } from "@react-three/drei";
-// import Effects from "./components/Effects";
+import { OrthographicCamera } from "@react-three/drei";
 
 const Space: FC = () => {
-  const [positions, setPositions] = useState<THREE.Vector3[]>([]); //positions
+  const [positions, setPositions] = useState<THREE.Vector3[]>([]);
 
   useEffect(() => {
     const positions: THREE.Vector3[] = [];
@@ -28,13 +24,10 @@ const Space: FC = () => {
 
   return (
     <Canvas
-      // onCreated={({ gl, size, camera }) => {
-      //   gl.setClearColor(new THREE.Color("white"));
-      // }}
       eventSource={document.getElementById("root") as HTMLElement} // Specifies the DOM element to listen for pointer events
       eventPrefix="page" // The event prefix that is cast into canvas pointer x/y events
     >
-      {/* <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={150} /> */}
+      <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={150} />
       <ambientLight intensity={Math.PI / 2} />
       <spotLight
         position={[10, 10, 10]}
@@ -47,13 +40,13 @@ const Space: FC = () => {
       <AsteroidProvider>
         <Physics gravity={[0, 0, 0]} interpolate={false} colliders={"hull"}>
           <Rocket url={model} />
+          <Asteroid />
           {positions.map((position, index) => (
             <Asteroid key={index} position={position} />
           ))}
-          <Floor show={false} />
+          <Floor />
         </Physics>
       </AsteroidProvider>
-      <Stars count={10000} />
     </Canvas>
   );
 };

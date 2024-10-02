@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { RigidBody } from "@react-three/rapier";
 import { degToRad } from "three/src/math/MathUtils.js";
+import { IFloor } from "../types";
 
-const Floor: FC = () => {
+const Floor: FC<IFloor> = ({ show = true }: IFloor) => {
   return (
     <RigidBody
       type="fixed"
@@ -11,7 +12,12 @@ const Floor: FC = () => {
     >
       <mesh receiveShadow>
         <planeGeometry args={[100, 100, 500, 500]} />
-        <meshStandardMaterial color="rgb(1,1,1)" opacity={1} wireframe />
+        <meshStandardMaterial
+          transparent
+          color="rgb(0,0,0)"
+          opacity={1}
+          wireframe={show}
+        />
       </mesh>
     </RigidBody>
   );
