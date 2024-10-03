@@ -28,6 +28,7 @@ const Asteroid: FC<IAsteroid> = ({
       ref={(ref): void => {
         setRef(ref);
       }}
+      enabledTranslations={[true, true, false]}
     >
       <group ref={ref} scale={vector}>
         {fbx && <primitive object={fbx.clone()} />}
