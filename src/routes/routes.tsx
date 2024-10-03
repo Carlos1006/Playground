@@ -19,6 +19,7 @@ import Page_18 from "../pages/page_18";
 import Page_19 from "../pages/page_19";
 import Page_20 from "../pages/page_20";
 
+import Web_00 from "../website/web_00";
 import Web_01 from "../website/web_01";
 import Web_02 from "../website/web_02";
 import Web_03 from "../website/web_03";
@@ -39,7 +40,7 @@ import Web_15 from "../website/web_15";
 const Routes = [
   {
     path: "/",
-    element: <></>,
+    element: <Web_00 />,
   },
   {
     path: "/day_night_toggle",

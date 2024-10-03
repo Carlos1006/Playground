@@ -63,6 +63,10 @@ const Page_00: FC = () => {
   //   setCollapseWedding(!collapseWedding);
   // };
 
+  const onNameClick = (): void => {
+    hideAndNavigate("/");
+  }
+
   return (
     <div id={css.main}>
       <div
@@ -75,7 +79,7 @@ const Page_00: FC = () => {
         <AiOutlineMenu />
       </div>
       <div id={css.navigator} className={collapse ? css.collapse : ""}>
-        <div id={css.header}>
+        <div id={css.header} onClick={onNameClick}>
           <div id={css.logo}>
             <img src={logo} />
           </div>
