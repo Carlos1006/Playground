@@ -1,31 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import model from "./models/rocket.fbx";
 import { Physics } from "@react-three/rapier";
 import Rocket from "./components/Rocket";
-import * as THREE from "three";
-import Asteroid from "./components/Asteroid";
 import AsteroidProvider from "./components/AsteroidProvider";
 import Floor from "./components/Floor";
 import Stars from "./components/Stars";
+import Asteroids from "./components/Asteroids";
 // import AnimatedParticles from "./components/AnimatedParticles";
 // import { Stars } from "@react-three/drei";
 // import { OrthographicCamera } from "@react-three/drei";
 // import Effects from "./components/Effects";
 
 const Space: FC = () => {
-  const [positions, setPositions] = useState<THREE.Vector3[]>([]); //positions
-
-  useEffect(() => {
-    const positions: THREE.Vector3[] = [];
-    for (let i = 0; i < 10; i++) {
-      const x = Math.random() * 10 - 5;
-      const y = Math.random() * 10 - 5;
-      positions.push(new THREE.Vector3(x, y, 0));
-    }
-    setPositions(positions);
-  }, []);
-
   return (
     <Canvas
       // onCreated={({ gl, size, camera }) => {
@@ -47,9 +34,7 @@ const Space: FC = () => {
       <AsteroidProvider>
         <Physics gravity={[0, 0, 0]} interpolate={false} colliders={"hull"}>
           <Rocket url={model} />
-          {positions.map((position, index) => (
-            <Asteroid key={index} position={position} />
-          ))}
+          <Asteroids />
           <Floor show={false} />
         </Physics>
       </AsteroidProvider>

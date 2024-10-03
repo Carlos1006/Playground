@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { ReactNode } from "react";
+import { RapierRigidBody } from "@react-three/rapier";
 
 export interface IAsteroidContext {
   fbx: THREE.Group | null;
@@ -11,6 +12,7 @@ export interface IAsteroidProvider {
 
 export interface IAsteroid {
   position?: THREE.Vector3;
+  setRef?: (ref: RapierRigidBody | null) => void;
 }
 
 export interface IFloor {

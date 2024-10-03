@@ -7,7 +7,7 @@ const Floor: FC<IFloor> = ({ show = true }: IFloor) => {
   return (
     <RigidBody
       type="fixed"
-      position={[0, -2, 0]}
+      position={[0, -5, 0]}
       rotation={[degToRad(90), 0, 0]}
     >
       <mesh receiveShadow>

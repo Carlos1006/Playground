@@ -62,8 +62,6 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
   useFrame(() => {
     if (!rigidBodyRef.current || !ref.current || !wrapperRef.current) return;
 
-    console.log(keys.current);
-
     const lerpFactor = 0.1; // Factor de suavizado para la rotación
     const decelerationFactor = 0.05; // Factor de desaceleración para la velocidad
     // Direccion hacia adelante basándonos en la rotación actual
@@ -124,6 +122,7 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
       gravityScale={0}
       onCollisionEnter={handleCollision}
       colliders="cuboid"
+      lockRotations
       position={[0, -1.5, 0]}
     >
       <group ref={wrapperRef}>

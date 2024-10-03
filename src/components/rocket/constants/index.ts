@@ -10,3 +10,7 @@ export const KEYS_DEFAULT: IKeys = {
   ArrowUp: false,
   ArrowDown: false,
 };
+
+export const EMPTY_FUNCTION = (): void => {
+  return;
+};
