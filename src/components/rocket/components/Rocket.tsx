@@ -9,6 +9,8 @@ import * as THREE from "three";
 import { FBXLoader } from "three-stdlib";
 import Fire from "./Fire";
 import Smoke from "./Smoke";
+import { IKeyDirection, IKeys } from "../types";
+import { KEYS_DEFAULT } from "../constants";
 
 const Rocket: FC<{ url: string }> = ({ url }) => {
   const ref = useRef<THREE.Group>(null);
@@ -20,12 +22,7 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
   const [velocity, setVelocity] = useState(new THREE.Vector3(0, 0, 0)); // Velocidad actual del cohete
 
   // Teclas activas
-  const keys = useRef<{ [key: string]: boolean }>({
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: false,
-  });
+  const keys = useRef<IKeys>(KEYS_DEFAULT);
 
   // Manejar colisiones
   const handleCollision = (event: CollisionEnterPayload): void => {
@@ -38,10 +35,18 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
   // Añadir y quitar eventos de teclado
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
-      if (event.key in keys.current) keys.current[event.key] = true;
+      if (event.key in keys.current) {
+        keys.current = {
+          ...KEYS_DEFAULT,
+          [event.key as IKeyDirection]: true,
+        };
+      }
     };
+
     const handleKeyUp = (event: KeyboardEvent): void => {
-      if (event.key in keys.current) keys.current[event.key] = false;
+      if (event.key in keys.current) {
+        keys.current[event.key as IKeyDirection] = false;
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -57,6 +62,8 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
   useFrame(() => {
     if (!rigidBodyRef.current || !ref.current || !wrapperRef.current) return;
 
+    console.log(keys.current);
+
     const lerpFactor = 0.1; // Factor de suavizado para la rotación
     const decelerationFactor = 0.05; // Factor de desaceleración para la velocidad
     // Direccion hacia adelante basándonos en la rotación actual
@@ -64,10 +71,13 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
 
     // Calcular la nueva velocidad objetivo
     let newTargetVelocity = new THREE.Vector3(0, 0, 0);
-    if (keys.current.ArrowLeft)
+    if (keys.current.ArrowLeft) {
       newTargetVelocity = direction.multiplyScalar(-5);
-    if (keys.current.ArrowRight)
+    }
+
+    if (keys.current.ArrowRight) {
       newTargetVelocity = direction.multiplyScalar(5);
+    }
 
     // Actualizar la velocidad real del cohete con `lerp` hacia la velocidad objetivo
     const newVelocity = new THREE.Vector3().lerpVectors(
@@ -120,15 +130,9 @@ const Rocket: FC<{ url: string }> = ({ url }) => {
         <group ref={ref} scale={vector} layers={0}>
           <primitive object={fbx} />
         </group>
-        <Fire position={[0, -0.17, 0] as unknown as THREE.Vector3} />
-        <Fire
-          position={[0, -0.35, 0] as unknown as THREE.Vector3}
-          scale={0.5}
-        />
-        <Fire
-          position={[0, -0.47, 0] as unknown as THREE.Vector3}
-          scale={0.25}
-        />
+        <Fire position={new THREE.Vector3(0, -0.17, 0)} />
+        <Fire position={new THREE.Vector3(0, -0.35, 0)} scale={0.5} />
+        <Fire position={new THREE.Vector3(0, -0.47, 0)} scale={0.25} />
         <Smoke count={100} />
       </group>
     </RigidBody>

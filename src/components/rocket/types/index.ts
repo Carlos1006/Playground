@@ -25,3 +25,12 @@ export interface IFire {
 export interface IParticles {
   count: number;
 }
+
+export interface IKeys {
+  ArrowLeft: boolean;
+  ArrowRight: boolean;
+  ArrowUp: boolean;
+  ArrowDown: boolean;
+}
+
+export type IKeyDirection = keyof IKeys;
