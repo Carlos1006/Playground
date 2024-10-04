@@ -1,29 +1,30 @@
 import { FC } from "react";
 import css from "./styles/main.module.scss";
+import Header from "./components/Header";
+import Center0 from "./components/Center0";
+import Center1 from "./components/Center1";
+import Footer from "./components/Footer";
+import Gt0l0 from "./components/GT0L0";
+import Gt0l1 from "./components/GT0L1";
+import Gt1l0 from "./components/GT1L0";
+import St1r1 from "./components/ST1R1";
+import Gt2r0 from "./components/GT2R0";
+import St0r0 from "./components/ST0R0";
 
 const Web00: FC = () => {
   return (
     <main className={css.main}>
       <div className={css.wrapper}>
-        <div data-slot="h1000-00" className={css.slot} />
-        <div data-slot="h2000-00" className={css.slot} />
-        <div data-slot="h3000-00" className={css.slot} />
-        <div data-slot="h4000-00" className={css.slot} />
-        <div data-slot="gt0l0-00" className={css.slot} />
-        <div data-slot="gt0l1-00" className={css.slot} />
-        <div data-slot="gt1l0-00" className={css.slot} />
-        <div data-slot="gt1l0-00" className={css.slot} />
-        <div data-slot="st0r0-00" className={css.slot} />
-        <div data-slot="st0r0-01" className={css.slot} />
-        <div data-slot="st0r0-01" className={css.slot} />
-        <div data-slot="st0r0-01" className={css.slot} />
-        <div data-slot="st0r0-01" className={css.slot} />
-        <div data-slot="st1r1-00" className={css.slot} />
-        <div data-slot="st1r1-01" className={css.slot} />
-        <div data-slot="c0000-00" className={css.slot} />
-        <div data-slot="c1000-00" className={css.slot} />
-        <div data-slot="gt2r0-00" className={css.slot} />
-        <div data-slot="f0000-00" className={css.slot} />
+        <Header />
+        <Gt0l0 />
+        <Gt0l1 />
+        <Gt1l0 />
+        <St0r0 />
+        <St1r1 />
+        <Center0 />
+        <Center1 />
+        <Gt2r0 />
+        <Footer />
       </div>
     </main>
   );
