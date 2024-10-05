@@ -10,10 +10,12 @@ import Gt1l0 from "./components/GT1L0";
 import St1r1 from "./components/ST1R1";
 import Gt2r0 from "./components/GT2R0";
 import St0r0 from "./components/ST0R0";
+import Background from "./components/Background";
 
 const Web00: FC = () => {
   return (
     <main className={css.main}>
+      <Background />
       <div className={css.wrapper}>
         <Header />
         <Gt0l0 />

@@ -1,31 +1,19 @@
+@import "theme";
+
 .main {
   width:100vw;
   height:100vh;
   container: main / size;
-  //background-color:rgb(8, 8, 12);
-  // background: radial-gradient(circle at 50% 0, rgb(19, 25, 87) 0%, rgb(6, 25, 43) 60%, rgb(3, 12, 20) 100%);
-  background-image:linear-gradient(90deg, rgb(8, 8, 12), rgb(11, 11, 17));
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 170px;
-    opacity: 0.12;
-  }
+  background-color:black;
+  position:relative;
   .wrapper {
-    padding:1.5cqb;
+    padding:$gap;
     width:100cqi;
     height:100cqb;
     position:relative;
     z-index: 10;
     display:grid;
-    gap:1.5cqb;
+    gap:$gap;
     grid-template-columns:150px 170px repeat(4, 1fr) 280px 120px;
     grid-template-rows:70px 25cqb repeat(3, 1fr) 60px;
     grid-template-areas: 
@@ -36,79 +24,81 @@
       'gt1l0-00 gt1l0-00 gt1l0-00 c1000-00 c1000-00 c1000-00 gt2r0-00 gt2r0-00'
       'f0000-00 f0000-00 f0000-00 f0000-00 f0000-00 f0000-00 f0000-00 f0000-00';
     .slot {
-      background-color:black;
+      background-color: $slot_color;
+      border:1px solid $border_color;
+      border-radius:10px;
       &[data-slot="h1000-00"] {
         grid-area:h1000-00;
-        background-color:red;
+        // background-color:red;
       }
       &[data-slot="h2000-00"] {
         grid-area:h2000-00;
-        background-color:blue;
+        // background-color:blue;
       }
       &[data-slot="h3000-00"] {
         grid-area:h3000-00;
-        background-color:green;
+        // background-color:green;
       }
       &[data-slot="h4000-00"] {
         grid-area:h4000-00;
-        background-color:yellow;
+        // background-color:yellow;
       }
       &[data-slot="gt0l0-00"] {
         grid-area:gt0l0-00;
-        background-color:purple;
+        // background-color:purple;
       }
       &[data-slot="gt1l0-00"] {
         grid-area:gt1l0-00;
-        background-color:orange;
+        // background-color:orange;
       }
       &[data-slot="gt0l1-00"] {
         grid-area:gt0l1-00;
-        background-color: pink;
+        // background-color: pink;
       }
 
       &[data-slot="st0r0-00"] {
         grid-area:st0r0-00;
-        background-color:hotpink;
+        // background-color:hotpink;
       }
 
       &[data-slot="st0r0-00"] {
         grid-area:st0r0-00;
-        background-color:lightblue;
+        // background-color:lightblue;
       }
 
       &[data-slot="f0000-00"] {
         grid-area:f0000-00;
-        background-color:grey;
+        // background-color:grey;
       }
 
       &[data-slot="st0r0-01"] {
         grid-area:st0r0-01;
-        background-color: lightblue;
+        // background-color: lightblue;
       }
 
       &[data-slot="st1r1-00"] {
         grid-area:st1r1-00;
-        background-color: lightgreen;
+        // background-color: lightgreen;
       }
 
       &[data-slot="st1r1-01"] {
         grid-area:st1r1-01;
-        background-color: lightgreen;
+        // background-color: lightgreen;
       }
 
       &[data-slot="c0000-00"] {
         grid-area:c0000-00;
-        background-color: papayawhip
+        // background-color: papayawhip
       }
 
       &[data-slot="c1000-00"] {
         grid-area:c1000-00;
-        background-color: aquamarine;
+        // background-color: aquamarine;
       }
 
       &[data-slot="gt2r0-00"] {
         grid-area:gt2r0-00;
-        background-color: darkslategray;
+        // background-color: darkslategray;
       }
 
     }
