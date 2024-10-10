@@ -11,6 +11,7 @@ import St1r1 from "./components/ST1R1";
 import Gt2r0 from "./components/GT2R0";
 import St0r0 from "./components/ST0R0";
 import Background from "./components/Background";
+import "./styles/main.scss";
 
 const Web00: FC = () => {
   return (

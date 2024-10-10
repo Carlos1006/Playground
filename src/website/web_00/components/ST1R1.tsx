@@ -2,6 +2,8 @@ import { CSSProperties, FC, useLayoutEffect, useRef, useState } from "react";
 import globalCss from "../styles/main.module.scss";
 import css from "../styles/st1r1.module.scss";
 import Background from "./Background";
+import JobSlides from "./JobSlides";
+import JobCarousel from "./JobCarousel";
 
 const St1r1: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
@@ -11,12 +13,12 @@ const St1r1: FC = () => {
   const [l0t0Style, setL0t0Style] = useState<CSSProperties>({});
   const [l0b0Style, setL0b0Style] = useState<CSSProperties>({});
 
-  const [maskStyles, setMaskStles] = useState<CSSProperties>({});
+  const [maskStyles, setMaskStyles] = useState<CSSProperties>({});
 
   const calculateSizes = (): void => {
     if (maskRef.current) {
       const { left, top } = maskRef.current.getBoundingClientRect();
-      setMaskStles({
+      setMaskStyles({
         left: `-${left}px`,
         top: `-${top}px`,
       });
@@ -57,6 +59,7 @@ const St1r1: FC = () => {
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
+        <JobSlides />
         <div className={css.wrapper}>
           <div className={css.bordererLeftTop} style={l0t0Style} />
           <div className={css.bordererLeftBottom} style={l0b0Style} />
@@ -74,6 +77,7 @@ const St1r1: FC = () => {
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}
       >
+        <JobCarousel />
         <div className={css.wrapper}>
           <div className={css.bordererRight} />
         </div>

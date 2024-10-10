@@ -2,6 +2,8 @@ import { CSSProperties, FC, useLayoutEffect, useRef, useState } from "react";
 import globalCss from "../styles/main.module.scss";
 import css from "../styles/st0r0.module.scss";
 import Background from "./Background";
+import SkillCarousel from "./SkillCarousel";
+import SkillSlides from "./SkillSlides";
 
 const St0r0: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
@@ -53,6 +55,7 @@ const St0r0: FC = () => {
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
+        <SkillSlides />
         <div className={css.wrapper}>
           <div className={css.bordererLeft} />
         </div>
@@ -62,6 +65,7 @@ const St0r0: FC = () => {
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}
       >
+        <SkillCarousel />
         <div className={css.wrapper}>
           <div className={css.bordererRightTop} style={r0t0Style} />
           <div className={css.bordererRightBottom} style={r0b0Style} />
