@@ -1,15 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import css from "../styles/skills.module.scss";
 import { ISlider } from "../types";
-import { SKILLS } from "../helpers/SkillIcons";
+import useSkillData from "../hooks/useSkillData";
 
 const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const [showNext, setShowNext] = useState<boolean>(false);
+  const [atLeastOnce, setAtLeastOnce] = useState<boolean>(false);
+  const loaded = useRef<boolean>(false);
 
   useEffect(() => {
-    setShowNext(true);
+    loaded.current && setShowNext(true);
     const timeout = setTimeout(() => {
+      setAtLeastOnce(true);
       setCurrentIndex(index);
       setShowNext(false);
     }, 500);
@@ -19,8 +22,14 @@ const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
     };
   }, [index]);
 
-  const next = SKILLS[index];
-  const current = SKILLS[currentIndex];
+  useEffect(() => {
+    if (atLeastOnce) {
+      loaded.current = true;
+    }
+  }, [atLeastOnce]);
+
+  const next = useSkillData(index);
+  const current = useSkillData(currentIndex);
 
   return (
     <div id={css.skillSlides}>

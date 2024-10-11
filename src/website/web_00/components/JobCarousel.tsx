@@ -7,9 +7,13 @@ import JobIcon from "./JobIcon";
 import { JOBS } from "../helpers/JobIcons";
 import { ISwiper } from "../types";
 
-const JobCarousel: FC<ISwiper> = ({ onSlideChange, onSwiper }: ISwiper) => {
+const JobCarousel: FC<ISwiper> = ({
+  index,
+  onSlideChange,
+  onSwiper,
+}: ISwiper) => {
   return (
-    <div id={css.skillCarousel}>
+    <div id={css.jobsCarousel}>
       <div className={css.skillCarouselWrapper}>
         <Swiper
           autoplay={{
@@ -28,9 +32,12 @@ const JobCarousel: FC<ISwiper> = ({ onSlideChange, onSwiper }: ISwiper) => {
           loop
           className={css.skillCarouselSwiper}
         >
-          {JOBS.map(({ src }, index) => (
-            <SwiperSlide key={index} className={css.skillCarouselSwiperSlide}>
-              <JobIcon src={src} />
+          {JOBS.map(({ src }, drawIndex) => (
+            <SwiperSlide
+              key={drawIndex}
+              className={css.skillCarouselSwiperSlide}
+            >
+              <JobIcon selected={drawIndex === index} src={src} />
             </SwiperSlide>
           ))}
         </Swiper>

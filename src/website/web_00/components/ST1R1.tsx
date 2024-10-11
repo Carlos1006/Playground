@@ -12,6 +12,7 @@ import Background from "./Background";
 import JobSlides from "./JobSlides";
 import JobCarousel from "./JobCarousel";
 import { SwiperClass } from "swiper/react";
+import JobTime from "./JobTime";
 
 const St1r1: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
@@ -86,6 +87,7 @@ const St1r1: FC = () => {
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
+        <JobTime index={debounceIndex} />
         <JobSlides index={debounceIndex} />
         <div className={css.wrapper}>
           <div className={css.bordererLeftTop} style={l0t0Style} />
@@ -105,6 +107,7 @@ const St1r1: FC = () => {
         ref={rightElementRef}
       >
         <JobCarousel
+          index={activeIndex}
           onSlideChange={onCarouselChange}
           onSwiper={onCarouselSwiper}
         />

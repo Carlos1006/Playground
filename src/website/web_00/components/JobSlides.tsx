@@ -1,18 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import css from "../styles/skills.module.scss";
-import { JOBS } from "../helpers/JobIcons";
-
-import "swiper/css";
-import "swiper/css/navigation";
 import { ISlider } from "../types";
+import useJobData from "../hooks/useJobData";
 
 const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const [showNext, setShowNext] = useState<boolean>(false);
+  const [atLeastOnce, setAtLeastOnce] = useState<boolean>(false);
+  const loaded = useRef<boolean>(false);
 
   useEffect(() => {
-    setShowNext(true);
+    loaded.current && setShowNext(true);
     const timeout = setTimeout(() => {
+      setAtLeastOnce(true);
       setCurrentIndex(index);
       setShowNext(false);
     }, 500);
@@ -22,11 +22,17 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
     };
   }, [index]);
 
-  const next = JOBS[index];
-  const current = JOBS[currentIndex];
+  useEffect(() => {
+    if (atLeastOnce) {
+      loaded.current = true;
+    }
+  }, [atLeastOnce]);
+
+  const next = useJobData(index);
+  const current = useJobData(currentIndex);
 
   return (
-    <div id={css.skillSlides}>
+    <div id={css.jobsSlides}>
       <h1>Jobs</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>

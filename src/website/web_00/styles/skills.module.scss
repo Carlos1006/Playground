@@ -1,4 +1,4 @@
-#skillCarousel {
+#skillCarousel, #jobsCarousel {
   width: 100%;
   height: 100%;
   container: SkillCarousel / size;
@@ -36,7 +36,7 @@
   }
 }
 
-#skillSlides {
+#skillSlides, #jobsSlides {
   width: 100%;
   height: 100%;
   container: SkillSlides / size;
@@ -109,6 +109,14 @@
   display:grid;
   place-items:center;
   background-color:rgb(0,0,0,0.3);
+  &.selected {
+    transition: filter 200ms ease-in-out;
+    filter:saturate(1); 
+  }
+  &.notSelected {
+    transition: filter 50ms ease-in-out;
+    filter:saturate(0) brightness(0.5);
+  }
   svg {
     width: 70%;
     height: 70%;
@@ -125,3 +133,64 @@
 }
 
 
+#skillBar {
+  position:absolute;
+  bottom:1cqi;
+  left:1.5cqb;
+  width:calc(100% - 3cqb);
+  height:1cqb;
+  display:grid;
+  grid-template-columns:repeat(10, 1fr);
+  gap: 0.4cqb;
+  grid-template-rows:1fr;
+  .milestone {
+    border:1px solid rgba(240,240,250,0.2);
+    border-radius:3px;
+    transition:all 0.2s ease-in-out, background-color var(--delay) ease-in-out;
+    &.active {
+      background-color:var(--color);
+    }
+    &:first-child {
+      border-top-left-radius:5px;
+      border-bottom-left-radius:5px;
+    }
+    &:last-child {
+      border-top-right-radius:5px;
+      border-bottom-right-radius:5px;
+    }
+  }
+  &.isEleven {
+    .milestone {
+      box-shadow: 0 0 5px 3px var(--shadow);
+    }
+  }
+}
+
+#jobTime {
+  position:absolute;
+  bottom:1cqi;
+  left:1.5cqb;
+  width:calc(100% - 3cqb);
+  height:3cqb;
+  display:grid;
+  grid-template-columns:repeat(2, 0.5fr 1fr);
+  grid-template-rows:1fr;
+  grid-template-areas: 'from fromDate to toDate';
+  align-items:center;
+  gap: 0.4cqb;
+  color:white;
+  font-family:"Inconsolata";
+  >div.title{
+    font-size:1.8ex;
+    display:flex;
+    align-items:center;
+    justify-content:end;
+    span { 
+      margin-right:1ex;
+      opacity:0.5;
+    }
+  }
+  >div:not(.title) {
+    font-size:2ex;
+  }
+}

@@ -12,12 +12,13 @@ import Background from "./Background";
 import SkillCarousel from "./SkillCarousel";
 import SkillSlides from "./SkillSlides";
 import { SwiperClass } from "swiper/react";
+import SkillBar from "./SkillBar";
 
 const St0r0: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
   const leftElementRef = useRef<HTMLDivElement>(null);
   const rightElementRef = useRef<HTMLDivElement>(null);
-  const jobCarousel = useRef<SwiperClass | null>(null);
+  const skillCarousel = useRef<SwiperClass | null>(null);
 
   const [maskStyles, setMaskStyles] = useState<CSSProperties>({});
   const [r0t0Style, setR0t0Style] = useState<CSSProperties>({});
@@ -50,7 +51,7 @@ const St0r0: FC = () => {
   };
 
   const onCarouselSwiper = (swiper: SwiperClass): void => {
-    jobCarousel.current = swiper;
+    skillCarousel.current = swiper;
   };
 
   const onCarouselChange = (swiper: SwiperClass): void => {
@@ -84,6 +85,7 @@ const St0r0: FC = () => {
         ref={leftElementRef}
       >
         <SkillSlides index={debounceIndex} />
+        <SkillBar index={debounceIndex} />
         <div className={css.wrapper}>
           <div className={css.bordererLeft} />
         </div>
@@ -94,6 +96,7 @@ const St0r0: FC = () => {
         ref={rightElementRef}
       >
         <SkillCarousel
+          index={activeIndex}
           onSlideChange={onCarouselChange}
           onSwiper={onCarouselSwiper}
         />

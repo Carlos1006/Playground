@@ -4,8 +4,8 @@ export function ThreeJsIcon(props: SVGProps<SVGSVGElement>): ReactNode {
   return (
     <svg
       fill="white"
-      stroke-linecap="square"
-      stroke-miterlimit="10"
+      strokeLinecap="square"
+      strokeMiterlimit="10"
       style={{ background: "rgb(240,240,240)", borderRadius: "10px" }}
       version="1.1"
       viewBox="0 0 226.77 226.77"
@@ -14,11 +14,11 @@ export function ThreeJsIcon(props: SVGProps<SVGSVGElement>): ReactNode {
     >
       <g
         transform="translate(8.964 4.2527)"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         stroke="#000"
-        stroke-linecap="butt"
-        stroke-linejoin="round"
-        stroke-width="4"
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+        strokeWidth="4"
       >
         <path d="m63.02 200.61-43.213-174.94 173.23 49.874z" />
         <path d="m106.39 50.612 21.591 87.496-86.567-24.945z" />

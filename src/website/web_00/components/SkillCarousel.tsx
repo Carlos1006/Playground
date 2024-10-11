@@ -7,7 +7,11 @@ import { SKILLS } from "../helpers/SkillIcons";
 import {} from "swiper/modules";
 import { ISwiper } from "../types";
 
-const SkillCarousel: FC<ISwiper> = ({ onSlideChange, onSwiper }: ISwiper) => {
+const SkillCarousel: FC<ISwiper> = ({
+  index,
+  onSlideChange,
+  onSwiper,
+}: ISwiper) => {
   return (
     <div id={css.skillCarousel}>
       <div className={css.skillCarouselWrapper}>
@@ -28,9 +32,14 @@ const SkillCarousel: FC<ISwiper> = ({ onSlideChange, onSwiper }: ISwiper) => {
             onSlideChange(swiper);
           }}
         >
-          {SKILLS.map(({ icon }, index) => (
-            <SwiperSlide key={index} className={css.skillCarouselSwiperSlide}>
-              <SkillIcon>{icon}</SkillIcon>
+          {SKILLS.map(({ icon: Icon }, drawIndex) => (
+            <SwiperSlide
+              key={drawIndex}
+              className={css.skillCarouselSwiperSlide}
+            >
+              <SkillIcon selected={drawIndex === index}>
+                <Icon />
+              </SkillIcon>
             </SwiperSlide>
           ))}
         </Swiper>
