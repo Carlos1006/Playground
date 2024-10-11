@@ -30,6 +30,8 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
 
   const next = useJobData(index);
   const current = useJobData(currentIndex);
+  const { description: Description } = current;
+  const { description: NextDescription } = next;
 
   return (
     <div id={css.jobsSlides}>
@@ -42,7 +44,7 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
             }`}
           >
             <h2>{current.name}</h2>
-            <p>{current.description}</p>
+            <Description />
           </div>
           <div
             className={`${css.skillCarouselSlide} ${css.next} ${
@@ -50,7 +52,7 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
             }`}
           >
             <h2>{next.name}</h2>
-            <p>{next.description}</p>
+            <NextDescription />
           </div>
         </div>
       </div>

@@ -6,6 +6,11 @@ export interface ISkillIcon {
   selected: boolean;
 }
 
+export interface ISocialIcon {
+  children: ReactNode;
+  title: string;
+}
+
 export interface IJonIcon {
   src: string;
   selected: boolean;
@@ -13,7 +18,7 @@ export interface IJonIcon {
 
 export interface IJobObject {
   name: string;
-  description: ReactNode;
+  description: FC;
   src: string;
   from: string;
   to: string;

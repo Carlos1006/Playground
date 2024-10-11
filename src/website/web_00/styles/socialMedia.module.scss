@@ -1,0 +1,23 @@
+#socialMedia {
+  width:calc(100% - 3cqb);
+  margin-left:10px;
+  height:100%;
+  display:flex;
+  // justify-content:end;
+  justify-content:space-around;
+  align-items:center;
+  gap:15px;
+  .socialIcon {
+    height:35px;
+    width:35px;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    * {
+      pointer-events:none;
+    }
+    svg {
+      fill:white !important;
+    }
+  }
+}
