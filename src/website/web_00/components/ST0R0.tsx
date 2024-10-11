@@ -1,23 +1,34 @@
-import { CSSProperties, FC, useLayoutEffect, useRef, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import globalCss from "../styles/main.module.scss";
 import css from "../styles/st0r0.module.scss";
 import Background from "./Background";
 import SkillCarousel from "./SkillCarousel";
 import SkillSlides from "./SkillSlides";
+import { SwiperClass } from "swiper/react";
 
 const St0r0: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
   const leftElementRef = useRef<HTMLDivElement>(null);
   const rightElementRef = useRef<HTMLDivElement>(null);
+  const jobCarousel = useRef<SwiperClass | null>(null);
 
-  const [maskStyles, setMaskStles] = useState<CSSProperties>({});
+  const [maskStyles, setMaskStyles] = useState<CSSProperties>({});
   const [r0t0Style, setR0t0Style] = useState<CSSProperties>({});
   const [r0b0Style, setR0b0Style] = useState<CSSProperties>({});
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [debounceIndex, setDebounceIndex] = useState<number>(0);
 
   const calculateSizes = (): void => {
     if (maskRef.current) {
       const { left, top } = maskRef.current.getBoundingClientRect();
-      setMaskStles({
+      setMaskStyles({
         left: `-${left}px`,
         top: `-${top}px`,
       });
@@ -38,6 +49,14 @@ const St0r0: FC = () => {
     }
   };
 
+  const onCarouselSwiper = (swiper: SwiperClass): void => {
+    jobCarousel.current = swiper;
+  };
+
+  const onCarouselChange = (swiper: SwiperClass): void => {
+    setActiveIndex(swiper.realIndex);
+  };
+
   useLayoutEffect(() => {
     document.addEventListener("DOMContentLoaded", calculateSizes);
     window.addEventListener("resize", calculateSizes);
@@ -48,6 +67,15 @@ const St0r0: FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebounceIndex(activeIndex);
+    }, 500);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [debounceIndex, activeIndex]);
+
   return (
     <>
       <div
@@ -55,7 +83,7 @@ const St0r0: FC = () => {
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
-        <SkillSlides />
+        <SkillSlides index={debounceIndex} />
         <div className={css.wrapper}>
           <div className={css.bordererLeft} />
         </div>
@@ -65,7 +93,10 @@ const St0r0: FC = () => {
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}
       >
-        <SkillCarousel />
+        <SkillCarousel
+          onSlideChange={onCarouselChange}
+          onSwiper={onCarouselSwiper}
+        />
         <div className={css.wrapper}>
           <div className={css.bordererRightTop} style={r0t0Style} />
           <div className={css.bordererRightBottom} style={r0b0Style} />

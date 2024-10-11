@@ -1,19 +1,29 @@
-import { CSSProperties, FC, useLayoutEffect, useRef, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import globalCss from "../styles/main.module.scss";
 import css from "../styles/st1r1.module.scss";
 import Background from "./Background";
 import JobSlides from "./JobSlides";
 import JobCarousel from "./JobCarousel";
+import { SwiperClass } from "swiper/react";
 
 const St1r1: FC = () => {
   const maskRef = useRef<HTMLDivElement>(null);
   const leftElementRef = useRef<HTMLDivElement>(null);
   const rightElementRef = useRef<HTMLDivElement>(null);
+  const jobCarousel = useRef<SwiperClass | null>(null);
 
   const [l0t0Style, setL0t0Style] = useState<CSSProperties>({});
   const [l0b0Style, setL0b0Style] = useState<CSSProperties>({});
-
   const [maskStyles, setMaskStyles] = useState<CSSProperties>({});
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [debounceIndex, setDebounceIndex] = useState<number>(0);
 
   const calculateSizes = (): void => {
     if (maskRef.current) {
@@ -42,6 +52,14 @@ const St1r1: FC = () => {
     }
   };
 
+  const onCarouselSwiper = (swiper: SwiperClass): void => {
+    jobCarousel.current = swiper;
+  };
+
+  const onCarouselChange = (swiper: SwiperClass): void => {
+    setActiveIndex(swiper.realIndex);
+  };
+
   useLayoutEffect(() => {
     document.addEventListener("DOMContentLoaded", calculateSizes);
     window.addEventListener("resize", calculateSizes);
@@ -52,6 +70,15 @@ const St1r1: FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebounceIndex(activeIndex);
+    }, 500);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [debounceIndex, activeIndex]);
+
   return (
     <>
       <div
@@ -59,7 +86,7 @@ const St1r1: FC = () => {
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
-        <JobSlides />
+        <JobSlides index={debounceIndex} />
         <div className={css.wrapper}>
           <div className={css.bordererLeftTop} style={l0t0Style} />
           <div className={css.bordererLeftBottom} style={l0b0Style} />
@@ -77,7 +104,10 @@ const St1r1: FC = () => {
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}
       >
-        <JobCarousel />
+        <JobCarousel
+          onSlideChange={onCarouselChange}
+          onSwiper={onCarouselSwiper}
+        />
         <div className={css.wrapper}>
           <div className={css.bordererRight} />
         </div>

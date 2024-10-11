@@ -12,6 +12,16 @@
     gap: 10cqi;
     width: 100cqi;
     height: 100cqb;
+    position: relative;
+
+    .skillCarouselCurrentSlide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100cqi;
+      height: 100cqb;
+    }
+
     .skillCarouselSwiper {
       width: 100cqi;
       overflow: hidden;
@@ -38,12 +48,56 @@
   display:grid;
   grid-template-columns:1fr;
   grid-template-rows:auto 1fr;
-  h2 {
+  h2, h1 {
+    color:white;
+    font-family:"Inconsolata";
+  }
+  p {
     color:white;
     font-family:"Inconsolata";
   }
   .slidesContainer {
-    background:rgba(0, 26, 255, 0.685);
+    height:100%;
+    .slidesWrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+
+    .skillCarouselSlide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+
+      &:not(.next) {
+        &.vanish {
+          transition: opacity 300ms ease-in-out;
+          opacity: 0;
+        }
+      }
+
+      &.next {
+        transform: translateX(100%);
+        &.show {
+          transition: transform 300ms ease-in-out;
+          transform: translateX(0);
+        }
+      }
+
+      h2 {
+        margin-bottom: 13px;
+        font-weight:500;
+        color:rgb(230,230,235);
+      }
+      p {
+        color:rgb(170,170,190)
+      }
+
+    }
+  }
   }
 }
 
@@ -63,6 +117,11 @@
     border-radius:10px;
     width: 70%;
     height: 70%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap; /* Previene que los elementos colapsen en varias líneas */
   }
 }
+
 

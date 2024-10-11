@@ -1,11 +1,50 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import css from "../styles/skills.module.scss";
+import { ISlider } from "../types";
+import { SKILLS } from "../helpers/SkillIcons";
 
-const SkillSlides: FC = () => {
+const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(index);
+  const [showNext, setShowNext] = useState<boolean>(false);
+
+  useEffect(() => {
+    setShowNext(true);
+    const timeout = setTimeout(() => {
+      setCurrentIndex(index);
+      setShowNext(false);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [index]);
+
+  const next = SKILLS[index];
+  const current = SKILLS[currentIndex];
+
   return (
     <div id={css.skillSlides}>
-      <h2>Skills</h2>
-      <div className={css.slidesContainer}></div>
+      <h1>Skills</h1>
+      <div className={css.slidesContainer}>
+        <div className={css.slidesWrapper}>
+          <div
+            className={`${css.skillCarouselSlide} ${
+              showNext ? css.vanish : ""
+            }`}
+          >
+            <h2>{current.name}</h2>
+            <p>{current.description}</p>
+          </div>
+          <div
+            className={`${css.skillCarouselSlide} ${css.next} ${
+              showNext ? css.show : ""
+            }`}
+          >
+            <h2>{next.name}</h2>
+            <p>{next.description}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,80 +2,33 @@ import { FC } from "react";
 import css from "../styles/skills.module.scss";
 import SkillIcon from "./SkillIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel } from "swiper/modules";
+import { Mousewheel, Autoplay } from "swiper/modules";
+import { SKILLS } from "../helpers/SkillIcons";
+import {} from "swiper/modules";
+import { ISwiper } from "../types";
 
-import {
-  TypescriptIcon,
-  JavascriptIcon,
-  CSSIcon,
-  SassIcon,
-  ReactIcon,
-  SvelteIcon,
-  ArduinoIcon,
-  AngularIcon,
-  DockerIcon,
-  ExpoIcon,
-  GitIcon,
-  GithubIcon,
-  HtmlIcon,
-  FigmaIcon,
-  JQueryIcon2,
-  NestJsIcon,
-  MuiIcon,
-  MySqlIcon,
-  PostgresIcon,
-  PostmanIcon,
-  ReduxIcon,
-  NextJsIcon,
-  ViteIcon,
-  TailwindIcon,
-  ThreeJsIcon,
-  ObsidianIcon,
-} from "../icons";
-
-const Icons = [
-  <TypescriptIcon />,
-  <JavascriptIcon />,
-  <HtmlIcon />,
-  <CSSIcon />,
-  <SassIcon />,
-  <ReactIcon />,
-  <NextJsIcon />,
-  <MuiIcon />,
-  <ReduxIcon />,
-  <TailwindIcon />,
-  <SvelteIcon />,
-  <AngularIcon />,
-  <ThreeJsIcon />,
-  <ExpoIcon />,
-  <PostmanIcon />,
-  <MySqlIcon />,
-  <ViteIcon />,
-  <PostgresIcon />,
-  <NestJsIcon />,
-  <DockerIcon />,
-  <GitIcon />,
-  <GithubIcon />,
-  <JQueryIcon2 />,
-  <FigmaIcon />,
-  <ArduinoIcon />,
-  <ObsidianIcon />,
-];
-
-const SkillCarousel: FC = () => {
+const SkillCarousel: FC<ISwiper> = ({ onSlideChange, onSwiper }: ISwiper) => {
   return (
     <div id={css.skillCarousel}>
       <div className={css.skillCarouselWrapper}>
         <Swiper
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
           slidesPerView={6}
           spaceBetween={"10cqi"}
           direction="vertical"
-          modules={[Mousewheel]}
+          modules={[Autoplay, Mousewheel]}
           mousewheel={{ forceToAxis: true }}
           loop
           className={css.skillCarouselSwiper}
+          onSwiper={onSwiper}
+          onSlideChange={(swiper): void => {
+            onSlideChange(swiper);
+          }}
         >
-          {Icons.map((icon, index) => (
+          {SKILLS.map(({ icon }, index) => (
             <SwiperSlide key={index} className={css.skillCarouselSwiperSlide}>
               <SkillIcon>{icon}</SkillIcon>
             </SwiperSlide>
