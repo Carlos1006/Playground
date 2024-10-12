@@ -2,7 +2,7 @@ import { FC } from "react";
 import Bubble from "../components/bubble";
 import css from "../styles/page.module.scss";
 
-const Page_13: FC = () => {
+const Page_15: FC = () => {
   return (
     <div className={`${css.page} ${css.black} ${css.relative}`}>
       <Bubble
@@ -42,4 +42,4 @@ const Page_13: FC = () => {
   );
 };
 
-export default Page_13;
+export default Page_15;

@@ -9,7 +9,7 @@ import {
 import NodeTree from "../components/nodeTree_01";
 import css from "../styles/page.module.scss";
 
-const Page_03: FC = () => {
+const Page_08: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastClientX, setLastClientX] = useState(0);
@@ -96,4 +96,4 @@ const Page_03: FC = () => {
   );
 };
 
-export default Page_03;
+export default Page_08;

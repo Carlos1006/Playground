@@ -6,6 +6,7 @@ const ShowCaseCanvas: FC = () => {
   const ref = useRef<HTMLCanvasElement>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const { width, height } = dimensions;
 
   useEffect(() => {
     if (ref.current) {
@@ -15,23 +16,35 @@ const ShowCaseCanvas: FC = () => {
     }
   }, []);
 
-  const { width, height } = dimensions;
   useEffect(() => {
+    let animationFrame = 0;
+
     if (context && width && height) {
       const size = 30;
-      const rows = Math.ceil(width / size);
-      const cols = Math.ceil(height / size);
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          // context.fillStyle = `rgb(${Math.floor(
-          //   255 - (255 / rows) * i
-          // )},${Math.floor(255 - (255 / cols) * j)},0)`;
-          context.strokeStyle = "rgb(255,255,255,0.05)";
-          context.strokeRect(i * size, j * size, size, size);
+      const rows: number = Math.ceil(width / size);
+      const cols: number = Math.ceil(height / size);
+      let offset = 0;
+
+      const render = (): void => {
+        context.clearRect(0, 0, width, height);
+        for (let i = 0; i < rows; i++) {
+          for (let j = offset; j < cols; j++) {
+            context.strokeStyle = "rgb(255,255,255,0.05)";
+            context.strokeRect(i * size, j * size, size, size);
+          }
         }
-      }
+        offset -= 0.0025;
+        if (offset < -size) {
+          offset = 0;
+        }
+        animationFrame = requestAnimationFrame(render);
+      };
+      render();
     }
     return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
       if (context) {
         context.clearRect(0, 0, width, height);
       }

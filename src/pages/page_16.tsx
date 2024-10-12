@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import BarGraph3D from "../components/3dBarGraph";
 import css from "../styles/page.module.scss";
 
-const Page_13: FC = () => {
+const Page_16: FC = () => {
   const [fov, setFov] = useState<number>(50);
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
   const [orthographic, setOrthographic] = useState<boolean>(false);
@@ -42,4 +42,4 @@ const Page_13: FC = () => {
   );
 };
 
-export default Page_13;
+export default Page_16;
