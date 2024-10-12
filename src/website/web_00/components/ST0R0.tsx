@@ -38,13 +38,13 @@ const St0r0: FC = () => {
       const { height: heightLeft } =
         leftElementRef.current.getBoundingClientRect();
       setR0t0Style({
-        height: `calc(${heightLeft}px + 1.5cqb + 1px)`,
+        height: `calc(${heightLeft}px + 1.5vmin + 1px)`,
       });
       if (rightElementRef.current && leftElementRef.current) {
         const { height: heightRight } =
           rightElementRef.current.getBoundingClientRect();
         setR0b0Style({
-          height: `calc(${heightRight - heightLeft}px - 1.5cqb + 1px)`,
+          height: `calc(${heightRight - heightLeft}px - 1.5vmin + 1px)`,
         });
       }
     }

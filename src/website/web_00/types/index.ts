@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, RefObject } from "react";
 import { SwiperClass } from "swiper/react";
 
 export interface ISkillIcon {
@@ -63,4 +63,20 @@ export interface IGlitchCharacter {
   delay: number;
   searchTime: number;
   stop: number;
+}
+
+export interface ILoader {
+  className: string;
+}
+
+export interface IUserResizeObserverParams {
+  ref: RefObject<HTMLElement>;
+  onResize: ResizeObserverCallback;
+}
+
+export interface IIf {
+  condition: boolean;
+  children: ReactNode;
+  id?: string | null;
+  className?: string;
 }

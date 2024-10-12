@@ -1,4 +1,40 @@
 $slot_color: rgb(0,0,0,0.3);
 $border_color: rgb(58, 58, 59);
-$gap: 1.5cqb;
+$gap: 1.5vmin;
 $border_radius: 15px;
+$font: "Inconsolata";
+$fontSizeTitle: 4ex;
+$fontSizeTitle2: 3.3ex;
+$fontSizeSubtitle: 2.5ex;
+$fontSizeParagraph: 2.1ex;
+
+@mixin title {
+  color:white;
+  font-family:$font;
+  font-size:$fontSizeTitle;
+}
+
+@mixin subtitle {
+  color:rgb(170,170,190);
+  font-family:$font;
+  font-size:$fontSizeSubtitle;
+}
+
+@mixin title2 {
+  color:white;
+  font-family:$font;
+  font-size:$fontSizeTitle2;
+  font-weight:500;
+}
+
+@mixin paragraph {
+  color:rgb(170,170,190);
+  font-family:$font;
+  font-size:$fontSizeParagraph;
+}
+
+@mixin helperText {
+  color:rgb(170,170,190);
+  font-family:$font;
+  font-size:1.5ex;
+}

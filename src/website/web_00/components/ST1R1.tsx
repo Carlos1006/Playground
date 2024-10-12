@@ -40,14 +40,14 @@ const St1r1: FC = () => {
         rightElementRef.current.getBoundingClientRect();
 
       setL0b0Style({
-        height: `calc(${heightRight}px + 1.5cqb + 1px)`,
+        height: `calc(${heightRight}px + 1.5vmin + 1px)`,
       });
 
       if (leftElementRef.current) {
         const { height: heightLeft } =
           leftElementRef.current.getBoundingClientRect();
         setL0t0Style({
-          height: `calc(${heightLeft - heightRight}px - 1.5cqb + 1px)`,
+          height: `calc(${heightLeft - heightRight}px - 1.5vmin + 1px)`,
         });
       }
     }
