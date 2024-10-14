@@ -134,7 +134,7 @@ export const SKILLS: ISkillObject[] = [
     color: "#F0F0F0",
   },
   {
-    name: "Expo",
+    name: "React Native / Expo",
     description:
       "I love to work with Expo. I love to work with Expo. I love to work with Expo. I love to work with Expo",
     icon: ExpoIcon,
