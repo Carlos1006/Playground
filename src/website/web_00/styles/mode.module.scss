@@ -1,9 +1,13 @@
+@import "theme";
+
 #mode {
   width:100%;
   height:100%;
   container: mode / size;
-  display:grid;
-  place-items: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
   #toggler {
     width:50cqi;
     height:60cqb;
@@ -12,6 +16,15 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    &.old {
+      opacity:0.2;
+      >div {
+        transition:none !important;
+        &::before {
+          transition:none !important;
+        }
+      }
+    }
     &.light>div {
       left:calc(100% - 50cqb);
       &::before {
@@ -44,6 +57,25 @@
         transition:0.5s;
         transform:translateX(0);
       }
+    }
+  }
+  #oldMode {
+    display:grid;
+    place-items:center;
+    width:60cqb;
+    aspect-ratio:1/1;
+    background-color:#07070a;
+    border-radius:100px;
+    cursor: pointer;
+    &.active {
+      background-color:rgb(182, 182, 189);
+      svg {
+        fill:#07070a;
+      }
+    }
+    svg {
+      width:50%;
+      fill:rgb(182, 182, 189);
     }
   }
 }

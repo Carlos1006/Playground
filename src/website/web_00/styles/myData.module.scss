@@ -3,81 +3,99 @@
 #myData {
   width:100%;
   height:100%;
-  padding:$gap;
-  display:grid;
-  grid-template-columns:1fr;
-  grid-template-rows:auto 1fr;
-  row-gap:$gap;
-  align-items:start;
-  align-content:start;
-  justify-content:stretch;
-  justify-items:stretch;
-  h1{
-    @include title;
-  }
-  #myDataWrapper {
+  #myDataContent {
+    width:100%;
+    height:100%;
+    container:myData / size;
+    padding:$gap;
     display:grid;
-    grid-template-columns:auto 1fr;
-    column-gap:$gap;
-    row-gap:2ex;
-    grid-template-rows:repeat(auto-fill, 3ex);
-    span {
-      font-family: $font;
-      font-size:2.5ex;
-      margin:0;
-      padding:0;
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto 1fr;
+    row-gap:$gap;
+    align-items:start;
+    align-content:start;
+    justify-content:stretch;
+    justify-items:stretch;
+    h1{
+      @include title;
     }
-    .value {
-      >div {
-        display:inline-block;
-        position:relative;
-        cursor:pointer;
-        &::after {
-          content:"";
-          position:absolute;
-          left:-7px;
-          top:-3px;
-          height:calc(100% + 6px);
-          width:0;
-          background:rgba(0, 174, 255, 0.26);
-          mix-blend-mode:multiply;
-          transform:skewX(-10deg);
-          border-radius:3px;
-          transition:width 0.3s ease-in-out;
-        }
-        &:hover::after {
-          width:calc(100% + 14px);
-        }
-        >span {
+    #myDataWrapper {
+      display:grid;
+      grid-template-columns:auto 1fr;
+      column-gap:$gap;
+      row-gap:2ex;
+      grid-template-rows:repeat(auto-fill, 3ex);
+      span {
+        font-family: $font;
+        font-size:2.5ex;
+        margin:0;
+        padding:0;
+        height:3ex;
+      }
+      .value {
+        height:3ex;
+        overflow:hidden;
+        >div {
+          display:inline-block;
           position:relative;
-          z-index:1;
-          font-weight:500;
-          color:rgb(211, 211, 216);
-        }
-      }
-    }
-    >span {
-      color:rgb(105, 105, 109);
-      cursor: pointer;
-      &:nth-child(even) {
-        position:relative;
-        &:after {
-          content:"";
-          position:absolute;
-          left:0;
-          top:0;
-          width: 100%;
-          height: 100%;
-          background-color:red;
-        }
-      }
-      &:hover {
-        color:rgb(211, 211, 216);
-        & + .value {
-          >div::after {
+          cursor:pointer;
+          &::after {
+            content:"";
+            position:absolute;
+            left:-7px;
+            top:-3px;
+            height:calc(100% + 6px);
+            width:0;
+            background:rgba(0, 174, 255, 0.26);
+            mix-blend-mode:multiply;
+            transform:skewX(-10deg);
+            border-radius:3px;
+            transition:width 0.3s ease-in-out;
+          }
+          &:hover::after {
             width:calc(100% + 14px);
           }
+          >span {
+            position:relative;
+            z-index:1;
+            font-weight:500;
+            color:rgb(211, 211, 216);
+          }
         }
+      }
+      >span {
+        color:rgb(105, 105, 109);
+        cursor: pointer;
+        &:nth-child(even) {
+          position:relative;
+          &:after {
+            content:"";
+            position:absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height: 100%;
+            background-color:red;
+          }
+        }
+        &:hover {
+          color:rgb(211, 211, 216);
+          & + .value {
+            >div::after {
+              width:calc(100% + 14px);
+            }
+          }
+        }
+      }
+    }
+    #logo {
+      justify-self:stretch;
+      height:100%;
+      display:flex;
+      align-items: center;
+      img {
+        height:13cqb;
+        transform:rotate(-15deg);
       }
     }
   }

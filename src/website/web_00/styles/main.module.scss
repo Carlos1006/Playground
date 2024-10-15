@@ -14,7 +14,7 @@
     z-index: 10;
     display:grid;
     gap:$gap;
-    grid-template-columns:150px 170px 1fr 1fr 1fr 1fr 280px 120px;
+    grid-template-columns:120px 200px 1fr 1fr 1fr 1fr 280px 120px;
     grid-template-rows:70px 1.2fr repeat(2, 1fr) 0.7fr 60px;
     grid-template-areas: 
       'h1000-00 h2000-00 h3000-00 h3000-00 h3000-00 h3000-00 h4000-00 h4000-00'

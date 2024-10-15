@@ -91,4 +91,4 @@ export interface ITldr {
   active: boolean;
 }
 
-export type ThemeMode = "light" | "dark";
+export type ThemeMode = "light" | "dark" | "old";

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 import css from "../styles/skills.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay } from "swiper/modules";
@@ -6,14 +6,26 @@ import { Mousewheel, Autoplay } from "swiper/modules";
 import JobIcon from "./JobIcon";
 import { JOBS } from "../helpers/JobIcons";
 import { ISwiper } from "../types";
+import useResizeObserver from "../hooks/useResizeObserver";
+import { getSlidesPerView } from "../utils";
 
 const JobCarousel: FC<ISwiper> = ({
   index,
   onSlideChange,
   onSwiper,
 }: ISwiper) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [slidesPerView, setSlidesPerView] = useState<number>(2);
+
+  useResizeObserver({
+    ref,
+    onResize: (): void => {
+      setSlidesPerView(getSlidesPerView(ref, 2));
+    },
+  });
+
   return (
-    <div id={css.jobsCarousel}>
+    <div id={css.jobsCarousel} ref={ref}>
       <div className={css.skillCarouselWrapper}>
         <Swiper
           autoplay={{
@@ -24,7 +36,7 @@ const JobCarousel: FC<ISwiper> = ({
           onSlideChange={(swiper): void => {
             onSlideChange(swiper);
           }}
-          slidesPerView={2}
+          slidesPerView={slidesPerView}
           spaceBetween={"10cqi"}
           direction="vertical"
           modules={[Mousewheel, Autoplay]}
