@@ -90,3 +90,5 @@ export interface ITldr {
   onClick: () => void;
   active: boolean;
 }
+
+export type ThemeMode = "light" | "dark";
