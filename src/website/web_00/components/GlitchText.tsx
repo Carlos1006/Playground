@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import css from "../styles/main.module.scss";
 import { IGlitchText } from "../types";
-import GlitchCharacter from "./glitchCharacter";
+import GlitchCharacter from "./GlitchCharacter";
 
 const GlitchText: FC<IGlitchText> = ({
   text,

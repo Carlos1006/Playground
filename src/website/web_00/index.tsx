@@ -12,6 +12,7 @@ import Gt2r0 from "./components/GT2R0";
 import St0r0 from "./components/ST0R0";
 import Background from "./components/Background";
 import "./styles/main.scss";
+import Gt0l2 from "./components/GT0L2";
 
 const Web00: FC = () => {
   return (
@@ -21,6 +22,7 @@ const Web00: FC = () => {
         <Header />
         <Gt0l0 />
         <Gt0l1 />
+        <Gt0l2 />
         <Gt1l0 />
         <St0r0 />
         <St1r1 />

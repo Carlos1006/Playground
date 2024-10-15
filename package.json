@@ -21,6 +21,7 @@
     "@types/swiper": "^6.0.0",
     "@types/three": "^0.156.0",
     "canvas-sketch-util": "^1.10.0",
+    "dayjs": "^1.11.13",
     "jquery": "^4.0.0-beta",
     "js-sha256": "^0.9.0",
     "leva": "0.9.34",

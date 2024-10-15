@@ -3,7 +3,6 @@ import css from "../styles/showCase.module.scss";
 import GlitchText from "./GlitchText";
 import Loader from "./Loader";
 import ShowCaseCanvas from "./ShowCaseCanvas";
-import If from "./If";
 
 import {
   MdOutlineArrowBackIosNew as ArrowLeft,
@@ -11,6 +10,7 @@ import {
 } from "react-icons/md";
 
 import DayNightToggle from "../../../components/daynightToggle_01";
+import DivIf from "./DivIf";
 // import GlowButton from "../../../components/glowButton";
 // import DeleteFile from "../../../components/deleteFile";
 // import CompleteOrder from "../../../components/completeOrder";
@@ -43,9 +43,9 @@ const ShowCase: FC = () => {
 
   return (
     <div id={css.showCase} ref={ref}>
-      <If condition={loading} id={css.loaderContainer}>
+      <DivIf condition={loading} id={css.loaderContainer}>
         <Loader className={css.loader} />
-      </If>
+      </DivIf>
 
       <div data-direction="left" className={css.control}>
         <ArrowLeft />
@@ -54,7 +54,7 @@ const ShowCase: FC = () => {
         <ArrowRight />
       </div>
 
-      <If condition={!loading} id={css.glass}>
+      <DivIf condition={!loading} id={css.glass}>
         <DayNightToggle />
         {/* <GlowButton /> */}
         {/* <DeleteFile /> */}
@@ -70,7 +70,7 @@ const ShowCase: FC = () => {
         {/* <Page_08 /> */}
         {/* Grid */}
         {/* Terrain */}
-      </If>
+      </DivIf>
 
       <div id={css.currentComponent}>
         <GlitchText text={title} />

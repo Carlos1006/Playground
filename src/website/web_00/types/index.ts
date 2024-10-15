@@ -77,6 +77,16 @@ export interface IUserResizeObserverParams {
 export interface IIf {
   condition: boolean;
   children: ReactNode;
+}
+
+export interface IDivIf {
+  condition: boolean;
+  children: ReactNode;
   id?: string | null;
   className?: string;
+}
+
+export interface ITldr {
+  onClick: () => void;
+  active: boolean;
 }

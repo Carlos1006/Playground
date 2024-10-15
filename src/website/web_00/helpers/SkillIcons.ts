@@ -238,3 +238,11 @@ export const SKILLS: ISkillObject[] = [
     color: "#5D33B0",
   },
 ];
+
+// <span>Frontend</span> <span>React, Redux, TypeScript, SCSS</span>
+// <span>Backend</span> <span>Node.js, Express, MongoDB, MySQL</span>
+// <span>DevOps</span> <span>Docker, Kubernetes, Jenkins</span>
+// <span>Cloud</span> <span>AWS, GCP, Azure</span>
+// <span>CI/CD</span> <span>GitHub Actions, Travis CI, Circle CI</span>
+// <span>Testing</span> <span>Jest, React Testing Library, Mocha</span>
+// <span>Other</span> <span>Git, Agile, Scrum, Kanban, Jira</span>
