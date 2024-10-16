@@ -14,12 +14,14 @@
   p {
     font-family: $font;
     color:rgb(150, 150, 155);
-    font-size:2.1ex;
+    // ? font-size:2.1ex;
+    font-size:2.4ex;
     justify-self:center;
     margin:0;
     padding:0;
     margin-top:auto;
     margin-bottom:auto;
-    line-height:2.6ex;
+    // ? line-height:2.6ex;
+    line-height:2.9ex;
   }
 }

@@ -15,11 +15,13 @@
   p {
     font-family: $font;
     color:rgb(211, 211, 216);
-    font-size:3.5ex;
+    // ? font-size:3.5ex;
+    font-size:3.8ex;
     justify-self:center;
     text-align:center;
     margin:0;
     padding:0;
-    line-height:2.5ex;
+    // ? line-height:2.5ex;
+    line-height:3ex;
   }
 }

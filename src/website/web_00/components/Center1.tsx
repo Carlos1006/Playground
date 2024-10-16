@@ -1,11 +1,11 @@
 import { FC } from "react";
 import globalCss from "../styles/main.module.scss";
-import Certificates from "./Certificates";
+import Schooling from "./Schooling";
 
 const Center1: FC = () => {
   return (
     <div data-slot="c1000-00" className={globalCss.slot}>
-      <Certificates />
+      <Schooling />
     </div>
   );
 };

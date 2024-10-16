@@ -4,22 +4,62 @@
   width:100%;
   height:100%;
   display:grid;
-  gap:$gap;
   padding:$gap;
   grid-template-rows:auto 1fr;
   grid-template-columns:1fr;
   align-items:center;
+  position:relative;
+  container: schooling / size;
   h1{
     @include title;
+  }
+  #icons {
+    position:absolute;
+    top:$gap;
+    right:$gap;
+    width:11cqi;
+    height:100cqb;
+    display:flex;
+    flex-direction:column;
+    gap:2ex;
+    justify-content:center;
+    img {
+      width:100%;
+    }
   }
   #schoolingWrapper {
     font-family: $font;
     color:rgb(211, 211, 216);
-    font-size:3.5ex;
-    justify-self:center;
-    text-align:center;
+    font-size:1ex;
     margin:0;
     padding:0;
-    line-height:2.5ex;
+    height:100%;
+    width:100%;
+    gap:5px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    span {
+      &:nth-child(1) {
+        font-size:6ex;
+      }
+      &:nth-child(2) {
+        font-size:5.2ex;
+        color:rgb(150, 150, 155);
+      }
+      &:nth-child(3) {
+        font-size:5ex;
+        color:rgb(150, 150, 155);
+      }
+      &:nth-child(4) {
+        font-size:4.8ex;
+        margin-top:1ex;
+        font-weight:bold;
+      }
+    }
+    img {
+      width:15ex;
+      height:15ex;
+    }
   }
 }
