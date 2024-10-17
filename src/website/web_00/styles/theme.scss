@@ -8,6 +8,11 @@ $fontSizeTitle2: 3.3ex;
 $fontSizeSubtitle: 2.5ex;
 $fontSizeParagraph: 2.1ex;
 
+// ? LIGHT MODE
+$slot_color_light: rgb(255,255,255,0.3);
+$border_color_light: rgb(229, 229, 235);
+
+
 @mixin title {
   color:white;
   font-family:$font;

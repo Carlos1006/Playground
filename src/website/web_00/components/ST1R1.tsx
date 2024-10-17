@@ -13,8 +13,11 @@ import JobSlides from "./JobSlides";
 import JobCarousel from "./JobCarousel";
 import { SwiperClass } from "swiper/react";
 import JobTime from "./JobTime";
+import useHomeContext from "../hooks/useHomeContext";
 
 const St1r1: FC = () => {
+  const { themeMode } = useHomeContext();
+
   const maskRef = useRef<HTMLDivElement>(null);
   const leftElementRef = useRef<HTMLDivElement>(null);
   const rightElementRef = useRef<HTMLDivElement>(null);
@@ -86,6 +89,7 @@ const St1r1: FC = () => {
         data-slot="st1r1-00"
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
+        data-mode={themeMode}
       >
         <JobTime index={debounceIndex} />
         <JobSlides index={debounceIndex} />
@@ -102,6 +106,7 @@ const St1r1: FC = () => {
         </div>
       </div>
       <div
+        data-mode={themeMode}
         data-slot="st1r1-01"
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}

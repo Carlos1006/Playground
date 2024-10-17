@@ -1,18 +1,23 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ThemeMode } from "../types";
 import { MODE } from "../constants";
 import css from "../styles/mode.module.scss";
 import { WindowsIcon } from "../icons/Windows";
+import useHomeContext from "../hooks/useHomeContext";
 
 const Mode: FC = () => {
-  const [mode, setMode] = useState<ThemeMode>(MODE.DARK);
+  const { themeMode, setThemeMode } = useHomeContext();
 
   const toggleMode = (): void => {
-    setMode((prev) => (prev === MODE.LIGHT ? MODE.DARK : MODE.LIGHT));
+    setThemeMode((prev: ThemeMode) =>
+      prev === MODE.LIGHT ? MODE.DARK : MODE.LIGHT
+    );
   };
 
   const onOldMode = (): void => {
-    setMode((prev) => (prev === MODE.OLD ? MODE.DARK : MODE.OLD));
+    setThemeMode((prev: ThemeMode) =>
+      prev === MODE.OLD ? MODE.DARK : MODE.OLD
+    );
   };
 
   return (
@@ -21,9 +26,9 @@ const Mode: FC = () => {
         id={css.toggler}
         onClick={toggleMode}
         className={
-          mode === MODE.DARK
+          themeMode === MODE.DARK
             ? css.dark
-            : mode === MODE.LIGHT
+            : themeMode === MODE.LIGHT
             ? css.light
             : css.old
         }
@@ -33,7 +38,7 @@ const Mode: FC = () => {
       <div
         id={css.oldMode}
         onClick={onOldMode}
-        className={mode === MODE.OLD ? css.active : ""}
+        className={themeMode === MODE.OLD ? css.active : ""}
       >
         <WindowsIcon />
       </div>

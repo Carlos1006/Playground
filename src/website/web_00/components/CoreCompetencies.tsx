@@ -6,19 +6,22 @@ const CoreCompetencies: FC = () => {
     <div id={css.coreCompetencies}>
       <h1>Core Competencies</h1>
       <div id={css.coreCompetenciesWrapper}>
-        <span>Desarrollo de software</span>
-        <span>Servicios web</span>
+        {/* <span>Desarrollo de software</span> */}
+        {/* <span>Servicios web</span> */}
+        {/* <span>Recopilación de requisitos</span> */}
+        {/* <span>Desarrollo web</span> */}
         <span>Integración de tecnología</span>
         <span>Liderazgo de equipo</span>
-        <span>Desarrollo web</span>
         <span>Scripting y Programación</span>
-        <span>Recopilación de requisitos</span>
         <span>Resolución de problemas</span>
         <span>Documentación</span>
         <span>Pensamiento crítico</span>
         <span>Trabajo en equipo</span>
         <span>Priorización</span>
         <span>Mantenimiento de equipo</span>
+        <span>Adaptabilidad Tecnológica</span>
+        <span>Productividad y eficiencia con IA</span>
+        <span>Toma de decisiones informada</span>
       </div>
     </div>
   );

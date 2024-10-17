@@ -33,7 +33,7 @@ const Web00: FC = () => {
 
   return (
     <HomeContext.Provider value={homeContext}>
-      <main className={css.main}>
+      <main className={`${css.main} ${css.light}`}>
         <Background />
         <div className={css.wrapper}>
           <Header />

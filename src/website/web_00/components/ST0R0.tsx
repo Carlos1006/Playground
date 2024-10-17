@@ -13,8 +13,11 @@ import SkillCarousel from "./SkillCarousel";
 import SkillSlides from "./SkillSlides";
 import { SwiperClass } from "swiper/react";
 import SkillBar from "./SkillBar";
+import useHomeContext from "../hooks/useHomeContext";
 
 const St0r0: FC = () => {
+  const { themeMode } = useHomeContext();
+
   const maskRef = useRef<HTMLDivElement>(null);
   const leftElementRef = useRef<HTMLDivElement>(null);
   const rightElementRef = useRef<HTMLDivElement>(null);
@@ -81,6 +84,7 @@ const St0r0: FC = () => {
     <>
       <div
         data-slot="st0r0-00"
+        data-mode={themeMode}
         className={`${globalCss.slot} ${css.leftItem}`}
         ref={leftElementRef}
       >
@@ -92,6 +96,7 @@ const St0r0: FC = () => {
       </div>
       <div
         data-slot="st0r0-01"
+        data-mode={themeMode}
         className={`${globalCss.slot} ${css.rightItem}`}
         ref={rightElementRef}
       >
