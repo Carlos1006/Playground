@@ -1,3 +1,5 @@
+import { IAppContext } from "../types";
+
 export const R = 0;
 export const G = 1;
 export const B = 2;
@@ -154,3 +156,10 @@ export const WEBSITES = [
     name: "Bento Grid",
   },
 ];
+
+export const APP_CONTEXT_DEFAULT: IAppContext = {
+  showMenu: false,
+  setShowMenu: () => {
+    return;
+  },
+};

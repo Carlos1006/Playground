@@ -15,10 +15,8 @@
   #certificatesWrapper {
     font-family: $font;
     color:rgb(211, 211, 216);
-    font-size:3.5ex;
     margin:0;
     padding:0;
-    line-height:2.5ex;
     overflow:auto;
     position:relative;
     .mySwiper {
@@ -28,7 +26,6 @@
       position:relative;
       .slide {
         height:100%;
-        background-color:blue;
       }
       >div:last-child {
         top: 90%;
@@ -54,6 +51,25 @@
       display:flex;
       flex-direction:column;
       align-items:center;
+      // background-color:rgb(15,15,45);
+      span {
+        margin:0;
+        padding:0;
+        &:nth-child(1) {
+          font-size:2.8ex;
+          line-height:1.8ex;
+          text-align:center;
+        }
+        &:nth-child(2) {
+          margin-top:auto;
+          font-size:2.2ex;
+          color: rgb(143, 143, 146);
+        }
+        &:nth-child(3) {
+          margin-top:0.5ex;
+          font-size:2.3ex;
+        }
+      }
     }
   }
 }

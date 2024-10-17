@@ -92,3 +92,10 @@ export interface ITldr {
 }
 
 export type ThemeMode = "light" | "dark" | "old";
+
+export interface ICertify {
+  name: string;
+  duration: string;
+  year: string;
+  institution: string;
+}

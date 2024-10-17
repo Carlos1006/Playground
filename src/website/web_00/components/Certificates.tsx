@@ -1,11 +1,12 @@
 import { FC } from "react";
 import css from "../styles/certificates.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import Certify from "./Certifiy";
+import { CERTIFICATES } from "../helpers/certificates";
 
 const Certificates: FC = () => {
   return (
@@ -15,40 +16,22 @@ const Certificates: FC = () => {
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
           loop
           pagination={{
             clickable: true,
           }}
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           className={css.mySwiper}
         >
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
-          <SwiperSlide className={css.slide}>
-            <Certify />
-          </SwiperSlide>
+          {CERTIFICATES.map((certify, index) => (
+            <SwiperSlide className={css.slide}>
+              <Certify {...certify} key={index} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

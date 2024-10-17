@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useLayoutEffect } from "react";
 import css from "./styles/main.module.scss";
 import Header from "./components/Header";
 import Center0 from "./components/Center0";
@@ -13,8 +13,15 @@ import St0r0 from "./components/ST0R0";
 import Background from "./components/Background";
 import "./styles/main.scss";
 import Gt0l2 from "./components/GT0L2";
+import useAppContext from "../../hooks/useAppContext";
 
 const Web00: FC = () => {
+  const { setShowMenu } = useAppContext();
+
+  useLayoutEffect(() => {
+    setShowMenu(false);
+  }, [setShowMenu]);
+
   return (
     <main className={css.main}>
       <Background />
