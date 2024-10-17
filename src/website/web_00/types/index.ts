@@ -1,5 +1,10 @@
-import { FC, ReactNode, RefObject } from "react";
+import { Dispatch, FC, ReactNode, RefObject } from "react";
 import { SwiperClass } from "swiper/react";
+
+export interface IHomeContext {
+  themeMode: ThemeMode;
+  setThemeMode: Dispatch<ThemeMode>;
+}
 
 export interface ISkillIcon {
   children: ReactNode;
