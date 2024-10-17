@@ -1,12 +1,17 @@
 import { FC, useEffect, useRef, useState } from "react";
 import css from "../styles/showCase.module.scss";
 import useResizeObserver from "../hooks/useResizeObserver";
+import useHomeContext from "../hooks/useHomeContext";
 
 const ShowCaseCanvas: FC = () => {
+  const { themeMode } = useHomeContext();
   const ref = useRef<HTMLCanvasElement>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const { width, height } = dimensions;
+
+  const strokeStyle =
+    themeMode === "dark" ? "rgb(255,255,255,0.05)" : "rgb(10,10,10,0.05)";
 
   useEffect(() => {
     if (ref.current) {
@@ -29,7 +34,7 @@ const ShowCaseCanvas: FC = () => {
         context.clearRect(0, 0, width, height);
         for (let i = 0; i < rows; i++) {
           for (let j = offset; j < cols; j++) {
-            context.strokeStyle = "rgb(255,255,255,0.05)";
+            context.strokeStyle = strokeStyle;
             context.strokeRect(i * size, j * size, size, size);
           }
         }
@@ -49,7 +54,7 @@ const ShowCaseCanvas: FC = () => {
         context.clearRect(0, 0, width, height);
       }
     };
-  }, [context, width, height]);
+  }, [context, width, height, strokeStyle]);
 
   useResizeObserver({
     ref,

@@ -89,6 +89,7 @@ export interface IDivIf {
   children: ReactNode;
   id?: string | null;
   className?: string;
+  themeMode?: ThemeMode | null;
 }
 
 export interface ITldr {

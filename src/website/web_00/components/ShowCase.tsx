@@ -11,6 +11,7 @@ import {
 
 import DayNightToggle from "../../../components/daynightToggle_01";
 import DivIf from "./DivIf";
+import useHomeContext from "../hooks/useHomeContext";
 // import GlowButton from "../../../components/glowButton";
 // import DeleteFile from "../../../components/deleteFile";
 // import CompleteOrder from "../../../components/completeOrder";
@@ -25,9 +26,9 @@ import DivIf from "./DivIf";
 // import Page_08 from "../../../pages/page_08";
 
 const ShowCase: FC = () => {
+  const { themeMode } = useHomeContext();
   const ref = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
   const [title, setTitle] = useState<string>("");
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const ShowCase: FC = () => {
         <ArrowRight />
       </div>
 
-      <DivIf condition={!loading} id={css.glass}>
+      <DivIf condition={!loading} id={css.glass} themeMode={themeMode}>
         <DayNightToggle />
         {/* <GlowButton /> */}
         {/* <DeleteFile /> */}

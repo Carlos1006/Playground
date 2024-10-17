@@ -90,8 +90,8 @@ const St0r0: FC = () => {
       >
         <SkillSlides index={debounceIndex} />
         <SkillBar index={debounceIndex} />
-        <div className={css.wrapper}>
-          <div className={css.bordererLeft} />
+        <div className={css.wrapper} data-mode={themeMode}>
+          <div className={css.bordererLeft} data-mode={themeMode} />
         </div>
       </div>
       <div
@@ -106,11 +106,19 @@ const St0r0: FC = () => {
           onSwiper={onCarouselSwiper}
         />
         <div className={css.wrapper}>
-          <div className={css.bordererRightTop} style={r0t0Style} />
-          <div className={css.bordererRightBottom} style={r0b0Style} />
+          <div
+            className={css.bordererRightTop}
+            style={r0t0Style}
+            data-mode={themeMode}
+          />
+          <div
+            className={css.bordererRightBottom}
+            style={r0b0Style}
+            data-mode={themeMode}
+          />
         </div>
-        <div className={css.friendWrapper}>
-          <div className={css.mask}>
+        <div className={css.friendWrapper} data-mode={themeMode}>
+          <div className={css.mask} data-mode={themeMode}>
             <div style={maskStyles} ref={maskRef}>
               <Background />
             </div>

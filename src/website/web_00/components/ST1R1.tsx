@@ -94,11 +94,19 @@ const St1r1: FC = () => {
         <JobTime index={debounceIndex} />
         <JobSlides index={debounceIndex} />
         <div className={css.wrapper}>
-          <div className={css.bordererLeftTop} style={l0t0Style} />
-          <div className={css.bordererLeftBottom} style={l0b0Style} />
+          <div
+            className={css.bordererLeftTop}
+            style={l0t0Style}
+            data-mode={themeMode}
+          />
+          <div
+            className={css.bordererLeftBottom}
+            style={l0b0Style}
+            data-mode={themeMode}
+          />
         </div>
-        <div className={css.friendWrapper}>
-          <div className={css.mask}>
+        <div className={css.friendWrapper} data-mode={themeMode}>
+          <div className={css.mask} data-mode={themeMode}>
             <div style={maskStyles} ref={maskRef}>
               <Background />
             </div>
@@ -116,8 +124,8 @@ const St1r1: FC = () => {
           onSlideChange={onCarouselChange}
           onSwiper={onCarouselSwiper}
         />
-        <div className={css.wrapper}>
-          <div className={css.bordererRight} />
+        <div className={css.wrapper} data-mode={themeMode}>
+          <div className={css.bordererRight} data-mode={themeMode} />
         </div>
       </div>
     </>

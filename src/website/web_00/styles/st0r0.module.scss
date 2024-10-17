@@ -21,6 +21,13 @@
       border-radius:$border_radius 0 0 $border_radius;
       border-right:none;
       position:absolute;
+      &[data-mode="light"] {
+        border-color: $border_color_light !important;
+      }
+    }
+    &[data-mode="light"] {
+      background-color: $slot_color_light !important;
+      border-color: $border_color_light !important;
     }
   }
 }
@@ -41,6 +48,9 @@
       border-left:none;
       border-radius:0 $border_radius 0 0;
       border-bottom:none;
+      &[data-mode="light"] {
+        border-color: $border_color_light !important;
+      }
     }
     .bordererRightBottom {
       position:absolute;
@@ -50,6 +60,9 @@
       border:1px solid $border_color;
       border-radius:0 0 $border_radius $border_radius;
       border-top:none;
+      &[data-mode="light"] {
+        border-color: $border_color_light !important;
+      }
     }
   }
   .friendWrapper {
@@ -77,8 +90,17 @@
         width:100vw;
         height:100vh;
         z-index:1;
-        background-color:black;
+        &[data-mode="light"] {
+          border-color: $border_color_light !important;
+        }
       }
+      &[data-mode="light"] {
+        box-shadow: -1px 1px 0 0 $border_color_light !important;
+      }
+    }
+    &[data-mode="light"] {
+      background-color: $slot_color_light !important;
+      border-color: $border_color_light !important;
     }
   }
 }
