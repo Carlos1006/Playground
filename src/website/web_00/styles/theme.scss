@@ -19,6 +19,13 @@ $border_color_light: rgb(229, 229, 235);
   font-size:$fontSizeTitle;
 }
 
+@mixin title_dark {
+  color:black;
+  font-family:$font;
+  font-size:$fontSizeTitle;
+}
+
+
 @mixin subtitle {
   color:rgb(170,170,190);
   font-family:$font;

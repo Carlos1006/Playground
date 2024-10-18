@@ -1,9 +1,12 @@
 import { FC } from "react";
 import css from "../styles/aboutMe.module.scss";
+import useHomeContext from "../hooks/useHomeContext";
 
 const AboutMe: FC = () => {
+  const { themeMode } = useHomeContext();
+
   return (
-    <div id={css.aboutMe}>
+    <div id={css.aboutMe} data-mode={themeMode}>
       <h1>About Me</h1>
       <p>
         Desarrollador de software consumado y orientado a los resultados, muy

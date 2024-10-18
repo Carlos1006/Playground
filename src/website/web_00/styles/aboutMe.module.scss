@@ -24,4 +24,13 @@
     // ? line-height:2.6ex;
     line-height:2.9ex;
   }
+
+  &[data-mode="light"] {
+    h1 {
+      @include title_dark;
+    }
+    p {
+      color:rgb(70, 70, 70) !important;
+    }
+  }
 }

@@ -20,4 +20,12 @@
   &.active {
     opacity:1;
   }
+
+  &[data-mode="light"] {
+    border-color:black;
+    color:black;
+    &:not(.active) {
+      opacity:0.3;
+    }
+  }
 }
