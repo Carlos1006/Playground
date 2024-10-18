@@ -16,6 +16,7 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    transition:all 0.5s ease-in-out;
     &.old {
       opacity:0.2;
       >div {
@@ -25,10 +26,15 @@
         }
       }
     }
-    &.light>div {
-      left:calc(100% - 50cqb);
-      &::before {
-        right: -100%;
+    &.light {
+      background-color:rgb(170, 170, 200);
+      >div {
+        background-color:rgb(229, 229, 235);
+        left:calc(100% - 50cqb);
+        &::before {
+          right: -100%;
+          background-color:rgb(170, 170, 200);
+        }
       }
     }
     >div {
@@ -56,6 +62,7 @@
         border-radius:100px;
         transition:0.5s;
         transform:translateX(0);
+        transition:all 0.5s ease-in-out;
       }
     }
   }
@@ -67,6 +74,12 @@
     background-color:#07070a;
     border-radius:100px;
     cursor: pointer;
+    &[data-mode="light"] {
+      background-color:rgb(170, 170, 200);
+      svg {
+        fill:rgb(229, 229, 235);
+      }
+    }
     &.active {
       background-color:rgb(182, 182, 189);
       svg {

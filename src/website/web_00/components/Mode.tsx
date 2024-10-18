@@ -38,6 +38,7 @@ const Mode: FC = () => {
       <div
         id={css.oldMode}
         onClick={onOldMode}
+        data-mode={themeMode}
         className={themeMode === MODE.OLD ? css.active : ""}
       >
         <WindowsIcon />
