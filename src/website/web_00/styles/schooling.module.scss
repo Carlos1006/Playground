@@ -1,65 +1,65 @@
 @import "theme";
 
 #schooling {
-  width:100%;
-  height:100%;
-  display:grid;
-  padding:$gap;
-  grid-template-rows:auto 1fr;
-  grid-template-columns:1fr;
-  align-items:center;
-  position:relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  padding: $gap;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  align-items: center;
+  position: relative;
   container: schooling / size;
-  h1{
+  h1 {
     @include title;
   }
   #icons {
-    position:absolute;
-    top:$gap;
-    right:$gap;
-    width:11cqi;
-    height:100cqb;
-    display:flex;
-    flex-direction:column;
-    gap:2ex;
-    justify-content:center;
+    position: absolute;
+    top: $gap;
+    right: $gap;
+    width: 11cqi;
+    height: 100cqb;
+    display: flex;
+    flex-direction: column;
+    gap: 2ex;
+    justify-content: center;
     img {
-      width:100%;
+      width: 100%;
     }
   }
   #schoolingWrapper {
     font-family: $font;
-    color:rgb(211, 211, 216);
-    font-size:1ex;
-    margin:0;
-    padding:0;
-    height:100%;
-    width:100%;
-    gap:5px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    color: rgb(211, 211, 216);
+    font-size: 1ex;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     span {
       &:nth-child(1) {
-        font-size:6ex;
+        font-size: 6ex;
       }
       &:nth-child(2) {
-        font-size:5.2ex;
-        color:rgb(150, 150, 155);
+        font-size: 5.2ex;
+        color: rgb(150, 150, 155);
       }
       &:nth-child(3) {
-        font-size:5ex;
-        color:rgb(150, 150, 155);
+        font-size: 5ex;
+        color: rgb(150, 150, 155);
       }
       &:nth-child(4) {
-        font-size:4.8ex;
-        margin-top:1ex;
-        font-weight:bold;
+        font-size: 4.8ex;
+        margin-top: 1ex;
+        font-weight: bold;
       }
     }
     img {
-      width:15ex;
-      height:15ex;
+      width: 15ex;
+      height: 15ex;
     }
   }
 
@@ -68,16 +68,15 @@
       @include title_dark;
     }
     #schoolingWrapper {
-      color:rgb(39, 39, 44);
+      color: rgb(39, 39, 44);
       span {
         &:nth-child(2) {
-          color:rgb(50, 50, 50);
+          color: rgb(50, 50, 50);
         }
         &:nth-child(3) {
-          color:rgb(70, 70, 70);
+          color: rgb(70, 70, 70);
         }
       }
     }
   }
-
 }

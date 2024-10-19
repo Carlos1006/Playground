@@ -1,4 +1,4 @@
-$slot_color: rgb(0,0,0,0.3);
+$slot_color: rgb(0, 0, 0, 0.3);
 $border_color: rgb(58, 58, 59);
 $gap: 1.5vmin;
 $border_radius: 15px;
@@ -9,51 +9,53 @@ $fontSizeSubtitle: 2.5ex;
 $fontSizeParagraph: 2.1ex;
 
 // ? LIGHT MODE
-$slot_color_light: rgb(255,255,255,0.3);
+$slot_color_light: rgb(255, 255, 255, 0.3);
 $border_color_light: rgb(229, 229, 235);
 
+// ? OLD MODe
+$slot_color_old: rgb(0, 0, 0, 0.3);
+$border_color_old: rgb(58, 58, 59);
 
 @mixin title {
-  color:white;
-  font-family:$font;
-  font-size:$fontSizeTitle;
+  color: white;
+  font-family: $font;
+  font-size: $fontSizeTitle;
 }
 
 @mixin title_dark {
-  color:black;
-  font-family:$font;
-  font-size:$fontSizeTitle;
+  color: black;
+  font-family: $font;
+  font-size: $fontSizeTitle;
 }
 
 @mixin title2_dark {
-  color:black;
-  font-family:$font;
-  font-size:$fontSizeTitle2;
-  font-weight:500;
+  color: black;
+  font-family: $font;
+  font-size: $fontSizeTitle2;
+  font-weight: 500;
 }
 
-
 @mixin subtitle {
-  color:rgb(170,170,190);
-  font-family:$font;
-  font-size:$fontSizeSubtitle;
+  color: rgb(170, 170, 190);
+  font-family: $font;
+  font-size: $fontSizeSubtitle;
 }
 
 @mixin title2 {
-  color:white;
-  font-family:$font;
-  font-size:$fontSizeTitle2;
-  font-weight:500;
+  color: white;
+  font-family: $font;
+  font-size: $fontSizeTitle2;
+  font-weight: 500;
 }
 
 @mixin paragraph {
-  color:rgb(170,170,190);
-  font-family:$font;
-  font-size:$fontSizeParagraph;
+  color: rgb(170, 170, 190);
+  font-family: $font;
+  font-size: $fontSizeParagraph;
 }
 
 @mixin helperText {
-  color:rgb(170,170,190);
-  font-family:$font;
-  font-size:1.5ex;
+  color: rgb(170, 170, 190);
+  font-family: $font;
+  font-size: 1.5ex;
 }

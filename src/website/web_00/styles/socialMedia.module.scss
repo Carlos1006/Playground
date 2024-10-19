@@ -1,29 +1,29 @@
 #socialMedia {
-  width:calc(100% - 3cqb);
-  margin-left:10px;
-  height:100%;
-  display:flex;
+  width: calc(100% - 3cqb);
+  margin-left: 10px;
+  height: 100%;
+  display: flex;
   // justify-content:end;
-  justify-content:space-around;
-  align-items:center;
-  gap:15px;
+  justify-content: space-around;
+  align-items: center;
+  gap: 15px;
   .socialIcon {
-    height:35px;
-    width:35px;
-    cursor:pointer;
-    display:grid;
-    place-items:center;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
     * {
-      pointer-events:none;
+      pointer-events: none;
     }
     svg {
-      fill:white !important;
+      fill: white !important;
     }
   }
   &[data-mode="light"] {
     .socialIcon {
       svg {
-        fill:rgb(50, 50, 50) !important;
+        fill: rgb(50, 50, 50) !important;
       }
     }
   }

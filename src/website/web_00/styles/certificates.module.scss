@@ -1,73 +1,73 @@
 @import "theme";
 
 #certificates {
-  width:100%;
-  height:100%;
-  display:grid;
-  gap:$gap;
-  padding:$gap;
-  grid-template-rows:auto 1fr;
-  grid-template-columns:1fr;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: $gap;
+  padding: $gap;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
   container: certificates / size;
-  h1{
+  h1 {
     @include title;
   }
   #certificatesWrapper {
     font-family: $font;
-    color:rgb(211, 211, 216);
-    margin:0;
-    padding:0;
-    overflow:auto;
-    position:relative;
+    color: rgb(211, 211, 216);
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    position: relative;
     .mySwiper {
-      width:100%;
-      height:100%;
-      padding-bottom:20px;
-      position:relative;
+      width: 100%;
+      height: 100%;
+      padding-bottom: 20px;
+      position: relative;
       .slide {
-        height:100%;
+        height: 100%;
       }
-      >div:last-child {
+      > div:last-child {
         top: 90%;
         height: 10px;
-        z-index:10;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        position:absolute;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
         :global(.swiper-pagination-bullet) {
           width: 10px;
           height: 10px;
           margin: 0 5px;
           border-radius: 50%;
-          background-color:white;
+          background-color: white;
         }
       }
     }
-    
+
     .certifyBody {
-      width:100%;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       // background-color:rgb(15,15,45);
       span {
-        margin:0;
-        padding:0;
+        margin: 0;
+        padding: 0;
         &:nth-child(1) {
-          font-size:2.8ex;
-          line-height:1.8ex;
-          text-align:center;
+          font-size: 2.8ex;
+          line-height: 1.8ex;
+          text-align: center;
         }
         &:nth-child(2) {
-          margin-top:auto;
-          font-size:2.2ex;
+          margin-top: auto;
+          font-size: 2.2ex;
           color: rgb(143, 143, 146);
         }
         &:nth-child(3) {
-          margin-top:0.5ex;
-          font-size:2.3ex;
+          margin-top: 0.5ex;
+          font-size: 2.3ex;
         }
       }
     }
@@ -78,18 +78,17 @@
       @include title_dark;
     }
     #certificatesWrapper {
-      color:rgb(39, 39, 44);
+      color: rgb(39, 39, 44);
       .certifyBody {
         span {
           &:nth-child(2) {
-            color:rgb(70, 70, 70);
+            color: rgb(70, 70, 70);
           }
         }
       }
       :global(.swiper-pagination-bullet) {
-        background-color:rgb(60, 60, 60) !important;
+        background-color: rgb(60, 60, 60) !important;
       }
     }
   }
-
 }

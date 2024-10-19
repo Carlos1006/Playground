@@ -1,35 +1,41 @@
 @import "theme";
 
 .leftItem {
-  border-radius:$border_radius $border_radius 0 $border_radius !important;
-  position:relative;
-  border:none !important;
+  border-radius: $border_radius $border_radius 0 $border_radius !important;
+  position: relative;
+  border: none !important;
   .wrapper {
-    width:100%;
-    height:100%;
-    position:absolute;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     .bordererLeftTop {
-      position:absolute;
-      width:100%;
-      border:1px solid $border_color;
-      border-radius:$border_radius $border_radius 0 0;
-      border-bottom:none;
-       &[data-mode="light"] {
+      position: absolute;
+      width: 100%;
+      border: 1px solid $border_color;
+      border-radius: $border_radius $border_radius 0 0;
+      border-bottom: none;
+      &[data-mode="light"] {
         border-color: $border_color_light !important;
+      }
+      &[data-mode="old"] {
+        border-radius: 0;
       }
     }
     .bordererLeftBottom {
-      position:absolute;
+      position: absolute;
       left: 0;
-      width:calc(100% + $gap + 1px);
-      border:1px solid $border_color;
-      border-radius:0 0 0  $border_radius;
-      border-top:none;
-      border-right:none;
-      z-index:1;
-      bottom:0;
-       &[data-mode="light"] {
+      width: calc(100% + $gap + 1px);
+      border: 1px solid $border_color;
+      border-radius: 0 0 0 $border_radius;
+      border-top: none;
+      border-right: none;
+      z-index: 1;
+      bottom: 0;
+      &[data-mode="light"] {
         border-color: $border_color_light !important;
+      }
+      &[data-mode="old"] {
+        border-radius: 0;
       }
     }
     &[data-mode="light"] {
@@ -38,36 +44,42 @@
     }
   }
   .friendWrapper {
-    height:$gap;
-    width:$gap;
-    position:absolute;
-    top:calc($gap * -1);
-    right:calc($gap * -1);
-    background:$slot_color;
-    z-index:100;
+    height: $gap;
+    width: $gap;
+    position: absolute;
+    top: calc($gap * -1);
+    right: calc($gap * -1);
+    background: $slot_color;
+    z-index: 100;
     .mask {
-      position:absolute;
-      container:mask / size;
-      width:100%;
-      height:100%;
-      border-radius:0 $border_radius 0 0;
-      z-index:10;
+      position: absolute;
+      container: mask / size;
+      width: 100%;
+      height: 100%;
+      border-radius: 0 $border_radius 0 0;
+      z-index: 10;
       overflow: hidden;
-      border-top:none;
-      border-right:none;
+      border-top: none;
+      border-right: none;
       box-shadow: 1px -1px 0 0 $border_color;
-      div { 
-        position:absolute;
-        border-radius:100px;
-        width:100vw;
-        height:100vh;
-        z-index:1;
+      div {
+        position: absolute;
+        border-radius: 100px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
         &[data-mode="light"] {
           border-color: $border_color_light !important;
+        }
+        &[data-mode="old"] {
+          border-radius: 0;
         }
       }
       &[data-mode="light"] {
         box-shadow: 1px -1px 0 0 $border_color_light !important;
+      }
+      &[data-mode="old"] {
+        border-radius: 0;
       }
     }
     &[data-mode="light"] {
@@ -75,37 +87,46 @@
       border-color: $border_color_light !important;
     }
   }
+  &[data-mode="old"] {
+    border-radius: 0;
+  }
 }
 
 .rightItem {
-  position:relative;
-  background:transparent !important;
-  border:none !important;
+  position: relative;
+  background: transparent !important;
+  border: none !important;
   .wrapper {
-    width:calc(100% + $gap);
-    height:100%;
-    position:absolute;
-    background:$slot_color;
-    right:0;
-    border-radius:0 $border_radius $border_radius 0;
-    border:1px solid $border_color;
-    border-left:none;
-    border:none !important;
+    width: calc(100% + $gap);
+    height: 100%;
+    position: absolute;
+    background: $slot_color;
+    right: 0;
+    border-radius: 0 $border_radius $border_radius 0;
+    border: 1px solid $border_color;
+    border-left: none;
+    border: none !important;
     .bordererRight {
-      width:calc(100% - $gap + 1px);
-      height:100%;
-      border:1px solid $border_color;
-      border-radius:0 $border_radius $border_radius 0;
-      border-left:none;
-      position:absolute;
-      right:0;
+      width: calc(100% - $gap + 1px);
+      height: 100%;
+      border: 1px solid $border_color;
+      border-radius: 0 $border_radius $border_radius 0;
+      border-left: none;
+      position: absolute;
+      right: 0;
       &[data-mode="light"] {
         border-color: $border_color_light !important;
+      }
+      &[data-mode="old"] {
+        border-radius: 0;
       }
     }
     &[data-mode="light"] {
       background-color: $slot_color_light !important;
       border-color: $border_color_light !important;
+    }
+    &[data-mode="old"] {
+      border-radius: 0;
     }
   }
 }
