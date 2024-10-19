@@ -88,4 +88,10 @@
       color: rgb(39, 39, 44);
     }
   }
+  &[data-mode="old"] {
+    border-radius: 0;
+    #glass {
+      background: transparent;
+    }
+  }
 }

@@ -13,8 +13,8 @@ $slot_color_light: rgb(255, 255, 255, 0.3);
 $border_color_light: rgb(229, 229, 235);
 
 // ? OLD MODe
-$slot_color_old: rgb(0, 0, 0, 0.3);
-$border_color_old: rgb(58, 58, 59);
+$slot_color_old: #c5c5c5;
+$border_color_old: transparent;
 
 @mixin title {
   color: white;
@@ -58,4 +58,18 @@ $border_color_old: rgb(58, 58, 59);
   color: rgb(170, 170, 190);
   font-family: $font;
   font-size: 1.5ex;
+}
+
+@mixin title_old {
+  margin-bottom: 1vh;
+  font-size: 2.2ex;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-family: "Trebuchet MS";
+  position: relative;
+  background-color: #02007b;
+  line-height: 2ex;
 }

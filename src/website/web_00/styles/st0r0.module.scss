@@ -26,6 +26,7 @@
       }
       &[data-mode="old"] {
         border-radius: 0;
+        border:0;
       }
     }
     &[data-mode="light"] {
@@ -33,9 +34,11 @@
       border-color: $border_color_light !important;
     }
     &[data-mode="old"] {
+      background-color: $slot_color_old !important;
       border-radius: 0;
     }
   }
+  
 }
 
 .rightItem {
@@ -59,6 +62,7 @@
       }
       &[data-mode="old"] {
         border-radius: 0;
+        border:none;
       }
     }
     .bordererRightBottom {
@@ -74,6 +78,7 @@
       }
       &[data-mode="old"] {
         border-radius: 0;
+        border:0;
       }
     }
   }
@@ -114,6 +119,7 @@
       }
       &[data-mode="old"] {
         border-radius: 0;
+        box-shadow: none;
       }
     }
     &[data-mode="light"] {
@@ -121,7 +127,11 @@
       border-color: $border_color_light !important;
     }
     &[data-mode="old"] {
-      border-radius: 0;
+      border-radius: 0 !important;
+      display:none !important;
     }
+  }
+  &[data-mode="old"] {
+    border-radius: 0 !important;
   }
 }
