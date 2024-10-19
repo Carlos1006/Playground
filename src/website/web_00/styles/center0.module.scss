@@ -25,4 +25,15 @@
       }
     }
   }
+
+  &[data-mode="old"] {
+    .showCaseTitle {
+      width: calc(100% - 0.15cqi - 2px);
+      left: 0.15cqi;
+      top: 0.15cqi;
+      h1 {
+        @include title_old;
+      }
+    }
+  }
 }

@@ -33,4 +33,11 @@
       color: rgb(39, 39, 44) !important;
     }
   }
+
+  &[data-mode="old"] {
+    padding: 0.15cqi 2px 0.15cqi 0.15cqi;
+    h1 {
+      @include title_old;
+    }
+  }
 }
