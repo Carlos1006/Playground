@@ -2,10 +2,13 @@ import { FC } from "react";
 import css from "../styles/schooling.module.scss";
 import fcfm from "../assets/fcfm.png";
 import uanl from "../assets/uanl.png";
+import useHomeContext from "../hooks/useHomeContext";
 
 const Schooling: FC = () => {
+  const { themeMode } = useHomeContext();
+
   return (
-    <div id={css.schooling}>
+    <div id={css.schooling} data-mode={themeMode}>
       <div id={css.icons}>
         <img src={uanl} alt="UANL" />
         <img src={fcfm} alt="FCFM" />

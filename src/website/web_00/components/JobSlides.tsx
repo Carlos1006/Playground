@@ -2,8 +2,10 @@ import { FC, useEffect, useRef, useState } from "react";
 import css from "../styles/skills.module.scss";
 import { ISlider } from "../types";
 import useJobData from "../hooks/useJobData";
+import useHomeContext from "../hooks/useHomeContext";
 
 const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
+  const { themeMode } = useHomeContext();
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [atLeastOnce, setAtLeastOnce] = useState<boolean>(false);
@@ -34,7 +36,7 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
   const { description: NextDescription } = next;
 
   return (
-    <div id={css.jobsSlides}>
+    <div id={css.jobsSlides} data-mode={themeMode}>
       <h1>Jobs</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>

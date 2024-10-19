@@ -28,4 +28,16 @@
     background-color:white;
     opacity:0.3;
   }
+
+  &[data-mode="light"] {
+    color:black;
+    span {
+      &:first-child {
+        opacity:0.6;
+      }
+    }
+    #line {
+      background-color:black;
+    }
+  }
 }

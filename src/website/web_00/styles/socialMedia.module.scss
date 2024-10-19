@@ -20,4 +20,11 @@
       fill:white !important;
     }
   }
+  &[data-mode="light"] {
+    .socialIcon {
+      svg {
+        fill:rgb(50, 50, 50) !important;
+      }
+    }
+  }
 }

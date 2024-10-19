@@ -22,4 +22,13 @@
     padding:0;
     line-height:2.5ex;
   }
+
+  &[data-mode="light"] {
+    h1 {
+      @include title_dark;
+    }
+    #meWrapper {
+      color:rgb(70, 70, 70) !important;
+    }
+  }
 }

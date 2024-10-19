@@ -8,10 +8,13 @@ import EmailIcon from "../icons/Email";
 import WhatsappIcon from "../icons/Whatsapp";
 import GithubIcon from "../icons/GithubSocial";
 import DailyDevIcon from "../icons/DailyDev";
+import useHomeContext from "../hooks/useHomeContext";
 
 const SocialMedia: FC = () => {
+  const { themeMode } = useHomeContext();
+
   return (
-    <div id={css.socialMedia}>
+    <div id={css.socialMedia} data-mode={themeMode}>
       <SocialIcon title="Instagram">
         <InstagramIcon />
       </SocialIcon>

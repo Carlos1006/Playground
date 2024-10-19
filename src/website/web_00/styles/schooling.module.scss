@@ -62,4 +62,22 @@
       height:15ex;
     }
   }
+
+  &[data-mode="light"] {
+    h1 {
+      @include title_dark;
+    }
+    #schoolingWrapper {
+      color:rgb(39, 39, 44);
+      span {
+        &:nth-child(2) {
+          color:rgb(50, 50, 50);
+        }
+        &:nth-child(3) {
+          color:rgb(70, 70, 70);
+        }
+      }
+    }
+  }
+
 }

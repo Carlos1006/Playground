@@ -43,7 +43,7 @@ const ShowCase: FC = () => {
   }, []);
 
   return (
-    <div id={css.showCase} ref={ref}>
+    <div id={css.showCase} ref={ref} data-mode={themeMode}>
       <DivIf condition={loading} id={css.loaderContainer}>
         <Loader className={css.loader} />
       </DivIf>

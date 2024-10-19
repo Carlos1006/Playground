@@ -15,4 +15,14 @@
     }
   }
   
+  &[data-mode="light"] {
+    .showCaseTitle {
+      h1 {
+        @include title_dark;
+      }
+      p {
+        color:rgb(39, 39, 44) !important;
+      }
+    }
+  }
 }

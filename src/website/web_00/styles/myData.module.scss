@@ -98,5 +98,29 @@
         transform:rotate(-15deg);
       }
     }
+
+    &[data-mode="light"] {
+      h1 {
+        @include title_dark;
+      }
+      #myDataWrapper {
+        >span {
+          color:rgb(50, 50, 50);
+        }
+        .value {
+          >div {
+            &::after {
+              background:rgba(98, 0, 255, 0.26);
+            }
+            >span {
+              color:rgb(30, 30, 30);
+            }
+          }
+        }
+      }
+      #logo {
+        filter: invert(1);
+      }
+    }
   }
 }

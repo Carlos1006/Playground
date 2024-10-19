@@ -8,12 +8,14 @@ import {} from "swiper/modules";
 import { ISwiper } from "../types";
 import useResizeObserver from "../hooks/useResizeObserver";
 import { getSlidesPerView } from "../utils";
+import useHomeContext from "../hooks/useHomeContext";
 
 const SkillCarousel: FC<ISwiper> = ({
   index,
   onSlideChange,
   onSwiper,
 }: ISwiper) => {
+  const { themeMode } = useHomeContext();
   const ref = useRef<HTMLDivElement>(null);
   const [slidesPerView, setSlidesPerView] = useState<number>(5);
 
@@ -25,7 +27,7 @@ const SkillCarousel: FC<ISwiper> = ({
   });
 
   return (
-    <div id={css.skillCarousel} ref={ref}>
+    <div id={css.skillCarousel} ref={ref} data-mode={themeMode}>
       <div className={css.skillCarouselWrapper}>
         <Swiper
           autoplay={{

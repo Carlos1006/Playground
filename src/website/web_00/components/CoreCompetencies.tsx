@@ -1,9 +1,12 @@
 import { FC } from "react";
 import css from "../styles/coreCompetencies.module.scss";
+import useHomeContext from "../hooks/useHomeContext";
 
 const CoreCompetencies: FC = () => {
+  const { themeMode } = useHomeContext();
+
   return (
-    <div id={css.coreCompetencies}>
+    <div id={css.coreCompetencies} data-mode={themeMode}>
       <h1>Core Competencies</h1>
       <div id={css.coreCompetenciesWrapper}>
         {/* <span>Desarrollo de software</span> */}

@@ -17,9 +17,6 @@
     z-index: 5;
     display:grid;
     place-items:center;
-    &[data-theme="light"] {
-      background:rgba(255,255,255,0.1);
-    }
   }
   #canvas {
     width:100%;
@@ -80,6 +77,15 @@
     }
     &[data-direction="right"] {
       right:1.5vmin;
+    }
+  }
+
+  &[data-mode="light"] {
+    #glass {
+      background:rgba(255,255,255,0.1);
+    }
+    #currentComponent {
+      color:rgb(39,39,44);
     }
   }
 }

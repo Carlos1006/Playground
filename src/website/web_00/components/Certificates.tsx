@@ -7,10 +7,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Certify from "./Certifiy";
 import { CERTIFICATES } from "../helpers/certificates";
+import useHomeContext from "../hooks/useHomeContext";
 
 const Certificates: FC = () => {
+  const { themeMode } = useHomeContext();
+
   return (
-    <div id={css.certificates}>
+    <div id={css.certificates} data-mode={themeMode}>
       <h1>Certificates</h1>
       <div id={css.certificatesWrapper}>
         <Swiper

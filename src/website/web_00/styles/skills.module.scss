@@ -36,6 +36,16 @@
       }
     }
   }
+
+  &[data-mode="light"] {
+    .skillIcon {
+      background-color:rgb(255,255,255,0.5);
+      &.notSelected {
+        transition: filter 50ms ease-in-out;
+        filter:saturate(0) brightness(0.7);
+      }
+    }
+  }
 }
 
 #skillSlides, #jobsSlides {
@@ -95,6 +105,17 @@
       }
     }
   }
+}
+  &[data-mode="light"] {
+    h1 {
+      @include title_dark;
+    }
+    h2 {
+      @include title2_dark;
+    }
+    p {
+      color:rgb(39, 39, 44) !important;
+    }
   }
 }
 
@@ -160,6 +181,17 @@
       box-shadow: 0 0 5px 3px var(--shadow);
     }
   }
+  &[data-mode="light"] {
+    .milestone {
+      border:1px solid rgba(15, 15, 15, 0.3);
+      &:not(.active) {
+        background-color:rgb(15, 15, 15, 0.8);
+      }
+      &.active {
+        background-color:var(--color);
+      }
+    }
+  }
 }
 
 #jobTime {
@@ -188,6 +220,9 @@
   }
   >div:not(.title) {
     font-size:2ex;
+  }
+  &[data-mode="light"] {
+    color:rgb(39, 39, 44);
   }
 }
 

@@ -4,13 +4,15 @@ import { BIRTH_DATE } from ".";
 import { getExactAge } from "../utils";
 import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
+import useHomeContext from "../hooks/useHomeContext";
 
 const MyData: FC = () => {
+  const { themeMode } = useHomeContext();
   const age = getExactAge(BIRTH_DATE);
 
   return (
     <div id={css.myData}>
-      <div id={css.myDataContent}>
+      <div id={css.myDataContent} data-mode={themeMode}>
         <h1>My Data</h1>
         <div id={css.myDataWrapper}>
           <span>Full name</span>
