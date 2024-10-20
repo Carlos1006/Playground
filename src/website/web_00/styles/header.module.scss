@@ -1,0 +1,37 @@
+@import "theme";
+
+$headerMenuWidth: calc(120px + $gap);
+$headerSocialMediaWidth: calc(470px + $gap * 3);
+$headerModeWidth: calc(200px + $gap);
+$headerNameWidth: calc(
+  100vw + $gap - $headerMenuWidth - $headerSocialMediaWidth - $headerModeWidth
+);
+
+.headerItem[data-mode="old"] {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 50px;
+  width: 0;
+}
+
+#headerMenu[data-mode="old"] {
+  width: $headerMenuWidth;
+  left: 0;
+}
+
+#headerSocialMedia[data-mode="old"] {
+  width: $headerSocialMediaWidth;
+  right: 0;
+  left: unset;
+}
+
+#headerMode[data-mode="old"] {
+  width: $headerModeWidth;
+  left: calc(120px + $gap);
+}
+
+#headerName[data-mode="old"] {
+  width: $headerNameWidth;
+  left: calc(320px + $gap);
+}

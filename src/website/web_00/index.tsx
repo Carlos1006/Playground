@@ -35,7 +35,7 @@ const Web00: FC = () => {
     <HomeContext.Provider value={homeContext}>
       <main className={`${css.main} ${css.light}`}>
         <Background />
-        <div className={css.wrapper}>
+        <div className={css.wrapper} data-mode={themeMode}>
           <Header />
           <Gt0l0 />
           <Gt0l1 />

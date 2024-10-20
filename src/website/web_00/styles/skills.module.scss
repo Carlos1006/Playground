@@ -47,6 +47,21 @@
       }
     }
   }
+
+  &[data-mode="old"] {
+    &#skillCarousel {
+      height:calc(100% - 2.3ex - 20px - 0.15vw - 1vh);
+      margin-top:calc(2.3ex + 20px + 0.15vw + 1vh);
+    }
+    .skillIcon {
+      background-color: rgb(230, 230, 230, 1);
+      border-radius:5px;
+      &.notSelected {
+        transition: filter 50ms ease-in-out;
+        filter: saturate(0) ;
+      }
+    }
+  }
 }
 
 #skillSlides,
@@ -117,6 +132,15 @@
     }
     p {
       color: rgb(39, 39, 44) !important;
+    }
+  }
+  &[data-mode="old"] {
+    padding: 0.15vw 2px 0.15vw 0.15vw;
+    h1 {
+      @include title_old;
+    }
+    &#skillSlides {
+      width:calc(100% + 120px + $gap);
     }
   }
 }
