@@ -72,4 +72,33 @@ $border_color_old: transparent;
   position: relative;
   background-color: #02007b;
   line-height: 2ex;
+  background-image: linear-gradient(to right, #4b3fe8, #5ab4d1);
+  &::before {
+    content: "";
+    width: calc(1.8ex + 10px);
+    aspect-ratio: 1 / 1;
+    background: #cccccc;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    display: grid;
+    place-items: center;
+    line-height: 0;
+    box-shadow: 2px 2px 0 0px #292929;
+  }
+  &::after {
+    content: "x";
+    font-family: "DotGothic16";
+    display: grid;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    top: 1.33ex;
+    font-weight: 500;
+    right: calc(10px + 0.45ex);
+    line-height: 0;
+    color: black;
+    font-size: 2.5ex;
+  }
 }

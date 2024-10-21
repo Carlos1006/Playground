@@ -1,0 +1,36 @@
+.leftShadow {
+  width: 0.15vw;
+  position: absolute;
+  height: 100%;
+  background: #dbdbdb;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.topShadow {
+  height: 0.15vw;
+  position: absolute;
+  width: 100%;
+  background: #dbdbdb;
+  left: 0;
+  top: 0;
+}
+
+.rightShadow {
+  width: 2px;
+  position: absolute;
+  height: 100%;
+  background: #696969;
+  right: 0;
+  top: 0;
+}
+
+.bottomShadow {
+  height: 2px;
+  position: absolute;
+  width: 100%;
+  background: #696969;
+  right: 0;
+  bottom: 0;
+}
