@@ -28,4 +28,25 @@
       opacity: 0.3;
     }
   }
+  &[data-mode="old"] {
+    z-index: 10;
+    position: absolute;
+    background-color: $slot_color_old;
+    opacity: 1;
+    border-radius: 0;
+    top: calc(5px + 0.15vw);
+    border: 0;
+    right: calc(5px + 0.15vw + 2ex + 10px + 10px);
+    background: #cccccc;
+    box-shadow: 2px 2px 0 0px #292929;
+    font-family: "DotGothic16";
+    font-size: 1.8rex;
+    letter-spacing: 2px;
+    color: black;
+    &.active {
+      background: #dfdfdf;
+      translate: 1px 1px;
+      box-shadow: 1px 1px 0 0px #292929;
+    }
+  }
 }

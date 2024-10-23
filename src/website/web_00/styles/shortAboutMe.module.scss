@@ -15,13 +15,11 @@
   p {
     font-family: $font;
     color: rgb(211, 211, 216);
-    // ? font-size:3.5ex;
     font-size: 3.8ex;
     justify-self: center;
     text-align: center;
     margin: 0;
     padding: 0;
-    // ? line-height:2.5ex;
     line-height: 3ex;
   }
 
@@ -36,8 +34,20 @@
 
   &[data-mode="old"] {
     padding: 0.15cqi 2px 0.15cqi 0.15cqi;
+    gap: 0;
     h1 {
       @include title_old;
+    }
+    p {
+      width: calc(100% - 10px);
+      height: 100%;
+      justify-self: start;
+      margin-left: 0;
+      padding: 10px;
+      font-family: "Tahoma";
+      color: rgb(40, 40, 40);
+      font-size: 4ex;
+      text-align: left;
     }
   }
 }

@@ -14,14 +14,12 @@
   p {
     font-family: $font;
     color: rgb(150, 150, 155);
-    // ? font-size:2.1ex;
     font-size: 2.4ex;
     justify-self: center;
     margin: 0;
     padding: 0;
     margin-top: auto;
     margin-bottom: auto;
-    // ? line-height:2.6ex;
     line-height: 2.9ex;
   }
 
@@ -35,9 +33,18 @@
   }
 
   &[data-mode="old"] {
-    padding:0.15cqi 2px 0.15cqi 0.15cqi;
+    padding: 0.15vw 2px 0.15vw 0.15vw;
+    gap: 0;
     h1 {
       @include title_old;
+    }
+    p {
+      width: calc(100% - 10px);
+      height: 100%;
+      margin-left: 0;
+      padding: 10px;
+      font-family: "Tahoma";
+      color: rgb(40, 40, 40);
     }
   }
 }

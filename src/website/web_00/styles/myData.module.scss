@@ -123,9 +123,38 @@
       }
     }
     &[data-mode="old"] {
-      padding:0.15cqi 2px 0.15cqi 0.15cqi;
+      padding: 0.15cqi 2px 0.15cqi 0.15cqi;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      align-items: stretch;
+      align-content: stretch;
+      justify-content: stretch;
+      justify-items: stretch;
       h1 {
         @include title_old;
+      }
+      #myDataWrapper {
+        background-color: white;
+        margin-inline: 5px;
+        margin-bottom: 5px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 0;
+        row-gap: 0;
+        grid-template-rows: repeat(auto-fill, 4ex);
+        > span {
+          height: 100%;
+          line-height: 4ex;
+          padding-inline: 5px;
+          border: 1px solid black;
+        }
+        > div.value {
+          height: 100%;
+          border: 1px solid black;
+        }
+      }
+      #logo {
+        display: none;
       }
     }
   }
