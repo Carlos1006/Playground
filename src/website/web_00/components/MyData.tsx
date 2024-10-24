@@ -5,10 +5,14 @@ import { getExactAge } from "../utils";
 import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
 import useHomeContext from "../hooks/useHomeContext";
+import { MODE } from "../constants";
+import MyDataOld from "./MyDataOld";
 
 const MyData: FC = () => {
   const { themeMode } = useHomeContext();
   const age = getExactAge(BIRTH_DATE);
+
+  if (themeMode === MODE.OLD) return <MyDataOld />;
 
   return (
     <div id={css.myData}>
