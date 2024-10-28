@@ -102,9 +102,9 @@ const MyDataOld: FC = () => {
           <div />
           <div />
           <div />
-          <div />
-          <div />
-          <div />
+          <div className={css.noBorder} />
+          <div className={css.noBorder} />
+          <div className={css.noBorder} />
         </div>
       </div>
     </div>

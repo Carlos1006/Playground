@@ -184,7 +184,7 @@
     }
     #myDataWrapper {
       display: grid;
-      background-color: white;
+      background-color: rgb(240, 240, 240);
       margin-inline: 5px;
       margin-bottom: 5px;
       display: grid;
@@ -215,6 +215,9 @@
         min-height: 10px;
         &.colspan2 {
           grid-column: span 2;
+        }
+        &.noBorder {
+          border-bottom: none;
         }
         &:hover {
           background-color: rgb(230, 230, 230);

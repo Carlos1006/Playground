@@ -8,9 +8,15 @@ import "swiper/css/pagination";
 import Certify from "./Certifiy";
 import { CERTIFICATES } from "../helpers/certificates";
 import useHomeContext from "../hooks/useHomeContext";
+import { MODE } from "../constants";
+import CertificatesOld from "./CertificatesOld";
 
 const Certificates: FC = () => {
   const { themeMode } = useHomeContext();
+
+  if (themeMode === MODE.OLD) {
+    return <CertificatesOld />;
+  }
 
   return (
     <div id={css.certificates} data-mode={themeMode}>

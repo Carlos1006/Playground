@@ -1,9 +1,13 @@
 import { FC } from "react";
 import css from "../styles/coreCompetencies.module.scss";
 import useHomeContext from "../hooks/useHomeContext";
+import { MODE } from "../constants";
+import CoreCompetenciesOld from "./CoreCompetenciesOld";
 
 const CoreCompetencies: FC = () => {
   const { themeMode } = useHomeContext();
+
+  if (themeMode === MODE.OLD) return <CoreCompetenciesOld />;
 
   return (
     <div id={css.coreCompetencies} data-mode={themeMode}>

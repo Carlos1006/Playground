@@ -82,9 +82,31 @@
   }
 
   &[data-mode="old"] {
-    padding: 0.15cqi 2px 0.15cqi 0.15cqi;
+    padding: 0.15vw 2px 0.15vw 0.15vw;
+    gap: 0;
     h1 {
       @include title_old;
+      margin-bottom: 0;
+    }
+    #icons {
+      height: calc(100cqb - 2ex - 0.3vw - 20px);
+      gap: 1ex;
+      top: unset;
+      bottom: 0.15vw;
+      justify-content: center;
+    }
+    #schoolingWrapper {
+      color: rgb(39, 39, 44);
+      span {
+        font-family: "Tahoma";
+        padding-left: 1vw;
+        &:nth-child(2) {
+          color: rgb(50, 50, 50);
+        }
+        &:nth-child(3) {
+          color: rgb(70, 70, 70);
+        }
+      }
     }
   }
 }
