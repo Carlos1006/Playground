@@ -28,7 +28,7 @@
 
   &[data-mode="old"] {
     .showCaseTitle {
-      width: calc(100% - 0.15cqi - 2px);
+      width: calc(100% - 0.15vw - 2px);
       left: 0.15cqi;
       top: 0.15cqi;
       h1 {
@@ -36,4 +36,15 @@
       }
     }
   }
+}
+
+#oldShowCaseScreen {
+  width: calc(100% - 0.15vw - 2px);
+  height: calc(100% - 2.2ex - 20px - 0.15vw - 4px - 2px);
+  z-index: 10px;
+  position: absolute;
+  top: calc(2.2ex + 20px + 0.15vw + 4px);
+  left: 0.15vw;
+  background: #000000;
+  box-shadow: inset 0 0 0 1px #000;
 }

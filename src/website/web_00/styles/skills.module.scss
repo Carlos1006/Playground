@@ -49,22 +49,42 @@
   }
 
   &[data-mode="old"] {
+    background-color: #f0f0f0;
+    &::after {
+      height: 100%;
+      width: 2px;
+      content: "";
+      background-color: gray;
+      left: 0;
+      top: 0;
+      position: absolute;
+    }
     &#skillCarousel {
-      height: calc(100% - 2.3ex - 20px - 0.15vw - 1vh);
-      margin-top: calc(2.3ex + 20px + 0.15vw + 1vh);
+      width: calc(100% - 2px);
+      height: calc(100% - 2.3ex - 10px - 0.15vw - 1vh - 4px);
+      margin-top: calc(2.3ex + 10px + 0.15vw + 1vh + 2px);
     }
-    .skillIcon {
-      background-color: rgb(230, 230, 230, 1);
-      border-radius: 0;
-      box-shadow: 4px 4px 0 0 rgb(39, 39, 44, 0.7);
-      &.notSelected {
-        transition: filter 50ms ease-in-out;
-        filter: saturate(0);
-      }
-      &.selected {
-        filter: saturate(1.2);
+    &#jobsCarousel {
+      width: calc(100% - 2px);
+      margin-top: 2px;
+      height: calc(100% - 4px);
+      box-shadow: -$gap 0 0 0 #f0f0f0;
+      &::after {
+        left: -$gap;
       }
     }
+    // .skillIcon {
+    //   background-color: rgb(230, 230, 230, 1);
+    //   border-radius: 0;
+    //   box-shadow: 4px 4px 0 0 rgb(39, 39, 44, 0.7);
+    //   &.notSelected {
+    //     transition: filter 50ms ease-in-out;
+    //     filter: saturate(0);
+    //   }
+    //   &.selected {
+    //     filter: saturate(1.2);
+    //   }
+    // }
   }
 }
 
@@ -140,11 +160,31 @@
   }
   &[data-mode="old"] {
     padding: 0.15vw 2px 0.15vw 0.15vw;
+    gap: 0;
     h1 {
       @include title_old;
     }
+    h2 {
+      @include title2_dark;
+      font-family: "Tahoma";
+      letter-spacing: 2px;
+    }
+    p {
+      color: rgb(39, 39, 44) !important;
+      font-family: "Tahoma";
+    }
     &#skillSlides {
       width: calc(100% + 120px + $gap);
+      .slidesContainer {
+        width: calc(100% - 120px - $gap);
+        margin-left: 10px;
+      }
+    }
+    &#jobsSlides {
+      .slidesContainer {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+      }
     }
   }
 }
@@ -176,6 +216,40 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     white-space: nowrap; /* Previene que los elementos colapsen en varias líneas */
+  }
+
+  &[data-mode="old"] {
+    position: relative;
+    background-color: transparent;
+    border-radius: 0;
+    svg {
+      width: 45%;
+      height: 45%;
+      transform: translateX(-30%) translateY(10%);
+      z-index: 2;
+    }
+    img {
+      border-radius: 0;
+      &:first-child {
+        z-index: 0;
+        opacity: 0.9;
+        position: absolute;
+        width: calc(100%);
+        height: calc(100%);
+        filter: contrast(1.2) saturate(1.5)
+          drop-shadow(5px 5px 0 rgba(0, 0, 0, 0.5));
+      }
+      &:last-child {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 2px);
+        border-radius: 100px;
+        transform: translateY(-50%) translateX(-50%);
+        width: 45%;
+        height: 45%;
+        z-index: 2;
+      }
+    }
   }
 }
 
@@ -252,6 +326,11 @@
   }
   &[data-mode="light"] {
     color: rgb(39, 39, 44);
+  }
+  &[data-mode="old"] {
+    color: rgb(39, 39, 44);
+    font-family: "Tahoma";
+    font-size: 1.8ex;
   }
 }
 

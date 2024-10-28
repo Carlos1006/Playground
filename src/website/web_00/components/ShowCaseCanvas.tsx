@@ -54,7 +54,7 @@ const ShowCaseCanvas: FC = () => {
         context.clearRect(0, 0, width, height);
       }
     };
-  }, [context, width, height, strokeStyle]);
+  }, [context, width, height, strokeStyle, themeMode]);
 
   useResizeObserver({
     ref,

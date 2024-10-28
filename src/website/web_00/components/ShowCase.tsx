@@ -12,6 +12,7 @@ import {
 import DayNightToggle from "../../../components/daynightToggle_01";
 import DivIf from "./DivIf";
 import useHomeContext from "../hooks/useHomeContext";
+// import { MODE } from "../constants";
 // import GlowButton from "../../../components/glowButton";
 // import DeleteFile from "../../../components/deleteFile";
 // import CompleteOrder from "../../../components/completeOrder";
@@ -77,6 +78,7 @@ const ShowCase: FC = () => {
         <GlitchText text={title} />
       </div>
       <ShowCaseCanvas />
+      {/* {themeMode !== MODE.OLD && <ShowCaseCanvas />} */}
     </div>
   );
 };
