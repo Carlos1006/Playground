@@ -74,6 +74,7 @@ $border_color_old: transparent;
   background-color: #02007b;
   line-height: 2ex;
   background-image: linear-gradient(to right, #4b3fe8, #5ab4d1);
+  color: white;
   &::before {
     content: "";
     width: calc(1.8ex + 10px);

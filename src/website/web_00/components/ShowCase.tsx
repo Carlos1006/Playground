@@ -12,6 +12,8 @@ import {
 import DayNightToggle from "../../../components/daynightToggle_01";
 import DivIf from "./DivIf";
 import useHomeContext from "../hooks/useHomeContext";
+import ShowCaseControl from "./ShowCaseControl";
+import { MODE } from "../constants";
 // import { MODE } from "../constants";
 // import GlowButton from "../../../components/glowButton";
 // import DeleteFile from "../../../components/deleteFile";
@@ -49,12 +51,16 @@ const ShowCase: FC = () => {
         <Loader className={css.loader} />
       </DivIf>
 
-      <div data-direction="left" className={css.control}>
-        <ArrowLeft />
-      </div>
-      <div data-direction="right" className={css.control}>
-        <ArrowRight />
-      </div>
+      {themeMode != MODE.OLD && (
+        <>
+          <div data-direction="left" className={css.control}>
+            <ArrowLeft />
+          </div>
+          <div data-direction="right" className={css.control}>
+            <ArrowRight />
+          </div>
+        </>
+      )}
 
       <DivIf condition={!loading} id={css.glass} themeMode={themeMode}>
         <DayNightToggle />
@@ -74,11 +80,15 @@ const ShowCase: FC = () => {
         {/* Terrain */}
       </DivIf>
 
-      <div id={css.currentComponent}>
-        <GlitchText text={title} />
-      </div>
-      <ShowCaseCanvas />
-      {/* {themeMode !== MODE.OLD && <ShowCaseCanvas />} */}
+      {themeMode != MODE.OLD && (
+        <>
+          <div id={css.currentComponent}>
+            <GlitchText text={title} />
+          </div>
+          <ShowCaseCanvas />
+        </>
+      )}
+      {themeMode === MODE.OLD && <ShowCaseControl title={title} />}
     </div>
   );
 };

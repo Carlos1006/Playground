@@ -105,3 +105,7 @@ export interface ICertify {
   year: string;
   institution: string;
 }
+
+export interface IShowCaseControl {
+  title: string;
+}
