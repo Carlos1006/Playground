@@ -1,7 +1,135 @@
+@import "theme";
+
 #footer[data-mode="old"] {
   position: fixed;
   bottom: 0;
   left: 0;
   height: 40px;
   width: 100vw;
+  border-top: 2px solid #f5f5f5 !important;
+  display: flex;
+  align-items: center;
+  container: footer / size;
+  #startButton {
+    height: calc(100cqb - 10px);
+    width: calc(150cqb - 10px);
+    background-color: $slot_color_old;
+    margin-left: $gap;
+    margin-bottom: 2px;
+    box-shadow: inset 2px 2px 0 #f5f5f5, 2px 2px 0 #6d6d6d !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    img {
+      height: 75%;
+      width: auto;
+      transform: rotate(-20deg);
+      transition: transform 0.2s ease-in-out;
+      filter: drop-shadow(1px 1px 0 rgba(151, 151, 151, 0.527));
+    }
+    &:hover {
+      img {
+        transform: rotate(20deg);
+      }
+    }
+    &:active {
+      box-shadow: inset 2px 2px 0 #6e6e6e, 2px 2px 0 #f5f5f5 !important;
+    }
+  }
+  .divider {
+    background: linear-gradient(
+      to right,
+      #f5f5f5 0%,
+      #f5f5f5 50%,
+      #222222 100%
+    );
+    width: 4px;
+    border-radius: 10px;
+    margin-inline: 10px;
+    height: calc(100cqb - 10px);
+  }
+  #socialIcons {
+    margin-left: 0;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .socialIcon {
+      height: calc(80cqb - 10px);
+      width: calc(80cqb - 10px);
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+      }
+      svg {
+        filter: drop-shadow(1px 1px 0 rgba(151, 151, 151, 0.527));
+      }
+      &#instagramIcon {
+        fill: #e4405f;
+      }
+      &#linkedinIcon {
+        fill: #0077b5;
+      }
+      &#emailIcon {
+        fill: #ea4335;
+      }
+      &#whatsappIcon {
+        fill: #25d366;
+      }
+      &#githubIcon {
+        svg {
+          scale: 0.8;
+        }
+      }
+      &#dailyDevIcon {
+        fill: #0a0a0a;
+        margin-left: 2px;
+        svg {
+          transform: translateY(3px);
+        }
+      }
+    }
+  }
+  #myName,
+  #role,
+  #time {
+    height: calc(100cqb - 10px);
+    transform: translateY(-1px);
+    background-color: $slot_color_old;
+    box-shadow: inset 2px 2px 0 #6e6e6e, 2px 2px 0 #f5f5f5 !important;
+    display: flex;
+    align-items: center;
+    padding-inline: 10px;
+    margin-right: 10px;
+    font-family: "Trebuchet MS";
+    font-size: 1.9ex;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      background-color: $slot_color_old_hover;
+    }
+    &:active {
+      background-color: $slot_color_old_active;
+    }
+    &#role {
+      margin-right: auto;
+    }
+    &#time {
+      width: 220cqb;
+      margin-right: $gap;
+      justify-content: center;
+      span {
+        white-space: nowrap;
+        font-weight: normal;
+        font-size: 1.8ex;
+      }
+    }
+    img {
+      height: 75%;
+      width: auto;
+      margin-right: 5px;
+    }
+  }
 }

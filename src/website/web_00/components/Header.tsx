@@ -5,10 +5,15 @@ import Name from "./Name";
 import Mode from "./Mode";
 import useHomeContext from "../hooks/useHomeContext";
 import css from "../styles/header.module.scss";
+import HeaderOld from "./HeaderOld";
+import { MODE } from "../constants";
 
 const Header: FC = () => {
   const { themeMode } = useHomeContext();
 
+  if (themeMode === MODE.OLD) {
+    return <HeaderOld />;
+  }
   return (
     <>
       <div
