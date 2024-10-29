@@ -1,4 +1,4 @@
-import { IHomeContext, ThemeMode } from "../types";
+import { IHomeContext, Position, ThemeMode } from "../types";
 
 export namespace MODE {
   export const LIGHT: ThemeMode = "light";
@@ -11,4 +11,9 @@ export const HOME_CONTEXT_DEFAULT: IHomeContext = {
   setThemeMode: (): void => {
     return;
   },
+};
+
+export const EMPTY_POSITION: Position = {
+  x: 0,
+  y: 0,
 };

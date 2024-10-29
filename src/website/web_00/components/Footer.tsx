@@ -72,7 +72,7 @@ const Footer: FC = () => {
           </div>
           <div id={css.role}>
             <img src={briefcaseImg} alt="CD" />
-            <span>Software Engineer</span>
+            <span>Senior Software Developer</span>
           </div>
           <div className={css.divider} />
           <div id={css.time}>

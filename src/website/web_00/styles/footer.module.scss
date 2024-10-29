@@ -63,33 +63,7 @@
       &:hover {
         opacity: 1;
       }
-      svg {
-        filter: drop-shadow(1px 1px 0 rgba(151, 151, 151, 0.527));
-      }
-      &#instagramIcon {
-        fill: #e4405f;
-      }
-      &#linkedinIcon {
-        fill: #0077b5;
-      }
-      &#emailIcon {
-        fill: #ea4335;
-      }
-      &#whatsappIcon {
-        fill: #25d366;
-      }
-      &#githubIcon {
-        svg {
-          scale: 0.8;
-        }
-      }
-      &#dailyDevIcon {
-        fill: #0a0a0a;
-        margin-left: 2px;
-        svg {
-          transform: translateY(3px);
-        }
-      }
+      @include socialIcons($marginLeft: 2px, $translate: 20%);
     }
   }
   #myName,

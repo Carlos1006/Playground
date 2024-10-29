@@ -1,4 +1,11 @@
-import { Dispatch, FC, ReactNode, RefObject, SetStateAction } from "react";
+import React, {
+  Dispatch,
+  FC,
+  LegacyRef,
+  ReactNode,
+  RefObject,
+  SetStateAction,
+} from "react";
 import { SwiperClass } from "swiper/react";
 
 export interface IHomeContext {
@@ -108,4 +115,29 @@ export interface ICertify {
 
 export interface IShowCaseControl {
   title: string;
+}
+
+export interface IMenuItem {
+  title: string;
+  src?: string;
+  element?: ReactNode;
+  className?: string;
+  onClick: () => void;
+}
+
+export interface IMenu {
+  x: number;
+  y: number;
+  open: boolean;
+  items: IMenuItem[];
+}
+
+export type Position = {
+  x: number;
+  y: number;
+};
+
+export interface IUsePosition<Element> {
+  ref: LegacyRef<Element> | undefined;
+  position: Position;
 }
