@@ -9,75 +9,100 @@ import {
   MdArrowForwardIos as ArrowRight,
 } from "react-icons/md";
 
-import DayNightToggle from "../../../components/daynightToggle_01";
 import DivIf from "./DivIf";
 import useHomeContext from "../hooks/useHomeContext";
 import ShowCaseControl from "./ShowCaseControl";
 import { MODE } from "../constants";
-// import { MODE } from "../constants";
-// import GlowButton from "../../../components/glowButton";
-// import DeleteFile from "../../../components/deleteFile";
-// import CompleteOrder from "../../../components/completeOrder";
-// import CompleteOrder2 from "../../../components/completeOrder_01";
-// import SusbcribeButton from "../../../components/subscribeButton";
-// import AudioSphere from "../../../components/audioSphere";
-// import AudioFrequecies from "../../../components/audioFreqs";
-// import LoginRobot from "../../../components/loginRobot";
-// import Rocket from "../../../components/rocket";
-// import Page_16 from "../../../pages/page_16";
-// import Page_15 from "../../../pages/page_15";
-// import Page_08 from "../../../pages/page_08";
+import {
+  EMPTY_COMPONENT,
+  SHOWCASE_COMPONENTS,
+  SHOWCASE_COMPONENTS_ARRAY,
+} from "../helpers/showCase";
+import { IShowCaseComponent, ShowCaseComponent } from "../types";
 
 const ShowCase: FC = () => {
   const { themeMode } = useHomeContext();
   const ref = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
   const [title, setTitle] = useState<string>("");
+  const [componentIndex, setComponentIndex] = useState<number>(0);
+  const [currentShowCaseComponent, setCurrentShowCaseComponent] =
+    useState<IShowCaseComponent | null>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      const currentKey: ShowCaseComponent =
+        SHOWCASE_COMPONENTS_ARRAY[componentIndex];
+      const newComponent = SHOWCASE_COMPONENTS[currentKey];
+      setCurrentShowCaseComponent(newComponent);
+      setTitle(newComponent.title);
       setLoading(false);
-      setTitle("Day/Night Toggle");
     }, 2000);
-
     return () => {
       clearTimeout(timeout);
     };
-  }, []);
+  }, [componentIndex]);
+
+  const nextComponent = (): void => {
+    const newComponentIndex = componentIndex + 1;
+    setLoading(true);
+    setTitle("");
+    if (newComponentIndex >= SHOWCASE_COMPONENTS_ARRAY.length) {
+      setComponentIndex(0);
+      return;
+    }
+    setComponentIndex(newComponentIndex);
+  };
+
+  const prevComponent = (): void => {
+    const newComponentIndex = componentIndex - 1;
+    setLoading(true);
+    setTitle("");
+    if (newComponentIndex < 0) {
+      setComponentIndex(SHOWCASE_COMPONENTS_ARRAY.length - 1);
+      return;
+    }
+    setComponentIndex(newComponentIndex);
+  };
+
+  const { component: Component, props } =
+    currentShowCaseComponent ?? EMPTY_COMPONENT;
 
   return (
     <div id={css.showCase} ref={ref} data-mode={themeMode}>
-      <DivIf condition={loading} id={css.loaderContainer}>
+      <DivIf
+        condition={loading || !currentShowCaseComponent}
+        id={css.loaderContainer}
+      >
         <Loader className={css.loader} />
       </DivIf>
 
       {themeMode != MODE.OLD && (
         <>
-          <div data-direction="left" className={css.control}>
+          <div
+            data-direction="left"
+            className={css.control}
+            onClick={prevComponent}
+            aria-label="Previous"
+            aria-roledescription="button"
+          >
             <ArrowLeft />
           </div>
-          <div data-direction="right" className={css.control}>
+          <div
+            data-direction="right"
+            className={css.control}
+            onClick={nextComponent}
+            aria-label="Next"
+            aria-roledescription="button"
+          >
             <ArrowRight />
           </div>
         </>
       )}
 
       <DivIf condition={!loading} id={css.glass} themeMode={themeMode}>
-        <DayNightToggle />
-        {/* <GlowButton /> */}
-        {/* <DeleteFile /> */}
-        {/* <CompleteOrder /> */}
-        {/* <CompleteOrder2 /> */}
-        {/* <SusbcribeButton /> */}
-        {/* <AudioSphere /> */}
-        {/* <AudioFrequecies /> */}
-        {/* <LoginRobot /> */}
-        {/* <Rocket /> */}
-        {/* <Page_16 /> */}
-        {/* <Page_15 /> */}
-        {/* <Page_08 /> */}
-        {/* Grid */}
-        {/* Terrain */}
+        <Component {...props} />
       </DivIf>
 
       {themeMode != MODE.OLD && (

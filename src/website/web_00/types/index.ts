@@ -141,3 +141,30 @@ export interface IUsePosition<Element> {
   ref: LegacyRef<Element> | undefined;
   position: Position;
 }
+
+export interface IShowCaseComponent {
+  component: FC;
+  title: string;
+  props: Record<string, unknown>;
+}
+
+export type ShowCaseComponent =
+  | "DayNightToggle"
+  | "GlowButton"
+  | "DeleteFile"
+  | "CompleteOrder"
+  | "CompleteOrderWithError"
+  | "SubscribeButton"
+  | "AudioSphere"
+  | "AudioFrequecies"
+  | "LoginRobot"
+  | "Rocket"
+  | "Page_16"
+  | "Page_15"
+  | "Page_08"
+  | "Grid"
+  | "Terrain";
+
+export interface IShowCaseComponents {
+  [key: string]: IShowCaseComponent;
+}
