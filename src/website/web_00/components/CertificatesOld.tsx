@@ -11,7 +11,7 @@ const CertificatesOld: FC = () => {
 
   return (
     <div id={css.certificates} data-mode={themeMode}>
-      <h1>Certificates</h1>
+      <h1>Certificados</h1>
       <div id={css.certificatesWrapper}>
         {CERTIFICATES.map((certify, index) => (
           <Certify {...certify} key={index} />

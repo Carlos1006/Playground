@@ -7,10 +7,12 @@ const Name: FC = () => {
 
   return (
     <div id={css.name} data-mode={themeMode}>
-      <span>Hi!, I am</span>
+      {/* <span>Hi!, I am</span> */}
+      <span>Hola!, Yo soy</span>
       <span>Carlos Daniel Gonzalez</span>
       <div id={css.line} />
-      <span>Senior Software Developer</span>
+      {/* <span>Senior Software Developer</span> */}
+      <span>Desarrollador de Software Senior</span>
     </div>
   );
 };

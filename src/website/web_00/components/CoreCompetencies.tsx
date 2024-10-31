@@ -11,12 +11,13 @@ const CoreCompetencies: FC = () => {
 
   return (
     <div id={css.coreCompetencies} data-mode={themeMode}>
-      <h1>Core Competencies</h1>
+      {/* <h1>Core Competencies</h1> */}
+      <h1>Competencias Destacables</h1>
       <div id={css.coreCompetenciesWrapper}>
-        {/* <span>Desarrollo de software</span> */}
-        {/* <span>Servicios web</span> */}
-        {/* <span>Recopilación de requisitos</span> */}
-        {/* <span>Desarrollo web</span> */}
+        <span>Desarrollo de software</span>
+        <span>Servicios web</span>
+        <span>Recopilación de requisitos</span>
+        <span>Desarrollo web</span>
         <span>Integración de tecnología</span>
         <span>Liderazgo de equipo</span>
         <span>Scripting y Programación</span>

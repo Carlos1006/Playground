@@ -37,11 +37,11 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
 
   return (
     <div id={css.jobsSlides} data-mode={themeMode}>
-      <h1>Jobs</h1>
+      <h1>Historial Laboral</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>
           <div
-            className={`${css.skillCarouselSlide} ${
+            className={`${css.skillCarouselSlide} ${css.jobCarouselSlide} ${
               showNext ? css.vanish : ""
             }`}
           >
@@ -49,9 +49,9 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
             <Description />
           </div>
           <div
-            className={`${css.skillCarouselSlide} ${css.next} ${
-              showNext ? css.show : ""
-            }`}
+            className={`${css.skillCarouselSlide} ${css.jobCarouselSlide} ${
+              css.next
+            } ${showNext ? css.show : ""}`}
           >
             <h2>{next.name}</h2>
             <NextDescription />

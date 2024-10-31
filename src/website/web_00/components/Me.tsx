@@ -7,7 +7,7 @@ const Me: FC = () => {
 
   return (
     <div id={css.me} data-mode={themeMode}>
-      <h1>Me</h1>
+      <h1>Yo</h1>
     </div>
   );
 };

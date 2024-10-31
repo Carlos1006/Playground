@@ -17,7 +17,7 @@ const MyData: FC = () => {
   return (
     <div id={css.myData}>
       <div id={css.myDataContent} data-mode={themeMode}>
-        <h1>My Data</h1>
+        <h1>Mis Datos</h1>
         <div id={css.myDataWrapper}>
           <span>Full name</span>
           <div className={css.value}>

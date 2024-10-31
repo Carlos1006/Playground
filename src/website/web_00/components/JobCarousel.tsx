@@ -31,7 +31,7 @@ const JobCarousel: FC<ISwiper> = ({
       <div className={css.skillCarouselWrapper}>
         <Swiper
           autoplay={{
-            delay: 4000,
+            delay: 400000,
             disableOnInteraction: false,
           }}
           onSwiper={onSwiper}

@@ -97,7 +97,6 @@
   z-index: 10;
   overflow: hidden;
   padding: 1.5vmin;
-  row-gap: 1cqb;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
@@ -105,6 +104,7 @@
     @include title;
   }
   h2 {
+    margin-block: 5px !important;
     @include title2;
   }
   p {
@@ -122,10 +122,27 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        padding-right: $gap;
         height: 100%;
         opacity: 1;
-
+        &.jobCarouselSlide {
+          height: calc(100% - 3cqb - 10px);
+          overflow: auto;
+        }
+        &::-webkit-scrollbar {
+          width: 0.4rem;
+          height: 0.4rem;
+          background-color: #1f1f1f;
+          border-radius: 100px;
+        }
+        &::-webkit-scrollbar-track {
+          border-radius: 100px;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 100px;
+          background-color: #5c5c5c;
+          position: relative;
+        }
         &:not(.next) {
           &.vanish {
             transition: opacity 300ms ease-in-out;
@@ -157,6 +174,14 @@
     p {
       color: rgb(39, 39, 44) !important;
     }
+    .skillCarouselSlide {
+      &::-webkit-scrollbar {
+        background-color: #929292;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #b8b8b8;
+      }
+    }
   }
   &[data-mode="old"] {
     padding: 0.15vw 2px 0.15vw 0.15vw;
@@ -168,6 +193,7 @@
       @include title2_dark;
       font-family: "Tahoma";
       letter-spacing: 2px;
+      margin-top: 0 !important;
     }
     p {
       color: rgb(39, 39, 44) !important;
@@ -184,6 +210,26 @@
       .slidesContainer {
         width: calc(100% - 20px);
         margin-left: 10px;
+      }
+    }
+    .skillCarouselSlide {
+      &.jobCarouselSlide {
+        height: calc(100% - 4cqb - 20px) !important;
+        overflow: auto;
+      }
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: #929292;
+      }
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+      &::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 1px 1px 1px #868686,
+          inset -1px -1px 1px #dfdfdf;
+        background-color: #b8b8b8;
+        position: relative;
       }
     }
   }
@@ -331,6 +377,26 @@
     color: rgb(39, 39, 44);
     font-family: "Tahoma";
     font-size: 1.8ex;
+  }
+}
+
+#milenioJob,
+#aldeaJob,
+#ummJob,
+#banregioJob,
+#onephaseJob,
+#masttroJob {
+  span {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1ex;
+  }
+  ul {
+    li {
+      margin-bottom: 1ex;
+      position: relative;
+      list-style: none;
+    }
   }
 }
 

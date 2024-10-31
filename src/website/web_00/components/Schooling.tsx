@@ -13,7 +13,7 @@ const Schooling: FC = () => {
         <img src={uanl} alt="UANL" />
         <img src={fcfm} alt="FCFM" />
       </div>
-      <h1>Schooling</h1>
+      <h1>Estudios</h1>
       <div id={css.schoolingWrapper}>
         <span>Lic. en Multimedia y Animacion Digital</span>
         <span>Facultad de Ciencias Fisico Matematicas</span>

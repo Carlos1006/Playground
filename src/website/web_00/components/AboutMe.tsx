@@ -7,7 +7,7 @@ const AboutMe: FC = () => {
 
   return (
     <div id={css.aboutMe} data-mode={themeMode}>
-      <h1>About Me</h1>
+      <h1>Acerca De Mi</h1>
       <p>
         Desarrollador de software consumado y orientado a los resultados, muy
         apreciado por desarrollar aplicaciones que cumplen y superan los

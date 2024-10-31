@@ -35,7 +35,7 @@ const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
 
   return (
     <div id={css.skillSlides} data-mode={themeMode}>
-      <h1>Skills</h1>
+      <h1>Habilidades</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>
           <div

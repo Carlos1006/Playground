@@ -43,9 +43,12 @@
     span {
       &:nth-child(1) {
         font-size: 6ex;
+        font-weight: bold;
+        margin-bottom: -0.8ex;
       }
       &:nth-child(2) {
         font-size: 5.2ex;
+        margin-bottom: -0.8ex;
         color: rgb(150, 150, 155);
       }
       &:nth-child(3) {

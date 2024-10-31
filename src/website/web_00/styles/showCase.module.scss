@@ -87,6 +87,17 @@
     #currentComponent {
       color: rgb(39, 39, 44);
     }
+    .control {
+      svg {
+        fill: black !important;
+      }
+      &:hover {
+        background: rgba(10, 10, 10, 0.05);
+      }
+      &:active {
+        background: rgba(10, 10, 10, 0.1);
+      }
+    }
   }
   &[data-mode="old"] {
     border-radius: 0;

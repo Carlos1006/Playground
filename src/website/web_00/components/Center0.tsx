@@ -18,9 +18,13 @@ const Center0: FC = () => {
       <OldMenuSlot />
       {themeMode === MODE.OLD && <div id={css.oldShowCaseScreen} />}
       <div className={css.showCaseTitle}>
-        <h1>Some of my work</h1>
+        <h1>Algo de mi Trabajo</h1>
         {themeMode !== MODE.OLD && (
-          <p>Here are some of the personal projects I have worked on.</p>
+          // <p>Here are some of the personal projects I have worked on.</p>
+          <p>
+            Aqui hay algunos de los proyectos personales en los que he
+            trabajado.
+          </p>
         )}
       </div>
       <ShowCase />

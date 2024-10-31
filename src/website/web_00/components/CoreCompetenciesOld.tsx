@@ -12,6 +12,18 @@ const CoreCompetenciesOld: FC = () => {
         <span>C://Windows/MyData/Carlos/CoreCompetencies&gt; cd</span>
         <span># showing core competencies: </span>
         <span>
+          <i>-ds</i> Desarrollo de software
+        </span>
+        <span>
+          <i>-sw</i> Servicios web
+        </span>
+        <span>
+          <i>-rr</i> Recopilación de requisitos
+        </span>
+        <span>
+          <i>-dw</i> Desarrollo web
+        </span>
+        <span>
           <i>-it</i> Integración de tecnología
         </span>
         <span>

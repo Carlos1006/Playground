@@ -14,7 +14,7 @@
     display: grid;
     gap: $gap;
     grid-template-columns: 120px 200px 0.6fr 0.7fr 1fr 1fr 350px 120px;
-    grid-template-rows: 70px 1fr 0.7fr repeat(3, 1fr) 1.4fr 60px;
+    grid-template-rows: 55px 1.4fr 0.7fr repeat(3, 1fr) 1.1fr 40px;
     grid-template-areas:
       "h1000-00 h2000-00 h3000-00 h3000-00 h3000-00 h3000-00 h4000-00 h4000-00"
       "gt0l0-00 gt0l0-00 gt0l0-00 gt0l1-00 gt0l2-00 gt0l2-00 st0r0-00 st0r0-01"
