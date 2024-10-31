@@ -218,16 +218,21 @@
         overflow: auto;
       }
       &::-webkit-scrollbar {
+        border-radius: 0 !important;
         width: 0.5rem;
         height: 0.5rem;
         background-color: #929292;
       }
       &::-webkit-scrollbar-track {
+        border-radius: 0 !important;
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #929292;
       }
       &::-webkit-scrollbar-thumb {
+        border-radius: 0 !important;
         -webkit-box-shadow: inset 1px 1px 1px #868686,
           inset -1px -1px 1px #dfdfdf;
+        background-color: #b8b8b8;
         background-color: #b8b8b8;
         position: relative;
       }
