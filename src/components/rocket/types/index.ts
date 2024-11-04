@@ -26,6 +26,8 @@ export interface IFire {
 
 export interface IParticles {
   count: number;
+  scale?: number;
+  range?: [number, number];
 }
 
 export interface IKeys {
@@ -36,3 +38,9 @@ export interface IKeys {
 }
 
 export type IKeyDirection = keyof IKeys;
+
+export interface ISpaceRocket {
+  asteroidScale?: number;
+  asteroidCount?: number;
+  asteroidRange?: [number, number];
+}

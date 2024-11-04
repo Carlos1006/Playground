@@ -1,11 +1,13 @@
 import AudioFrequecies from "../../../components/audioFreqs";
-import AudioSphere from "../../../components/audioSphere";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import AudioSphere from "../../../components/audioSphere/components/OrbCore";
 import CompleteOrder from "../../../components/completeOrder";
 import CompleteOrderWithError from "../../../components/completeOrder_01";
 import DayNightToggle from "../../../components/daynightToggle_01";
 import DeleteFile from "../../../components/deleteFile";
 import GlowButton from "../../../components/glowButton";
-import LoginRobot from "../../../components/loginRobot";
+import LoginRobot from "../../../components/loginRobotShowCase";
 import Rocket from "../../../components/rocket";
 import SusbcribeButton from "../../../components/subscribeButton";
 import Page_08 from "../../../pages/page_08";
@@ -94,22 +96,39 @@ export const SHOWCASE_COMPONENTS: IShowCaseComponents = {
   },
   [SHOWCASE_COMPONENT.AUDIO_SPHERE]: {
     component: AudioSphere,
-    props: {},
+    props: {
+      showBackground: false,
+      size: [1.9, 1.8],
+      scale: 1.5,
+      particalSize: 10,
+      intensity: 0.12,
+    },
     title: "Audio Sphere",
   },
   [SHOWCASE_COMPONENT.AUDIO_FREQUENCIES]: {
     component: AudioFrequecies,
-    props: {},
+    props: {
+      scale: 0.5,
+    },
     title: "Audio Frequencies",
   },
   [SHOWCASE_COMPONENT.LOGIN_ROBOT]: {
     component: LoginRobot,
-    props: {},
+    props: {
+      extraCss: {
+        scale: "85%",
+        translate: "0 3cqb",
+      },
+    },
     title: "Login Robot",
   },
   [SHOWCASE_COMPONENT.ROCKET]: {
     component: Rocket,
-    props: {},
+    props: {
+      asteroidScale: 1.5,
+      range: [-200, 200],
+      count: 15000,
+    },
     title: "Rocket",
   },
   [SHOWCASE_COMPONENT.PAGE_16]: {

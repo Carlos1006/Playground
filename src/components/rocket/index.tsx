@@ -7,12 +7,17 @@ import AsteroidProvider from "./components/AsteroidProvider";
 import Floor from "./components/Floor";
 import Stars from "./components/Stars";
 import Asteroids from "./components/Asteroids";
+import { ISpaceRocket } from "./types";
 // import AnimatedParticles from "./components/AnimatedParticles";
 // import { Stars } from "@react-three/drei";
 // import { OrthographicCamera } from "@react-three/drei";
 // import Effects from "./components/Effects";
 
-const Space: FC = () => {
+const SpaceRocket: FC<ISpaceRocket> = ({
+  asteroidScale = 1,
+  asteroidCount = 10000,
+  asteroidRange = [-50, 50],
+}: ISpaceRocket) => {
   return (
     <Canvas
       // onCreated={({ gl, size, camera }) => {
@@ -38,9 +43,13 @@ const Space: FC = () => {
           <Floor show={false} />
         </Physics>
       </AsteroidProvider>
-      <Stars count={10000} />
+      <Stars
+        count={asteroidCount}
+        scale={asteroidScale}
+        range={asteroidRange}
+      />
     </Canvas>
   );
 };
 
-export default Space;
+export default SpaceRocket;

@@ -17,6 +17,8 @@ function useAnimation(): AnimationTools {
   const [truckLastStage, setTruckLastStage] = useState(false);
   const [fillCheckmark, setFillCheckmark] = useState(false);
 
+  const [killTransition, setKillTransition] = useState(false);
+
   const animationStart = async (): Promise<void> => {
     setSmall(true);
     await sleep(500);
@@ -47,6 +49,24 @@ function useAnimation(): AnimationTools {
     setSmall(false);
     await sleep(100);
     setFillCheckmark(true);
+    await sleep(3000);
+    setKillTransition(true);
+    restore();
+  };
+
+  const restore = (): void => {
+    setSmall(false);
+    setRemoveBorderRadius(false);
+    setDisappear(false);
+    setOverflow(false);
+    setPackageBox(false);
+    setPackageRight(false);
+    setTruckFirstStage(false);
+    setLoadBar(false);
+    setFillBar(false);
+    setTruckLastStage(false);
+    setFillCheckmark(false);
+    setKillTransition(false);
   };
 
   return {
@@ -63,6 +83,7 @@ function useAnimation(): AnimationTools {
     truckLastStage,
     fillCheckmark,
     animationEnd,
+    killTransition,
   };
 }
 
@@ -81,6 +102,7 @@ const CompleteOrder: FC = () => {
     truckLastStage,
     fillCheckmark,
     animationEnd,
+    killTransition,
   } = useAnimation();
 
   const [completed, setCompleted] = useState(false);
@@ -92,6 +114,9 @@ const CompleteOrder: FC = () => {
     setText(response ? "Order Placed" : "Error");
     setCompleted(response);
     animationEnd();
+    await sleep(3000);
+    setText("Complete Order");
+    setCompleted(false);
   };
 
   return (
@@ -112,6 +137,8 @@ const CompleteOrder: FC = () => {
             ${fillBar ? css.fillBar : ""}
             ${truckLastStage ? css.truckLastStage : ""}
             ${fillCheckmark ? css.fillCheckmark : ""}
+
+            ${killTransition ? css.killTransition : ""}
         `}
       >
         <div className={css.carContainer}>

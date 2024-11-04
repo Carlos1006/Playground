@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import AsteroidContext from "../context/AsteroidContext";
 import { useLoader } from "@react-three/fiber";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { FBXLoader } from "three-stdlib";
 import { IAsteroidContext, IAsteroidProvider } from "../types";
-import asteroidModel from "../models/stone.fbx";
+import asteroidModel from "../models/stone2.fbx";
 import asteroidTexture from "../textures/stone.jpg";
 
 const AsteroidProvider: FC<IAsteroidProvider> = ({
@@ -12,6 +12,7 @@ const AsteroidProvider: FC<IAsteroidProvider> = ({
 }: IAsteroidProvider) => {
   const fbx = useLoader(FBXLoader, asteroidModel);
   const texture = useLoader(THREE.TextureLoader, asteroidTexture);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     if (fbx) {
@@ -32,11 +33,12 @@ const AsteroidProvider: FC<IAsteroidProvider> = ({
           }
         });
       }
+      setLoaded(true);
     }
   }, [fbx, texture]);
 
   const value: IAsteroidContext = {
-    fbx: Array.isArray(fbx) ? fbx[0] : fbx,
+    fbx: loaded ? (Array.isArray(fbx) ? fbx[0] : fbx) : null,
   };
 
   return (

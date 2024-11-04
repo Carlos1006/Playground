@@ -25,7 +25,6 @@ function useColorGradient(
 
 const GlowButton: FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const followingGlow = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [widthPercent, setWidthPercent] = useState(0);
@@ -42,22 +41,39 @@ const GlowButton: FC = () => {
 
   useEffect(() => {
     if (!followingGlow.current) return;
-    const { x, y } = followingGlow.current.getBoundingClientRect();
-    const { width, height } = followingGlow.current.getBoundingClientRect();
-    setDimensions({ width, height });
-    setOffset({ x, y });
+
+    const updateOffset = (): void => {
+      if (!followingGlow.current) return;
+      const { width, height } = followingGlow.current.getBoundingClientRect();
+      setDimensions({ width, height });
+      console.log("offset");
+    };
+    updateOffset();
+
+    window.addEventListener("resize", updateOffset);
+    const resizeObserver = new ResizeObserver(() => {
+      updateOffset();
+    });
+    resizeObserver.observe(followingGlow.current);
+
+    return () => {
+      window.removeEventListener("resize", updateOffset);
+      resizeObserver.disconnect();
+    };
   }, [followingGlow]);
 
   const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!followingGlow.current) return;
+      const { x, y } = followingGlow.current.getBoundingClientRect();
       setPosition({
-        x: e.clientX - offset.x,
-        y: e.clientY - offset.y,
+        x: e.clientX - x,
+        y: e.clientY - y,
       });
       const currentWidthPercent = (position.x / dimensions.width) * 100;
       setWidthPercent(parseInt(currentWidthPercent.toString()));
     },
-    [offset.x, offset.y, position.x, dimensions.width]
+    [position.x, dimensions.width]
   );
 
   return (

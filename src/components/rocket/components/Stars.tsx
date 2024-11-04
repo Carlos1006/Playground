@@ -4,7 +4,11 @@ import { useFrame } from "@react-three/fiber";
 import Random from "canvas-sketch-util/random";
 import { IParticles } from "../types";
 
-const Stars: FC<IParticles> = ({ count }: IParticles) => {
+const Stars: FC<IParticles> = ({
+  count,
+  scale = 1,
+  range = [-50, 50],
+}: IParticles) => {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const light = useRef(null);
 
@@ -15,14 +19,14 @@ const Stars: FC<IParticles> = ({ count }: IParticles) => {
       const time = Random.range(0, 100);
       const factor = Random.range(20, 120);
       const speed = Random.range(0.01, 0.015) / 2;
-      const x = Random.range(-50, 50);
-      const y = Random.range(-50, 50);
-      const z = Random.range(-50, 50);
+      const x = Random.range(...range);
+      const y = Random.range(...range);
+      const z = Random.range(...range);
 
       temp.push({ time, factor, speed, x, y, z });
     }
     return temp;
-  }, [count]);
+  }, [count, range]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -62,7 +66,7 @@ const Stars: FC<IParticles> = ({ count }: IParticles) => {
     <group position={[0, 0, -60]}>
       <pointLight ref={light} distance={1500} intensity={2500} color="white" />
       <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-        <dodecahedronGeometry args={[0.5, 0]} />
+        <dodecahedronGeometry args={[0.5 * scale, 0]} />
         <meshPhongMaterial color="#050505" />
       </instancedMesh>
     </group>

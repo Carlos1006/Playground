@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, memo, useRef } from "react";
 import Asteroid from "./Asteroid";
 import * as THREE from "three";
 import { RapierRigidBody } from "@react-three/rapier";
@@ -11,16 +11,12 @@ const AsteroidWrapper: FC = () => {
 
   useFrame(() => {
     if (asteroidRef.current) {
-      console.log("Applying impulse");
-      console.log(asteroidRef.current);
-
       if (!moving.current) {
         asteroidRef.current.applyImpulse(
           new THREE.Vector3(0, -0.0003, 0),
           true
         );
       }
-
       const position = asteroidRef.current.translation();
       if (position.y < -4) {
         asteroidRef.current.setTranslation(
@@ -43,4 +39,6 @@ const AsteroidWrapper: FC = () => {
   );
 };
 
-export default AsteroidWrapper;
+const AsteroidWrapperMemo = memo(AsteroidWrapper);
+AsteroidWrapperMemo.displayName = "AsteroidWrapper";
+export default AsteroidWrapperMemo;

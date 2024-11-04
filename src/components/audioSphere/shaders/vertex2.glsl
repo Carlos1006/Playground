@@ -206,7 +206,8 @@ void calculatePointSize(){
 void main(){
   calculatePointSize();
   
-  float noise=2.*pnoise(position+u_time,vec3(10.));
+  // noise = 2.
+  float noise=3.*pnoise(position+u_time,vec3(10.));
   float displacement=(noise/10.);
   
   if(u_frequency>0.){

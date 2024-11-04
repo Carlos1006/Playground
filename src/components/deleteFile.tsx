@@ -7,6 +7,7 @@ const DeleteFile: FC = () => {
   const [showDocument, setShowDocument] = useState(false);
   const [throwDocument, setThrowDocument] = useState(false);
   const [fillCheckmark, setFillCheckmark] = useState(false);
+  const [killTransition, setKillTransition] = useState(false);
   const [hideOk, setHideOk] = useState(false);
 
   const onClick = async (): Promise<void> => {
@@ -23,6 +24,18 @@ const DeleteFile: FC = () => {
     setShowDocument(false);
     setCenter(false);
     setHideOk(true);
+    await sleep(500);
+    setKillTransition(true);
+    restoreAll();
+  };
+
+  const restoreAll = (): void => {
+    setCenter(false);
+    setShowDocument(false);
+    setThrowDocument(false);
+    setFillCheckmark(false);
+    setKillTransition(false);
+    setHideOk(false);
   };
 
   return (
@@ -33,6 +46,7 @@ const DeleteFile: FC = () => {
             ${showDocument ? css.showDocument : ""}
             ${throwDocument ? css.throwDocument : ""}
             ${fillCheckmark ? css.fillCheckmark : ""}
+            ${killTransition ? css.killTransition : ""}
             ${hideOk ? css.hideOk : ""}
             ${css.deleteFile}
         `}

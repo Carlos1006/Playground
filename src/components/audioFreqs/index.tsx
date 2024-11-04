@@ -2,7 +2,13 @@ import { CSSProperties, FC, useEffect, useState } from "react";
 import css from "./styles/main.module.scss";
 import { getColorAtPercentage } from "./utils";
 
-const AudioFrequecies: FC = () => {
+interface IAudioFrequecies {
+  scale?: number;
+}
+
+const AudioFrequecies: FC<IAudioFrequecies> = ({
+  scale = 1,
+}: IAudioFrequecies) => {
   const [frequencies, setFrequencies] = useState<Uint8Array>(new Uint8Array(0));
 
   useEffect(() => {
@@ -57,7 +63,7 @@ const AudioFrequecies: FC = () => {
   const frequenciesNum: number[] = Array.from(frequencies);
 
   return (
-    <div className={css.main}>
+    <div className={css.main} style={{ transform: `scale(${scale})` }}>
       {frequenciesNum.map((_, i) => {
         const color = getColorAtPercentage(i * step);
         const shadow = getColorAtPercentage(i * step, 0.1);

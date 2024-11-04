@@ -6,14 +6,25 @@ import fragmentShader from "../shaders/fragment.glsl?raw";
 import vertexShader from "../shaders/vertex2.glsl?raw";
 import vertexDiskShader from "../shaders/vertexDisk.glsl?raw";
 import fragmentDiskShader from "../shaders/fragmentDisk.glsl?raw";
-import { Bloom, DepthOfField, EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
+import {
+  Bloom,
+  DepthOfField,
+  EffectComposer,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { degToRad, radToDeg } from "three/src/math/MathUtils.js";
 
-
 extend({ UnrealBloomPass });
 
-const ParaboloidMesh = ({ a = 2, b = 2, speed = -0.005, rotation }) => {
+const ParaboloidMesh = ({
+  a = 2,
+  b = 2,
+  speed = -0.005,
+  rotation,
+  scale = 1,
+}) => {
   const materialRef = useRef();
   const meshRef = useRef();
 
@@ -27,26 +38,35 @@ const ParaboloidMesh = ({ a = 2, b = 2, speed = -0.005, rotation }) => {
   });
 
   return (
-    <mesh ref={meshRef} scale={[0.17,0.17,0.17]} rotation={[0,rotation,0]}>
-      <ringGeometry args={[0, 10, 64, 64, 6.28,6.28]} />
+    <mesh
+      ref={meshRef}
+      scale={[0.17 * scale, 0.17 * scale, 0.17 * scale]}
+      rotation={[0, rotation, 0]}
+    >
+      <ringGeometry args={[0, 10, 64, 64, 6.28, 6.28]} />
       <shaderMaterial
-          uniforms={{
-            a: {value: a},
-            b: {value: b}
-          }}
-          ref={materialRef}
-          fragmentShader={fragmentDiskShader}
-          vertexShader={vertexDiskShader}
-          blending={THREE.NoBlending}
-          depthWrite={false}
-          wireframe
-        />  
+        uniforms={{
+          a: { value: a },
+          b: { value: b },
+        }}
+        ref={materialRef}
+        fragmentShader={fragmentDiskShader}
+        vertexShader={vertexDiskShader}
+        blending={THREE.NoBlending}
+        depthWrite={false}
+        wireframe
+      />
     </mesh>
   );
 };
 
-
-function Scene() {
+function Scene({
+  showBackground,
+  size = [1.5, 1.4],
+  scale = 1,
+  particalSize = 27,
+  intensity = 0.08,
+}) {
   const [average, setAverage] = useState(0);
 
   const mesh = useRef();
@@ -54,9 +74,6 @@ function Scene() {
   const speed = 0.5;
   const colorA = "#3f3089";
   const colorB = "#00bcff";
-  const intensity = 0.08;
-  const particalSize = 27;
-
   const paraboloidSpeeds = useRef([-0.005, 0.003, -0.008]);
 
   const uniforms = useMemo(() => {
@@ -81,13 +98,13 @@ function Scene() {
       },
       u_frequency: {
         value: 0.0,
-      }
+      },
     };
   }, [speed, intensity, particalSize, colorA, colorB]);
 
   useFrame((state) => {
     const { clock } = state;
-    if(average) {
+    if (average) {
       const frequency = Math.round(average);
       if (frequency > 5) {
         mesh.current.material.uniforms.u_frequency.value = frequency * 3;
@@ -102,7 +119,7 @@ function Scene() {
     mesh.current.material.uniforms.u_color_a.value = new THREE.Color(colorA);
     mesh.current.material.uniforms.u_color_b.value = new THREE.Color(colorB);
   });
-  
+
   useEffect(() => {
     let audioContext;
     let analyser;
@@ -130,17 +147,16 @@ function Scene() {
         setAverage(average);
         console.log(average);
         rafId = requestAnimationFrame(updateFrequencies);
-
       };
 
       // get average frequency
-     
 
       updateFrequencies(); // Iniciar el ciclo de actualización
     };
 
     // Solicitar acceso al micrófono
-    navigator.mediaDevices.getUserMedia({ audio: true })
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
       .then(handleSuccess)
       .catch((err) => console.error("Error al acceder al micrófono:", err));
 
@@ -155,10 +171,10 @@ function Scene() {
 
   return (
     <>
-      <color args={["#000000"]} attach="background" />
+      {showBackground && <color args={["#000000"]} attach="background" />}
       <OrbitControls autoRotate={true} autoRotateSpeed={1} />
       <ambientLight />
-      <points scale={1.5} ref={mesh}>
+      <points scale={size[0]} ref={mesh}>
         <icosahedronGeometry args={[2, 30]} />
         <shaderMaterial
           uniforms={uniforms}
@@ -167,22 +183,45 @@ function Scene() {
           blending={THREE.AdditiveBlending}
         />
       </points>
-      <points scale={1.4}>
+      <points scale={size[1]}>
         <icosahedronGeometry args={[2, 30]} />
         <shaderMaterial
           uniforms={uniforms}
           fragmentShader={fragmentShader}
           vertexShader={vertexShader}
           blending={THREE.AdditiveBlending}
-        />  
-      </points> 
-      <group rotation={[0,0,degToRad(45)]}>
-        <ParaboloidMesh a={5} b={4} speed={paraboloidSpeeds.current[1]} rotation={0} />
-        <ParaboloidMesh a={5} b={4} speed={paraboloidSpeeds.current[2]} rotation={radToDeg(-15)} />
-        <ParaboloidMesh a={5} b={4} speed={paraboloidSpeeds.current[3]} rotation={radToDeg(-90)} />
+        />
+      </points>
+      <group rotation={[0, 0, degToRad(45)]}>
+        <ParaboloidMesh
+          scale={scale}
+          a={5}
+          b={4}
+          speed={paraboloidSpeeds.current[1]}
+          rotation={0}
+        />
+        <ParaboloidMesh
+          scale={scale}
+          a={5}
+          b={4}
+          speed={paraboloidSpeeds.current[2]}
+          rotation={radToDeg(-15)}
+        />
+        <ParaboloidMesh
+          scale={scale}
+          a={5}
+          b={4}
+          speed={paraboloidSpeeds.current[3]}
+          rotation={radToDeg(-90)}
+        />
       </group>
       <EffectComposer>
-        <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
+        <DepthOfField
+          focusDistance={0}
+          focalLength={0.02}
+          bokehScale={2}
+          height={480}
+        />
         <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
         <Noise opacity={0.02} />
         <Vignette eskil={false} offset={0.1} darkness={1.1} />
@@ -192,10 +231,22 @@ function Scene() {
   );
 }
 
-export default function OrbCore() {
+export default function OrbCore({
+  showBackground = true,
+  size = [1.5, 1.4],
+  scale = 1,
+  particalSize = 27,
+  intensity = 0.08
+}) {
   return (
     <Canvas camera={{ position: [8, 0, 0] }}>
-      <Scene />
+      <Scene
+        showBackground={showBackground}
+        size={size}
+        scale={scale}
+        particalSize={particalSize}
+        intensity={intensity}
+      />
     </Canvas>
   );
 }

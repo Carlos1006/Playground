@@ -26,7 +26,7 @@ const ShowCase: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const [title, setTitle] = useState<string>("");
-  const [componentIndex, setComponentIndex] = useState<number>(0);
+  const [componentIndex, setComponentIndex] = useState<number>(10);
   const [currentShowCaseComponent, setCurrentShowCaseComponent] =
     useState<IShowCaseComponent | null>(null);
 
@@ -45,24 +45,26 @@ const ShowCase: FC = () => {
   }, [componentIndex]);
 
   const nextComponent = (): void => {
-    const newComponentIndex = componentIndex + 1;
+    let newComponentIndex = componentIndex + 1;
     setLoading(true);
-    setTitle("");
     if (newComponentIndex >= SHOWCASE_COMPONENTS_ARRAY.length) {
-      setComponentIndex(0);
-      return;
+      newComponentIndex = 0;
     }
+    const newTitle =
+      SHOWCASE_COMPONENTS[SHOWCASE_COMPONENTS_ARRAY[newComponentIndex]].title;
+    setTitle(newTitle);
     setComponentIndex(newComponentIndex);
   };
 
   const prevComponent = (): void => {
-    const newComponentIndex = componentIndex - 1;
+    let newComponentIndex = componentIndex - 1;
     setLoading(true);
-    setTitle("");
     if (newComponentIndex < 0) {
-      setComponentIndex(SHOWCASE_COMPONENTS_ARRAY.length - 1);
-      return;
+      newComponentIndex = SHOWCASE_COMPONENTS_ARRAY.length - 1;
     }
+    const newTitle =
+      SHOWCASE_COMPONENTS[SHOWCASE_COMPONENTS_ARRAY[newComponentIndex]].title;
+    setTitle(newTitle);
     setComponentIndex(newComponentIndex);
   };
 

@@ -18,6 +18,8 @@ function useAnimation(): AnimationTools {
   const [motorError, setMotorError] = useState(false);
   const [fillErrormark, setFillErrormark] = useState(false);
 
+  const [killTransition, setKillTransition] = useState(false);
+
   const animationStart = async (): Promise<void> => {
     setSmall(true);
     await sleep(500);
@@ -49,6 +51,25 @@ function useAnimation(): AnimationTools {
     setSmall(false);
     await sleep(100);
     setFillErrormark(true);
+    await sleep(3000);
+    setKillTransition(true);
+    restore();
+  };
+
+  const restore = (): void => {
+    setSmall(false);
+    setRemoveBorderRadius(false);
+    setDisappear(false);
+    setOverflow(false);
+    setPackageBox(false);
+    setPackageRight(false);
+    setTruckFirstStage(false);
+    setLoadBar(false);
+    setFillBarError(false);
+    setWheelError(false);
+    setMotorError(false);
+    setFillErrormark(false);
+    setKillTransition(false);
   };
 
   return {
@@ -66,6 +87,7 @@ function useAnimation(): AnimationTools {
     motorError,
     fillErrormark,
     animationError,
+    killTransition,
   };
 }
 
@@ -85,6 +107,7 @@ const CompleteOrder: FC = () => {
     motorError,
     fillErrormark,
     animationError,
+    killTransition,
   } = useAnimation();
 
   const [completed, setCompleted] = useState(false);
@@ -96,6 +119,9 @@ const CompleteOrder: FC = () => {
     setText(response ? "Error Occured" : "Order Placed");
     setCompleted(response);
     animationError();
+    await sleep(3000);
+    setText("Complete Order");
+    setCompleted(false);
   };
 
   return (
@@ -117,6 +143,8 @@ const CompleteOrder: FC = () => {
             ${wheelError ? css.wheelError : ""}
             ${motorError ? css.motorError : ""}
             ${fillErrormark ? css.fillErrormark : ""}
+
+            ${killTransition ? css.killTransition : ""}
         `}
       >
         <div className={css.carContainer}>
