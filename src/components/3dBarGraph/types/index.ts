@@ -4,6 +4,7 @@ export interface IBarGraph3D {
   fov: number;
   autoRotate: boolean;
   orthographic: boolean;
+  showCase?: boolean;
 }
 
 export interface IBar {

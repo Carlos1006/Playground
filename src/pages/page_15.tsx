@@ -1,10 +1,17 @@
 import { FC } from "react";
 import Bubble from "../components/bubble";
 import css from "../styles/page.module.scss";
+interface IPage15 {
+  showCase?: boolean;
+}
 
-const Page_15: FC = () => {
+const Page_15: FC<IPage15> = ({ showCase = false }) => {
   return (
-    <div className={`${css.page} ${css.black} ${css.relative}`}>
+    <div
+      className={`${css.page} ${css.black} ${css.relative} ${
+        showCase ? css.showCase : ""
+      }`}
+    >
       <Bubble
         side={"20vw"}
         x={"10vw"}

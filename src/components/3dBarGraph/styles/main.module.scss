@@ -1,37 +1,43 @@
 .barGraph3D {
   width: 700px;
   height: 500px;
-  margin:10vw 0 1vw 10vw;
+  margin: 10vw 0 1vw 10vw;
   container: barGraph3D / size;
   .render {
     width: 100%;
     height: 100%;
-    border-radius:30px;
-    border:2px dashed rgb(70, 70, 221,0.5);
+    border-radius: 30px;
+    border: 2px dashed rgb(70, 70, 221, 0.5);
+  }
+  &.showCase {
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
   }
 }
 
 .tooltip {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 8px rgba(255,255,255, 0.1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
   color: white;
   padding: 0.5vh;
   border-radius: 10px;
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  grid-template-rows: repeat(4,1fr);
-  row-gap:0.5vh;
-  column-gap:0.5vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 0.5vh;
+  column-gap: 0.5vh;
   width: 200px;
   justify-content: center;
   justify-items: center;
-  grid-template-areas:  "title title" 
-                        "xValue x" 
-                        "yValue y"
-                        "zValue z";
+  grid-template-areas:
+    "title title"
+    "xValue x"
+    "yValue y"
+    "zValue z";
   > * {
-    font-family:'Roboto';
+    font-family: "Roboto";
     &:nth-child(1) {
       grid-area: title;
       font-size: 2.5ex;
@@ -40,7 +46,7 @@
     }
     &:nth-child(2) {
       grid-area: xValue;
-      opacity:0.7;
+      opacity: 0.7;
       font-size: 2ex;
     }
     &:nth-child(3) {
@@ -49,7 +55,7 @@
     }
     &:nth-child(4) {
       grid-area: yValue;
-      opacity:0.7;
+      opacity: 0.7;
       font-size: 2ex;
     }
     &:nth-child(5) {
@@ -58,7 +64,7 @@
     }
     &:nth-child(6) {
       grid-area: zValue;
-      opacity:0.7;
+      opacity: 0.7;
       font-size: 2ex;
     }
     &:nth-child(7) {

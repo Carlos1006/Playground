@@ -133,17 +133,23 @@ export const SHOWCASE_COMPONENTS: IShowCaseComponents = {
   },
   [SHOWCASE_COMPONENT.PAGE_16]: {
     component: Page_16,
-    props: {},
-    title: "Page 16",
+    props: {
+      showCase: true,
+    },
+    title: "3D Bar Graph",
   },
   [SHOWCASE_COMPONENT.PAGE_15]: {
     component: Page_15,
-    props: {},
-    title: "Page 15",
+    props: {
+      showCase: true,
+    },
+    title: "Glow Bubbles",
   },
   [SHOWCASE_COMPONENT.PAGE_08]: {
     component: Page_08,
-    props: {},
-    title: "Page 08",
+    props: {
+      showCase: true,
+    },
+    title: "Node Tree",
   },
 };

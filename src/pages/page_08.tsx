@@ -9,7 +9,11 @@ import {
 import NodeTree from "../components/nodeTree_01";
 import css from "../styles/page.module.scss";
 
-const Page_08: FC = () => {
+interface IPage08 {
+  showCase?: boolean;
+}
+
+const Page_08: FC<IPage08> = ({ showCase = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastClientX, setLastClientX] = useState(0);
@@ -75,7 +79,7 @@ const Page_08: FC = () => {
   return (
     <>
       <div
-        className={`${css.page} ${css.inBlock}`}
+        className={`${css.page} ${css.inBlock} ${showCase ? css.showCase : ""}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

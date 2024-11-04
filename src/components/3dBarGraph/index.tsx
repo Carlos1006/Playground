@@ -20,6 +20,7 @@ import css from "./styles/main.module.scss";
 const BarGraph3D: FC<IBarGraph3D> = ({
   fov,
   autoRotate,
+  showCase = false,
   orthographic,
 }: IBarGraph3D) => {
   const orbitRef = useRef<unknown>();
@@ -48,7 +49,7 @@ const BarGraph3D: FC<IBarGraph3D> = ({
   const isOneHovered = hoverStatus.some((row) => row.some((status) => status));
   return (
     <div
-      className={css.barGraph3D}
+      className={`${css.barGraph3D} ${showCase ? css.showCase : ""}`}
       style={{
         cursor: isOneHovered ? "pointer" : "auto",
       }}
