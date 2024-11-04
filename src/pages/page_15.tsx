@@ -3,19 +3,22 @@ import Bubble from "../components/bubble";
 import css from "../styles/page.module.scss";
 interface IPage15 {
   showCase?: boolean;
+  container?: boolean;
 }
 
-const Page_15: FC<IPage15> = ({ showCase = false }) => {
+const Page_15: FC<IPage15> = ({ showCase = false, container = true }) => {
   return (
     <div
       className={`${css.page} ${css.black} ${css.relative} ${
         showCase ? css.showCase : ""
-      }`}
+      }
+      ${container ? css.container : ""}
+      `}
     >
       <Bubble
-        side={"20vw"}
-        x={"10vw"}
-        y={"10vw"}
+        side={"30cqi"}
+        x={"10cqi"}
+        y={"10cqi"}
         center={[70, 60]}
         color={{
           glow: [173, 51, 235],
@@ -24,9 +27,9 @@ const Page_15: FC<IPage15> = ({ showCase = false }) => {
         }}
       />
       <Bubble
-        side={"10vw"}
-        x={"23vw"}
-        y={"23vw"}
+        side={"15cqi"}
+        x={"50cqi"}
+        y={"50cqb"}
         center={[40, 30]}
         color={{
           glow: [51, 155, 235],
@@ -35,9 +38,9 @@ const Page_15: FC<IPage15> = ({ showCase = false }) => {
         }}
       />
       <Bubble
-        side={"12vw"}
-        x={"25vw"}
-        y={"5vw"}
+        side={"13cqi"}
+        x={"70cqi"}
+        y={"10cqi"}
         center={[30, 40]}
         color={{
           glow: [53, 241, 176],

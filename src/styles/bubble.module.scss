@@ -1,24 +1,23 @@
 .bubble {
-    border-radius:1000px;
-    position:absolute;
-    .innerBubble {
-      position:absolute;
-      left:0;
-      top:0;
-      z-index:10;
-      height:inherit;
-      width:inherit;
-      border-radius:1000px;
-      rotate:14deg;
-    }
-    .outerBubble {
-      position:absolute;
-      left:-1vw;
-      top:-1vw;
-      z-index:10;
-      border-radius:1000px;
-      opacity:0.7;
-      filter:blur(10px);
-    }
+  border-radius: 1000px;
+  position: absolute;
+  .innerBubble {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: inherit;
+    width: inherit;
+    border-radius: 1000px;
+    rotate: 14deg;
   }
-  
+  .outerBubble {
+    position: absolute;
+    left: -1vw;
+    top: -1vw;
+    z-index: 10;
+    border-radius: 1000px;
+    opacity: 0.7;
+    filter: blur(10px);
+  }
+}
