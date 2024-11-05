@@ -1,7 +1,7 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import css from "../styles/bubble.module.scss";
 
-interface BubbleProps {
+export interface BubbleProps {
   side: string;
   x: string | number;
   y: string | number;
@@ -21,6 +21,16 @@ const Bubble: FC<BubbleProps> = ({
   center,
 }: BubbleProps) => {
   const { glow, innerColor, outerColor } = color;
+  const [active, setActive] = useState<boolean>(false);
+
+  const { initialRadius, initialX, initialY } = useMemo(() => {
+    const radius = `calc(${side} / 2)`;
+    return {
+      initialRadius: radius,
+      initialX: `calc(${x} + ${radius})`,
+      initialY: `calc(${y} + ${radius})`,
+    };
+  }, [side, x, y]);
 
   const boxShadowInset = useMemo(() => {
     const [R, G, B] = glow;
@@ -38,15 +48,24 @@ const Bubble: FC<BubbleProps> = ({
     return `calc(${side} + 2vw)`;
   }, [side]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setActive(true);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
       <div
         className={css.bubble}
         style={{
-          width: side,
-          height: side,
-          left: x,
-          top: y,
+          width: active ? side : 0,
+          height: active ? side : 0,
+          left: active ? x : initialX,
+          top: active ? y : initialY,
         }}
       >
         <div
@@ -54,14 +73,16 @@ const Bubble: FC<BubbleProps> = ({
           style={{
             boxShadow: boxShadowInset,
             background,
+            left: active ? 0 : initialRadius,
+            top: active ? 0 : initialRadius,
           }}
         ></div>
         <div
           className={css.outerBubble}
           style={{
             background,
-            width: outerSide,
-            height: outerSide,
+            width: active ? outerSide : 0,
+            height: active ? outerSide : 0,
           }}
         ></div>
       </div>

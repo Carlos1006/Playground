@@ -1,10 +1,8 @@
 .bubble {
   border-radius: 1000px;
   position: absolute;
+  transition: all 0.3s cubic-bezier(0.59, 0.02, 0.53, 1.9);
   .innerBubble {
-    position: absolute;
-    left: 0;
-    top: 0;
     z-index: 10;
     height: inherit;
     width: inherit;
@@ -19,5 +17,6 @@
     border-radius: 1000px;
     opacity: 0.7;
     filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.59, 0.02, 0.53, 1.9);
   }
 }

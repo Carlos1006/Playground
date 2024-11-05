@@ -26,7 +26,7 @@ const ShowCase: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const [title, setTitle] = useState<string>("");
-  const [componentIndex, setComponentIndex] = useState<number>(11);
+  const [componentIndex, setComponentIndex] = useState<number>(12);
   const [currentShowCaseComponent, setCurrentShowCaseComponent] =
     useState<IShowCaseComponent | null>(null);
 
