@@ -11,9 +11,10 @@ import css from "../styles/page.module.scss";
 
 interface IPage08 {
   showCase?: boolean;
+  className?: string;
 }
 
-const Page_08: FC<IPage08> = ({ showCase = false }) => {
+const Page_08: FC<IPage08> = ({ showCase = false, className = "" }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastClientX, setLastClientX] = useState(0);
@@ -42,8 +43,8 @@ const Page_08: FC<IPage08> = ({ showCase = false }) => {
     const deltaY = lastClientY - e.clientY; // Invertimos el desplazamiento en el eje Y
     setLastClientX(e.clientX);
     setLastClientY(e.clientY);
-    containerRef.current.scrollLeft += deltaX;
-    containerRef.current.scrollTop += deltaY;
+    containerRef.current.scrollLeft += deltaX / 2;
+    containerRef.current.scrollTop += deltaY / 2;
   };
 
   const handleZoom = (e: WheelEvent<HTMLDivElement>): void => {
@@ -79,7 +80,9 @@ const Page_08: FC<IPage08> = ({ showCase = false }) => {
   return (
     <>
       <div
-        className={`${css.page} ${css.inBlock} ${showCase ? css.showCase : ""}`}
+        className={`${css.page} ${css.inBlock} ${
+          showCase ? css.showCase : ""
+        } ${className}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

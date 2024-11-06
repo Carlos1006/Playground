@@ -98,6 +98,14 @@
         background: rgba(10, 10, 10, 0.1);
       }
     }
+    .tree {
+      &::-webkit-scrollbar {
+        background-color: #929292 !important;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #b8b8b8 !important;
+      }
+    }
   }
   &[data-mode="old"] {
     border-radius: 0;
@@ -244,5 +252,22 @@
         margin-left: 5px;
       }
     }
+  }
+}
+
+.tree {
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: #1f1f1f;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #5c5c5c;
+    position: relative;
   }
 }

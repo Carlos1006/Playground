@@ -176,10 +176,10 @@
     }
     .skillCarouselSlide {
       &::-webkit-scrollbar {
-        background-color: #929292;
+        background-color: #929292 !important;
       }
       &::-webkit-scrollbar-thumb {
-        background-color: #b8b8b8;
+        background-color: #b8b8b8 !important;
       }
     }
   }

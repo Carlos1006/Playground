@@ -19,6 +19,7 @@ import {
   ShowCaseComponent,
 } from "../types";
 import { Fragment } from "react";
+import css from "../styles/showCase.module.scss";
 
 export namespace SHOWCASE_COMPONENT {
   export const DAY_NIGHT_TOGGLE: ShowCaseComponent = "DayNightToggle";
@@ -149,7 +150,18 @@ export const SHOWCASE_COMPONENTS: IShowCaseComponents = {
     component: Page_08,
     props: {
       showCase: true,
+      className: css.tree,
     },
     title: "Node Tree",
+  },
+  [SHOWCASE_COMPONENT.GRID]: {
+    component: Fragment,
+    props: {},
+    title: "Grid",
+  },
+  [SHOWCASE_COMPONENT.TERRAIN]: {
+    component: Fragment,
+    props: {},
+    title: "Terrain",
   },
 };
