@@ -120,7 +120,11 @@ const createSpotLight = (): THREE.Mesh => {
   return sphere;
 };
 
-const Grid: React.FC = () => {
+interface IGrid {
+  showCase?: boolean;
+}
+
+const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
   const ambientLight = useRef<THREE.HemisphereLight>(
     new THREE.HemisphereLight()
   );
@@ -179,11 +183,13 @@ const Grid: React.FC = () => {
       base.current = createBase();
 
       barsContainer.current.add(base.current);
+      let counter = 0;
       let x = 0;
-      for (let i = -4.67; i < 4.67; i += 0.1, x++) {
+      for (let i = -4.6; i < 4.6; i += 0.1, x++) {
         let y = 0;
-        for (let j = -4.67; j < 4.67; j += 0.1, y++) {
+        for (let j = -4.6; j < 4.6; j += 0.1, y++) {
           const bar = createBar(i, 0, j, Random(0.5, 1.5));
+          counter++;
           barsContainer.current.add(bar);
           if (Array.isArray(barGrid.current[x]) === false) {
             barGrid.current[x] = [];
@@ -192,6 +198,7 @@ const Grid: React.FC = () => {
         }
       }
       console.log(barGrid.current);
+      console.log({ counter });
 
       // mainContainer.add(referenceCube.current);
       mainContainer.current.add(spotLight.current);
@@ -242,48 +249,59 @@ const Grid: React.FC = () => {
   useLayoutEffect(() => {
     const drawColorMap = async (): Promise<void> => {
       if (canvasRef1.current && imgContainerRef1.current) {
-        const { clientWidth: width, clientWidth: height } =
-          imgContainerRef1.current;
         canvasContext1.current = canvasRef1.current.getContext("2d");
-        imgContainerRef1.current.style.height = `${height}px`;
-        canvasRef1.current.width = width;
-        canvasRef1.current.height = height;
+        // imgContainerRef1.current.style.height = `${height}px`;
         const image = new Image();
         image.src = cmap;
+        let imageRealDimensions = { w: 0, h: 0 };
         await new Promise((resolve) => {
           image.onload = (): void => {
             resolve(true);
+            if (canvasRef1.current) {
+              imageRealDimensions = { w: image.width, h: image.height };
+            }
           };
         });
+        canvasRef1.current.width = imageRealDimensions.w;
+        canvasRef1.current.height = imageRealDimensions.h;
         if (canvasContext1.current) {
-          canvasContext1.current?.drawImage(image, 0, 0, width, height);
+          canvasContext1.current?.drawImage(
+            image,
+            0,
+            0,
+            imageRealDimensions.w,
+            imageRealDimensions.h
+          );
           const dataOrigin = canvasContext1.current.getImageData(
             0,
             0,
-            width,
-            height
+            imageRealDimensions.w,
+            imageRealDimensions.h
           );
           const dataDestiny = canvasContext1.current.createImageData(
-            width,
-            height
+            imageRealDimensions.w,
+            imageRealDimensions.h
           );
           const colors: string[][] = [];
           let xx = 0;
           let yy = 0;
-          for (let x = 0; x < width; x += 4) {
+          for (let x = 0; x < imageRealDimensions.w; x += 4) {
             yy = 0;
-            for (let y = 0; y < height; y += 4) {
+            for (let y = 0; y < imageRealDimensions.h; y += 4) {
               // getPixels in a 4x4 square
               const pixels: Uint8ClampedArray[][] = [];
               for (let i = 0; i < 4; i++) {
                 pixels[i] = [];
                 for (let j = 0; j < 4; j++) {
                   // if pixel is out of bounds, set it to black
-                  if (x + i >= width || y + j >= height) {
+                  if (
+                    x + i >= imageRealDimensions.w ||
+                    y + j >= imageRealDimensions.h
+                  ) {
                     pixels[i][j] = new Uint8ClampedArray([0, 0, 0, 0]);
                     continue;
                   }
-                  const iPixel = (x + i + (y + j) * width) * 4;
+                  const iPixel = (x + i + (y + j) * imageRealDimensions.w) * 4;
                   const pixel = dataOrigin.data.slice(iPixel, iPixel + 4);
                   pixels[i][j] = pixel;
                 }
@@ -314,10 +332,13 @@ const Grid: React.FC = () => {
               // set pixels in destiny
               for (let i = 0; i < 4; i++) {
                 for (let j = 0; j < 4; j++) {
-                  if (x + i >= width || y + j >= height) {
+                  if (
+                    x + i >= imageRealDimensions.w ||
+                    y + j >= imageRealDimensions.h
+                  ) {
                     continue;
                   }
-                  const iPixel = (x + i + (y + j) * width) * 4;
+                  const iPixel = (x + i + (y + j) * imageRealDimensions.w) * 4;
                   dataDestiny.data[iPixel] = r;
                   dataDestiny.data[iPixel + 1] = g;
                   dataDestiny.data[iPixel + 2] = b;
@@ -348,48 +369,57 @@ const Grid: React.FC = () => {
   useLayoutEffect(() => {
     const drawHeightMap = async (): Promise<void> => {
       if (canvasRef2.current && imgContainerRef2.current) {
-        const { clientWidth: width, clientWidth: height } =
-          imgContainerRef2.current;
         canvasContext2.current = canvasRef2.current.getContext("2d");
-        imgContainerRef2.current.style.height = `${height}px`;
-        canvasRef2.current.width = width;
-        canvasRef2.current.height = height;
+
         const image = new Image();
         image.src = hmap;
+        let imageRealDimensions = { w: 0, h: 0 };
         await new Promise((resolve) => {
           image.onload = (): void => {
+            imageRealDimensions = { w: image.width, h: image.height };
             resolve(true);
           };
         });
         if (canvasContext2.current) {
-          canvasContext2.current?.drawImage(image, 0, 0, width, height);
+          canvasRef2.current.width = imageRealDimensions.w;
+          canvasRef2.current.height = imageRealDimensions.h;
+          canvasContext2.current?.drawImage(
+            image,
+            0,
+            0,
+            imageRealDimensions.w,
+            imageRealDimensions.h
+          );
           const dataOrigin = canvasContext2.current.getImageData(
             0,
             0,
-            width,
-            height
+            imageRealDimensions.w,
+            imageRealDimensions.h
           );
           const dataDestiny = canvasContext2.current.createImageData(
-            width,
-            height
+            imageRealDimensions.w,
+            imageRealDimensions.h
           );
           const colors: number[][] = [];
           let xx = 0;
           let yy = 0;
-          for (let x = 0; x < width; x += 4) {
+          for (let x = 0; x < imageRealDimensions.w; x += 4) {
             yy = 0;
-            for (let y = 0; y < height; y += 4) {
+            for (let y = 0; y < imageRealDimensions.h; y += 4) {
               // getPixels in a 4x4 square
               const pixels: Uint8ClampedArray[][] = [];
               for (let i = 0; i < 4; i++) {
                 pixels[i] = [];
                 for (let j = 0; j < 4; j++) {
                   // if pixel is out of bounds, set it to black
-                  if (x + i >= width || y + j >= height) {
+                  if (
+                    x + i >= imageRealDimensions.w ||
+                    y + j >= imageRealDimensions.h
+                  ) {
                     pixels[i][j] = new Uint8ClampedArray([0, 0, 0, 0]);
                     continue;
                   }
-                  const iPixel = (x + i + (y + j) * width) * 4;
+                  const iPixel = (x + i + (y + j) * imageRealDimensions.w) * 4;
                   const pixel = dataOrigin.data.slice(iPixel, iPixel + 4);
                   pixels[i][j] = pixel;
                 }
@@ -417,10 +447,13 @@ const Grid: React.FC = () => {
               // set pixels in destiny
               for (let i = 0; i < 4; i++) {
                 for (let j = 0; j < 4; j++) {
-                  if (x + i >= width || y + j >= height) {
+                  if (
+                    x + i >= imageRealDimensions.w ||
+                    y + j >= imageRealDimensions.h
+                  ) {
                     continue;
                   }
-                  const iPixel = (x + i + (y + j) * width) * 4;
+                  const iPixel = (x + i + (y + j) * imageRealDimensions.w) * 4;
                   dataDestiny.data[iPixel] = r;
                   dataDestiny.data[iPixel + 1] = g;
                   dataDestiny.data[iPixel + 2] = b;
@@ -448,13 +481,13 @@ const Grid: React.FC = () => {
   }, [canvasRef1, imgContainerRef1, canvasRender1, changeBarHeight]);
 
   return (
-    <div id={css.grid}>
+    <div id={css.grid} className={showCase ? css.showCase : ""}>
       <div className={css.column}>
         <div className={css.imageContainer} ref={imgContainerRef1}>
-          <canvas ref={canvasRef1} />
+          <canvas ref={canvasRef1} style={{ width: "100%" }} />
         </div>
         <div className={css.imageContainer} ref={imgContainerRef2}>
-          <canvas ref={canvasRef2} />
+          <canvas ref={canvasRef2} style={{ width: "100%" }} />
         </div>
       </div>
       <div className={css.column}>

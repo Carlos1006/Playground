@@ -120,7 +120,11 @@ const createSpotLight = (): THREE.Mesh => {
   return sphere;
 };
 
-const Grid: React.FC = () => {
+interface IGrid {
+  showCase?: boolean;
+}
+
+const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
   const ambientLight = useRef<THREE.HemisphereLight>(
     new THREE.HemisphereLight()
   );
@@ -479,7 +483,7 @@ const Grid: React.FC = () => {
   );
 
   return (
-    <div id={css.grid}>
+    <div id={css.grid} className={showCase ? css.showCase : ""}>
       <div className={css.column}>
         <div
           className={css.imageContainer}

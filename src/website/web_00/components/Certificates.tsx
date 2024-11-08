@@ -37,7 +37,7 @@ const Certificates: FC = () => {
           className={css.mySwiper}
         >
           {CERTIFICATES.map((certify, index) => (
-            <SwiperSlide className={css.slide}>
+            <SwiperSlide className={css.slide} key={index}>
               <Certify {...certify} key={index} />
             </SwiperSlide>
           ))}

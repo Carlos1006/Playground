@@ -163,7 +163,8 @@ export type ShowCaseComponent =
   | "Page_15"
   | "Page_08"
   | "Grid"
-  | "Terrain";
+  | "Terrain"
+  | "Globe";
 
 export interface IShowCaseComponents {
   [key: string]: IShowCaseComponent;

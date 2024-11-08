@@ -20,6 +20,9 @@ import {
 } from "../types";
 import { Fragment } from "react";
 import css from "../styles/showCase.module.scss";
+import Globe from "../../../components/globe";
+import Grid from "../../../components/3dGrid";
+import GridBigger from "../../../components/3dGridBigger";
 
 export namespace SHOWCASE_COMPONENT {
   export const DAY_NIGHT_TOGGLE: ShowCaseComponent = "DayNightToggle";
@@ -38,6 +41,7 @@ export namespace SHOWCASE_COMPONENT {
   export const PAGE_08: ShowCaseComponent = "Page_08";
   export const GRID: ShowCaseComponent = "Grid";
   export const TERRAIN: ShowCaseComponent = "Terrain";
+  export const GLOBE: ShowCaseComponent = "Globe";
 }
 
 export const SHOWCASE_COMPONENTS_ARRAY: ShowCaseComponent[] = [
@@ -56,6 +60,7 @@ export const SHOWCASE_COMPONENTS_ARRAY: ShowCaseComponent[] = [
   SHOWCASE_COMPONENT.PAGE_08,
   SHOWCASE_COMPONENT.GRID,
   SHOWCASE_COMPONENT.TERRAIN,
+  SHOWCASE_COMPONENT.GLOBE,
 ];
 
 export const EMPTY_COMPONENT: IShowCaseComponent = {
@@ -155,13 +160,22 @@ export const SHOWCASE_COMPONENTS: IShowCaseComponents = {
     title: "Node Tree",
   },
   [SHOWCASE_COMPONENT.GRID]: {
-    component: Fragment,
-    props: {},
+    component: Grid,
+    props: {
+      showCase: true,
+    },
     title: "Grid",
   },
   [SHOWCASE_COMPONENT.TERRAIN]: {
-    component: Fragment,
-    props: {},
+    component: GridBigger,
+    props: {
+      showCase: true,
+    },
     title: "Terrain",
+  },
+  [SHOWCASE_COMPONENT.GLOBE]: {
+    component: Globe,
+    props: {},
+    title: "Globe",
   },
 };

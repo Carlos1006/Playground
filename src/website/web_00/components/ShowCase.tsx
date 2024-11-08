@@ -26,7 +26,7 @@ const ShowCase: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const [title, setTitle] = useState<string>("");
-  const [componentIndex, setComponentIndex] = useState<number>(12);
+  const [componentIndex, setComponentIndex] = useState<number>(15);
   const [currentShowCaseComponent, setCurrentShowCaseComponent] =
     useState<IShowCaseComponent | null>(null);
 
@@ -38,7 +38,7 @@ const ShowCase: FC = () => {
       setCurrentShowCaseComponent(newComponent);
       setTitle(newComponent.title);
       setLoading(false);
-    }, 2000);
+    }, 1000);
     return () => {
       clearTimeout(timeout);
     };

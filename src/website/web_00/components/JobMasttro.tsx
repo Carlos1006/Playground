@@ -3,7 +3,7 @@ import css from "../styles/skills.module.scss";
 
 const JobMasttro: FC = () => {
   return (
-    <p id={css.masttroJob}>
+    <div id={css.masttroJob} className={css.job}>
       <span>Desarrollador Web Frontend</span>
       <ul>
         <li>
@@ -23,7 +23,7 @@ const JobMasttro: FC = () => {
           una migración sin interrupciones en la operatividad del sistema.
         </li>
       </ul>
-    </p>
+    </div>
   );
 };
 

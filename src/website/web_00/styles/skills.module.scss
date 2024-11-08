@@ -73,6 +73,7 @@
         left: -$gap;
       }
     }
+
     // .skillIcon {
     //   background-color: rgb(230, 230, 230, 1);
     //   border-radius: 0;
@@ -107,7 +108,8 @@
     margin-block: 5px !important;
     @include title2;
   }
-  p {
+  p,
+  .job {
     @include paragraph;
   }
   .slidesContainer {
