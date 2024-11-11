@@ -44,5 +44,6 @@ export default defineConfig({
     "**/*.ico",
     "**/*.fbx",
     "**/*.glsl",
+    "**/*.tif",
   ],
 });

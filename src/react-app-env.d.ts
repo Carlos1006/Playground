@@ -9,5 +9,6 @@ declare module "*.mp4";
 declare module "*.jsx";
 declare module "*.svg";
 declare module "*.fbx";
+declare module "*.tif";
 declare module "*.glsl";
 declare module "canvas-sketch-util/random";
