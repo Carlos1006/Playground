@@ -1,116 +1,71 @@
-import { OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { FC, useMemo, useRef } from "react";
-import {
-  BufferGeometry,
-  Material,
-  Mesh,
-  NormalBufferAttributes,
-  Object3DEventMap,
-  TextureLoader,
-} from "three";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import fragmentCode from "./shaders/fragment.glsl?raw";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import vertexCode from "./shaders/vertex.glsl?raw";
-
-import fillSrc from "./assets/fill.png";
-import strokeSrc from "./assets/stroke.png";
+import { Canvas } from "@react-three/fiber";
+import { FC, useState } from "react";
+import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
 import css from "./styles/main.module.scss";
-import { getPosition } from "./utils";
+import GlobeMonochromatic from "./components/Globe";
+import ColorPicker from "./components/ColorPicker";
+import { ColorRGBA } from "./types";
+import { normalizeRGB } from "./utils";
 
-const monterrey: [number, number] = [25.6802019, -100.315258];
-const tokyo: [number, number] = [35.652832, 139.839478];
-const newYork: [number, number] = [40.712776, -74.005974];
-const puertoRico: [number, number] = [18.465539, -66.105735];
-const benalmadena: [number, number] = [36.5987, -4.516];
-const sydney: [number, number] = [-33.8688, 151.2093];
-const kinshasa: [number, number] = [-4.4419, 15.2663];
-const shanghai: [number, number] = [31.2304, 121.4737];
-const honolulu: [number, number] = [21.3069, -157.8583];
-const nullIsland: [number, number] = [0, 0];
-const CITIES = [
-  monterrey,
-  tokyo,
-  newYork,
-  puertoRico,
-  benalmadena,
-  sydney,
-  kinshasa,
-  shanghai,
-  honolulu,
-  nullIsland,
-];
+export const GlobeCanvasMonochromatic: FC = () => {
+  const [active] = useState(true);
 
-type MeshRef = Mesh<
-  BufferGeometry<NormalBufferAttributes>,
-  Material | Material[],
-  Object3DEventMap
-> | null;
+  const [background, setBackground] = useState<ColorRGBA>([
+    ...normalizeRGB([102, 102, 128]),
+    0.5,
+  ]);
 
-const GlobeMonochromatic: FC = () => {
-  const earthMesh = useRef<MeshRef>();
-  const cloudMesh = useRef<MeshRef>();
-  const fillTexture = useLoader(TextureLoader, fillSrc);
-  const strokeTexture = useLoader(TextureLoader, strokeSrc);
+  const [outline, setOutline] = useState<ColorRGBA>([
+    ...normalizeRGB([76, 76, 102]),
+    0.7,
+  ]);
 
-  const uniforms = {
-    uFillTexture: { value: fillTexture },
-    uStrokeTexture: { value: strokeTexture },
-    uMonterrey: { value: getPosition(...monterrey, 2) },
-  };
-
-  useFrame(() => {
-    if (cloudMesh.current) {
-      cloudMesh.current.rotation.y -= 0.0005;
-      // cloudMesh.current.rotation.x -= 0.0004;
-      // cloudMesh.current.rotation.z += 0.0003;
-    }
-  });
-
-  const positions = useMemo(() => {
-    return CITIES.map(([latitude, longitude]) => {
-      return getPosition(latitude, longitude, 2);
-    });
-  }, []);
+  const [land, setLand] = useState<ColorRGBA>([
+    ...normalizeRGB([153, 153, 178]),
+    1,
+  ]);
 
   return (
     <>
-      {/* <color args={["#000000"]} attach="background" /> */}
-      <ambientLight />
-      <OrbitControls autoRotate={false} autoRotateSpeed={1} />
-      <mesh
-        scale={[1, 1, 1]}
-        ref={(ref): void => {
-          earthMesh.current = ref;
-        }}
-      >
-        <icosahedronGeometry args={[2, 5]} />
-        <shaderMaterial
-          uniforms={uniforms}
-          vertexShader={vertexCode}
-          fragmentShader={fragmentCode}
-          // depthWrite={false}
+      <div id={css.controls}>
+        <ColorPicker
+          title="Background"
+          alpha={0.5}
+          color={[102, 102, 128]}
+          onChange={(color): void => setBackground(color)}
         />
-
-        {positions.map((position, index) => (
-          <mesh key={index} position={position}>
-            <sphereGeometry args={[0.02, 32, 32]} />
-            <meshBasicMaterial color="blue" />
-          </mesh>
-        ))}
-      </mesh>
+        <ColorPicker
+          title="Outline"
+          alpha={0.7}
+          color={[76, 76, 102]}
+          onChange={(color): void => setOutline(color)}
+        />
+        <ColorPicker
+          title="Land"
+          alpha={1}
+          color={[153, 153, 178]}
+          onChange={(color): void => setLand(color)}
+        />
+      </div>
+      <Canvas camera={{ position: [4, 0, 0] }} className={css.canvas}>
+        <GlobeMonochromatic
+          background={background}
+          outline={outline}
+          land={land}
+        />
+        <EffectComposer>
+          {/* Efecto Bloom para resaltar el brillo */}
+          <Bloom
+            mipmapBlur
+            intensity={active ? 1.5 : 0} // Solo activado si está 'active'
+            radius={0.3}
+            // threshold={0.1}
+          />
+          {/* Agregar un pequeño ruido o blur si es necesario */}
+          <Noise opacity={0.1} />
+        </EffectComposer>
+      </Canvas>
     </>
-  );
-};
-
-export const GlobeCanvasMonochromatic: FC = () => {
-  return (
-    <Canvas camera={{ position: [4, 0, 0] }} className={css.canvas}>
-      <GlobeMonochromatic />
-    </Canvas>
   );
 };
 
