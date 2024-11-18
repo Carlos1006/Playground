@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useLayoutEffect, RefObject } from "react";
+import React, { useRef, useCallback, useEffect, RefObject } from "react";
 import css from "../styles/grid.module.scss";
 import cmap from "../assets/maps/map1/cmap.png";
 import hmap from "../assets/maps/map1/hmap.png";
@@ -26,8 +26,8 @@ const createBar = (x: number, y: number, z: number, height = 1): THREE.Mesh => {
   bar.position.x = x;
   bar.position.y = y;
   bar.position.z = z;
-  bar.castShadow = true;
-  bar.receiveShadow = true;
+  bar.castShadow = false;
+  bar.receiveShadow = false;
   return bar;
 };
 
@@ -163,6 +163,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
   const innerCanvas2 = useRef<HTMLCanvasElement>(null);
   const innerCanvas1Context = useRef<CanvasRenderingContext2D | null>(null);
   const innerCanvas2Context = useRef<CanvasRenderingContext2D | null>(null);
+  const frame = useRef<number>(0);
 
   const colors1 = useRef<string[][]>([]);
   const colors2 = useRef<number[][]>([]);
@@ -175,7 +176,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
 
   const animate = useCallback(() => {
     const delta = clock.current.getDelta();
-    requestAnimationFrame(animate);
+    frame.current = requestAnimationFrame(animate);
     // cube.rotation.y += 0.8 * delta;
     barsContainer.current.rotation.y += speed.current * delta;
     renderer.current.render(scene.current, camera.current);
@@ -244,7 +245,23 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
 
   // Drag events
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const mainContainerRef = mainContainer.current;
+    const barsContainerRef = barsContainer.current;
+    const renderRefRef = renderRef.current;
+
+    return () => {
+      cancelAnimationFrame(frame.current);
+      mainContainerRef.remove(barsContainerRef);
+      mainContainerRef.remove(ambientLight.current);
+      mainContainerRef.remove(spotLight.current);
+      mainContainerRef.remove(referenceCube.current);
+      scene.current.remove(mainContainerRef);
+      renderRefRef?.removeChild(renderer.current.domElement);
+    };
+  }, []);
+
+  useEffect(() => {
     render.current = render.current + 1;
     if (renderRef.current && render.current === 1) {
       const { clientHeight: height, clientWidth: width } = renderRef.current;
@@ -252,7 +269,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [renderRef, render, construct]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     canvasRender1.current = canvasRender1.current + 1;
     if (
       canvasRef1.current &&
@@ -275,7 +292,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [canvasRef1, imgContainerRef1, canvasRender1]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     canvasRender2.current = canvasRender2.current + 1;
     if (
       canvasRef2.current &&
@@ -326,7 +343,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     });
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (innerCanvas1.current && draggerRef.current) {
       innerCanvas1.current.width = draggerRef.current.clientWidth;
       innerCanvas1.current.height = draggerRef.current.clientHeight;
@@ -337,7 +354,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [innerCanvas1, draggerRef]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (innerCanvas2.current && draggerRef2.current) {
       const ctx = innerCanvas2.current.getContext("2d");
       innerCanvas2.current.width = draggerRef2.current.clientWidth;

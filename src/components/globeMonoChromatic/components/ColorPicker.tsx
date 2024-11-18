@@ -36,7 +36,7 @@ const ColorPicker: FC<IColorPicker> = ({
         type="range"
         min="0"
         max="1"
-        step="0.1"
+        step="0.01"
         value={backgroundAlpha}
         onChange={(e): void => onAlphaChange(parseFloat(e.target.value))}
       ></input>

@@ -63,7 +63,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
     <>
       <ambientLight />
       <OrbitControls
-        autoRotate={false}
+        autoRotate={true}
         autoRotateSpeed={1}
         ref={(ref): void => {
           orbitRef.current = ref;

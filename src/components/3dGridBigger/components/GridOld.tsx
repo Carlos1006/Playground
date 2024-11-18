@@ -1,9 +1,9 @@
-import React, { useRef, useCallback, useLayoutEffect } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import css from "../styles/grid.module.scss";
 import cmap from "../assets/maps/map1/cmap.png";
 import hmap from "../assets/maps/map1/hmap.png";
 import * as THREE from "three";
-import { DegToRad, Random } from "../website/web_03/utils";
+import { DegToRad, Random } from "../../../website/web_03/utils";
 
 const createScene = (): THREE.Scene => {
   const scene = new THREE.Scene();
@@ -141,6 +141,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
   const barGrid = useRef<THREE.Mesh[][]>([]);
   const speed = useRef<number>(0.15);
   const render = useRef<number>(0);
+  const frame = useRef<number>(0);
 
   const imgContainerRef1 = useRef<HTMLDivElement>(null);
   const canvasRef1 = useRef<HTMLCanvasElement>(null);
@@ -164,7 +165,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
 
   const animate = useCallback(() => {
     const delta = clock.current.getDelta();
-    requestAnimationFrame(animate);
+    frame.current = requestAnimationFrame(animate);
     barsContainer.current.rotation.y += speed.current * delta;
     renderer.current.render(scene.current, camera.current);
   }, []);
@@ -183,13 +184,11 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
       base.current = createBase();
 
       barsContainer.current.add(base.current);
-      let counter = 0;
       let x = 0;
       for (let i = -4.6; i < 4.6; i += 0.1, x++) {
         let y = 0;
         for (let j = -4.6; j < 4.6; j += 0.1, y++) {
           const bar = createBar(i, 0, j, Random(0.5, 1.5));
-          counter++;
           barsContainer.current.add(bar);
           if (Array.isArray(barGrid.current[x]) === false) {
             barGrid.current[x] = [];
@@ -197,8 +196,6 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
           barGrid.current[x][y] = bar;
         }
       }
-      console.log(barGrid.current);
-      console.log({ counter });
 
       // mainContainer.add(referenceCube.current);
       mainContainer.current.add(spotLight.current);
@@ -238,7 +235,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     });
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     render.current = render.current + 1;
     if (renderRef.current && render.current === 1) {
       const { clientHeight: height, clientWidth: width } = renderRef.current;
@@ -246,7 +243,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [renderRef, render, construct]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const drawColorMap = async (): Promise<void> => {
       if (canvasRef1.current && imgContainerRef1.current) {
         canvasContext1.current = canvasRef1.current.getContext("2d");
@@ -366,7 +363,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [canvasRef1, imgContainerRef1, canvasRender1, changeBarColors]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const drawHeightMap = async (): Promise<void> => {
       if (canvasRef2.current && imgContainerRef2.current) {
         canvasContext2.current = canvasRef2.current.getContext("2d");
@@ -480,6 +477,10 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
     }
   }, [canvasRef1, imgContainerRef1, canvasRender1, changeBarHeight]);
 
+  useEffect(() => {
+    console.log({ canvasContext1, canvasContext2 });
+  }, []);
+
   return (
     <div id={css.grid} className={showCase ? css.showCase : ""}>
       <div className={css.column}>
@@ -491,7 +492,7 @@ const Grid: React.FC<IGrid> = ({ showCase = false }: IGrid) => {
         </div>
       </div>
       <div className={css.column}>
-        <div id={css.render} ref={renderRef}></div>
+        <div id={css.render} ref={renderRef} />
       </div>
     </div>
   );
