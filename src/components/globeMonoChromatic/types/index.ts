@@ -9,7 +9,7 @@ import {
 export interface IOrbitControl {
   target: {
     set: (x: number, y: number, z: number) => void;
-  }
+  };
 }
 
 export type MeshRef = Mesh<
@@ -27,6 +27,7 @@ export interface ICity {
   name: string;
   country: string;
   color: string;
+  fixColor: string;
   latitude: number;
   longitude: number;
 }

@@ -1,4 +1,4 @@
-import { useRef, useCallback, useLayoutEffect, FC } from "react";
+import { useRef, useCallback, useLayoutEffect, FC, useEffect } from "react";
 import css from "./../styles/main.module.scss";
 import cmap from "../../../assets/maps/map1/cmap.png";
 import hmap from "../../../assets/maps/map1/hmap.png";
@@ -29,8 +29,8 @@ const createBar = (x: number, y: number, z: number, height = 1): THREE.Mesh => {
   bar.position.x = x;
   bar.position.y = y;
   bar.position.z = z;
-  bar.castShadow = true;
-  bar.receiveShadow = true;
+  bar.castShadow = false;
+  bar.receiveShadow = false;
   return bar;
 };
 
@@ -45,8 +45,8 @@ const createBase = (): THREE.Mesh => {
     reflectivity: 1,
   });
   const flatCube = new THREE.Mesh(flatCubeGeometry, flatCubeMaterial);
-  flatCube.receiveShadow = true;
-  flatCube.castShadow = true;
+  flatCube.receiveShadow = false;
+  flatCube.castShadow = false;
   flatCube.position.y = -2.5;
   return flatCube;
 };
@@ -93,8 +93,8 @@ const createReferenceCube = (): THREE.Mesh => {
     reflectivity: 1,
   });
   const cube = new THREE.Mesh(geometry, material);
-  cube.receiveShadow = true;
-  cube.castShadow = true;
+  cube.receiveShadow = false;
+  cube.castShadow = false;
   cube.position.y = 1;
   return cube;
 };
@@ -152,6 +152,7 @@ const HeightMap: FC = () => {
   const barGrid = useRef<THREE.Mesh[][]>([]);
   const speed = useRef<number>(0.1);
   const render = useRef<number>(0);
+  const frame = useRef<number>(0);
 
   const canvasRender1 = useRef<number>(0);
   const canvasRender2 = useRef<number>(0);
@@ -169,7 +170,7 @@ const HeightMap: FC = () => {
   const animate = useCallback(() => {
     if (camera === null || clock === null) return;
     const delta = clock.current.getDelta();
-    requestAnimationFrame(animate);
+    frame.current = requestAnimationFrame(animate);
     barsContainer.current.rotation.y += speed.current * delta;
     renderer.current.render(scene.current, camera.current);
 
@@ -177,6 +178,22 @@ const HeightMap: FC = () => {
     euler.current.x = -DegToRad(30) + safeCameraMove * -DegToRad(4);
     camera.current.setRotationFromEuler(euler.current);
   }, [camera, clock, cameraMove]);
+
+  useEffect(() => {
+    const mainContainerRef = mainContainer.current;
+    const barsContainerRef = barsContainer.current;
+    const renderRefRef = renderRef.current;
+
+    return () => {
+      cancelAnimationFrame(frame.current);
+      mainContainerRef.remove(barsContainerRef);
+      mainContainerRef.remove(ambientLight.current);
+      mainContainerRef.remove(spotLight.current);
+      mainContainerRef.remove(referenceCube.current);
+      scene.current.remove(mainContainerRef);
+      renderRefRef?.removeChild(renderer.current.domElement);
+    };
+  }, []);
 
   const construct = useCallback(
     (width: number, height: number) => {

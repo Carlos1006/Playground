@@ -22,6 +22,12 @@ type MeshRef = Mesh<
   Object3DEventMap
 > | null;
 
+export interface IOrbitControl {
+  target: {
+    set: (x: number, y: number, z: number) => void;
+  };
+}
+
 const Globe: FC = () => {
   const earthMesh = useRef<MeshRef>();
   const cloudMesh = useRef<MeshRef>();
@@ -29,6 +35,7 @@ const Globe: FC = () => {
   const cloudTexture = useLoader(TextureLoader, cloudSrc);
   const normalTexture = useLoader(TextureLoader, normalSrc);
   const specularTexture = useLoader(TextureLoader, specularSrc);
+  const orbitRef = useRef<unknown | null>(null);
 
   // const material = new THREE.ShaderMaterial({
   //   uniforms: {
@@ -68,13 +75,23 @@ const Globe: FC = () => {
       // cloudMesh.current.rotation.x -= 0.0004;
       // cloudMesh.current.rotation.z += 0.0003;
     }
+    if (orbitRef.current) {
+      const orbitRefTyped = orbitRef.current as unknown as IOrbitControl;
+      orbitRefTyped.target.set(0, 0.2, 0); // Cambia el valor "0.5" para ajustar el paneo
+    }
   });
 
   return (
     <>
       {/* <color args={["#000000"]} attach="background" /> */}
       <ambientLight />
-      <OrbitControls autoRotate={true} autoRotateSpeed={1} />
+      <OrbitControls
+        autoRotate={true}
+        autoRotateSpeed={1}
+        ref={(ref): void => {
+          orbitRef.current = ref;
+        }}
+      />
       <mesh
         scale={[1, 1, 1]}
         ref={(ref): void => {

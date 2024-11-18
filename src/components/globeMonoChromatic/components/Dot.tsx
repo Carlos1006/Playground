@@ -32,15 +32,15 @@ const Dot: FC<IDot> = ({ position, city }) => {
     }
   });
 
-  const { color } = city;
+  const { fixColor } = city;
 
   return (
     <mesh position={position} ref={meshRef}>
       <sphereGeometry args={[0.02, 32, 32]} />
-      <meshStandardMaterial
-        emissive={color}
+      <meshPhongMaterial
+        emissive={fixColor}
         emissiveIntensity={isVisible ? 50 : 10}
-        color={color}
+        color={fixColor}
       />
       {isVisible && <Tooltip position={position} {...city} />}
     </mesh>
