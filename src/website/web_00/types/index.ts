@@ -165,7 +165,8 @@ export type ShowCaseComponent =
   | "Grid"
   | "Terrain"
   | "Globe"
-  | "GlobeMono";
+  | "GlobeMono"
+  | "Pixel";
 
 export interface IShowCaseComponents {
   [key: string]: IShowCaseComponent;

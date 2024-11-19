@@ -24,6 +24,7 @@ import Globe from "../../../components/globe";
 import Grid from "../../../components/3dGrid";
 import GridBigger from "../../../components/3dGridBigger";
 import GlobeCanvasMonochromatic from "../../../components/globeMonoChromatic";
+import Pixelate from "../../../components/pixelate";
 
 export namespace SHOWCASE_COMPONENT {
   export const DAY_NIGHT_TOGGLE: ShowCaseComponent = "DayNightToggle";
@@ -44,6 +45,7 @@ export namespace SHOWCASE_COMPONENT {
   export const TERRAIN: ShowCaseComponent = "Terrain";
   export const GLOBE: ShowCaseComponent = "Globe";
   export const GLOBE_MONO: ShowCaseComponent = "GlobeMono";
+  export const PIXEL: ShowCaseComponent = "Pixel";
 }
 
 export const SHOWCASE_COMPONENTS_ARRAY: ShowCaseComponent[] = [
@@ -64,6 +66,7 @@ export const SHOWCASE_COMPONENTS_ARRAY: ShowCaseComponent[] = [
   SHOWCASE_COMPONENT.TERRAIN,
   SHOWCASE_COMPONENT.GLOBE,
   SHOWCASE_COMPONENT.GLOBE_MONO,
+  SHOWCASE_COMPONENT.PIXEL,
 ];
 
 export const EMPTY_COMPONENT: IShowCaseComponent = {
@@ -185,5 +188,10 @@ export const SHOWCASE_COMPONENTS: IShowCaseComponents = {
     component: GlobeCanvasMonochromatic,
     props: {},
     title: "Globe Monochromatic",
+  },
+  [SHOWCASE_COMPONENT.PIXEL]: {
+    component: Pixelate,
+    props: {},
+    title: "Pixelate",
   },
 };
