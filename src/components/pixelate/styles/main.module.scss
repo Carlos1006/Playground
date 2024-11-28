@@ -3,6 +3,17 @@
   height: 100%;
   position: relative;
   container: pixelate / size;
+  .input {
+    position: absolute;
+    right: 5cqb;
+    bottom: 5cqb;
+    display: flex;
+    flex-direction: column;
+    label {
+      color: white;
+      font-family: "Consolas", monospace;
+    }
+  }
   #container {
     width: 60cqmax;
     height: 80cqmin;
@@ -22,6 +33,22 @@
       img {
         width: 100%;
       }
+    }
+    #dragEnter {
+      border-radius: 30px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 2em;
+      font-family: "Consolas", monospace;
     }
     #draggerContainer {
       width: 100%;

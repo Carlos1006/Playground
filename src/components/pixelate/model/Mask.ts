@@ -4,6 +4,8 @@ export default class Mask {
   public image: IImage;
   public pixelSize: number;
   public mosaic: INewPixel[] = [];
+  public frame = 0;
+  public currentPixel = 0;
 
   constructor(image: IImage, pixelSize: number) {
     this.image = image;
@@ -55,6 +57,25 @@ export default class Mask {
       average: avgPixel,
       width: pixelSize,
       height: pixelSize,
+    });
+  }
+
+  async beginDrawAsync(ctx: CanvasRenderingContext2D): Promise<void> {
+    this.currentPixel = 0;
+    this.drawAsync(ctx);
+  }
+
+  async drawAsync(ctx: CanvasRenderingContext2D): Promise<void> {
+    this.frame = requestAnimationFrame(() => {
+      if (this.currentPixel >= this.mosaic.length) {
+        cancelAnimationFrame(this.frame);
+        return;
+      }
+      const { x, y, average, width, height } = this.mosaic[this.currentPixel];
+      ctx.fillStyle = `rgba(${average.r}, ${average.g}, ${average.b}, ${average.a})`;
+      ctx.fillRect(x, y, width, height);
+      this.currentPixel++;
+      this.drawAsync(ctx);
     });
   }
 
