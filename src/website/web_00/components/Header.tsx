@@ -7,6 +7,7 @@ import useHomeContext from "../hooks/useHomeContext";
 import css from "../styles/header.module.scss";
 import HeaderOld from "./HeaderOld";
 import { MODE } from "../constants";
+import Language from "./Languange";
 
 const Header: FC = () => {
   const { themeMode } = useHomeContext();
@@ -21,7 +22,9 @@ const Header: FC = () => {
         data-slot="h1000-00"
         data-mode={themeMode}
         className={`${globalCss.slot} ${css.headerItem}`}
-      />
+      >
+        <Language />
+      </div>
       <div
         id={css.headerMode}
         data-slot="h2000-00"

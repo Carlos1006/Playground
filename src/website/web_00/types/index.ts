@@ -11,6 +11,8 @@ import { SwiperClass } from "swiper/react";
 export interface IHomeContext {
   themeMode: ThemeMode;
   setThemeMode: Dispatch<SetStateAction<ThemeMode>>;
+  language: Language;
+  setLanguage: Dispatch<SetStateAction<Language>>;
 }
 
 export interface ISkillIcon {
@@ -105,6 +107,8 @@ export interface ITldr {
 }
 
 export type ThemeMode = "light" | "dark" | "old";
+
+export type Language = "en" | "es";
 
 export interface ICertify {
   name: string;

@@ -4,6 +4,7 @@ import { MODE } from "../constants";
 import css from "../styles/mode.module.scss";
 import { WindowsIcon } from "../icons/Windows";
 import useHomeContext from "../hooks/useHomeContext";
+import { getThemeClass } from "../../../utils";
 
 const Mode: FC = () => {
   const { themeMode, setThemeMode } = useHomeContext();
@@ -25,13 +26,7 @@ const Mode: FC = () => {
       <div
         id={css.toggler}
         onClick={toggleMode}
-        className={
-          themeMode === MODE.DARK
-            ? css.dark
-            : themeMode === MODE.LIGHT
-            ? css.light
-            : css.old
-        }
+        className={getThemeClass(themeMode, css)}
       >
         <div />
       </div>
