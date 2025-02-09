@@ -1,18 +1,19 @@
 import { FC } from "react";
 import css from "../styles/name.module.scss";
 import useHomeContext from "../hooks/useHomeContext";
+import { useTranslation } from "react-i18next";
+import { MY_NAME } from "../../../constants";
 
 const Name: FC = () => {
   const { themeMode } = useHomeContext();
+  const { t } = useTranslation();
 
   return (
     <div id={css.name} data-mode={themeMode}>
-      {/* <span>Hi!, I am</span> */}
-      <span>Hola!, Yo soy</span>
-      <span>Carlos Daniel Gonzalez</span>
+      <span>{t("hello_i_am")}</span>
+      <span>{MY_NAME}</span>
       <div id={css.line} />
-      {/* <span>Senior Software Developer</span> */}
-      <span>Desarrollador de Software Senior</span>
+      <span>{t("role")}</span>
     </div>
   );
 };

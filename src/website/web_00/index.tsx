@@ -14,14 +14,13 @@ import Background from "./components/Background";
 import "./styles/main.scss";
 import Gt0l2 from "./components/GT0L2";
 import useAppContext from "../../hooks/useAppContext";
-import { LANGUAGES, MODE } from "./constants";
-import { IHomeContext, Language, ThemeMode } from "./types";
+import { MODE } from "./constants";
+import { IHomeContext, ThemeMode } from "./types";
 import HomeContext from "./context/homeContext";
 
 const Web00: FC = () => {
   const { setShowMenu } = useAppContext();
   const [themeMode, setThemeMode] = useState<ThemeMode>(MODE.DARK);
-  const [language, setLanguage] = useState<Language>(LANGUAGES.ES);
 
   useLayoutEffect(() => {
     setShowMenu(false);
@@ -30,8 +29,6 @@ const Web00: FC = () => {
   const homeContext: IHomeContext = {
     themeMode,
     setThemeMode,
-    language,
-    setLanguage,
   };
 
   return (
