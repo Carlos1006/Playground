@@ -1,11 +1,11 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import css from "../styles/certificates.module.scss";
 import { ICertify } from "../types";
 import useHomeContext from "../hooks/useHomeContext";
 import { MODE } from "../constants";
 import OldMenuSlot from "./OldMenuSlot";
 import certificateIcon from "../assets/certificate.png";
-import { useTranslation } from "react-i18next";
 
 const Certify: FC<ICertify> = ({
   duration,
