@@ -5,8 +5,10 @@ import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
 import useHomeContext from "../hooks/useHomeContext";
 import { BIRTH_DATE, FULL_NAME } from "../constants";
+import { useTranslation } from "react-i18next";
 
 const MyDataOld: FC = () => {
+  const { t } = useTranslation();
   const { themeMode } = useHomeContext();
   const age = getExactAge(BIRTH_DATE);
 
