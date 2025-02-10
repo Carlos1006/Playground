@@ -3,8 +3,10 @@ import css from "../styles/skills.module.scss";
 import { ISlider } from "../types";
 import useSkillData from "../hooks/useSkillData";
 import useHomeContext from "../hooks/useHomeContext";
+import { useTranslation } from "react-i18next";
 
 const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
+  const { t } = useTranslation();
   const { themeMode } = useHomeContext();
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const [showNext, setShowNext] = useState<boolean>(false);
@@ -35,7 +37,7 @@ const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
 
   return (
     <div id={css.skillSlides} data-mode={themeMode}>
-      <h1>Habilidades</h1>
+      <h1>{t("skills_title")}</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>
           <div
@@ -44,7 +46,7 @@ const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
             }`}
           >
             <h2>{current.name}</h2>
-            <p>{current.description}</p>
+            <p>{t(current.description)}</p>
           </div>
           <div
             className={`${css.skillCarouselSlide} ${css.next} ${
@@ -52,7 +54,7 @@ const SkillSlides: FC<ISlider> = ({ index }: ISlider) => {
             }`}
           >
             <h2>{next.name}</h2>
-            <p>{next.description}</p>
+            <p>{t(next.description)}</p>
           </div>
         </div>
       </div>

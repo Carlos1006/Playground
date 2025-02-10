@@ -163,5 +163,3 @@ export const APP_CONTEXT_DEFAULT: IAppContext = {
     return;
   },
 };
-
-export const MY_NAME = "Carlos Daniel Gonzalez";

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import css from "../styles/myData.module.scss";
-import { BIRTH_DATE } from ".";
 import { getExactAge } from "../utils";
 import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
 import useHomeContext from "../hooks/useHomeContext";
+import { BIRTH_DATE, FULL_NAME } from "../constants";
 
 const MyDataOld: FC = () => {
   const { themeMode } = useHomeContext();
@@ -20,7 +20,7 @@ const MyDataOld: FC = () => {
           </div>
           <div>
             <span>
-              <GlitchText text="Carlos Daniel Gonzalez Lopez" />
+              <GlitchText text={FULL_NAME} />
             </span>
           </div>
           <div />

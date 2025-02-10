@@ -38,7 +38,7 @@ export interface IJobObject {
 
 export interface ISkillObject {
   name: string;
-  description: ReactNode;
+  description: string;
   icon: FC;
   level: number;
   color: string;

@@ -1,25 +1,24 @@
 import { FC } from "react";
 import css from "../styles/skills.module.scss";
+import { useTranslation } from "react-i18next";
 
 const JobOnephase: FC = () => {
+  const { t } = useTranslation();
   return (
     <p id={css.onephaseJob}>
-      <span>Desarrollador Web Frontend</span>
+      <span>{t("job_onephase_frontend_web_developer")}</span>
       <ul>
         <li>
-          <b>Migración de Plataformas Legacy:</b> Implementación de migraciones
-          de aplicaciones legacy a tecnologías modernas utilizando React y
-          TypeScript, mejorando la funcionalidad y experiencia del usuario.
+          <b>{t("job_onephase_legacy_platform_migration")}:</b>{" "}
+          {t("job_onephase_legacy_platform_migration_description")}
         </li>
         <li>
-          <b>Documentación de Componentes:</b> Participación en un proyecto
-          interno para documentar componentes propietarios de la consultoría,
-          facilitando la reutilización y estandarización en futuros proyectos.
+          <b>{t("job_onephase_component_documentation")}:</b>{" "}
+          {t("job_onephase_component_documentation_description")}
         </li>
         <li>
-          <b>Optimización de UI:</b> Desarrollo y mejora de la interfaz para
-          adaptarla a los estándares modernos, optimizando el diseño y la
-          consistencia visual en múltiples aplicaciones.
+          <b>{t("job_onephase_ui_optimization")}:</b>{" "}
+          {t("job_onephase_ui_optimization_description")}
         </li>
       </ul>
     </p>

@@ -1,16 +1,17 @@
 import { FC } from "react";
 import css from "../styles/myData.module.scss";
-import { BIRTH_DATE } from ".";
 import { getExactAge } from "../utils";
 import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
 import useHomeContext from "../hooks/useHomeContext";
-import { MODE } from "../constants";
+import { BIRTH_DATE, EMAIL, FULL_NAME, MODE, PHONE_NUMBER } from "../constants";
 import MyDataOld from "./MyDataOld";
+import { useTranslation } from "react-i18next";
 
 const MyData: FC = () => {
   const { themeMode } = useHomeContext();
   const age = getExactAge(BIRTH_DATE);
+  const { t } = useTranslation();
 
   if (themeMode === MODE.OLD) return <MyDataOld />;
 
@@ -23,7 +24,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="Carlos Daniel Gonzalez Lopez" />
+                <GlitchText text={FULL_NAME} />
               </span>
             </div>
           </div>
@@ -31,7 +32,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text={BIRTH_DATE.format("dddd, MMMM Do YYYY")} />
+                <GlitchText text={t("birth_date")} />
               </span>
             </div>
           </div>
@@ -39,7 +40,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text={`${age} years old`} />
+                <GlitchText text={`${age} ${t("years_old")}`} />
               </span>
             </div>
           </div>
@@ -47,7 +48,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="Mexico" />
+                <GlitchText text={t("homeland")} />
               </span>
             </div>
           </div>
@@ -55,7 +56,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="Nuevo Leon" />
+                <GlitchText text={t("state")} />
               </span>
             </div>
           </div>
@@ -63,7 +64,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="Monterrey" />
+                <GlitchText text={t("city")} />
               </span>
             </div>
           </div>
@@ -71,7 +72,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="+52 1 811 035 1117" />
+                <GlitchText text={PHONE_NUMBER} />
               </span>
             </div>
           </div>
@@ -79,7 +80,7 @@ const MyData: FC = () => {
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text="cdgzz19@gmail.com" />
+                <GlitchText text={EMAIL} />
               </span>
             </div>
           </div>

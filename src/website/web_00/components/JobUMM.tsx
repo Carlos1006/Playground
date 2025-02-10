@@ -1,41 +1,36 @@
 import { FC } from "react";
 import css from "../styles/skills.module.scss";
+import { useTranslation } from "react-i18next";
 
 const JobUMM: FC = () => {
+  const { t } = useTranslation();
   return (
     <p id={css.ummJob}>
-      <span>Desarrollador Web Full Stack</span>
+      <span>{t("job_umm_full_stack_web_developer")}</span>
       <ul>
         <li>
-          <b>Gestión de Base de Datos:</b> Administración, optimización y
-          desarrollo en SQL Server, garantizando la integridad y el rendimiento
-          de los datos institucionales.
+          <b>{t("job_umm_database_management")}:</b>{" "}
+          {t("job_umm_database_management_description")}
         </li>
         <li>
-          <b>Desarrollo de Aplicaciones Web:</b> Diseño, desarrollo, pruebas e
-          implementación de una aplicación web en React y React Native para uso
-          estudiantil, docente y administrativo, mejorando la experiencia de
-          usuario en todos los niveles.
+          <b>{t("job_umm_web_application_development")}:</b>{" "}
+          {t("job_umm_web_application_development_description")}
         </li>
         <li>
-          <b>Colaboración Interdepartamental:</b> Trabajo conjunto con la
-          gerencia y diferentes departamentos para definir requisitos y
-          especificaciones de usuario final.
+          <b>{t("job_umm_interdepartmental_collaboration")}:</b>{" "}
+          {t("job_umm_interdepartmental_collaboration_description")}
         </li>
         <li>
-          <b>Diseño y Optimización de Software:</b> Creación de algoritmos y
-          diagramas de flujo para nuevos sistemas, producción de código limpio y
-          eficiente basado en necesidades específicas.
+          <b>{t("job_umm_software_design_and_optimization")}:</b>{" "}
+          {t("job_umm_software_design_and_optimization_description")}
         </li>
         <li>
-          <b>Mantenimiento y Mejora Continua:</b> Depuración y actualización del
-          software existente, implementando mejoras para optimizar el
-          rendimiento y la usabilidad.
+          <b>{t("job_umm_maintenance_and_continuous_improvement")}:</b>{" "}
+          {t("job_umm_maintenance_and_continuous_improvement_description")}
         </li>
         <li>
-          <b>Documentación Técnica:</b> Desarrollo de documentación técnica
-          detallada para guiar futuros proyectos de desarrollo y facilitar el
-          mantenimiento.
+          <b>{t("job_umm_technical_documentation")}:</b>{" "}
+          {t("job_umm_technical_documentation_description")}
         </li>
       </ul>
     </p>

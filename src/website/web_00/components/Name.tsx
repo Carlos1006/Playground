@@ -2,7 +2,7 @@ import { FC } from "react";
 import css from "../styles/name.module.scss";
 import useHomeContext from "../hooks/useHomeContext";
 import { useTranslation } from "react-i18next";
-import { MY_NAME } from "../../../constants";
+import { MY_NAME } from "../constants";
 
 const Name: FC = () => {
   const { themeMode } = useHomeContext();

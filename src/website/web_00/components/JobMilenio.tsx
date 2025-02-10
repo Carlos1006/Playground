@@ -1,22 +1,20 @@
 import { FC } from "react";
 import css from "../styles/skills.module.scss";
+import { useTranslation } from "react-i18next";
 
 const JobMilenio: FC = () => {
+  const { t } = useTranslation();
   return (
     <p id={css.milenioJob}>
-      <span>Frontend Developer</span>
+      <span>{t("job_milenio_frontend_developer")}</span>
       <ul>
         <li>
-          <b>Optimización y Mantenimiento de APIs:</b>Mejora continua del API de
-          las aplicaciones móviles y web para Multimedios, Telediario, y Grupo
-          Milenio, asegurando alto rendimiento y estabilidad.
+          <b>{t("job_milenio_api_optimization_and_maintenance")}:</b>
+          {t("job_milenio_api_optimization_and_maintenance_description")}
         </li>
         <li>
-          <b>Monitoreo de Errores y Reportes Automatizados:</b>
-          Desarrollo de un script de monitoreo de errores en todas las
-          plataformas, generando reportes automáticos para el equipo de
-          mantenimiento, lo que permitió una respuesta proactiva a incidentes y
-          mejoró la experiencia del usuario.
+          <b>{t("job_milenio_error_monitoring_and_automated_reports")}:</b>
+          {t("job_milenio_error_monitoring_and_automated_reports_description")}
         </li>
       </ul>
     </p>
