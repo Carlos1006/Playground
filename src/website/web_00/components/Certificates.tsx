@@ -10,8 +10,10 @@ import { CERTIFICATES } from "../helpers/certificates";
 import useHomeContext from "../hooks/useHomeContext";
 import { MODE } from "../constants";
 import CertificatesOld from "./CertificatesOld";
+import { useTranslation } from "react-i18next";
 
 const Certificates: FC = () => {
+  const { t } = useTranslation();
   const { themeMode } = useHomeContext();
 
   if (themeMode === MODE.OLD) {
@@ -20,7 +22,7 @@ const Certificates: FC = () => {
 
   return (
     <div id={css.certificates} data-mode={themeMode}>
-      <h1>Certificados</h1>
+      <h1>{t("certificates")}</h1>
       <div id={css.certificatesWrapper}>
         <Swiper
           slidesPerView={3}

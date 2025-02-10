@@ -18,9 +18,9 @@ const MyData: FC = () => {
   return (
     <div id={css.myData}>
       <div id={css.myDataContent} data-mode={themeMode}>
-        <h1>Mis Datos</h1>
+        <h1>{t("my_data")}</h1>
         <div id={css.myDataWrapper}>
-          <span>Full name</span>
+          <span>{t("full_name")}</span>
           <div className={css.value}>
             <div>
               <span>
@@ -28,7 +28,7 @@ const MyData: FC = () => {
               </span>
             </div>
           </div>
-          <span>Birth Date</span>
+          <span>{t("birth_day")}</span>
           <div className={css.value}>
             <div>
               <span>
@@ -36,7 +36,7 @@ const MyData: FC = () => {
               </span>
             </div>
           </div>
-          <span>Age</span>
+          <span>{t("age")}</span>
           <div className={css.value}>
             <div>
               <span>
@@ -44,7 +44,7 @@ const MyData: FC = () => {
               </span>
             </div>
           </div>
-          <span>Country</span>
+          <span>{t("country")}</span>
           <div className={css.value}>
             <div>
               <span>
@@ -52,23 +52,23 @@ const MyData: FC = () => {
               </span>
             </div>
           </div>
-          <span>State</span>
+          <span>{t("state")}</span>
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text={t("state")} />
+                <GlitchText text={t("nuevo_leon")} />
               </span>
             </div>
           </div>
-          <span>City</span>
+          <span>{t("city")}</span>
           <div className={css.value}>
             <div>
               <span>
-                <GlitchText text={t("city")} />
+                <GlitchText text={t("monterrey")} />
               </span>
             </div>
           </div>
-          <span>Phone</span>
+          <span>{t("phone")}</span>
           <div className={css.value}>
             <div>
               <span>
@@ -76,7 +76,7 @@ const MyData: FC = () => {
               </span>
             </div>
           </div>
-          <span>Email</span>
+          <span>{t("email")}</span>
           <div className={css.value}>
             <div>
               <span>
