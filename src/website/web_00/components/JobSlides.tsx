@@ -1,10 +1,12 @@
 import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import css from "../styles/skills.module.scss";
 import { ISlider } from "../types";
 import useJobData from "../hooks/useJobData";
 import useHomeContext from "../hooks/useHomeContext";
 
 const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
+  const { t } = useTranslation();
   const { themeMode } = useHomeContext();
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const [showNext, setShowNext] = useState<boolean>(false);
@@ -37,7 +39,7 @@ const JobSlides: FC<ISlider> = ({ index }: ISlider) => {
 
   return (
     <div id={css.jobsSlides} data-mode={themeMode}>
-      <h1>Historial Laboral</h1>
+      <h1>{t("job_history")}</h1>
       <div className={css.slidesContainer}>
         <div className={css.slidesWrapper}>
           <div
