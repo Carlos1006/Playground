@@ -11,6 +11,7 @@ import { SwiperClass } from "swiper/react";
 export interface IHomeContext {
   themeMode: ThemeMode;
   setThemeMode: Dispatch<SetStateAction<ThemeMode>>;
+  setAndPersistThemeMode: (mode: ThemeMode) => void;
 }
 
 export interface ISkillIcon {
@@ -132,6 +133,8 @@ export interface IMenu {
   y: number;
   open: boolean;
   items: IMenuItem[];
+  forcedRight?: number | null;
+  forcedBottom?: number | null;
 }
 
 export type Position = {

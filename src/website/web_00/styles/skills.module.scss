@@ -73,19 +73,6 @@
         left: -$gap;
       }
     }
-
-    // .skillIcon {
-    //   background-color: rgb(230, 230, 230, 1);
-    //   border-radius: 0;
-    //   box-shadow: 4px 4px 0 0 rgb(39, 39, 44, 0.7);
-    //   &.notSelected {
-    //     transition: filter 50ms ease-in-out;
-    //     filter: saturate(0);
-    //   }
-    //   &.selected {
-    //     filter: saturate(1.2);
-    //   }
-    // }
   }
 }
 
@@ -108,10 +95,7 @@
     margin-block: 5px !important;
     @include title2;
   }
-  p,
-  .job {
-    @include paragraph;
-  }
+
   .slidesContainer {
     height: 100%;
     .slidesWrapper {
@@ -166,6 +150,14 @@
       }
     }
   }
+
+  &[data-mode="dark"] {
+    p,
+    .job {
+      @include paragraph;
+    }
+  }
+
   &[data-mode="light"] {
     h1 {
       @include title_dark;
@@ -173,7 +165,9 @@
     h2 {
       @include title2_dark;
     }
-    p {
+    p,
+    .job {
+      @include paragraph;
       color: rgb(39, 39, 44) !important;
     }
     .skillCarouselSlide {
@@ -185,6 +179,7 @@
       }
     }
   }
+
   &[data-mode="old"] {
     padding: 0.15vw 2px 0.15vw 0.15vw;
     gap: 0;
@@ -197,7 +192,8 @@
       letter-spacing: 2px;
       margin-top: 0 !important;
     }
-    p {
+    p,
+    .job {
       color: rgb(39, 39, 44) !important;
       font-family: "Tahoma";
     }
@@ -205,7 +201,11 @@
       width: calc(100% + 120px + $gap);
       .slidesContainer {
         width: calc(100% - 120px - $gap);
+        height: calc(100% - 10px);
         margin-left: 10px;
+        .skillCarouselSlide {
+          overflow: auto;
+        }
       }
     }
     &#jobsSlides {
@@ -219,25 +219,7 @@
         height: calc(100% - 4cqb - 20px) !important;
         overflow: auto;
       }
-      &::-webkit-scrollbar {
-        border-radius: 0 !important;
-        width: 0.5rem;
-        height: 0.5rem;
-        background-color: #929292;
-      }
-      &::-webkit-scrollbar-track {
-        border-radius: 0 !important;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #929292;
-      }
-      &::-webkit-scrollbar-thumb {
-        border-radius: 0 !important;
-        -webkit-box-shadow: inset 1px 1px 1px #868686,
-          inset -1px -1px 1px #dfdfdf;
-        background-color: #b8b8b8;
-        background-color: #b8b8b8;
-        position: relative;
-      }
+      @include old_scroll;
     }
   }
 }

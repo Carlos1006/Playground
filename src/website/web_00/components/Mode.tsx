@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { ThemeMode } from "../types";
 import { MODE } from "../constants";
 import css from "../styles/mode.module.scss";
 import { WindowsIcon } from "../icons/Windows";
@@ -7,18 +6,14 @@ import useHomeContext from "../hooks/useHomeContext";
 import { getThemeClass } from "../../../utils";
 
 const Mode: FC = () => {
-  const { themeMode, setThemeMode } = useHomeContext();
+  const { themeMode, setAndPersistThemeMode } = useHomeContext();
 
   const toggleMode = (): void => {
-    setThemeMode((prev: ThemeMode) =>
-      prev === MODE.LIGHT ? MODE.DARK : MODE.LIGHT
-    );
+    setAndPersistThemeMode(themeMode === MODE.LIGHT ? MODE.DARK : MODE.LIGHT);
   };
 
   const onOldMode = (): void => {
-    setThemeMode((prev: ThemeMode) =>
-      prev === MODE.OLD ? MODE.DARK : MODE.OLD
-    );
+    setAndPersistThemeMode(themeMode === MODE.OLD ? MODE.DARK : MODE.OLD);
   };
 
   return (

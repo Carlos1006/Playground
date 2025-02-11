@@ -49,6 +49,27 @@
     margin-inline: 10px;
     height: calc(100cqb - 10px);
   }
+  .item {
+    font-family: "Trebuchet MS";
+    font-size: 1.9ex;
+    margin-right: 10px;
+    cursor: pointer;
+    height: calc(100cqb - 10px);
+    color: rgb(20, 20, 20);
+    background: $slot_color_old;
+    display: flex;
+    align-items: center;
+    padding-inline: 10px;
+    justify-content: center;
+    text-transform: uppercase;
+    &:hover {
+      color: black;
+      box-shadow: inset 2px 2px 0 #f5f5f5, 2px 2px 0 #6d6d6d !important;
+    }
+    &:active {
+      box-shadow: inset 2px 2px 0 #6e6e6e, 2px 2px 0 #f5f5f5 !important;
+    }
+  }
   #socialIcons {
     margin-left: 0;
     display: flex;
@@ -105,5 +126,12 @@
       width: auto;
       margin-right: 5px;
     }
+  }
+}
+
+.flag {
+  img {
+    height: 50% !important;
+    width: auto !important;
   }
 }

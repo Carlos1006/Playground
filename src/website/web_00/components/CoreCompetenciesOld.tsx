@@ -1,63 +1,65 @@
 import { FC } from "react";
 import css from "../styles/coreCompetencies.module.scss";
 import useHomeContext from "../hooks/useHomeContext";
+import { useTranslation } from "react-i18next";
 
 const CoreCompetenciesOld: FC = () => {
   const { themeMode } = useHomeContext();
+  const { t } = useTranslation();
 
   return (
     <div id={css.coreCompetencies} data-mode={themeMode}>
-      <h1>Core Competencies</h1>
+      <h1>{t("core_competencies_title")}</h1>
       <div id={css.coreCompetenciesWrapper}>
         <span>C://Windows/MyData/Carlos/CoreCompetencies&gt; cd</span>
         <span># showing core competencies: </span>
         <span>
-          <i>-ds</i> Desarrollo de software
+          <i>-ds</i> {t("software_development")}
         </span>
         <span>
-          <i>-sw</i> Servicios web
+          <i>-sw</i> {t("web_services")}
         </span>
         <span>
-          <i>-rr</i> Recopilación de requisitos
+          <i>-rr</i> {t("requirements_gathering")}
         </span>
         <span>
-          <i>-dw</i> Desarrollo web
+          <i>-dw</i> {t("web_development")}
         </span>
         <span>
-          <i>-it</i> Integración de tecnología
+          <i>-it</i> {t("technology_integration")}
         </span>
         <span>
-          <i>-le</i> Liderazgo de equipo
+          <i>-le</i> {t("team_leadership")}
         </span>
         <span>
-          <i>-sp</i> Scripting y Programación
+          <i>-sp</i> {t("scripting_and_programming")}
         </span>
         <span>
-          <i>-rp</i> Resolución de problemas
+          <i>-rp</i> {t("problem_solving")}
         </span>
         <span>
-          <i>-d</i> Documentación
+          <i>-d</i> {t("documentation")}
         </span>
         <span>
-          <i>-pc</i> Pensamiento crítico
+          <i>-pc</i> {t("critical_thinking")}
         </span>
         <span>
-          <i>-te</i> Trabajo en equipo
+          <i>-te</i> {t("teamwork")}
         </span>
         <span>
-          <i>-p</i> Priorización
+          <i>-p</i> {t("prioritization")}
         </span>
         <span>
-          <i>-me</i> Mantenimiento de equipo
+          <i>-me</i> {t("equipment_maintenance")}
         </span>
         <span>
-          <i>-at</i> Adaptabilidad Tecnológica
+          <i>-at</i> {t("technological_adaptability")}
         </span>
         <span>
-          <i>-pe</i> Productividad y eficiencia con IA
+          <i>-pe</i> {t("productivity_and_efficiency_with_ai")}
         </span>
         <span>
-          <i>-td</i> Toma de decisiones informada
+          <i>-td</i> {t("informed_decision_making")}
         </span>
       </div>
     </div>

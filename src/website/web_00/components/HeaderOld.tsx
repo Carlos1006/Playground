@@ -13,9 +13,11 @@ import EmailIcon from "../icons/Email";
 import WhatsappIcon from "../icons/Whatsapp";
 import { GithubIcon } from "../icons";
 import DailyDevIcon from "../icons/DailyDev";
+import { useTranslation } from "react-i18next";
 
 const HeaderOld: FC = () => {
-  const { setThemeMode } = useHomeContext();
+  const { setAndPersistThemeMode } = useHomeContext();
+  const { t } = useTranslation();
   const [openSocial, setOpenSocial] = useState(false);
   const [openColor, setOpenColor] = useState(false);
 
@@ -36,12 +38,12 @@ const HeaderOld: FC = () => {
 
   const backToLight = (): void => {
     setOpenColor(false);
-    setThemeMode(MODE.LIGHT);
+    setAndPersistThemeMode(MODE.LIGHT);
   };
 
   const backToDark = (): void => {
     setOpenColor(false);
-    setThemeMode(MODE.DARK);
+    setAndPersistThemeMode(MODE.DARK);
   };
 
   return (
@@ -49,10 +51,10 @@ const HeaderOld: FC = () => {
       <div id={css.headerOld}>
         <div id={css.divider} />
         <div className={css.item} ref={colorRef} onClick={onColorClick}>
-          <span>Color Theme</span>
+          <span>{t("color_theme")}</span>
         </div>
         <div className={css.item} ref={socialRef} onClick={onSocialClick}>
-          <span>Social</span>
+          <span>{t("social")}</span>
         </div>
       </div>
       <Menu
@@ -60,13 +62,13 @@ const HeaderOld: FC = () => {
         open={openColor}
         items={[
           {
-            title: "Back to Light Mode",
+            title: t("back_to_light_mode"),
             src: monitorSunImage,
             className: css.lightMode,
             onClick: backToLight,
           },
           {
-            title: "Back to Dark Mode",
+            title: t("back_to_dark_mode"),
             src: monitorMoonImage,
             className: css.darkMode,
             onClick: backToDark,

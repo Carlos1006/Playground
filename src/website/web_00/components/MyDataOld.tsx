@@ -4,7 +4,7 @@ import { getExactAge } from "../utils";
 import GlitchText from "./GlitchText";
 import img from "../../../assets/logotype/CD_white.png";
 import useHomeContext from "../hooks/useHomeContext";
-import { BIRTH_DATE, FULL_NAME } from "../constants";
+import { BIRTH_DATE, EMAIL, FULL_NAME, PHONE_NUMBER } from "../constants";
 import { useTranslation } from "react-i18next";
 
 const MyDataOld: FC = () => {
@@ -15,10 +15,10 @@ const MyDataOld: FC = () => {
   return (
     <div id={css.myDataOld}>
       <div id={css.myDataContent} data-mode={themeMode}>
-        <h1>My Data</h1>
+        <h1>{t("my_data")}</h1>
         <div id={css.myDataWrapper}>
           <div>
-            <span className={css.bold}>Full name</span>
+            <span className={css.bold}>{t("full_name")}</span>
           </div>
           <div>
             <span>
@@ -27,16 +27,16 @@ const MyDataOld: FC = () => {
           </div>
           <div />
           <div>
-            <span className={css.bold}>Birth Date</span>
+            <span className={css.bold}>{t("birth_day")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text={BIRTH_DATE.format("dddd, MMMM Do YYYY")} />
+              <GlitchText text={t("birth_date")} />
             </span>
           </div>
           <div />
           <div>
-            <span className={css.bold}>Age</span>
+            <span className={css.bold}>{t("age")}</span>
           </div>
           <div>
             <span>
@@ -45,47 +45,47 @@ const MyDataOld: FC = () => {
           </div>
           <div />
           <div>
-            <span className={css.bold}>Country</span>
+            <span className={css.bold}>{t("country")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text="Mexico" />
+              <GlitchText text={t("homeland")} />
             </span>
           </div>
           <div />
           <div>
-            <span className={css.bold}>State</span>
+            <span className={css.bold}>{t("state")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text="Nuevo Leon" />
+              <GlitchText text={t("nuevo_leon")} />
             </span>
           </div>
           <div />
           <div>
-            <span className={css.bold}>City</span>
+            <span className={css.bold}>{t("city")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text="Monterrey" />
+              <GlitchText text={t("monterrey")} />
             </span>
           </div>
           <div />
           <div>
-            <span className={css.bold}>Phone</span>
+            <span className={css.bold}>{t("phone")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text="+52 1 811 035 1117" />
+              <GlitchText text={PHONE_NUMBER} />
             </span>
           </div>
           <div />
           <div>
-            <span className={css.bold}>Email</span>
+            <span className={css.bold}>{t("email")}</span>
           </div>
           <div>
             <span>
-              <GlitchText text="cdgzz19@gmail.com" />
+              <GlitchText text={EMAIL} />
             </span>
           </div>
           <div />

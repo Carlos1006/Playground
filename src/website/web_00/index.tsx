@@ -26,9 +26,22 @@ const Web00: FC = () => {
     setShowMenu(false);
   }, [setShowMenu]);
 
+  useLayoutEffect(() => {
+    const themeMode = localStorage.getItem("themeMode") as ThemeMode;
+    if (themeMode) {
+      setThemeMode(themeMode);
+    }
+  }, []);
+
+  const setAndPersistThemeMode = (mode: ThemeMode): void => {
+    localStorage.setItem("themeMode", mode);
+    setThemeMode(mode);
+  };
+
   const homeContext: IHomeContext = {
     themeMode,
     setThemeMode,
+    setAndPersistThemeMode,
   };
 
   return (

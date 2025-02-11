@@ -2,7 +2,22 @@ import { FC } from "react";
 import css from "../styles/header.module.scss";
 import { IMenu } from "../types";
 
-const Menu: FC<IMenu> = ({ x, y, open, items }: IMenu) => {
+const Menu: FC<IMenu> = ({
+  x,
+  y,
+  open,
+  items,
+  forcedRight = null,
+  forcedBottom = null,
+}: IMenu) => {
+  const inlineRight = forcedRight !== null ? "right" : "left";
+  const blockAttribute = forcedBottom !== null ? "bottom" : "top";
+  const extra = 10;
+
+  const inlineValue = forcedRight !== null ? forcedRight : x - extra;
+  const blockValue =
+    forcedBottom !== null ? forcedBottom : `calc(${y}px + ${extra}px)`;
+
   if (!open) {
     return null;
   }
@@ -10,8 +25,8 @@ const Menu: FC<IMenu> = ({ x, y, open, items }: IMenu) => {
     <div
       className={css.menu}
       style={{
-        left: x,
-        top: `calc(${y}px + 10px)`,
+        [inlineRight]: inlineValue,
+        [blockAttribute]: blockValue,
       }}
     >
       {items.map(
