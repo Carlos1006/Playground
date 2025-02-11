@@ -68,6 +68,35 @@ const ShowCase: FC = () => {
     setComponentIndex(newComponentIndex);
   };
 
+  const toLastComponent = (): void => {
+    if (componentIndex === SHOWCASE_COMPONENTS_ARRAY.length - 1) return;
+    setLoading(true);
+    const newComponentIndex = SHOWCASE_COMPONENTS_ARRAY.length - 1;
+    const newTitle =
+      SHOWCASE_COMPONENTS[SHOWCASE_COMPONENTS_ARRAY[newComponentIndex]].title;
+    setTitle(newTitle);
+    setComponentIndex(newComponentIndex);
+  };
+
+  const toFirstComponent = (): void => {
+    if (componentIndex === 0) return;
+    setLoading(true);
+    const newComponentIndex = 0;
+    const newTitle =
+      SHOWCASE_COMPONENTS[SHOWCASE_COMPONENTS_ARRAY[newComponentIndex]].title;
+    setTitle(newTitle);
+    setComponentIndex(newComponentIndex);
+  };
+
+  const onIndexChange = (index: number): void => {
+    if (index === componentIndex) return;
+    setLoading(true);
+    const newTitle =
+      SHOWCASE_COMPONENTS[SHOWCASE_COMPONENTS_ARRAY[index]].title;
+    setTitle(newTitle);
+    setComponentIndex(index);
+  };
+
   const { component: Component, props } =
     currentShowCaseComponent ?? EMPTY_COMPONENT;
 
@@ -115,7 +144,22 @@ const ShowCase: FC = () => {
           <ShowCaseCanvas />
         </>
       )}
-      {themeMode === MODE.OLD && <ShowCaseControl title={title} />}
+      {themeMode === MODE.OLD && (
+        <ShowCaseControl
+          disableFastBackward={componentIndex === 0}
+          disableFastForward={
+            componentIndex === SHOWCASE_COMPONENTS_ARRAY.length - 1
+          }
+          componentLength={SHOWCASE_COMPONENTS_ARRAY.length}
+          index={componentIndex}
+          onRangeChange={onIndexChange}
+          onBackward={prevComponent}
+          onForward={nextComponent}
+          onFastBackward={toFirstComponent}
+          onFastForward={toLastComponent}
+          title={title}
+        />
+      )}
     </div>
   );
 };

@@ -118,6 +118,15 @@ export interface ICertify {
 
 export interface IShowCaseControl {
   title: string;
+  onForward: () => void;
+  onBackward: () => void;
+  onFastForward: () => void;
+  onFastBackward: () => void;
+  onRangeChange: (index: number) => void;
+  index: number;
+  componentLength: number;
+  disableFastForward: boolean;
+  disableFastBackward: boolean;
 }
 
 export interface IMenuItem {
