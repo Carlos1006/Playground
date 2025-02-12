@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { MODE } from "../constants";
 import css from "../styles/mode.module.scss";
-import { WindowsIcon } from "../icons/Windows";
+// import { WindowsIcon } from "../icons/Windows";
+import oldpcImage from "../assets/oldpc.png";
 import useHomeContext from "../hooks/useHomeContext";
 import { getThemeClass } from "../../../utils";
 
@@ -31,7 +32,8 @@ const Mode: FC = () => {
         data-mode={themeMode}
         className={themeMode === MODE.OLD ? css.active : ""}
       >
-        <WindowsIcon />
+        {/* <WindowsIcon /> */}
+        <img src={oldpcImage} alt="Windows" />
       </div>
     </div>
   );
