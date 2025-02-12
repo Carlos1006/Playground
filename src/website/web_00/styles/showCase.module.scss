@@ -113,9 +113,11 @@ $showCaseControl_height: 16.4cqb;
     border-radius: 0;
     #glass {
       padding-inline: 2cqmax;
-      margin-top: 10px;
-      height: calc(100cqb - #{$showCaseControl_height} - 5px - 10px);
-      background: transparent;
+      margin-top: 55px;
+      margin-left: 15px;
+      overflow: hidden;
+      width: calc(100cqi - 30px);
+      height: calc(100cqb - #{$showCaseControl_height} - 58px);
     }
   }
 }

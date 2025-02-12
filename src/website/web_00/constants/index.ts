@@ -22,6 +22,9 @@ export const HOME_CONTEXT_DEFAULT: IHomeContext = {
   setThemeMode: (): void => {
     return;
   },
+  setAndPersistThemeMode: (): void => {
+    return;
+  },
 };
 
 export const MY_NAME = "Carlos Daniel Gonzalez";
