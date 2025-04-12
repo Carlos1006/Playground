@@ -1,0 +1,29 @@
+#main {
+  width:2000px;
+  height:1200px;
+  margin:50px;
+  background-color:#111;
+  position:relative;
+  container:heatmap / size;
+  display: grid;
+  place-items: center;
+  background-color: #111;
+}
+
+.tiler {
+  width:100%;
+  height:100%;
+  display: grid;
+  place-items: center;
+  container:heatmap / size;
+  .container {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    position: relative;
+    container: heatmapContainer / size;
+  }
+}
+
+.tile { 
+  position:absolute;
+}
