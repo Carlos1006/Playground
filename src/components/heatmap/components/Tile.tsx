@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ITile } from "../types";
 import Tiler from "./Tiler";
-// import css from "../styles/heatmap.module.scss";
+import css from "../styles/heatmap.module.scss";
 
 const Tile: FC<ITile> = ({
   left,
@@ -11,43 +11,40 @@ const Tile: FC<ITile> = ({
   backgroundColor,
   level,
   children,
-  data: { name, color },
+  data,
 }: ITile) => {
+  const { name, color } = data;
+  const hasChildren = children && children.length > 0;
   return (
     <div
+      className={css.tile}
       style={{
-        position: "absolute",
         left,
         top,
         width,
         height,
-        display: "flex",
-        flexDirection: "column",
       }}
     >
       <div
+        className={`
+          ${css.tileWrapper} 
+          ${hasChildren ? css.tileWrapperChild : ""}
+        `}
         style={{
-          width: "calc(100% - 5px)",
-          height: "calc(100% - 5px)",
           backgroundColor,
-          display: "flex",
-          flexDirection: "column",
         }}
       >
-        <span
-          style={{
-            color: "white",
-            fontSize: "12px",
-            fontFamily: "Roboto",
-          }}
-        >
+        <span className={css.tileName} style={{}}>
           {name}
         </span>
-        <Tiler
-          color={color ?? backgroundColor}
-          level={level + 1}
-          elements={children ?? []}
-        />
+        {hasChildren && (
+          <Tiler
+            data={data}
+            color={color ?? backgroundColor}
+            level={level + 1}
+            elements={children ?? []}
+          />
+        )}
       </div>
     </div>
   );

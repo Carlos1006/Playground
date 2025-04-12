@@ -6,16 +6,16 @@ import { darker } from "../utils";
 
 const Tiler: FC<ITiler> = ({
   elements,
+  data,
   color: parentColor,
   level = 0,
 }: ITiler) => {
   const ref = useRef<HTMLDivElement>(null);
   const [tiles, setTiles] = useState<ITile[]>([]);
-
   const total = elements.reduce((acc, curr) => acc + curr.value, 0);
 
   useEffect(() => {
-    console.clear();
+    // console.clear();
     if (!ref.current) return;
     const { width, height } = ref.current.getBoundingClientRect();
     const area = width * height;
@@ -25,10 +25,10 @@ const Tiler: FC<ITiler> = ({
 
     let left = 0;
     let top = 0;
-    let leftPercentage = 100;
     let leftWidth = width;
     let leftHeight = height;
-    let leftArea = area;
+    // let leftPercentage = 100;
+    // let leftArea = area;
 
     const extendedValue: IExtendedElement[] = elements.map((item) => {
       const percentage = (item.value / total) * 100;
@@ -40,39 +40,45 @@ const Tiler: FC<ITiler> = ({
 
     const sorted = extendedValue.sort((a, b) => b.percentage - a.percentage);
 
-    console.log("begin", {
-      width,
-      height,
-      area,
-      leftWidth,
-      leftHeight,
-      top,
-      left,
-      total,
-      extendedValue,
-    });
+    // console.log("begin", {
+    //   width,
+    //   height,
+    //   area,
+    //   leftWidth,
+    //   leftHeight,
+    //   top,
+    //   left,
+    //   total,
+    //   extendedValue,
+    // });
 
-    let horizontal = true;
+    const aspectRatio = width / height;
 
-    sorted.forEach((item, index) => {
+    elements.length > 0 && console.log("aspectRatio", data, aspectRatio);
+    const aspectRatioThreshold = 0.6; // Adjust this threshold as needed
+
+    let horizontal = width > height;
+    const fixedOrientation = aspectRatio <= aspectRatioThreshold;
+
+    sorted.forEach((item) => {
       const { percentage, ...originalItem } = item;
       const { color, children } = originalItem;
-      console.log(`%citeration ${index + 1}`, `color: ${color}`);
-      console.log("item", item);
+      // console.log(`%citeration ${index + 1}`, `color: ${color}`);
+      // console.log("item", item);
 
       if (horizontal) {
         // console.log("width", newWidth, "height", newHeight);
-        console.log("left", left, "top", top);
-        console.log("leftWidth", leftWidth, "leftHeight", leftHeight);
-        console.log("leftPercentage", leftPercentage);
-        console.log("leftArea", leftArea);
-        console.log("area", area);
+        // console.log("left", left, "top", top);
+        // console.log("leftWidth", leftWidth, "leftHeight", leftHeight);
+        // console.log("leftPercentage", leftPercentage);
+        // console.log("leftArea", leftArea);
+        // console.log("area", area);
 
         const expectedArea = (area / 100) * percentage;
         const newHeight = leftHeight;
         const newWidth = expectedArea / newHeight;
 
-        console.log("expectedArea", expectedArea);
+        // console.log("expectedArea", expectedArea);
 
         const leftCqi = left / cqi;
         const topCqb = top / cqb;
@@ -92,15 +98,15 @@ const Tiler: FC<ITiler> = ({
 
         left += newWidth;
         leftWidth -= newWidth;
-        leftPercentage -= percentage;
-        leftArea = leftWidth * leftHeight;
+        // leftPercentage -= percentage;
+        // leftArea = leftWidth * leftHeight;
       }
       if (!horizontal) {
-        console.log("left", left, "top", top);
-        console.log("leftWidth", leftWidth, "leftHeight", leftHeight);
-        console.log("leftPercentage", leftPercentage);
-        console.log("leftArea", leftArea);
-        console.log("area", area);
+        // console.log("left", left, "top", top);
+        // console.log("leftWidth", leftWidth, "leftHeight", leftHeight);
+        // console.log("leftPercentage", leftPercentage);
+        // console.log("leftArea", leftArea);
+        // console.log("area", area);
 
         const expectedArea = (area / 100) * percentage;
         const newWidth = leftWidth;
@@ -110,7 +116,7 @@ const Tiler: FC<ITiler> = ({
         const topCqb = top / cqb;
         const widthCqi = newWidth / cqi;
         const heightCqb = newHeight / cqb;
-        console.log("expectedArea", expectedArea);
+        // console.log("expectedArea", expectedArea);
 
         tilesArray.push({
           left: `${leftCqi}cqi`,
@@ -125,14 +131,16 @@ const Tiler: FC<ITiler> = ({
 
         top += newHeight;
         leftHeight -= newHeight;
-        leftPercentage -= percentage;
-        leftArea = leftWidth * leftHeight;
+        // leftPercentage -= percentage;
+        // leftArea = leftWidth * leftHeight;
       }
 
-      console.log(
-        `------------------------------------------------------------------`
-      );
-      horizontal = !horizontal;
+      // console.log(
+      //   `------------------------------------------------------------------`
+      // );
+      if (!fixedOrientation) {
+        horizontal = !horizontal;
+      }
     });
 
     setTiles(tilesArray);
@@ -140,7 +148,7 @@ const Tiler: FC<ITiler> = ({
     return () => {
       setTiles([]);
     };
-  }, [elements, level, parentColor, total]);
+  }, [data, elements, level, parentColor, total]);
 
   return (
     <div className={css.tiler} ref={ref}>

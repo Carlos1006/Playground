@@ -83,7 +83,11 @@ const HeatMap: FC = () => {
 
   return (
     <div id={css.main}>
-      <Tiler color={items[0].color as string} elements={items} />
+      <Tiler
+        color={items[0].color as string}
+        data={items[0]}
+        elements={items}
+      />
     </div>
   );
 };

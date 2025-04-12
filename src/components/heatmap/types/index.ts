@@ -25,6 +25,7 @@ export interface ITile {
 }
 
 export interface ITiler {
+  data: IElement;
   elements: IElement[];
   color: string;
   level?: number;
