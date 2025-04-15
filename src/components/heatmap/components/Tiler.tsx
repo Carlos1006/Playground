@@ -91,6 +91,9 @@ const Tiler: FC<ITiler> = ({
           width: `${widthCqi}cqi`,
           height: `${heightCqb}cqb`,
           backgroundColor: color ?? darker(parentColor, 50),
+          backgroundColorHover: color
+            ? darker(color, 20)
+            : darker(parentColor, 100),
           level,
           data: originalItem,
           children,
@@ -124,6 +127,9 @@ const Tiler: FC<ITiler> = ({
           width: `${widthCqi}cqi`,
           height: `${heightCqb}cqb`,
           backgroundColor: color ?? darker(parentColor, 50),
+          backgroundColorHover: color
+            ? darker(color, 20)
+            : darker(parentColor, 100),
           data: originalItem,
           level,
           children,

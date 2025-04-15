@@ -20,6 +20,7 @@ export interface ITile {
   width: string;
   height: string;
   backgroundColor: string;
+  backgroundColorHover: string;
   data: IElement;
   children?: IElement[];
 }
@@ -29,4 +30,10 @@ export interface ITiler {
   elements: IElement[];
   color: string;
   level?: number;
+}
+
+export interface IHeatMapContext {
+  currentLevel: number;
+  canDrawChildren: (drawing: number) => boolean;
+  candDrawGap: (drawing: number) => boolean;
 }
