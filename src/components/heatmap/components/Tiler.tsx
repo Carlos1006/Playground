@@ -3,16 +3,19 @@ import { IExtendedElement, ITile, ITiler } from "../types";
 import css from "../styles/heatmap.module.scss";
 import Tile from "./Tile";
 import { darker } from "../utils";
+import { useHeatMapContext } from "../hooks";
 
 const Tiler: FC<ITiler> = ({
   elements,
   data,
+  parentLine,
   color: parentColor,
-  level = 0,
+  level,
 }: ITiler) => {
   const ref = useRef<HTMLDivElement>(null);
   const [tiles, setTiles] = useState<ITile[]>([]);
   const total = elements.reduce((acc, curr) => acc + curr.value, 0);
+  const { selectedTile, currentLevel } = useHeatMapContext();
 
   useEffect(() => {
     // console.clear();
@@ -54,7 +57,7 @@ const Tiler: FC<ITiler> = ({
 
     const aspectRatio = width / height;
 
-    elements.length > 0 && console.log("aspectRatio", data, aspectRatio);
+    // elements.length > 0 && console.log("aspectRatio", data, aspectRatio);
     const aspectRatioThreshold = 0.6; // Adjust this threshold as needed
 
     let horizontal = width > height;
@@ -93,10 +96,11 @@ const Tiler: FC<ITiler> = ({
           backgroundColor: color ?? darker(parentColor, 50),
           backgroundColorHover: color
             ? darker(color, 20)
-            : darker(parentColor, 100),
+            : darker(parentColor, 70),
           level,
           data: originalItem,
           children,
+          parentLine,
         });
 
         left += newWidth;
@@ -129,10 +133,11 @@ const Tiler: FC<ITiler> = ({
           backgroundColor: color ?? darker(parentColor, 50),
           backgroundColorHover: color
             ? darker(color, 20)
-            : darker(parentColor, 100),
+            : darker(parentColor, 70),
           data: originalItem,
           level,
           children,
+          parentLine,
         });
 
         top += newHeight;
@@ -154,11 +159,15 @@ const Tiler: FC<ITiler> = ({
     return () => {
       setTiles([]);
     };
-  }, [data, elements, level, parentColor, total]);
+  }, [data, elements, level, parentColor, parentLine, total]);
+
+  const expanded =
+    currentLevel === level &&
+    tiles.some((tile) => tile.data.id === selectedTile);
 
   return (
     <div className={css.tiler} ref={ref}>
-      <div className={css.container}>
+      <div className={`${css.container} ${expanded ? css.expanded : ""}`}>
         {tiles.map((tile, index) => (
           <Tile key={index} {...tile} level={level} />
         ))}
