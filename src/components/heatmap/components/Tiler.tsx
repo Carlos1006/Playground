@@ -163,6 +163,7 @@ const Tiler: FC<ITiler> = ({
 
   const expanded =
     currentLevel === level &&
+    level !== 0 &&
     tiles.some((tile) => tile.data.id === selectedTile);
 
   return (

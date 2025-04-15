@@ -23,12 +23,12 @@
     height: calc(100% - 20px);
     position: relative;
     container: heatmapContainer / size;
-    .expanded {
+    &.expanded {
       position: absolute;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
+      width: 100cqi;
+      height: 100cqb;
     }
   }
 }
@@ -70,6 +70,14 @@
     place-items: center;
     .tileName {
       margin: 0;
+    }
+  }
+  &.selectedTileWrapper {
+    height: 100% !important;
+  }
+  &:has(.selected) {
+    > .tileName {
+      display: none;
     }
   }
 }

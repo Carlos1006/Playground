@@ -49,17 +49,17 @@ const Tile: FC<ITile> = ({
     });
   };
 
+  const selected = currentLevel === level && selectedTile === data.id;
+
   return (
     <div
-      className={css.tile}
+      className={`${css.tile} ${selected ? css.selected : ""}`}
       style={{
         left,
         top,
         width,
         height,
-        ...(currentLevel === level && selectedTile === data.id
-          ? EXPAND_STYLES
-          : {}),
+        ...(selected ? EXPAND_STYLES : {}),
       }}
       ref={tileRef}
       onMouseUp={onClickHandler}
@@ -71,6 +71,7 @@ const Tile: FC<ITile> = ({
           ${css.tileWrapper} 
           ${canDrawGap(level) ? css.gap : ""}
           ${canDrawChildrenValue ? css.tileWrapperChild : ""}
+          ${selected ? css.selectedTileWrapper : ""}
         `}
         style={{
           backgroundColor: hover ? backgroundColorHover : backgroundColor,
