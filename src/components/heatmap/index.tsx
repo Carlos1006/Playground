@@ -137,7 +137,12 @@ const HeatMap: FC = () => {
   const [selectedTile, setSelectedTile] = useState<number>(0);
 
   const canDrawChildren = (drawing: number): boolean => {
-    if (drawing >= 4) return false;
+    if (currentLevel === 0) {
+      if (drawing >= 2) return false;
+    }
+    if (currentLevel === 1) {
+      if (drawing >= 4) return false;
+    }
     return true;
   };
 
