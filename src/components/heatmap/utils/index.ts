@@ -65,3 +65,31 @@ export function darker(color: string, amount: number): string {
     return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`;
   }
 }
+
+/**
+ * Calcula el ancho de un texto utilizando un canvas.
+ * @param {string} text - El texto cuyo ancho se desea calcular.
+ * @param {string} font - La fuente que se usará para el texto (por ejemplo, "16px Arial").
+ * @returns {number} - El ancho del texto en píxeles.
+ */
+export function measeureText(text: string, font: string): number {
+  // Crear un canvas temporal
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) {
+    return 0;
+  }
+  // Establecer la fuente en el contexto del canvas
+  context.font = font;
+  // Medir el ancho del texto
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
+
+export function abbreviateText(text: string): string {
+  const maxLength = 3; // Longitud máxima deseada
+  if (text.length > maxLength) {
+    return text.slice(0, maxLength) + "..."; // Abreviar el texto
+  }
+  return text; // Retornar el texto original si no se necesita abreviar
+}

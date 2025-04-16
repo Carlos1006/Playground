@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useLayoutEffect, useRef, useState } from "react";
 import { IExtendedElement, ITile, ITiler } from "../types";
 import css from "../styles/heatmap.module.scss";
 import Tile from "./Tile";
@@ -17,7 +17,7 @@ const Tiler: FC<ITiler> = ({
   const total = elements.reduce((acc, curr) => acc + curr.value, 0);
   const { selectedTile, tileLine } = useHeatMapContext();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // console.clear();
     if (!ref.current) return;
     const { width, height } = ref.current.getBoundingClientRect();

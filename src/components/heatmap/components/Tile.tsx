@@ -4,6 +4,8 @@ import Tiler from "./Tiler";
 import css from "../styles/heatmap.module.scss";
 import { useHeatMapContext } from "../hooks";
 import { EXPAND_STYLES } from "../constants";
+import { useResizeObserver } from "../hooks/useResizeObserver";
+import { abbreviateText, measeureText } from "../utils";
 
 const Tile: FC<ITile> = ({
   left,
@@ -18,7 +20,9 @@ const Tile: FC<ITile> = ({
   parentLine,
 }: ITile) => {
   const tileRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLSpanElement | null>(null);
   const { name, color } = data;
+  const [text, setText] = useState<string>(data.name);
   const hasChildren = children && children.length > 0;
   const [hover, setHover] = useState<boolean>(false);
   const {
@@ -52,6 +56,20 @@ const Tile: FC<ITile> = ({
   const selected = tileLine.includes(data.id);
   const hideName = selected && selectedTile !== data.id;
 
+  useResizeObserver({
+    target: tileRef,
+    callback: () => {
+      if (!tileRef.current) return;
+      const textWidth = measeureText(name, "12px Roboto");
+      const { width } = tileRef.current.getBoundingClientRect();
+      if (textWidth > width) {
+        setText(abbreviateText(name));
+      } else {
+        setText(name);
+      }
+    },
+  });
+
   return (
     <div
       className={`${css.tile} ${selected ? css.selected : ""}`}
@@ -83,10 +101,11 @@ const Tile: FC<ITile> = ({
         }}
       >
         <span
+          ref={textRef}
           className={`${css.tileName} ${hideName ? css.hideName : ""}`}
           style={{}}
         >
-          {name}
+          {text}
         </span>
         {canDrawChildrenValue && canDrawChildren(level) && (
           <Tiler

@@ -61,6 +61,8 @@
   pointer-events: none;
   transition: all 0.3s linear;
   height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   &.hideName {
     height: 0;
     margin: 0;

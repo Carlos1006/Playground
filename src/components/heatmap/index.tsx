@@ -24,10 +24,16 @@ const HeatMap: FC = () => {
               id: 3,
               name: "Mexico",
               value: 128932753,
+              color: "rgb(34, 182, 170)",
               children: [
                 { id: 4, name: "Mexico City", value: 9209944 },
                 { id: 5, name: "Guadalajara", value: 5295912 },
-                { id: 6, name: "Monterrey", value: 4423689 },
+                {
+                  id: 6,
+                  name: "Monterrey",
+                  value: 4423689,
+                  color: "rgb(157, 34, 182)",
+                },
               ],
             },
             { id: 7, name: "Canada", value: 37742154 },
