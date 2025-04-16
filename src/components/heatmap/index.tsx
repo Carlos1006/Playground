@@ -166,12 +166,8 @@ const HeatMap: FC = () => {
     const [, ...rest] = newTileLine;
     const newSelectedTile = rest[0];
 
-    console.log("newTileLine", {
-      tileLine,
-      selectedTile,
-      currentLevel,
-    });
-
+    const newCurrentLevel = currentLevel - 1;
+    if (newCurrentLevel < 0) return;
     setTileLine(rest);
     setSelectedTile(newSelectedTile);
     setCurrentLevel((prev) => prev - 1);
@@ -179,7 +175,7 @@ const HeatMap: FC = () => {
 
   return (
     <div id={css.main}>
-      <ReturnButton onClick={onReturn} />
+      {currentLevel > 0 && <ReturnButton onClick={onReturn} />}
       <HeatMapContext.Provider
         value={{
           tileLine,
