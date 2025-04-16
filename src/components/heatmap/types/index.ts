@@ -56,3 +56,7 @@ export interface IHeatMapContext {
   canDrawGap: (drawing: number) => boolean;
   onClick: (payload: IClickPayload) => void;
 }
+
+export interface IReturnButton {
+  onClick: () => void;
+}

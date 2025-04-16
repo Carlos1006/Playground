@@ -15,7 +15,7 @@ const Tiler: FC<ITiler> = ({
   const ref = useRef<HTMLDivElement>(null);
   const [tiles, setTiles] = useState<ITile[]>([]);
   const total = elements.reduce((acc, curr) => acc + curr.value, 0);
-  const { selectedTile, currentLevel } = useHeatMapContext();
+  const { selectedTile, tileLine } = useHeatMapContext();
 
   useEffect(() => {
     // console.clear();
@@ -161,14 +161,14 @@ const Tiler: FC<ITiler> = ({
     };
   }, [data, elements, level, parentColor, parentLine, total]);
 
-  const expanded =
-    currentLevel === level &&
-    level !== 0 &&
-    tiles.some((tile) => tile.data.id === selectedTile);
+  const expanded = tileLine.includes(data.id) && selectedTile !== data.id;
 
   return (
-    <div className={css.tiler} ref={ref}>
-      <div className={`${css.container} ${expanded ? css.expanded : ""}`}>
+    <div data-level={level} className={css.tiler} ref={ref}>
+      <div
+        data-level={level}
+        className={`${css.container} ${expanded ? css.expanded : ""}`}
+      >
         {tiles.map((tile, index) => (
           <Tile key={index} {...tile} level={level} />
         ))}

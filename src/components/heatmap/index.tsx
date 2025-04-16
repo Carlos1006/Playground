@@ -3,6 +3,7 @@ import css from "./styles/heatmap.module.scss";
 import { IClickPayload, IElement } from "./types";
 import Tiler from "./components/Tiler";
 import HeatMapContext from "./context";
+import ReturnButton from "./components/ReturnButton";
 
 const HeatMap: FC = () => {
   const items: IElement[] = [
@@ -136,7 +137,7 @@ const HeatMap: FC = () => {
   const [selectedTile, setSelectedTile] = useState<number>(0);
 
   const canDrawChildren = (drawing: number): boolean => {
-    if (drawing >= 2) return false;
+    if (drawing >= 4) return false;
     return true;
   };
 
@@ -151,13 +152,6 @@ const HeatMap: FC = () => {
   const onClick = ({ id, level, parentLine }: IClickPayload): void => {
     if (cooldown.current) return;
     cooldown.current = true;
-
-    console.log("onClick", {
-      id,
-      level,
-      parentLine,
-    });
-
     setSelectedTile(id);
     setCurrentLevel(level);
     setTileLine(parentLine);
@@ -167,8 +161,25 @@ const HeatMap: FC = () => {
     }, 500);
   };
 
+  const onReturn = (): void => {
+    const newTileLine = [...tileLine];
+    const [, ...rest] = newTileLine;
+    const newSelectedTile = rest[0];
+
+    console.log("newTileLine", {
+      tileLine,
+      selectedTile,
+      currentLevel,
+    });
+
+    setTileLine(rest);
+    setSelectedTile(newSelectedTile);
+    setCurrentLevel((prev) => prev - 1);
+  };
+
   return (
     <div id={css.main}>
+      <ReturnButton onClick={onReturn} />
       <HeatMapContext.Provider
         value={{
           tileLine,

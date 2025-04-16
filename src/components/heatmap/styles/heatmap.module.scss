@@ -21,10 +21,15 @@
   .container {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
+    left: 0;
+    top: 0;
     position: relative;
     container: heatmapContainer / size;
+    &[data-level="0"] {
+      width: 100cqi;
+      height: 100cqb;
+    }
     &.expanded {
-      position: absolute;
       left: 0;
       top: 0;
       width: 100cqi;
@@ -39,6 +44,7 @@
   flex-direction: column;
   cursor: pointer;
   pointer-events: all !important;
+  transition: all 0.3s linear;
   * {
     pointer-events: none;
   }
@@ -53,11 +59,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
+  transition: all 0.3s linear;
+  height: 12px;
+  &.hideName {
+    height: 0;
+    margin: 0;
+  }
 }
 
 .tileWrapper {
   width: 100%;
   height: 100%;
+  // transition: all 0.3s linear;
   &.gap {
     width: calc(100% - 5px);
     height: calc(100% - 5px);
@@ -73,11 +86,37 @@
     }
   }
   &.selectedTileWrapper {
+    width: 100% !important;
     height: 100% !important;
   }
-  &:has(.selected) {
-    > .tileName {
-      display: none;
+}
+
+.returnButton {
+  width: 4cqmin;
+  height: 4cqmin;
+  position: absolute;
+  right: 0.5cqmin;
+  top: 0.5cqmin;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  container: returnButtonContainer / size;
+  z-index: 1000;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  &:active {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  svg {
+    width: 80cqi;
+    height: 80cqi;
+    stroke: white;
+    path {
+      stroke: white;
     }
   }
 }

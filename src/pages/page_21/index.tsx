@@ -8,7 +8,7 @@ const Page_20: FC = () => {
   }, []);
 
   return (
-    <div className={`${css.page} ${css.black} ${css.relative}`}>
+    <div className={`${css.page} ${css.black} `}>
       <HeatMap />
     </div>
   );

@@ -22,8 +22,8 @@ const Tile: FC<ITile> = ({
   const hasChildren = children && children.length > 0;
   const [hover, setHover] = useState<boolean>(false);
   const {
-    currentLevel,
     selectedTile,
+    tileLine,
     canDrawChildren,
     canDrawGap,
     onClick,
@@ -49,7 +49,8 @@ const Tile: FC<ITile> = ({
     });
   };
 
-  const selected = currentLevel === level && selectedTile === data.id;
+  const selected = tileLine.includes(data.id);
+  const hideName = selected && selectedTile !== data.id;
 
   return (
     <div
@@ -61,12 +62,16 @@ const Tile: FC<ITile> = ({
         height,
         ...(selected ? EXPAND_STYLES : {}),
       }}
+      data-level={level}
+      data-id={data.id}
       ref={tileRef}
       onMouseUp={onClickHandler}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
       <div
+        data-level={level}
+        data-id={data.id}
         className={`
           ${css.tileWrapper} 
           ${canDrawGap(level) ? css.gap : ""}
@@ -77,7 +82,10 @@ const Tile: FC<ITile> = ({
           backgroundColor: hover ? backgroundColorHover : backgroundColor,
         }}
       >
-        <span className={css.tileName} style={{}}>
+        <span
+          className={`${css.tileName} ${hideName ? css.hideName : ""}`}
+          style={{}}
+        >
           {name}
         </span>
         {canDrawChildrenValue && canDrawChildren(level) && (
