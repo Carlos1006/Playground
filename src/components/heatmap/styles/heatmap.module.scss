@@ -44,7 +44,7 @@
   flex-direction: column;
   cursor: pointer;
   pointer-events: all !important;
-  transition: all 0.3s linear;
+  // transition: all 0.3s linear;
   * {
     pointer-events: none;
   }
@@ -59,7 +59,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
-  transition: all 0.3s linear;
+  // transition: all 0.3s linear;
   height: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -80,11 +80,15 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  container: tileWrapperContainer / size;
   &:not(.tileWrapperChild) {
     display: grid;
     place-items: center;
     .tileName {
       margin: 0;
+      height: auto;
+      font-size: 10cqmin;
+      line-height: 12cqmin;
     }
   }
   &.selectedTileWrapper {
@@ -105,7 +109,7 @@
   place-items: center;
   container: returnButtonContainer / size;
   z-index: 1000;
-  transition: all 0.3s linear;
+  // transition: all 0.3s linear;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.8);
