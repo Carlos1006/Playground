@@ -4,6 +4,7 @@ import { IClickPayload, IElement } from "./types";
 import Tiler from "./components/Tiler";
 import HeatMapContext from "./context";
 import ReturnButton from "./components/ReturnButton";
+import { sleep } from "./utils";
 
 const HeatMap: FC = () => {
   const items: IElement[] = [
@@ -141,6 +142,11 @@ const HeatMap: FC = () => {
   const [hoverTile, setHoverTile] = useState<number>(0);
   const [tileLine, setTileLine] = useState<number[]>([0]);
   const [selectedTile, setSelectedTile] = useState<number>(0);
+  const [animatedLine, setAnimatedLine] = useState<number[]>([]);
+
+  const addToAnimationLine = (line: number[]): void => {
+    setAnimatedLine((prev) => [...prev, ...line]);
+  };
 
   const canDrawChildren = (drawing: number): boolean => {
     if (currentLevel === 0) {
@@ -170,18 +176,28 @@ const HeatMap: FC = () => {
     timeout.current = window.setTimeout(() => {
       cooldown.current = false;
     }, 500);
+    setTimeout(() => {
+      setAnimatedLine([]);
+    }, 1000);
   };
 
-  const onReturn = (): void => {
+  const onReturn = async (): Promise<void> => {
     const newTileLine = [...tileLine];
     const [, ...rest] = newTileLine;
     const newSelectedTile = rest[0];
 
     const newCurrentLevel = currentLevel - 1;
+
+    addToAnimationLine(tileLine);
+    await sleep(100);
+
     if (newCurrentLevel < 0) return;
     setTileLine(rest);
     setSelectedTile(newSelectedTile);
     setCurrentLevel((prev) => prev - 1);
+
+    await sleep(500);
+    setAnimatedLine([]);
   };
 
   return (
@@ -200,6 +216,9 @@ const HeatMap: FC = () => {
           canDrawChildren,
           setCurrentLevel,
           onClick,
+          addToAnimationLine,
+          animatedLine,
+          setAnimatedLine,
         }}
       >
         <Tiler

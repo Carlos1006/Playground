@@ -18,6 +18,7 @@
   display: grid;
   place-items: center;
   container: heatmap / size;
+
   .container {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
@@ -25,6 +26,9 @@
     top: 0;
     position: relative;
     container: heatmapContainer / size;
+    &[data-animated="1"] {
+      // transition: all 0.3s linear;
+    }
     &[data-level="0"] {
       width: 100cqi;
       height: 100cqb;
@@ -44,7 +48,9 @@
   flex-direction: column;
   cursor: pointer;
   pointer-events: all !important;
-  // transition: all 0.3s linear;
+  &[data-animated="1"] {
+    transition: all 0.3s linear;
+  }
   * {
     pointer-events: none;
   }

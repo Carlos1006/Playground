@@ -5,7 +5,7 @@ import css from "../styles/heatmap.module.scss";
 import { useHeatMapContext } from "../hooks";
 import { EXPAND_STYLES } from "../constants";
 import { useResizeObserver } from "../hooks/useResizeObserver";
-import { abbreviateText, measeureText } from "../utils";
+import { abbreviateText, measeureText, sleep } from "../utils";
 
 const Tile: FC<ITile> = ({
   left,
@@ -28,10 +28,12 @@ const Tile: FC<ITile> = ({
   const {
     selectedTile,
     tileLine,
+    animatedLine,
     canDrawChildren,
     canDrawGap,
     onClick,
     setHoverTile,
+    addToAnimationLine,
   } = useHeatMapContext();
 
   const onHover = (): void => {
@@ -45,11 +47,15 @@ const Tile: FC<ITile> = ({
 
   const canDrawChildrenValue = hasChildren && canDrawChildren(level);
 
-  const onClickHandler = (): void => {
+  const onClickHandler = async (): Promise<void> => {
+    const newParentLine = [data.id, ...parentLine];
+    console.log("newParentLine", newParentLine);
+    addToAnimationLine(newParentLine);
+    await sleep(100);
     onClick({
       id: data.id,
       level,
-      parentLine: [data.id, ...parentLine],
+      parentLine: newParentLine,
     });
   };
 
@@ -86,6 +92,7 @@ const Tile: FC<ITile> = ({
       onMouseUp={onClickHandler}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      data-animated={animatedLine.includes(data.id) ? "1" : "0"}
     >
       <div
         data-level={level}

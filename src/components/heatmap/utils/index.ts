@@ -93,3 +93,7 @@ export function abbreviateText(text: string): string {
   }
   return text; // Retornar el texto original si no se necesita abreviar
 }
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

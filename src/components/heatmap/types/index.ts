@@ -55,6 +55,9 @@ export interface IHeatMapContext {
   canDrawChildren: (drawing: number) => boolean;
   canDrawGap: (drawing: number) => boolean;
   onClick: (payload: IClickPayload) => void;
+  addToAnimationLine: (line: number[]) => void;
+  setAnimatedLine: Dispatch<SetStateAction<number[]>>;
+  animatedLine: number[];
 }
 
 export interface IReturnButton {

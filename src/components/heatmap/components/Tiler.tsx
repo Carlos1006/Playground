@@ -15,7 +15,7 @@ const Tiler: FC<ITiler> = ({
   const ref = useRef<HTMLDivElement>(null);
   const [tiles, setTiles] = useState<ITile[]>([]);
   const total = elements.reduce((acc, curr) => acc + curr.value, 0);
-  const { selectedTile, tileLine } = useHeatMapContext();
+  const { selectedTile, tileLine, animatedLine } = useHeatMapContext();
 
   useLayoutEffect(() => {
     // console.clear();
@@ -167,6 +167,7 @@ const Tiler: FC<ITiler> = ({
     <div data-level={level} className={css.tiler} ref={ref}>
       <div
         data-level={level}
+        data-animated={animatedLine.includes(data.id) ? "1" : "0"}
         className={`${css.container} ${expanded ? css.expanded : ""}`}
       >
         {tiles.map((tile, index) => (
