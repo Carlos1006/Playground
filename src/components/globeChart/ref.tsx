@@ -269,4 +269,20 @@
 //         );
 //       })}
 
+// function getTexturePixel(
+//   texture: THREE.Texture,
+//   u: number,
+//   v: number
+// ): Uint8ClampedArray<ArrayBufferLike> {
+//   const canvas = document.createElement("canvas");
+//   canvas.width = texture.image.width;
+//   canvas.height = texture.image.height;
+//   const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+//   ctx.drawImage(texture.image, 0, 0);
+//   const x = Math.floor(u * (canvas.width - 1));
+//   const y = Math.floor(v * (canvas.height - 1));
+//   const pixel = ctx.getImageData(x, y, 1, 1).data;
+//   return pixel; // [r, g, b, a]
+// }
+
 export {};

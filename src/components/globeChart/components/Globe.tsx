@@ -10,24 +10,12 @@ import fragmentCode from "../shaders/fragment.glsl?raw";
 import vertexCode from "../shaders/vertex.glsl?raw";
 import { createCanvasTexture, createHexagonTextureBricked } from "../utils";
 
-function getTexturePixel(texture: THREE.Texture, u: number, v: number) {
-  const canvas = document.createElement("canvas");
-  canvas.width = texture.image.width;
-  canvas.height = texture.image.height;
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(texture.image, 0, 0);
-  const x = Math.floor(u * (canvas.width - 1));
-  const y = Math.floor(v * (canvas.height - 1));
-  const pixel = ctx.getImageData(x, y, 1, 1).data;
-  return pixel; // [r, g, b, a]
-}
-
 function getHexCentersOnSphereBricked(
   radius: number,
   rows: number,
   baseCols: number
-) {
-  const positions = [];
+): THREE.Vector3[] {
+  const positions: THREE.Vector3[] = [];
   for (let i = 0; i < rows; i++) {
     const v = i / (rows - 1); // de 0 a 1
     const phi = Math.PI * v; // de 0 a PI (latitud)
@@ -50,15 +38,17 @@ function getHexCentersOnSphereBricked(
 }
 
 const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
-  background,
   land,
-  outline,
 }: IGlobeMonoChromatic) => {
   const earthMesh = useRef<MeshRef>();
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
   const orbitRef = useRef<unknown | null>(null);
   const fillTexture = useLoader(THREE.ImageLoader, fillSrc);
-  const landTexture = useLoader(THREE.TextureLoader, fillSrc); // Usa tu textura de tierra
+  const landTextureRaw = useLoader(THREE.ImageLoader, fillSrc); // Usa tu textura de tierra
+
+  const landTexture = Array.isArray(landTextureRaw)
+    ? landTextureRaw[0]
+    : landTextureRaw;
 
   const hexTexture = useMemo(
     () =>
@@ -102,6 +92,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
     canvas.width = landTexture.width;
     canvas.height = landTexture.height;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
     ctx.drawImage(landTexture, 0, 0);
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     return {
@@ -115,7 +106,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
   const hexCenters = useMemo(
     //   () => getHexCentersOnSphereBricked(2.04, 220, 320),
-    () => getHexCentersOnSphereBricked(2.04, 290, 390),
+    () => getHexCentersOnSphereBricked(2.04, 280, 380),
     []
   );
 
@@ -158,7 +149,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
       dummy.position.copy(hex.pos);
       dummy.quaternion.copy(hex.quaternion);
       dummy.updateMatrix();
-      instancedRef.current!.setMatrixAt(i, dummy.matrix);
+      instancedRef.current?.setMatrixAt(i, dummy.matrix);
     });
     instancedRef.current.instanceMatrix.needsUpdate = true;
   }, [filteredHexes]);
@@ -191,7 +182,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
       <hemisphereLight args={["rgb(128,128,128)", "rgb(84,85,255)", 7]} />
 
-      {/* <mesh
+      <mesh
         scale={[1.001, 1.001, 1.001]}
         ref={(ref): void => {
           earthMesh.current = ref;
@@ -206,10 +197,10 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           ref={(ref): void => {
             materialRef.current = ref;
           }}
-          key={`${background}-${land}-${outline}`}
+          key={`shaderMaterial-${land}`}
           depthWrite={false}
         />
-      </mesh> */}
+      </mesh>
 
       <mesh
         scale={[1.02, 1.02, 1.02]}
@@ -235,7 +226,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
       {landSample && filteredHexes.length > 0 && (
         <instancedMesh
           ref={instancedRef}
-          args={[null, null, filteredHexes.length]}
+          args={[undefined, undefined, filteredHexes.length]}
           frustumCulled={false}
         >
           <circleGeometry args={[0.012, 6]} />
