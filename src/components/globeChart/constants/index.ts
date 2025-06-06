@@ -7,9 +7,6 @@ const benalmadena: [number, number] = [36.5987, -4.516];
 const sydney: [number, number] = [-33.8688, 151.2093];
 const kinshasa: [number, number] = [-4.4419, 15.2663];
 const honolulu: [number, number] = [21.3069, -157.8583];
-// const puertoRico: [number, number] = [18.465539, -66.105735];
-// const shanghai: [number, number] = [31.2304, 121.4737];
-// const nullIsland: [number, number] = [0, 0];
 
 export const CITIES: ICity[] = [
   {
@@ -36,13 +33,6 @@ export const CITIES: ICity[] = [
     latitude: newYork[0],
     longitude: newYork[1],
   },
-  // {
-  //   name: "Puerto Rico",
-  //   country: "USA",
-  //   color: "rgba(200,125,0,0.5)",
-  //   latitude: puertoRico[0],
-  //   longitude: puertoRico[1],
-  // },
   {
     name: "Benalmadena",
     country: "Spain",
@@ -67,13 +57,6 @@ export const CITIES: ICity[] = [
     latitude: kinshasa[0],
     longitude: kinshasa[1],
   },
-  // {
-  //   name: "Shanghai",
-  //   country: "China",
-  //   color: "rgba(200,200,200,0.5)",
-  //   latitude: shanghai[0],
-  //   longitude: shanghai[1],
-  // },
   {
     name: "Honolulu",
     country: "USA",
@@ -82,11 +65,4 @@ export const CITIES: ICity[] = [
     latitude: honolulu[0],
     longitude: honolulu[1],
   },
-  // {
-  //   name: "Null Island",
-  //   country: "Null",
-  //   color: "rgba(255,0,0,0.5)",
-  //   latitude: nullIsland[0],
-  //   longitude: nullIsland[1],
-  // }
 ];

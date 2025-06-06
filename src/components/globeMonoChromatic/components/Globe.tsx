@@ -2,14 +2,8 @@ import { OrbitControls } from "@react-three/drei";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { FC, useEffect, useMemo, useRef } from "react";
 import { TextureLoader } from "three";
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import fragmentCode from "../shaders/fragment.glsl?raw";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import vertexCode from "../shaders/vertex.glsl?raw";
-
 import fillSrc from "../assets/fill.png";
 import strokeSrc from "../assets/stroke.png";
 import { getPosition } from "../utils";
