@@ -19,6 +19,7 @@ import Page_18 from "../pages/page_18";
 import Page_19 from "../pages/page_19";
 import Page_20 from "../pages/page_20";
 import Page_21 from "../pages/page_21";
+import Page_22 from "../pages/page_22";
 
 import Web_00 from "../website/web_00";
 import Web_01 from "../website/web_01";
@@ -126,6 +127,10 @@ const Routes = [
   {
     path: "/heatmap",
     element: <Page_21 />,
+  },
+  {
+    path: "/globeChart",
+    element: <Page_22 />,
   },
   {
     path: "/web_01",

@@ -65,6 +65,14 @@ export const COMPONENTS = [
     path: "/rocket",
     name: "Rocket",
   },
+  {
+    path: "/heatmap",
+    name: "Heatmap",
+  },
+  {
+    path: "/globeChart",
+    name: "Globe Chart",
+  },
 ];
 
 export const EXPERIMENTS = [

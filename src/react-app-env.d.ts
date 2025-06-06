@@ -11,4 +11,5 @@ declare module "*.svg";
 declare module "*.fbx";
 declare module "*.tif";
 declare module "*.glsl";
+declare module "*.glsl?raw";
 declare module "canvas-sketch-util/random";
