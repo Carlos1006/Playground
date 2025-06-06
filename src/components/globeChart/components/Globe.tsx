@@ -10,6 +10,45 @@ import fragmentCode from "../shaders/fragment.glsl?raw";
 import vertexCode from "../shaders/vertex.glsl?raw";
 import { createCanvasTexture, createHexagonTextureBricked } from "../utils";
 
+function getTexturePixel(texture: THREE.Texture, u: number, v: number) {
+  const canvas = document.createElement("canvas");
+  canvas.width = texture.image.width;
+  canvas.height = texture.image.height;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(texture.image, 0, 0);
+  const x = Math.floor(u * (canvas.width - 1));
+  const y = Math.floor(v * (canvas.height - 1));
+  const pixel = ctx.getImageData(x, y, 1, 1).data;
+  return pixel; // [r, g, b, a]
+}
+
+function getHexCentersOnSphereBricked(
+  radius: number,
+  rows: number,
+  baseCols: number
+) {
+  const positions = [];
+  for (let i = 0; i < rows; i++) {
+    const v = i / (rows - 1); // de 0 a 1
+    const phi = Math.PI * v; // de 0 a PI (latitud)
+    // Calcula columnas según la latitud (más en el ecuador, menos en los polos)
+    const sinPhi = Math.sin(phi);
+    const cols = Math.max(3, Math.round(baseCols * sinPhi));
+    for (let j = 0; j < cols; j++) {
+      // Desfase tipo ladrillo en filas impares
+      const offset = i % 2 === 0 ? 0 : (Math.PI * 2) / (2 * cols);
+      const u = j / cols;
+      const theta = u * Math.PI * 2 + offset; // de 0 a 2PI (longitud)
+      // Conversión esférica a cartesiana
+      const x = radius * Math.sin(phi) * Math.cos(theta);
+      const y = radius * Math.cos(phi);
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      positions.push(new THREE.Vector3(x, y, z));
+    }
+  }
+  return positions;
+}
+
 const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   background,
   land,
@@ -19,6 +58,8 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
   const orbitRef = useRef<unknown | null>(null);
   const fillTexture = useLoader(THREE.ImageLoader, fillSrc);
+  const landTexture = useLoader(THREE.TextureLoader, fillSrc); // Usa tu textura de tierra
+
   const hexTexture = useMemo(
     () =>
       createHexagonTextureBricked(
@@ -54,6 +95,22 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
     uLandColor: { value: land },
     uAnotherTexture: { value: texture },
   };
+
+  const landSample = useMemo(() => {
+    if (!landTexture) {
+      console.warn("Land texture not loaded yet.");
+      return null;
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = landTexture.width;
+    canvas.height = landTexture.height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(landTexture, 0, 0);
+    return { canvas, ctx, width: canvas.width, height: canvas.height };
+  }, [landTexture.image]);
+
+  console.log("Land Sample:", landSample);
 
   return (
     <>
@@ -123,6 +180,40 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           transparent={true} // Necesario para que el blending funcione
         />
       </mesh>
+
+      {landSample &&
+        getHexCentersOnSphereBricked(2.05, 40, 60).map((pos, idx) => {
+          const normal = pos.clone().normalize();
+          const offsetDegrees = 180; // Cambia este valor para ajustar el meridiano
+          const offset = (offsetDegrees * Math.PI) / 180;
+          const uRaw =
+            0.5 + (Math.atan2(normal.z, normal.x) + offset) / (2 * Math.PI);
+          const u = ((uRaw % 1) + 1) % 1; // Corrige el rango de u
+          const v = 0.5 - Math.asin(normal.y) / Math.PI;
+
+          let isLand = false;
+          if (landSample && landSample.ctx) {
+            const x = Math.floor((1 - u) * (landSample.width - 1));
+            const y = Math.floor(v * (landSample.height - 1));
+            const pixel = landSample.ctx.getImageData(x, y, 1, 1).data;
+            if (pixel[3] > 1) {
+              isLand = true;
+            }
+          }
+
+          if (!isLand) return null;
+
+          const quaternion = new THREE.Quaternion().setFromUnitVectors(
+            new THREE.Vector3(0, 0, 1),
+            normal
+          );
+          return (
+            <mesh key={idx} position={pos} quaternion={quaternion}>
+              <circleGeometry args={[0.08, 6]} />
+              <meshStandardMaterial color="#FFD700" transparent opacity={0.7} />
+            </mesh>
+          );
+        })}
 
       <mesh
         scale={[1, 1, 1]}

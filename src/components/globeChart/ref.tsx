@@ -226,4 +226,47 @@
 //   return <>{hexagons}</>;
 // }
 
+// ?
+
+// function getHexCentersOnSphereBricked(
+//   radius: number,
+//   rows: number,
+//   baseCols: number
+// ) {
+//   const positions = [];
+//   for (let i = 0; i < rows; i++) {
+//     const v = i / (rows - 1); // de 0 a 1
+//     const phi = Math.PI * v; // de 0 a PI (latitud)
+//     // Calcula columnas según la latitud (más en el ecuador, menos en los polos)
+//     const sinPhi = Math.sin(phi);
+//     const cols = Math.max(3, Math.round(baseCols * sinPhi));
+//     for (let j = 0; j < cols; j++) {
+//       // Desfase tipo ladrillo en filas impares
+//       const offset = i % 2 === 0 ? 0 : (Math.PI * 2) / (2 * cols);
+//       const u = j / cols;
+//       const theta = u * Math.PI * 2 + offset; // de 0 a 2PI (longitud)
+//       // Conversión esférica a cartesiana
+//       const x = radius * Math.sin(phi) * Math.cos(theta);
+//       const y = radius * Math.cos(phi);
+//       const z = radius * Math.sin(phi) * Math.sin(theta);
+//       positions.push(new THREE.Vector3(x, y, z));
+//     }
+//   }
+//   return positions;
+// }
+
+//   {getHexCentersOnSphereBricked(2.05, 40, 60).map((pos, idx) => {
+//         const normal = pos.clone().normalize();
+//         const quaternion = new THREE.Quaternion().setFromUnitVectors(
+//           new THREE.Vector3(0, 0, 1),
+//           normal
+//         );
+//         return (
+//           <mesh key={idx} position={pos} quaternion={quaternion}>
+//             <circleGeometry args={[0.08, 6]} />
+//             <meshStandardMaterial color="#FFD700" transparent opacity={0.7} />
+//           </mesh>
+//         );
+//       })}
+
 export {};
