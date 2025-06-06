@@ -158,4 +158,72 @@
 //   ctx.fill();
 // }
 
+// function Hexagon({ position, normal, radius = 0.1 }): JSX.Element {
+//   // Crear un hexágono plano con BufferGeometry
+//   const geometry = useMemo(() => {
+//     const shape = new THREE.Shape();
+//     for (let i = 0; i < 6; i++) {
+//       const angle = (Math.PI / 3) * i; // 60 grados
+//       const x = radius * Math.cos(angle);
+//       const y = radius * Math.sin(angle);
+//       if (i === 0) shape.moveTo(x, y);
+//       else shape.lineTo(x, y);
+//     }
+//     shape.closePath();
+//     const geo = new THREE.ShapeGeometry(shape);
+//     return geo;
+//   }, [radius]);
+
+//   // Crear una matriz para orientar el hexágono para que su "cara" coincida con la normal
+//   const quaternion = new THREE.Quaternion();
+//   quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal);
+
+//   return (
+//     <mesh
+//       geometry={geometry}
+//       position={position}
+//       quaternion={quaternion}
+//       castShadow
+//       receiveShadow
+//     >
+//       <meshStandardMaterial color="black" />
+//     </mesh>
+//   );
+// }
+
+// function HexagonSphere(): JSX.Element {
+//   const radius = 2; // radio esfera
+//   const hexRadius = 0.1;
+//   const hexagons = [];
+
+//   // Ejemplo muy simple: colocar hexágonos en una rejilla esférica (latitud-longitud)
+//   const latSteps = 20;
+//   const lonSteps = 40;
+
+//   for (let lat = 0; lat <= latSteps; lat++) {
+//     const theta = (lat / latSteps) * Math.PI; // latitud 0 a PI
+//     for (let lon = 0; lon < lonSteps; lon++) {
+//       const phi = (lon / lonSteps) * 2 * Math.PI; // longitud 0 a 2PI
+
+//       const x = radius * Math.sin(theta) * Math.cos(phi);
+//       const y = radius * Math.cos(theta);
+//       const z = radius * Math.sin(theta) * Math.sin(phi);
+
+//       const position = new THREE.Vector3(x, y, z);
+//       const normal = position.clone().normalize();
+
+//       hexagons.push(
+//         <Hexagon
+//           key={`${lat}-${lon}`}
+//           position={position}
+//           normal={normal}
+//           radius={hexRadius}
+//         />
+//       );
+//     }
+//   }
+
+//   return <>{hexagons}</>;
+// }
+
 export {};
