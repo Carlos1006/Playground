@@ -97,18 +97,26 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   };
 
   const landSample = useMemo(() => {
-    if (!landTexture) {
-      console.warn("Land texture not loaded yet.");
-      return null;
-    }
-
+    if (!landTexture) return null;
     const canvas = document.createElement("canvas");
     canvas.width = landTexture.width;
     canvas.height = landTexture.height;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(landTexture, 0, 0);
-    return { canvas, ctx, width: canvas.width, height: canvas.height };
-  }, [landTexture.image]);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    return {
+      canvas,
+      ctx,
+      width: canvas.width,
+      height: canvas.height,
+      data: imageData.data,
+    };
+  }, [landTexture]);
+
+  const hexCenters = useMemo(
+    () => getHexCentersOnSphereBricked(2.04, 220, 320),
+    []
+  );
 
   console.log("Land Sample:", landSample);
 
@@ -140,7 +148,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
       <hemisphereLight args={["rgb(128,128,128)", "rgb(84,85,255)", 7]} />
 
-      <mesh
+      {/* <mesh
         scale={[1.001, 1.001, 1.001]}
         ref={(ref): void => {
           earthMesh.current = ref;
@@ -158,7 +166,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           key={`${background}-${land}-${outline}`}
           depthWrite={false}
         />
-      </mesh>
+      </mesh> */}
 
       <mesh
         scale={[1.02, 1.02, 1.02]}
@@ -182,21 +190,22 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
       </mesh>
 
       {landSample &&
-        getHexCentersOnSphereBricked(2.05, 40, 60).map((pos, idx) => {
+        hexCenters.map((pos, idx) => {
           const normal = pos.clone().normalize();
-          const offsetDegrees = 180; // Cambia este valor para ajustar el meridiano
+          const offsetDegrees = 180;
           const offset = (offsetDegrees * Math.PI) / 180;
           const uRaw =
             0.5 + (Math.atan2(normal.z, normal.x) + offset) / (2 * Math.PI);
-          const u = ((uRaw % 1) + 1) % 1; // Corrige el rango de u
+          const u = ((uRaw % 1) + 1) % 1;
           const v = 0.5 - Math.asin(normal.y) / Math.PI;
 
           let isLand = false;
-          if (landSample && landSample.ctx) {
+          if (landSample.data) {
             const x = Math.floor((1 - u) * (landSample.width - 1));
             const y = Math.floor(v * (landSample.height - 1));
-            const pixel = landSample.ctx.getImageData(x, y, 1, 1).data;
-            if (pixel[3] > 1) {
+            const idxPx = (y * landSample.width + x) * 4;
+            const alpha = landSample.data[idxPx + 3];
+            if (alpha > 1) {
               isLand = true;
             }
           }
@@ -209,14 +218,15 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           );
           return (
             <mesh key={idx} position={pos} quaternion={quaternion}>
-              <circleGeometry args={[0.08, 6]} />
-              <meshStandardMaterial color="#FFD700" transparent opacity={0.7} />
+              <circleGeometry args={[0.012, 6]} />
+              <meshStandardMaterial color="rgb(191, 93, 38)" />
             </mesh>
           );
         })}
 
       <mesh
-        scale={[1, 1, 1]}
+        // scale={[1,1,1]}
+        scale={[1.015, 1.015, 1.015]}
         ref={(ref): void => {
           earthMesh.current = ref;
         }}
