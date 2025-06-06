@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import "../material/index";
 import { IGlobeMonoChromatic, IOrbitControl, MeshRef } from "../types";
@@ -8,6 +8,7 @@ import fillSrc from "../assets/fill.png";
 import cloudSrc from "../assets/2k_earth_clouds.jpg";
 import fragmentCode from "../shaders/fragment.glsl?raw";
 import vertexCode from "../shaders/vertex.glsl?raw";
+import { createCanvasTexture, createHexagonTextureBricked } from "../utils";
 
 const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   background,
@@ -17,7 +18,19 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   const earthMesh = useRef<MeshRef>();
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
   const orbitRef = useRef<unknown | null>(null);
-  const fillTexture = useLoader(THREE.TextureLoader, fillSrc);
+  const fillTexture = useLoader(THREE.ImageLoader, fillSrc);
+  const hexTexture = useMemo(
+    () =>
+      createHexagonTextureBricked(
+        Array.isArray(fillTexture) ? fillTexture[0] : fillTexture
+      ),
+    [fillTexture]
+  );
+
+  const texture = useLoader(
+    THREE.TextureLoader,
+    createCanvasTexture().image.toDataURL()
+  );
 
   const cloudMesh = useRef<MeshRef>();
   const cloudTexture = useLoader(THREE.TextureLoader, cloudSrc);
@@ -37,8 +50,9 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   });
 
   const uniforms = {
-    uFillTexture: { value: fillTexture },
+    uFillTexture: { value: hexTexture },
     uLandColor: { value: land },
+    uAnotherTexture: { value: texture },
   };
 
   return (

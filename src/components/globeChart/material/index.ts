@@ -53,4 +53,6 @@ const GradientMaterial = shaderMaterial(
 );
 
 extend({ GradientMaterial });
+
 export { GradientMaterial };
+export default {};
