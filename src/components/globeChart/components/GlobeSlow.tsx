@@ -114,54 +114,11 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   }, [landTexture]);
 
   const hexCenters = useMemo(
-    //   () => getHexCentersOnSphereBricked(2.04, 220, 320),
-    () => getHexCentersOnSphereBricked(2.04, 290, 390),
+    () => getHexCentersOnSphereBricked(2.04, 220, 320),
     []
   );
 
-  const filteredHexes = useMemo(() => {
-    if (!landSample) return [];
-    const offsetDegrees = 180;
-    const offset = (offsetDegrees * Math.PI) / 180;
-    const hexes = [];
-    for (let i = 0; i < hexCenters.length; i++) {
-      const pos = hexCenters[i];
-      const normal = pos.clone().normalize();
-      const uRaw =
-        0.5 + (Math.atan2(normal.z, normal.x) + offset) / (2 * Math.PI);
-      const u = ((uRaw % 1) + 1) % 1;
-      const v = 0.5 - Math.asin(normal.y) / Math.PI;
-      const x = Math.floor((1 - u) * (landSample.width - 1));
-      const y = Math.floor(v * (landSample.height - 1));
-      const idxPx = (y * landSample.width + x) * 4;
-      const alpha = landSample.data[idxPx + 3];
-      if (alpha > 1) {
-        // Guarda posición y rotación (quaternion)
-        const quaternion = new THREE.Quaternion().setFromUnitVectors(
-          new THREE.Vector3(0, 0, 1),
-          normal
-        );
-        hexes.push({ pos, quaternion });
-      }
-    }
-    return hexes;
-  }, [landSample, hexCenters]);
-
-  console.log("Land Sample:", filteredHexes);
-
-  const instancedRef = useRef<THREE.InstancedMesh>(null);
-
-  useEffect(() => {
-    if (!instancedRef.current) return;
-    const dummy = new THREE.Object3D();
-    filteredHexes.forEach((hex, i) => {
-      dummy.position.copy(hex.pos);
-      dummy.quaternion.copy(hex.quaternion);
-      dummy.updateMatrix();
-      instancedRef.current!.setMatrixAt(i, dummy.matrix);
-    });
-    instancedRef.current.instanceMatrix.needsUpdate = true;
-  }, [filteredHexes]);
+  console.log("Land Sample:", landSample);
 
   return (
     <>
@@ -232,20 +189,44 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
         />
       </mesh>
 
-      {landSample && filteredHexes.length > 0 && (
-        <instancedMesh
-          ref={instancedRef}
-          args={[null, null, filteredHexes.length]}
-          frustumCulled={false}
-        >
-          <circleGeometry args={[0.012, 6]} />
-          <meshStandardMaterial color="rgb(191, 93, 38)" />
-        </instancedMesh>
-      )}
+      {landSample &&
+        hexCenters.map((pos, idx) => {
+          const normal = pos.clone().normalize();
+          const offsetDegrees = 180;
+          const offset = (offsetDegrees * Math.PI) / 180;
+          const uRaw =
+            0.5 + (Math.atan2(normal.z, normal.x) + offset) / (2 * Math.PI);
+          const u = ((uRaw % 1) + 1) % 1;
+          const v = 0.5 - Math.asin(normal.y) / Math.PI;
+
+          let isLand = false;
+          if (landSample.data) {
+            const x = Math.floor((1 - u) * (landSample.width - 1));
+            const y = Math.floor(v * (landSample.height - 1));
+            const idxPx = (y * landSample.width + x) * 4;
+            const alpha = landSample.data[idxPx + 3];
+            if (alpha > 1) {
+              isLand = true;
+            }
+          }
+
+          if (!isLand) return null;
+
+          const quaternion = new THREE.Quaternion().setFromUnitVectors(
+            new THREE.Vector3(0, 0, 1),
+            normal
+          );
+          return (
+            <mesh key={idx} position={pos} quaternion={quaternion}>
+              <circleGeometry args={[0.012, 6]} />
+              <meshStandardMaterial color="rgb(191, 93, 38)" />
+            </mesh>
+          );
+        })}
 
       <mesh
         // scale={[1,1,1]}
-        scale={[1.02, 1.02, 1.02]}
+        scale={[1.015, 1.015, 1.015]}
         ref={(ref): void => {
           earthMesh.current = ref;
         }}
