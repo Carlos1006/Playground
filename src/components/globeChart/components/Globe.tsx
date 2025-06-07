@@ -47,35 +47,6 @@ function getTowerTransform(
   return { position, quaternion };
 }
 
-function getCirclePositions(
-  center: THREE.Vector3,
-  normal: THREE.Vector3,
-  radius: number,
-  count: number,
-  ringIdx: number // <-- nuevo parámetro
-): THREE.Vector3[] {
-  const up = new THREE.Vector3(0, 1, 0);
-  let tangent = new THREE.Vector3().crossVectors(normal, up);
-  if (tangent.lengthSq() < 0.001) tangent = new THREE.Vector3(1, 0, 0);
-  tangent.normalize();
-  const bitangent = new THREE.Vector3()
-    .crossVectors(normal, tangent)
-    .normalize();
-
-  const positions: THREE.Vector3[] = [];
-  // Offset angular único para cada anillo (puedes usar PI*ringIdx/numRings o Math.random())
-  const angleOffset = (Math.PI * 2 * ringIdx) / count + ringIdx * 0.37;
-  for (let k = 0; k < count; k++) {
-    const angle = (2 * Math.PI * k) / count + angleOffset;
-    const offset = tangent
-      .clone()
-      .multiplyScalar(Math.cos(angle) * radius)
-      .add(bitangent.clone().multiplyScalar(Math.sin(angle) * radius));
-    positions.push(center.clone().add(offset));
-  }
-  return positions;
-}
-
 function getHexCentersOnSphereBricked(
   radius: number,
   rows: number,
@@ -235,7 +206,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   return (
     <>
       {CITIES.map(({ latitude, longitude, value, color, fixColor }, i) => {
-        const numCubes = Math.max(1, Math.round(value)); // Usa tu valor para la altura
+        // !const numCubes = Math.max(1, Math.round(value)); // Usa tu valor para la altura
         const base = getTowerTransform(2.04, latitude, longitude, 0); // altura 0 para base
         const normal = base.position.clone().normalize();
         const cubeHeight = 0.02; // altura de cada cubo
@@ -245,9 +216,12 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
         const cityFixColor = fixColor; // de la ciudad
 
         // --- NUEVO: parámetros para el grid circular ---
-        const numRings = 5; // cantidad de anillos alrededor
+        // !const numRings = 5; // cantidad de anillos alrededor
         const towersPerRing = 10; // torres por anillo
         const ringSpacing = 0.03; // distancia radial entre anillos
+
+        const numCubes = Math.max(1, Math.round(value)); // Usa tu valor para la altura
+        const numRings = Math.max(1, Math.floor(numCubes / 2)); // Al menos 1 anillo, más si la barra central es más alta
 
         // Función para calcular posiciones en círculo alrededor de la base
         function getCirclePositions(
@@ -324,7 +298,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
                 Math.max(1, Math.floor(numCubes * gauss)) - 2;
               return positions.map((pos, idx) => {
                 // Ruido: valor entre -1 y 1, escalado (ajusta 1.5 para más/menos variación)
-                const noise = (Math.random() - 0.5) * 1.5;
+                const noise = (Math.random() - 0.5) * 5;
                 const cubesWithNoise = Math.max(
                   1,
                   Math.floor(numCubesRing + noise)
@@ -337,7 +311,8 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
                         .clone()
                         .multiplyScalar((cubeHeight + gap) * (j + 0.5))
                     );
-                  const t = 1 - gauss;
+                  const t = ringIdx === 0 ? 0.2 : 1 - gauss;
+
                   const interpColor = interpolateColor(
                     cityFixColor,
                     cityColor,
@@ -360,6 +335,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           </group>
         );
       })}
+
       <OrbitControls
         autoRotate={true}
         autoRotateSpeed={1}
@@ -386,7 +362,9 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
       <hemisphereLight args={["rgb(128,128,128)", "rgb(84,85,255)", 7]} />
 
       <mesh
-        scale={[1.001, 1.001, 1.001]}
+        // scale={[1.03, 1.03, 1.03]}
+        scale={[0, 0, 0]}
+        rotation={[0, (-180 * Math.PI) / 180, 0]}
         ref={(ref): void => {
           earthMesh.current = ref;
         }}
@@ -433,7 +411,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           frustumCulled={false}
         >
           <circleGeometry args={[0.012, 6]} />
-          <meshStandardMaterial color="rgb(191, 93, 38)" />
+          <meshStandardMaterial color="rgb(252, 97, 8)" />
         </instancedMesh>
       )}
 
