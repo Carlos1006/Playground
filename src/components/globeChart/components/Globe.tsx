@@ -47,6 +47,35 @@ function getTowerTransform(
   return { position, quaternion };
 }
 
+function getCirclePositions(
+  center: THREE.Vector3,
+  normal: THREE.Vector3,
+  radius: number,
+  count: number,
+  ringIdx: number // <-- nuevo parámetro
+): THREE.Vector3[] {
+  const up = new THREE.Vector3(0, 1, 0);
+  let tangent = new THREE.Vector3().crossVectors(normal, up);
+  if (tangent.lengthSq() < 0.001) tangent = new THREE.Vector3(1, 0, 0);
+  tangent.normalize();
+  const bitangent = new THREE.Vector3()
+    .crossVectors(normal, tangent)
+    .normalize();
+
+  const positions: THREE.Vector3[] = [];
+  // Offset angular único para cada anillo (puedes usar PI*ringIdx/numRings o Math.random())
+  const angleOffset = (Math.PI * 2 * ringIdx) / count + ringIdx * 0.37;
+  for (let k = 0; k < count; k++) {
+    const angle = (2 * Math.PI * k) / count + angleOffset;
+    const offset = tangent
+      .clone()
+      .multiplyScalar(Math.cos(angle) * radius)
+      .add(bitangent.clone().multiplyScalar(Math.sin(angle) * radius));
+    positions.push(center.clone().add(offset));
+  }
+  return positions;
+}
+
 function getHexCentersOnSphereBricked(
   radius: number,
   rows: number,
@@ -225,20 +254,22 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           center: THREE.Vector3,
           normal: THREE.Vector3,
           radius: number,
-          count: number
+          count: number,
+          ringIdx: number // <-- nuevo parámetro
         ): THREE.Vector3[] {
-          // Encuentra dos vectores ortogonales al normal para definir el plano
           const up = new THREE.Vector3(0, 1, 0);
           let tangent = new THREE.Vector3().crossVectors(normal, up);
-          if (tangent.lengthSq() < 0.001) tangent = new THREE.Vector3(1, 0, 0); // fallback si normal es casi up
+          if (tangent.lengthSq() < 0.001) tangent = new THREE.Vector3(1, 0, 0);
           tangent.normalize();
           const bitangent = new THREE.Vector3()
             .crossVectors(normal, tangent)
             .normalize();
 
           const positions: THREE.Vector3[] = [];
+          // Offset angular único para cada anillo (puedes usar PI*ringIdx/numRings o Math.random())
+          const angleOffset = (Math.PI * 2 * ringIdx) / count + ringIdx * 0.37;
           for (let k = 0; k < count; k++) {
-            const angle = (2 * Math.PI * k) / count;
+            const angle = (2 * Math.PI * k) / count + angleOffset;
             const offset = tangent
               .clone()
               .multiplyScalar(Math.cos(angle) * radius)
@@ -278,7 +309,8 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
                 base.position,
                 normal,
                 ringRadius,
-                towersPerRing
+                towersPerRing,
+                ringIdx
               );
               // Parámetros de la gaussiana
               const sigma = numRings / 2; // ancho de la campana
