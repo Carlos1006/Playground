@@ -178,8 +178,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
       if (alpha > 1) {
         // Guarda posición y rotación (quaternion)
         const quaternion = new THREE.Quaternion().setFromUnitVectors(
-          // new THREE.Vector3(0, 0, 1), //! Si se trata de un circulo
-          new THREE.Vector3(0, 1, 0),
+          new THREE.Vector3(0, 0, 1),
           normal
         );
         hexes.push({ pos, quaternion });
@@ -411,9 +410,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
           args={[undefined, undefined, filteredHexes.length]}
           frustumCulled={false}
         >
-          {/* <circleGeometry args={[0.012, 6]} />
-           */}
-          <cylinderGeometry args={[0.012, 0.012, 0.004, 6]} />
+          <circleGeometry args={[0.012, 6]} />
           <meshStandardMaterial color="rgb(252, 97, 8)" />
         </instancedMesh>
       )}

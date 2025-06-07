@@ -6,11 +6,9 @@ const GradientMaterial = shaderMaterial(
   {
     color1: new THREE.Color("rgb(22, 30, 82)"),
     color2: new THREE.Color("rgb(50, 70, 199)"),
-    color3: new THREE.Color("rgb(48, 65, 175)"),
     emissive: new THREE.Color("rgb(5, 7, 19)"),
-    lightPosition: new THREE.Vector3(15, 15, 15),
+    lightPosition: new THREE.Vector3(10, 10, 10),
     shininess: 10,
-    lightIntensity: 0.7, // <-- Nuevo uniforme
   },
   `
     varying vec3 vNormal;
@@ -24,17 +22,15 @@ const GradientMaterial = shaderMaterial(
   `
     uniform vec3 color1;
     uniform vec3 color2;
-    uniform vec3 color3;
     uniform vec3 emissive;
     uniform vec3 lightPosition;
     uniform float shininess;
-    uniform float lightIntensity; // <-- Nuevo uniforme
-    
+
     varying vec3 vNormal;
     varying vec3 vPosition;
 
     void main() {
-        vec3 normal = normalize(vNormal);
+      vec3 normal = normalize(vNormal);
       vec3 lightDir = normalize(lightPosition - vPosition);
       vec3 viewDir = normalize(-vPosition);
       vec3 reflectDir = reflect(-lightDir, normal);
@@ -45,12 +41,9 @@ const GradientMaterial = shaderMaterial(
       float t = (vPosition.y + 1.0) / 2.0;
       vec3 baseColor = mix(color1, color2, t);
 
-       vec3 lightColor = mix(color1, vec3(1.0), 0.8); // <-- Luz más brillante basada en color1
-      //vec3 lightColor = mix(color3, vec3(1.0), 0.0); // <-- Luz más brillante basada en color1
-
       vec3 ambient = 0.1 * baseColor;
-      vec3 diffuse = diff * baseColor * lightColor * lightIntensity;
-      vec3 specular = spec * lightColor * lightIntensity;
+      vec3 diffuse = diff * baseColor;
+      vec3 specular = spec * vec3(1.0); // white specular
 
       vec3 finalColor = ambient + diffuse + specular + emissive;
 
