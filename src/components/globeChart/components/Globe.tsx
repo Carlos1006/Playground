@@ -9,6 +9,43 @@ import cloudSrc from "../assets/2k_earth_clouds.jpg";
 import fragmentCode from "../shaders/fragment.glsl?raw";
 import vertexCode from "../shaders/vertex.glsl?raw";
 import { createCanvasTexture, createHexagonTextureBricked } from "../utils";
+import { CITIES } from "../constants";
+
+function getTowerTransform(
+  radius: number,
+  lat: number,
+  lon: number,
+  height: number
+): {
+  position: THREE.Vector3;
+  quaternion: THREE.Quaternion;
+} {
+  // lat y lon en grados
+  const phi = (90 - lat) * (Math.PI / 180); // latitud a phi
+  const theta = (lon + 180) * (Math.PI / 180); // longitud a theta
+
+  // Posición sobre la esfera
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));
+  const y = radius * Math.cos(phi);
+  const z = radius * Math.sin(phi) * Math.sin(theta);
+
+  // Normal en ese punto
+  const normal = new THREE.Vector3(x, y, z).normalize();
+
+  // Quaternion para alinear el cilindro con la normal
+  const quaternion = new THREE.Quaternion().setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0), // eje Y del cilindro
+    normal
+  );
+
+  // Posición base de la torre (en la superficie)
+  const base = new THREE.Vector3(x, y, z);
+
+  // Para que la torre salga desde la superficie, hay que moverla la mitad de la altura hacia afuera
+  const position = base.clone().add(normal.clone().multiplyScalar(height / 2));
+
+  return { position, quaternion };
+}
 
 function getHexCentersOnSphereBricked(
   radius: number,
@@ -112,7 +149,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
   const filteredHexes = useMemo(() => {
     if (!landSample) return [];
-    const offsetDegrees = 180;
+    const offsetDegrees = 0;
     const offset = (offsetDegrees * Math.PI) / 180;
     const hexes = [];
     for (let i = 0; i < hexCenters.length; i++) {
@@ -156,7 +193,32 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
   return (
     <>
-      <ambientLight intensity={0.3} />
+      {CITIES.map(({ latitude, longitude, value }, i) => {
+        const numCubes = Math.max(1, Math.round(value)); // Usa tu valor para la altura
+        const base = getTowerTransform(2.04, latitude, longitude, 0); // altura 0 para base
+        const normal = base.position.clone().normalize();
+        const cubeHeight = 0.02; // altura de cada cubo
+        const gap = 0.005; // separación entre cubos
+
+        return (
+          <group key={i}>
+            {Array.from({ length: numCubes }).map((_, j) => {
+              // Calcula la posición de cada cubo a lo largo de la normal
+              const position = base.position
+                .clone()
+                .add(
+                  normal.clone().multiplyScalar((cubeHeight + gap) * (j + 0.5))
+                );
+              return (
+                <mesh key={j} position={position} quaternion={base.quaternion}>
+                  <boxGeometry args={[0.03, cubeHeight, 0.03]} />
+                  <meshStandardMaterial color="orange" />
+                </mesh>
+              );
+            })}
+          </group>
+        );
+      })}
       <OrbitControls
         autoRotate={true}
         autoRotateSpeed={1}

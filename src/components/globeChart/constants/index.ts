@@ -16,6 +16,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(0,125,200)",
     latitude: monterrey[0],
     longitude: monterrey[1],
+    value: 10,
   },
   {
     name: "Tokyo",
@@ -24,6 +25,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(0,200,125)",
     latitude: tokyo[0],
     longitude: tokyo[1],
+    value: 15,
   },
   {
     name: "New York",
@@ -32,6 +34,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(200,0,125)",
     latitude: newYork[0],
     longitude: newYork[1],
+    value: 5,
   },
   {
     name: "Benalmadena",
@@ -40,6 +43,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(125,0,200)",
     latitude: benalmadena[0],
     longitude: benalmadena[1],
+    value: 8,
   },
   {
     name: "Sydney",
@@ -48,6 +52,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(125,200,0)",
     latitude: sydney[0],
     longitude: sydney[1],
+    value: 12,
   },
   {
     name: "Kinshasa",
@@ -56,6 +61,7 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(0,0,0)",
     latitude: kinshasa[0],
     longitude: kinshasa[1],
+    value: 2,
   },
   {
     name: "Honolulu",
@@ -64,5 +70,6 @@ export const CITIES: ICity[] = [
     fixColor: "rgb(125,125,125)",
     latitude: honolulu[0],
     longitude: honolulu[1],
+    value: 2,
   },
 ];

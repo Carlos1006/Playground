@@ -30,6 +30,7 @@ export interface ICity {
   fixColor: string;
   latitude: number;
   longitude: number;
+  value: number;
 }
 
 export interface ITooltip extends ICity {
