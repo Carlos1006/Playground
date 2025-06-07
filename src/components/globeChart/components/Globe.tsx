@@ -74,6 +74,18 @@ function getHexCentersOnSphereBricked(
   return positions;
 }
 
+function interpolateColor(color1: string, color2: string, t: number): string {
+  // color1 y color2 en formato "rgb(r,g,b)"
+  const parse = (c: string): number[] =>
+    c.match(/\d+/g)?.map(Number) ?? [0, 0, 0];
+  const [r1, g1, b1] = parse(color1);
+  const [r2, g2, b2] = parse(color2);
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+  return `rgb(${r},${g},${b})`;
+}
+
 const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
   land,
 }: IGlobeMonoChromatic) => {
@@ -193,27 +205,120 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
 
   return (
     <>
-      {CITIES.map(({ latitude, longitude, value }, i) => {
+      {CITIES.map(({ latitude, longitude, value, color, fixColor }, i) => {
         const numCubes = Math.max(1, Math.round(value)); // Usa tu valor para la altura
         const base = getTowerTransform(2.04, latitude, longitude, 0); // altura 0 para base
         const normal = base.position.clone().normalize();
         const cubeHeight = 0.02; // altura de cada cubo
-        const gap = 0.005; // separación entre cubos
+        const gap = 0.004; // separación entre cubos
+
+        const cityColor = color; // de la ciudad
+        const cityFixColor = fixColor; // de la ciudad
+
+        // --- NUEVO: parámetros para el grid circular ---
+        const numRings = 5; // cantidad de anillos alrededor
+        const towersPerRing = 10; // torres por anillo
+        const ringSpacing = 0.03; // distancia radial entre anillos
+
+        // Función para calcular posiciones en círculo alrededor de la base
+        function getCirclePositions(
+          center: THREE.Vector3,
+          normal: THREE.Vector3,
+          radius: number,
+          count: number
+        ): THREE.Vector3[] {
+          // Encuentra dos vectores ortogonales al normal para definir el plano
+          const up = new THREE.Vector3(0, 1, 0);
+          let tangent = new THREE.Vector3().crossVectors(normal, up);
+          if (tangent.lengthSq() < 0.001) tangent = new THREE.Vector3(1, 0, 0); // fallback si normal es casi up
+          tangent.normalize();
+          const bitangent = new THREE.Vector3()
+            .crossVectors(normal, tangent)
+            .normalize();
+
+          const positions: THREE.Vector3[] = [];
+          for (let k = 0; k < count; k++) {
+            const angle = (2 * Math.PI * k) / count;
+            const offset = tangent
+              .clone()
+              .multiplyScalar(Math.cos(angle) * radius)
+              .add(bitangent.clone().multiplyScalar(Math.sin(angle) * radius));
+            positions.push(center.clone().add(offset));
+          }
+          return positions;
+        }
+
+        // --- FIN NUEVO ---
 
         return (
           <group key={i}>
+            {/* Torre central */}
             {Array.from({ length: numCubes }).map((_, j) => {
-              // Calcula la posición de cada cubo a lo largo de la normal
               const position = base.position
                 .clone()
                 .add(
                   normal.clone().multiplyScalar((cubeHeight + gap) * (j + 0.5))
                 );
               return (
-                <mesh key={j} position={position} quaternion={base.quaternion}>
+                <mesh
+                  key={`main-${j}`}
+                  position={position}
+                  quaternion={base.quaternion}
+                >
                   <boxGeometry args={[0.03, cubeHeight, 0.03]} />
-                  <meshStandardMaterial color="orange" />
+                  <meshStandardMaterial color={fixColor} />
                 </mesh>
+              );
+            })}
+
+            {/* Torres en grid circular */}
+            {Array.from({ length: numRings }).flatMap((_, ringIdx) => {
+              const ringRadius = ringSpacing * (ringIdx + 1);
+              const positions = getCirclePositions(
+                base.position,
+                normal,
+                ringRadius,
+                towersPerRing
+              );
+              // Parámetros de la gaussiana
+              const sigma = numRings / 2; // ancho de la campana
+              const mu = 0; // centro en el anillo central (puedes ajustar)
+              // Calcula el factor gaussiano para este anillo
+              const gauss = Math.exp(
+                -0.5 * Math.pow((ringIdx - mu) / sigma, 2)
+              );
+              // Calcula el número de cubos para este anillo (mínimo 1)
+              const numCubesRing =
+                Math.max(1, Math.floor(numCubes * gauss)) - 2;
+              return positions.map((pos, idx) =>
+                Array.from({ length: numCubesRing }).map((_, j) => {
+                  const stackPos = pos
+                    .clone()
+                    .add(
+                      normal
+                        .clone()
+                        .multiplyScalar((cubeHeight + gap) * (j + 0.5))
+                    );
+                  // Interpolación de color: rojo (centro) a amarillo (exterior)
+
+                  const t = 1 - gauss; // t=0 centro, t=1 orilla
+                  const interpColor = interpolateColor(
+                    cityFixColor,
+                    cityColor,
+                    t
+                  );
+
+                  return (
+                    <mesh
+                      key={`ring-${ringIdx}-${idx}-stack-${j}`}
+                      position={stackPos}
+                      quaternion={base.quaternion}
+                    >
+                      <boxGeometry args={[0.03, cubeHeight, 0.03]} />
+                      <meshStandardMaterial color={interpColor} />
+                    </mesh>
+                  );
+                })
               );
             })}
           </group>
