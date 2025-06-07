@@ -322,8 +322,14 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
               // Calcula el número de cubos para este anillo (mínimo 1)
               const numCubesRing =
                 Math.max(1, Math.floor(numCubes * gauss)) - 2;
-              return positions.map((pos, idx) =>
-                Array.from({ length: numCubesRing }).map((_, j) => {
+              return positions.map((pos, idx) => {
+                // Ruido: valor entre -1 y 1, escalado (ajusta 1.5 para más/menos variación)
+                const noise = (Math.random() - 0.5) * 1.5;
+                const cubesWithNoise = Math.max(
+                  1,
+                  Math.floor(numCubesRing + noise)
+                );
+                return Array.from({ length: cubesWithNoise }).map((_, j) => {
                   const stackPos = pos
                     .clone()
                     .add(
@@ -331,9 +337,7 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
                         .clone()
                         .multiplyScalar((cubeHeight + gap) * (j + 0.5))
                     );
-                  // Interpolación de color: rojo (centro) a amarillo (exterior)
-
-                  const t = 1 - gauss; // t=0 centro, t=1 orilla
+                  const t = 1 - gauss;
                   const interpColor = interpolateColor(
                     cityFixColor,
                     cityColor,
@@ -350,8 +354,8 @@ const GlobeMonochromatic: FC<IGlobeMonoChromatic> = ({
                       <meshStandardMaterial color={interpColor} />
                     </mesh>
                   );
-                })
-              );
+                });
+              });
             })}
           </group>
         );
