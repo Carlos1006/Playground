@@ -159,8 +159,7 @@ const Node: FC<NodeComponentProps> = ({
       setOpen(false);
       setTriggerOffset(Math.random());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [propagatedOpen]);
+  }, [propagatedOpen, setTriggerOffset]);
 
   useEffect(() => {
     getOffset();
@@ -202,9 +201,7 @@ const Node: FC<NodeComponentProps> = ({
               <div className={css.nodeFirstVerticalConnector}></div>
             )}
             <div
-              style={{
-                ...(index < siblings - 1 ? { height: "100%" } : {}),
-              }}
+              style={index < siblings - 1 ? { height: "100%" } : {}}
               className={css.nodeConnectorVertical}
             ></div>
           </>

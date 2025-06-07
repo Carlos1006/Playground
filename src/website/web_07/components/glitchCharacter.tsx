@@ -1,13 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { IGlitchCharacter } from "../types";
 
+const possiblesCharacter = "░▒▓Ø//ÆæÄ╚╩╦╠╬¶¥¢■┼@?";
+
 const GlitchCharacter: FC<IGlitchCharacter> = ({
   text,
   delay,
   searchTime,
   stop,
 }: IGlitchCharacter) => {
-  const possiblesCharacter = "░▒▓Ø//ÆæÄ╚╩╦╠╬¶¥¢■┼@?";
   const [temporalValue, setTemporalValue] = useState("");
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -24,8 +25,7 @@ const GlitchCharacter: FC<IGlitchCharacter> = ({
         setShow(true);
       }, stop);
     }, delay);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [delay, searchTime, stop]);
   return show ? text : temporalValue;
 };
 

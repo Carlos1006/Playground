@@ -52,8 +52,7 @@ const DateImage: FC<DateImageProps> = ({
     setCode(hashs);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(load, []);
+  useEffect(load, [day, month, pad, year]);
 
   return (
     <div className={css.dataImage}>

@@ -41,8 +41,7 @@ const RobotDev: FC<RobotDevProps> = ({
         setActiveTooth(0);
       }
     }, 200);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teeth]);
+  }, [activeTooth, teeth]);
 
   useEffect(() => {
     if (isActive && once) {
@@ -51,8 +50,7 @@ const RobotDev: FC<RobotDevProps> = ({
     if (!isActive && !once) {
       setRotate(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, once]);
 
   useEffect(() => {
     if (rotate) {

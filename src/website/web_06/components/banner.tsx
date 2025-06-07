@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import css from "../styles/banner.module.scss";
 
 interface IBanner {
@@ -18,23 +18,25 @@ const Banner: FC<IBanner> = ({ children }: IBanner) => {
   const myDescription1 = "Lic. en Multimedia y Animacion Digital";
   const myDescription0 = "Desarrollador FrontEnd";
 
-  const animation = (_value: number): void => {
-    if (_value <= lastStep) {
-      setTimeout(() => {
-        setStep(_value);
-        if (_value === 2) {
-          setBlockStep(1);
-        }
-        animation(_value + 1);
-      }, 350);
-    }
-  };
+  const animation = useCallback(
+    (_value: number): void => {
+      if (_value <= lastStep) {
+        setTimeout(() => {
+          setStep(_value);
+          if (_value === 2) {
+            setBlockStep(1);
+          }
+          animation(_value + 1);
+        }, 350);
+      }
+    },
+    [lastStep]
+  );
 
   useEffect(() => {
     setCircleStep(1);
-    animation(step);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    animation(0);
+  }, [animation]);
 
   return (
     <div id={css.banner}>

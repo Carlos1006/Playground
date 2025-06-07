@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import css from "../styles/loader.module.scss";
 
 interface ILoader {
@@ -6,6 +6,7 @@ interface ILoader {
 }
 
 const Loader: FC<ILoader> = ({ show: showExternal }: ILoader) => {
+  const showRef = useRef<boolean>(showExternal);
   const [show, setShow] = useState(showExternal);
   const [animationClass, setAnimationClass] = useState("");
 
@@ -13,7 +14,7 @@ const Loader: FC<ILoader> = ({ show: showExternal }: ILoader) => {
     setShow(showExternal);
   }, [showExternal]);
 
-  function animation(): void {
+  const animation = useCallback((): void => {
     setTimeout(() => {
       setAnimationClass("width");
       setTimeout(() => {
@@ -23,7 +24,7 @@ const Loader: FC<ILoader> = ({ show: showExternal }: ILoader) => {
           setTimeout(() => {
             setAnimationClass("");
             setTimeout(() => {
-              if (show) {
+              if (showRef.current) {
                 animation();
               } else {
                 return;
@@ -33,16 +34,17 @@ const Loader: FC<ILoader> = ({ show: showExternal }: ILoader) => {
         }, 300);
       }, 300);
     }, 500);
-  }
+  }, []);
 
   useEffect(() => {
     setShow(true);
+    showRef.current = true;
     animation();
     return () => {
+      showRef.current = false;
       setShow(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [animation]);
 
   return (
     <>
